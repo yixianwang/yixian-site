@@ -53,7 +53,7 @@ draft = true
 
 <!-- vim-markdown-toc -->
 
-# To MP3 Converter Free
+## To MP3 Converter Free
 ```
 cat *.mp3 > final.mp3
 
@@ -62,12 +62,12 @@ brew install mp3wrap
 mp3wrap output.mp3 *.mp3
 ```
 
-# pandoc convert markdown to org
+## pandoc convert markdown to org
 ```
 pandoc -f markdown -t org -o note_dynamic_programming.org note_dynamic_programming.md
 ```
 
-# set in c++
+## set in c++
 ```c++
 #include <vector>
 #include <numeric>
@@ -117,19 +117,19 @@ int main() {
 
 ```
 
-# Enable/Disable Monitor
+## Enable/Disable Monitor
 ```
 SwitchResX
 ```
 
-# 0x3f3f3f3f && 0xcfcfcfcf
+## 0x3f3f3f3f && 0xcfcfcfcf
 If you are using C++ to write program, sometimes you need to set an large number. We can use INT_MAX of course, however, sometimes we may get overflow if we add the large number by 1.
 
 Some people they like use this number as INF which is 0x3f3f3f3f.
 For -INF, we can use 0xcfcfcfcf
 
 
-# vim Table Mode
+## vim Table Mode
 ```markdown
 \tm
 |
@@ -141,7 +141,7 @@ i| or a| # insert a cell
 \tic # insert column
 ```
 
-# vim generate contents
+## vim generate contents
 ```bash
 :GenTocGFM
   Generate table of contents in GFM link style.
@@ -156,7 +156,7 @@ i| or a| # insert a cell
   Generate table of contents for iamcco/markdown-preview.vim which use Marked markdown parser.
 ```
 
-# scp
+## scp
 ```bash
 scp -ri /Users/yixianwang/.ssh/aws_ps.pem destination ec2-user@ec2-18-217-15-234.us-east-2.compute.amazonaws.com:~/
 scp -ri /Users/yixianwang/.ssh/aws_ps.pem ec2-user@ec2-18-217-15-234.us-east-2.compute.amazonaws.com:~/ destination
@@ -164,12 +164,12 @@ scp -ri /Users/yixianwang/.ssh/aws_ps.pem ec2-user@ec2-18-217-15-234.us-east-2.c
 scp -ri /Users/yixianwang/.ssh/aws_skater.pem ubuntu@ec2-3-142-96-155.us-east-2.compute.amazonaws.com:~/project4 ~/Downloads/
 ```
 
-# zip
+## zip
 ```bash
 zip -r py_image_manipulation.zip py_image_manipulation
 ```
 
-# patch
+## patch
 ```
 make clean
 make -f Makefile.test clean
@@ -185,7 +185,7 @@ diff -ruN src src-finished > xv6.patch
 3. Make xv6 and run the tests
 ```
 
-# conda
+## conda
 ```bash
 conda create --name myenv Python=3.8 --no-default-packages
 
@@ -208,7 +208,7 @@ conda install pip
 ```
 
 
-# export dependencies from poetry to requirements.txt
+## export dependencies from poetry to requirements.txt
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -218,18 +218,18 @@ poetry export --without-hashes > requirements.txt
 pip install -r requirements.txt
 ```
 
-# change poetry python version
+## change poetry python version
 ```bash
 poetry env use /usr/local/bin/python3.9
 ```
 
 
-# python
+## python
 ```bash
 python -m SimpleHTTPServer 8000
 ```
 
-# special characters for ps1 in bashshell
+## special characters for ps1 in bashshell
 ```bash
 \h the hostname up to the first .
 \n newline
@@ -240,19 +240,19 @@ python -m SimpleHTTPServer 8000
 \W the basename of the current working directory
 ```
 
-# rsync
+## rsync
 ```bash
 rsync -zaP --dry-run dir dir/
 ```
 
-# crontab.guru
+## crontab.guru
 ```bash
 crontab -l
 crontab -e
 crontab -r
 ```
 
-# pytest
+## pytest
 ```bash
 pytest --junitxml=result.xml
 
@@ -260,7 +260,7 @@ poetry run pytest test_py_image_manipulation.py
 ```
 
 
-# github
+## github
 ```bash
 git config --global user.name "firstname lastname"
 git config --global user.email "email@email.com"
@@ -277,19 +277,19 @@ git <verb> --help
 git diff
 ```
 
-## remove file from staging area
+### remove file from staging area
 ```bash
 git reset filename # remove one file
 git reset # remove everythin
 ```
 
-## viewing info about the remote repository
+### viewing info about the remote repository
 ```bash
 git remote -v
 git branch -a
 ```
 
-## pushing changes
+### pushing changes
 ```bash
 git pull origin master
 git push origin master # origin: the name of remote repository. master: the branch we want to push to
@@ -302,7 +302,7 @@ git push -u origin branchname
 git branch -a
 ```
 
-## merge a branch
+### merge a branch
 ```bash
 git checkout master
 git pull origin master
@@ -311,7 +311,7 @@ git merge branchname
 git push origin master
 ```
 
-## deleting a branch
+### deleting a branch
 ```bash
 git branch --merged
 git branch -d branchname
@@ -319,7 +319,7 @@ git branch -a
 git push origin --delete branchname
 ```
 
-## stash
+### stash
 ```bash
 git stash save "Worked on some function"
 git stash list
@@ -331,7 +331,7 @@ git stash clear # be careful here
 git checkout -- .
 ```
 
-## diffmerge
+### diffmerge
 ```bash
 git config --global diff.tool diffmerge
 git config --global difftool.diffmerge.cmd 'diffmerge "$LOCAL" "$REMOTE"'
@@ -352,7 +352,7 @@ git mergetool
 git commit
 ```
 
-## add
+### add
 Ignore the deleted files in git version 2
 ```bash
 git add --no-all sub_dir/
@@ -362,25 +362,25 @@ Ignore the untracked files
 git add -u/--update
 ```
 
-## remove changes
+### remove changes
 Remove changes of a file
 ```bash
 git checkout filename
 ```
 
-## change commit message(changed commit history)
+### change commit message(changed commit history)
 ```bash
 git commit --amend -m "new message here"
 ```
 
-## add a file to the last commit(changed commit history)
+### add a file to the last commit(changed commit history)
 ```bash
 git commit --amend 
 :wq
 git log --stat
 ```
 
-## commited to the wrong branch
+### commited to the wrong branch
 move commit between branch
 cherry-pick creates a new commit based off our original(doesn't delete)
 ```bash
@@ -419,7 +419,7 @@ git branch backup
 git branch # to see all branches
 ```
 
-### undo some commit but other people have already pulled those changes
+#### undo some commit but other people have already pulled those changes
 revert: creates a new commit to reverse the effect of some ealier commits(won't rewrite history)
 it's not going to modify or delete our existing commits
 ```bash
@@ -429,7 +429,7 @@ git revert #hash of the commit need to be covered
 
 `git diff #src #desc`
 
-# itertools
+## itertools
 ```python
 # count
 list(zip(itertools.count(), data))
@@ -523,8 +523,8 @@ for key, group in people_group:
 copy1, copy2 = itertools.tee(person_group)
 ```
 
-# Sorting Lists, Tuples, and Objects
-## Lists
+## Sorting Lists, Tuples, and Objects
+### Lists
 sort function is more flexible
 ```python
 li = [9, 1, 8, 2, 7]
@@ -546,7 +546,7 @@ s_li = sorted(li, key=abs)
 print(s_li)
 ```
 
-# Objects
+## Objects
 ```python
 class Employee():
     def __init__(self, name, age, salary):
@@ -576,11 +576,11 @@ from operator import attrgetter
 s_employees = sorted(employees, key=attrgetter('age'))
 ```
 
-# global vs nonlocal
+## global vs nonlocal
 LEGB
 > Local, Enclosing, Glboal, Built-in
 
-# Context Manager
+## Context Manager
 ```python
 import os
 from contxtlib import contextmanager
@@ -612,7 +612,7 @@ with change_dir("Sample-dir-two"):
     print(os.listdir())
 ```
 
-# grep
+## grep
 ```bash
 grep "Yixian" name.txt
 grep -w "Yixian" name.txt
@@ -656,7 +656,7 @@ egrep "\d{3}-\d{3}-\d{4}" name.txt
 grep -P "\d{3}-\d{3}-\d{4}" name.txt
 ```
 
-# emacs vc
+## emacs vc
 ```bash
 c-x v // show cv options
 
@@ -664,12 +664,12 @@ c-x vv // next action
 c-x vL // log
 ```
 
-# emacs magit
+## emacs magit
 ```bash
 c-x m-g // show magit options
 ```
 
-# c++ STL
+## c++ STL
 ```c++
 // reverse a string
 std::reverse(s.begin(), s.end());
@@ -745,7 +745,7 @@ std::sort(
 );
 ```
 
-# c++ concept && requires
+## c++ concept && requires
 
 The add() on line 8 is consuming a named concept, Number, using the requires clause. It takes two numbers as a parameter, which should be either integer or floating_point, and returns the sum of both numbers.
 

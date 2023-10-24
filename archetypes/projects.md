@@ -1,8 +1,8 @@
 +++
 title = '{{ replace .File.ContentBaseName "-" " " | title }}'
 date = {{ .Date }}
-startDate = '/'
-endDate = '/'
+startDate = ''
+endDate = ''
 draft = true
 +++
 

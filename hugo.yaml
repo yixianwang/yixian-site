@@ -45,9 +45,9 @@ menu:
     # - name: Papers
     #   pageRef: /paper
     #   weight: 4
-    # - name: Blog
-    #   pageRef: /blog
-    #   weight: 5
+    - name: Blog
+      pageRef: /blog
+      weight: 5
     # - name: Life
     #   pageRef: /life
     #   weight: 6

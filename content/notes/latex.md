@@ -1,5 +1,5 @@
 +++
-title = 'Latex'
+title = 'latex'
 date = 2023-10-23T23:51:32-04:00
 draft = true
 math = true

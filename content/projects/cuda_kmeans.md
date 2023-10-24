@@ -1,5 +1,5 @@
 +++
-title = 'Exploring K-Means with CUDA/CUDA Shared Memory/Thrust'
+title = 'Exploring GPU Programming with CUDA/CUDA Shared Memory/Thrust Solving K-Means Algorithm'
 date = 2023-10-24T15:21:05-04:00
 startDate = 'Sep 2021'
 endDate = 'Oct 2021'
@@ -18,6 +18,12 @@ draft = true
 - **CPU:** the Codio environment(Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz, 4 cores)
 - **OS:** the Codio environment(Ubuntu 18.04.2 LTS (GNU/Linux 5.4.0-1054-aws x86_64))
 > the data in this report was collected when I set “threshold argument” to 1e-6.
+
+## Data
+- <a href="/datasets/cuda_kmeans/random-n2048-d16-c16.txt">Data1: size = 2048, dim = 16, c = 16</a>
+- <a href="/datasets/cuda_kmeans/random-n16384-d24-c16.txt">Data2: size = 16384, dim = 24, c = 16</a>
+- <a href="/datasets/cuda_kmeans/random-n65536-d32-c16.txt">Data3: size = 65536, dim = 32, c = 16</a>
+
 
 ## The Fastest Implementation
 - For averaged elapsed time per iteration, **CUDA Shared Memory is always the fastest** implementation on different input sizes. (Fig. 1, left) Because the shared memory in each block is very fast, which means the processing unit for each thread can access data in shared memory very fast after transferring data from global memory to the shared memory.

@@ -8,22 +8,32 @@ module:
     - path: github.com/imfing/hextra
 
 # create new content page for the home page and the documentation page
-# $ hugo new content/_index.md
-# $ hugo new content/docs/_index.md
+# hugo new content/_index.md
+# hugo new content/docs/_index.md
 
 # preview the site locally
-# $ hugo server --buildDrafts --disableFastRender
+# hugo server --buildDrafts --disableFastRender
 
 # update all Hugo modules in my project to their latest versions
-# $ hugo mod get -u
+# hugo mod get -u
 
 # update only Hextra to the latest version
-# $ hugo mod get -u github.com/imfing/hextra
+# hugo mod get -u github.com/imfing/hextra
+
+markup:
+  # allow raw html
+  goldmark:
+    renderer:
+      unsafe: true
+
+  # enable hextra syntax highlight
+  highlight:
+    noClasses: false
 
 # Top right menu
 menu:
   main:
-    - name: About
+    - name: Home
       pageRef: /about
       weight: 1
     - name: Projects

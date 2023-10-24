@@ -1,0 +1,56 @@
+baseURL: https://example.org/
+languageCode: en-us
+title: Yixian Wang
+
+# Configure hugo.yaml to use Hextra theme
+module:
+  imports:
+    - path: github.com/imfing/hextra
+
+# create new content page for the home page and the documentation page
+# $ hugo new content/_index.md
+# $ hugo new content/docs/_index.md
+
+# preview the site locally
+# $ hugo server --buildDrafts --disableFastRender
+
+# update all Hugo modules in my project to their latest versions
+# $ hugo mod get -u
+
+# update only Hextra to the latest version
+# $ hugo mod get -u github.com/imfing/hextra
+
+# Top right menu
+menu:
+  main:
+    - name: About
+      pageRef: /about
+      weight: 1
+    - name: Projects
+      pageRef: /projects
+      weight: 2
+    - name: Notes
+      pageRef: /notes
+      weight: 3
+    # - name: Papers
+    #   pageRef: /paper
+    #   weight: 4
+    # - name: Blog
+    #   pageRef: /blog
+    #   weight: 5
+    # - name: Life
+    #   pageRef: /life
+    #   weight: 6
+    # - name: Photos
+    #   pageRef: /photo
+    #   weight: 7
+
+    - name: Search
+      weight: 20
+      params:
+        type: search
+    - name: GitHub
+      weight: 21
+      url: "https://github.com/yixianwang"
+      params:
+        icon: github

@@ -34,6 +34,7 @@ draft = true
 - The **sequential** has the slowest converge speed but it doesn’t have any overhead on transferring data. The CPU is very powerful the Sequential version is the fastest implementation for the total elapsed time when the input size is small. (Fig. 1, right)
 
 ![cuda kmeans 1](images/cuda_kmeans_1.png)
+<!-- <img src="../images/cuda_kmeans_1.png" alt="image" width="100%" height="auto"> -->
 > Fig. 1. Averaged elapsed time per iteration and Total elapsed time(E2E runtime) measured on different input size.
 
 

@@ -9,5 +9,3 @@ draft = true
 Implemented base **sequential** version of SVM algorithm on CPU by C++
 
 <!--more-->
-
-test

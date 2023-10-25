@@ -7,9 +7,9 @@ draft = true
 +++
 
 - Implemented base **sequential** version of K-Means algorithm on CPU by C++
-- Implemented first parallel version of K-means with **Thrust** primitives and a GroupBy-Aggregate by C++
-- Implemented second parallel version of K-means with **CUDA** by C++
-- Implemented third parallel version of K-means with **CUDA on Shared Memory** by C++
+- Implemented first parallel version of K-Means with **Thrust** primitives and a GroupBy-Aggregate by C++
+- Implemented second parallel version of K-Means with **CUDA** by C++
+- Implemented third parallel version of K-Means with **CUDA on Shared Memory** by C++
 - Analyzed speedup among all the implementations
 <!--more-->
 

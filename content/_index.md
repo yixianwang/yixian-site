@@ -12,4 +12,4 @@ CS Graduate Student at UT Austin
 Contact: wangyixian.wyx(at)gmail(dot)com or yixianwang(at)utexas(dot)edu
 
 ## 
-Hi! I obtained my master's degree in CS from UT Austin. I am very enthusiastic about the software engineer position and eager to learn. I have a strong background in applied mathematics and machine learning. 
+Hi! I obtained my master's degree in CS from UT Austin. I am very enthusiastic about the software engineer position and eager to learn. I also have a strong background in applied mathematics and machine learning. 

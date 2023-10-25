@@ -1,6 +1,6 @@
 +++
 title = 'Exploring GPU Programming with CUDA/CUDA Shared Memory/Thrust Solving K-Means Algorithm'
-date = 2023-10-24T15:21:05-04:00
+date = 2021-10-24T15:21:05-04:00
 startDate = 'Sep 2021'
 endDate = 'Oct 2021'
 draft = true

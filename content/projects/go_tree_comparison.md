@@ -1,15 +1,16 @@
 +++
 title = 'Exploring Concurrency Programming with Go'
-date = 2023-10-24T17:17:01-04:00
+date = 2021-10-24T17:17:01-04:00
 startDate = 'Oct 2021'
 endDate = 'Oct 2021'
 draft = true
 +++
 
-- Implemented concurrency programming model to compute BST(binary search tree) equivalence with **Go**
-- Used **channels, go-routines, and signaling**
-- Spawned threads to parallelize hash operations
-- Used a **concurrent buffer** to secure communication among threads
+- Implemented concurrency programming model to compute BST(binary search tree) equivalence with Go
+- Implemented **channels, go-routines, and signaling** with Go
+- Programmed **threads** to parallelize hash operations with Go
+- Assembled a **concurrent buffer** to secure communication among threads
+- Analyzed performance among all the implementations
 <!--more-->
 
 ## Hardware Details & OS Version
@@ -22,9 +23,13 @@ draft = true
 - <a href="/datasets/go_tree_comparison/fine.txt">Data3: fine</a>
 
 ## Analyze HashTime
-![HashTime of Simple](images/go_tree_1.png)
+<img src="../images/go_tree_1.png" alt="image" width="50%" height="auto" style="float: left">
+<img src="../images/go_tree_2.png" alt="image" width="50%" height="auto" style="float: right">
+<img src="../images/go_tree_3.png" alt="image" width="50%" height="auto" style="float: center">
+
+<!-- ![HashTime of Simple](images/go_tree_1.png)
 ![HashTime of Coarse](images/go_tree_2.png)
-![HashTime of Fine](images/go_tree_3.png)
+![HashTime of Fine](images/go_tree_3.png) -->
 
 > Fig. 1. Hash value computing time compared to Goroutines. Different input files has different hash-workers experiments. Computing time are all measured in seconds.  The x-axis represents the number of hash-workers.
 
@@ -39,9 +44,13 @@ draft = true
 - If the number of goroutines is less than the number of CPU cores, the program cannot get the best performance on specific hardware even if the Go runtime can schedule the goroutine very well. If the number of goroutines is much more than the number of CPU cores, it will also have some overhead when creating the segment stack even if only 3 registers need when goroutine switch context, and thus I think we also can’t get ideal performance on this setup. In both “coarse.txt” and “fine.txt” cases, I can get the best performance when my second implementation has 4 hash-workers which is the number of the CPU cores and it can also get ideal performance when the number of hash-workers is in a reasonable range. So I think this is kind of proof.
 
 ## Analyze Averaged HashGroupTime
-![Averaged HashGroupTime of Simple](images/go_tree_4.png)
+<img src="../images/go_tree_4.png" alt="image" width="50%" height="auto" style="float: left">
+<img src="../images/go_tree_5.png" alt="image" width="50%" height="auto" style="float: right">
+<img src="../images/go_tree_6.png" alt="image" width="50%" height="auto" style="float: center">
+
+<!-- ![Averaged HashGroupTime of Simple](images/go_tree_4.png)
 ![Averaged HashGroupTime of Coarse](images/go_tree_5.png)
-![Averaged HashGroupTime of Fine](images/go_tree_6.png)
+![Averaged HashGroupTime of Fine](images/go_tree_6.png) -->
 
 > Fig. 2. Averaged hashGroupTime for different input file. There are four different implementations tested on each input file: Sequential version, Channel version, Lock version and Extra Implementation for extra credit. All computing time are measured in seconds. 
 
@@ -56,9 +65,13 @@ draft = true
 - For extra credits, I also implement fine-grain synchronization to allow up to data-workers threads to access the data structure at once. It was not access to the shared data structure a bottleneck before. The main reason is that even if it has more parallelism it also has more overhead and it also has to wait for other threads to unlock the shared data structure. These extra implementations also are not simpler than the previous three implementations, because we have to handle the different threads to access data and avoid concurrency errors.
 
 ## Analyze Averaged CompareTreeTime
-![Averaged CompareTreeTime of Simple](images/go_tree_7.png)
+<img src="../images/go_tree_7.png" alt="image" width="50%" height="auto" style="float: left">
+<img src="../images/go_tree_8.png" alt="image" width="50%" height="auto" style="float: right">
+<img src="../images/go_tree_9.png" alt="image" width="50%" height="auto" style="float: center">
+
+<!-- ![Averaged CompareTreeTime of Simple](images/go_tree_7.png)
 ![Averaged CompareTreeTime of Coarse](images/go_tree_8.png)
-![Averaged CompareTreeTime of Fine](images/go_tree_9.png)
+![Averaged CompareTreeTime of Fine](images/go_tree_9.png) -->
 
 > Fig. 3. Averaged compareTreeTime for different input file. There are three different implementation for each input file: Sequential, Goroutine per BST and Concurrent Buffer. All computing time measured in seconds.
 

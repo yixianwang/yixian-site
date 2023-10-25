@@ -1,7 +1,6 @@
 +++
 title = 'cuda'
 date = 2023-10-24T03:10:46-04:00
-draft = true
 +++
 
 CUDA (Compute Unified Device Architecture) is a parallel computing platform and application programming interface (API) created by NVIDIA for utilizing their GPUs (Graphics Processing Units) to accelerate various computational tasks, including machine learning. Many machine learning algorithms can be optimized with CUDA to take advantage of GPU parallelism, which can significantly speed up training and inference. Here are some common machine learning algorithms that can benefit from CUDA optimization:

@@ -3,7 +3,6 @@ title = 'Exploring GPU Programming with CUDA/CUDA Shared Memory/Thrust Solving K
 date = 2021-10-24T15:21:05-04:00
 startDate = 'Sep 2021'
 endDate = 'Oct 2021'
-draft = true
 +++
 
 - Implemented base **sequential** version of K-Means algorithm on CPU by C++

@@ -3,7 +3,6 @@ title = 'Exploring Multithreaded Programming with Pthreads Solving Parallel Pref
 date = 2021-09-24T18:44:08-04:00
 startDate = 'Sep 2021'
 endDate = 'Sep 2021'
-draft = true
 +++
 
 - Implemented base **sequential** version of work-efficient parallel prefix sum algorithm by C++

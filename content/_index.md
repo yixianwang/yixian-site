@@ -1,7 +1,6 @@
 +++
 title = 'About me'
 date = 2023-10-23T21:32:57-04:00
-draft = true
 +++
 
 <img src="/images/photo.jpeg" alt="image" width="30%" height="auto" style="float: center">

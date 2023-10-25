@@ -3,7 +3,6 @@ title = 'Exploring Concurrency Programming with Go'
 date = 2021-10-24T17:17:01-04:00
 startDate = 'Oct 2021'
 endDate = 'Oct 2021'
-draft = true
 +++
 
 - Implemented concurrency programming model to compute BST(binary search tree) equivalence with Go

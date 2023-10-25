@@ -1,7 +1,6 @@
 +++
 title = 'pytest'
 date = 2023-10-24T03:10:46-04:00
-draft = true
 +++
 
 ## all test function should named leading with `test_`

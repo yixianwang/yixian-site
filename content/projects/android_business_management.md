@@ -3,7 +3,6 @@ title = 'Android App: Business Management & Accountant'
 date = 2023-10-25T00:15:21-04:00
 startDate = 'Aug 2022'
 endDate = 'Present'
-draft = true
 +++
 
 - Designed the app for my parents’ real daily business

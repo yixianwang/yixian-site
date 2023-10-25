@@ -3,7 +3,6 @@ title = 'Exploring Parallel Processes Programming with MPICH Simulating Barnes H
 date = 2021-12-24T23:24:06-04:00
 startDate = 'Nov 2021'
 endDate = 'Dec 2021'
-draft = true
 +++
 
 - Implemented astrophysical simulation solved N-body problem using Barnes-Hut algorithm with **MPICH** by C++

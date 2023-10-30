@@ -1,9 +1,9 @@
 +++
-title = 'Segment_tree'
+title = 'Segment Tree & Binary Index Tree'
 date = 2023-03-01T11:26:17-04:00
 +++
 
-Covered topics of **Segment Tree** and **Binary Index Tree**
+Covered topics of Segment Tree and Binary Index Tree
 <!--more-->
 
 ## Materials

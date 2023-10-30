@@ -1,6 +1,7 @@
 +++
 title = 'Dynamic Programming'
 date = 2022-12-15T10:36:13-04:00
+math = true
 +++
 
 Covered all topics of Dynamic Programming

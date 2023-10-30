@@ -1,8 +1,10 @@
 +++
 title = 'Dynamic Programming'
-date = 2023-10-30T10:36:13-04:00
+date = 2022-12-15T10:36:13-04:00
 +++
 
+Covered all topics of Dynamic Programming
+<!--more-->
 
 <!-- vim-markdown-toc GFM -->
 
@@ -335,13 +337,59 @@ date = 2023-10-30T10:36:13-04:00
     * [动态规划组成部分四：计算顺序](#动态规划组成部分四计算顺序-24)
   * [Example: Lintcode 118 Distinct Subsequences](#example-lintcode-118-distinct-subsequences)
 * [Chapter 23: 毕业旅行](#chapter-23-毕业旅行)
-  * [分析](#分析)
+  * [Solution 1: 排列型DFS](#solution-1-排列型dfs)
+    * [分析](#分析)
+    * [AC](#ac)
+    * [Optimize: Pruning](#optimize-pruning)
+  * [Solution 2: 状态压缩型动态规划???](#solution-2-状态压缩型动态规划)
 * [Chapter 24: 双色塔](#chapter-24-双色塔)
 * [Chapter 25: 编辑距离](#chapter-25-编辑距离)
+  * [Example: Lintcode 119 编辑距离](#example-lintcode-119-编辑距离-1)
+    * [动态规划组成部分一：确定状态](#动态规划组成部分一确定状态-25)
+    * [子问题](#子问题-20)
+    * [动态规划组成部分二：转移方程](#动态规划组成部分二转移方程-25)
+    * [动态规划组成部分三：初始条件和边界情况](#动态规划组成部分三初始条件和边界情况-25)
+    * [动态规划组成部分四：计算顺序](#动态规划组成部分四计算顺序-25)
+    * [滚动数组优化](#滚动数组优化-2)
+    * [编辑距离的实际用途](#编辑距离的实际用途-1)
+  * [Example: Lintcode 154 Regular Expression Matching](#example-lintcode-154-regular-expression-matching-1)
+    * [动态规划组成部分一：确定状态](#动态规划组成部分一确定状态-26)
+    * [子问题](#子问题-21)
+    * [动态规划组成部分二：转移方程](#动态规划组成部分二转移方程-26)
+    * [动态规划组成部分三：初始条件和边界情况](#动态规划组成部分三初始条件和边界情况-26)
+    * [动态规划组成部分四：计算顺序](#动态规划组成部分四计算顺序-26)
+  * [Example: Lintcode 192 Wildcard Matching](#example-lintcode-192-wildcard-matching-1)
+    * [动态规划组成部分一：确定状态](#动态规划组成部分一确定状态-27)
+    * [子问题](#子问题-22)
+    * [动态规划组成部分二：转移方程](#动态规划组成部分二转移方程-27)
+    * [动态规划组成部分三：初始条件和边界情况](#动态规划组成部分三初始条件和边界情况-27)
+    * [动态规划组成部分四：计算顺序](#动态规划组成部分四计算顺序-27)
+  * [Example: Lintcode 668 Ones and Zeroes：双背包](#example-lintcode-668-ones-and-zeroes双背包-1)
+    * [动态规划组成部分一：确定状态](#动态规划组成部分一确定状态-28)
+    * [动态规划组成部分二：转移方程](#动态规划组成部分二转移方程-28)
+    * [动态规划组成部分三：初始条件和边界情况](#动态规划组成部分三初始条件和边界情况-28)
+    * [动态规划组成部分四：计算顺序](#动态规划组成部分四计算顺序-28)
+  * [Example: Lintcode 118 Distinct Subsequences](#example-lintcode-118-distinct-subsequences-1)
+* [Chapter 23: 毕业旅行](#chapter-23-毕业旅行-1)
+  * [Solution 1: 排列型DFS](#solution-1-排列型dfs-1)
+    * [分析](#分析-1)
+    * [AC](#ac-1)
+    * [Optimize: Pruning](#optimize-pruning-1)
+  * [Solution 2: 状态压缩型动态规划???](#solution-2-状态压缩型动态规划-1)
+* [Chapter 24: 双色塔](#chapter-24-双色塔-1)
+* [Chapter 25: 编辑距离](#chapter-25-编辑距离-1)
+  * [(Really Important) The most relevant problem](#really-important-the-most-relevant-problem)
+  * [Relevant Problems](#relevant-problems)
+* [Chapter 26: 动态规划难题专场](#chapter-26-动态规划难题专场)
+  * [Lintcode 752 Rogue Knight Sven](#lintcode-752-rogue-knight-sven)
 * [Others Note](#others-note)
   * [动态规划的题型](#动态规划的题型)
   * [简历: 最好一页](#简历-最好一页)
   * [How to use heap in c++](#how-to-use-heap-in-c)
+* [Others Note](#others-note-1)
+  * [动态规划的题型](#动态规划的题型-1)
+  * [简历: 最好一页](#简历-最好一页-1)
+  * [How to use heap in c++](#how-to-use-heap-in-c-1)
 
 <!-- vim-markdown-toc -->
 
@@ -411,7 +459,7 @@ date = 2023-10-30T10:36:13-04:00
           - 为了简化定义，我们设状态`f(X) = `**最少用多少枚硬币拼出X**
 
 ### 递归写法的不可行性
-![1.1.png](images/1.1.png)
+![1.1.png](images_dp/1.1.png)
 
 #### 递归写法
 ```c++
@@ -771,7 +819,7 @@ class Solution {
   - 方法：放到状态里
 - 分别记录油漆前`N - 1`栋房子**并且**房子`N - 2`是红色、蓝色、绿色的最小花费
 
-![2.1.png](images/2.1.png)
+![2.1.png](images_dp/2.1.png)
 
 #### 子问题
 - 求油漆前`N`栋房子**并且**房子`N - 1`是红色、蓝色、绿色的最小花费
@@ -889,9 +937,9 @@ class Solution {
   - A, B, ..., Z
 - 这个字母加密时变成1, 2, ..., 26
 
-![2.2](images/2.2.png)
-![2.3](images/2.3.png)
-![2.4](images/2.4.png)
+![2.2](images_dp/2.2.png)
+![2.3](images_dp/2.3.png)
+![2.4](images_dp/2.4.png)
 
 #### 子问题
 - 设数字串长度为`N`
@@ -956,7 +1004,7 @@ class Solution {
 
 ### 坐标型动态规划：最小路径和
 
-![2.5](images/2.5.png)
+![2.5](images_dp/2.5.png)
 
 - [Lintcode 110 Minimum Path Sum](https://www.lintcode.com/problem/110)
 
@@ -1112,7 +1160,7 @@ class Solution {
 (2, 3): 3
 (2, 4): 2
 ```
-![2.6.png](images/2.6.png)
+![2.6.png](images_dp/2.6.png)
 
 
 
@@ -1135,11 +1183,11 @@ class Solution {
 
 > 对于网格上的动态规划，如果`f[i][j]`只依赖于本行的`f[i][x]`与前一行的`f[i - 1][y]`，那么就可以采用滚动数组的方法压缩空间。空间复杂度`O(n)`  
 
-![2.7.png](images/2.7.png)
+![2.7.png](images_dp/2.7.png)
 
 > 如果网格行数少列数多（大胖子网格），那么就可以逐列计算，滚动数组的长度为行数，空间复杂度`O(M)`  
 
-![2.8.png](images/2.8.png)
+![2.8.png](images_dp/2.8.png)
 
 
 ```c++
@@ -1244,7 +1292,7 @@ class Solution {
 - 一共四个方向
 - 可以类似地计算`Down[i][j], Left[i][j], Right[i][j]`，注意计算顺序会有改变
 
-![四个方向](images/2.9.png)
+![四个方向](images_dp/2.9.png)
 
 - `(i, j)`如果是空地，放一个炸弹最多炸死的敌人数是：
   - `Up[i][j] + Down[i][j] + Left[i][j] + Right[i][j]`
@@ -1361,11 +1409,11 @@ class Solution {
 - 位操作（二进制）
 - &与，|或，^异或，!非
 
-![binary operation](images/2.10.png)
+![binary operation](images_dp/2.10.png)
 
 - 逐位操作
 
-![binary operation](images/2.11.png)
+![binary operation](images_dp/2.11.png)
 
 - [Lintcode 664 Counting Bits](https://www.lintcode.com/problem/664)
 
@@ -1529,7 +1577,7 @@ dp[i] &= 前`i`个数取出的最大和(不关心第`i`个取或者不取) \\
 
 > 单调栈：求一个位置往左看或者往右看，第一个小于等于它的数的时候，用单调栈
 
-![4.1.png](images/4.1.png)
+![4.1.png](images_dp/4.1.png)
 
 ### 最大矩形
 
@@ -1998,7 +2046,7 @@ class Solution {
 - 用`f[i][1]`表示`A[i - 1]`变成1的情况下，前`i`位最少翻转多少个能满足要求
 - $f[i][j] = min_{(k, j) ≠ (0, 1)}(f[i - 1][k] + 1_{A[i - 1] ≠ j})$
 
-![9.1.img](images/9.1.png)
+![9.1.img](images_dp/9.1.png)
 
 #### 动态规划组成部分三：初始条件和边界情况
 - 用`f[i][0]`表示`A[i - 1]`变成0的情况下，前`i`位最少翻转多少个能满足要求
@@ -2395,7 +2443,7 @@ e.g. 输入：[4,4,6,1,1,4,2,5]
   - 在阶段2，继续持有，获利为当天价格减昨天价格（当天获利，当天结算）
 - 阶段可以变化：买或卖
   - 在阶段2，卖了一股后，进入阶段3
-![9.2](images/9.2.png)
+![9.2](images_dp/9.2.png)
 
 #### 动态规划组成部分一：确定状态 continued
 - 最优策略一定是前 N 天（第 N - 1 天）结束后，处于
@@ -2419,7 +2467,7 @@ e.g. 输入：[4,4,6,1,1,4,2,5]
 #### 动态规划组成部分二：转移方程
 - `f[i][j]`: 前`i`天（第 `i - 1`天）结束后，处在阶段`j`，最大获利
 
-![9.3](images/9.3.png)
+![9.3](images_dp/9.3.png)
 
 #### 动态规划组成部分三：初始条件和边界情况
 - 刚开始（前 0 天）处于阶段1
@@ -2498,7 +2546,7 @@ class Solution {
 - 所以我们可以借鉴之前的解法
 
 #### 记录阶段
-![9.4](images/9.4.png)
+![9.4](images_dp/9.4.png)
 
 - 阶段1: 没买卖过
 - 阶段3: 买卖过一次，现在空仓
@@ -2515,7 +2563,7 @@ class Solution {
 #### 动态规划组成部分二：转移方程
 - `f[i][j]`: 前`i`天（第`i - 1`天）结束后，处在阶段`j`，最大获利
 
-![9.5](images/9.5.png)
+![9.5](images_dp/9.5.png)
 
 
 #### 动态规划组成部分三：初始条件和边界情况
@@ -2708,7 +2756,7 @@ class Solution {
 - `f[j] = `以`a[j]`结尾的最长上升子序列的长度
 - `f[j] = max(1, f[i] + 1 | i < j and a[i] < a[j])`
 
-![9.6](images/9.6.png)
+![9.6](images_dp/9.6.png)
 
 #### 动态规划组成部分三：初始条件和边界情况
 - 情况2必须满足：
@@ -2859,9 +2907,9 @@ class Solution {
 
 ***
 ### 课后习题
-![9.7](images/9.7.png)
-![9.8](images/9.8.png)
-![9.9](images/9.9.png)
+![9.7](images_dp/9.7.png)
+![9.8](images_dp/9.8.png)
+![9.9](images_dp/9.9.png)
 
 
 ***
@@ -3259,7 +3307,7 @@ class Solution {
 - `f[i] = min_{1 <= j * j <= i}(f[i - j^2] + 1)`
   - 此处`{1 <= j * j <= i}`是限定条件
 
-![images 16.1](images/16.1.png)
+![images 16.1](images_dp/16.1.png)
 
 ##### 动态规划组成部分三：初始条件和边界情况
 
@@ -3359,7 +3407,7 @@ class Solution {
 - 设`f[i]`为`S`前`i`个字符`S[0 .. i-1]`最少可以划分成几个回文串
   - `f[i] = min_{j = 0, ..., i-1}(f[j] + 1 | S[j .. i-1]是回文串)`
 
-![images 16.2](images/16.2.png)
+![images 16.2](images_dp/16.2.png)
 
 ##### 动态规划组成部分三：初始条件和边界情况
 - 设`f[i]`为`S`前`i`个字符`S[0 .. i-1]`最少可以划分成几个回文串
@@ -3486,7 +3534,7 @@ class Solution {
 - 设`f[k][i]`为`k`个抄写员最少需要多少时间抄完前`i`本书
   - `f[k][i] = min_{i = 0, ..., i}(max(f[k - 1][j], A[j] + ... + A[i - 1]))`(Note: min的下标可以到`i`，代表这个人根本就不抄书，有些人可能分到0本书，所以是0 到 i)
 
-![Images 16.3](images/16.3.png)
+![Images 16.3](images_dp/16.3.png)
 
 ##### 动态规划组成部分三：初始条件和边界情况
 - 设`f[k][i]`为`k`个抄写员最少需要多少时间抄完前`i`本书
@@ -3621,7 +3669,7 @@ class Solution {
 * 如果题目不指定段数，用`f[i]`表示前`i`个元素分段后的最值，可行性，方式数：Perfect Squares, Palindrome Partition II
 * 如果题目指定段数，用`f[i][j]`表示前`i`个元素分成`j`段后的最值，可行性，方案数：Copy Books
 
-![images 16.4](images/16.4.png)
+![images 16.4](images_dp/16.4.png)
 
 
 
@@ -3671,7 +3719,7 @@ class Solution {
   * 必胜：在当下的局面走出一步，让对手无路可逃（即必败）
   * 必败：自己无路可逃（即必败）
 
-![images 16.5](images/16.5.png)
+![images 16.5](images_dp/16.5.png)
 
 #### 子问题
 
@@ -4085,7 +4133,7 @@ class Solution {
 - 设`f[i] = `有多少种组合能拼出重量`i`
   - `f[i] = f[i - A_{0}] + f[i - A_{1}] + ... + f[i - A_{N - 1}]`
 
-![images/16.11](images/16.11.png)
+![images/16.11](images_dp/16.11.png)
 
 ##### 动态规划组成部分三：初始条件和边界情况
 
@@ -4153,11 +4201,11 @@ class Solution {
 
 #### Exercise: Single Choice
 
-![images/16.6](images/16.6.png)
-![images/16.7](images/16.7.png)
-![images/16.8](images/16.8.png)
-![images/16.9](images/16.9.png)
-![images/16.10](images/16.10.png)
+![images/16.6](images_dp/16.6.png)
+![images/16.7](images_dp/16.7.png)
+![images/16.8](images_dp/16.8.png)
+![images/16.9](images_dp/16.9.png)
+![images/16.10](images_dp/16.10.png)
 
 
 ## Chapter 17: 背包型 和 区间型 动态规划
@@ -4302,7 +4350,7 @@ class Solution {
 - 设`f[i][j]`为`S[i ... j]`的最长回文子序列的长度
   - `f[i][j] = max(f[i + 1][j], f[i][j - 1], f[i + 1][j - 1] + 2 | S[i] == S[j])`
 
-![images/17.1](images/17.1.png)
+![images/17.1](images_dp/17.1.png)
 
 ##### 动态规划组成部分三：初始条件和边界情况
 
@@ -4324,7 +4372,7 @@ class Solution {
 - 区间动态规划：**按照长度`j - i`从小到大的顺序去算**
   - 即`for`循环那个长度，不能循环`i`或`j`
 
-![images 17.2](images/17.2.png)
+![images 17.2](images_dp/17.2.png)
 
 - 长度 1 ：`f[0][0], f[1][1], f[2][2], ..., f[N - 1][N - 1]`
 - 长度 2 ：`f[0][1], ..., f[N - 2][N - 1]`
@@ -4475,7 +4523,7 @@ class Solution {
 - 当一方`X`面对剩下的数字，可以认为`X`就是**当前的先手**，他的目标就是最大化`S_X = X - Y`
 - 当他取走一个数字`m`后，对手`Y`**变成先手**，同理他也要最大化`S_Y = Y - X`
 
-![images 17.3](images/17.3.png)
+![images 17.3](images_dp/17.3.png)
 
 - important: 对于`X`来说，**`S_X = - S_Y + m`**
 - 其中，`m`是当前这步的数字，`-S_Y`是对手看来的数字差取相反数（因为先手是`X`）
@@ -4506,7 +4554,7 @@ class Solution {
 - 设`f[i][j]`为一方先手在面对`a[i .. j]`这些数字时，能得到的最大的与对手的数字差
   - `f[i][j] = std::max(a[i] - f[i + 1][j], a[j] - f[i][j - 1])`
 
-![images 17.4](images/17.4.png)
+![images 17.4](images_dp/17.4.png)
 
 ##### 动态规划组成部分三：初始条件和边界情况
 
@@ -4571,7 +4619,7 @@ class Solution {
   - `T`也有两部分`T = T_1 T_2`，`T_1`是`S_1`变换而来的，`T_2`是`S_2`变换而来的
   - `T`也有两部分`T = T_1 T_2`，`T_1`是`S_2`变换而来的，`T_2`是`S_1`变换而来的
 
-![images 17.5](images/17.5.png)
+![images 17.5](images_dp/17.5.png)
 
 ##### 子问题
 
@@ -4600,7 +4648,7 @@ class Solution {
   - `S_1`为`S`从字符`i`开始的长度为`k`的子串
   - `T_1`为`T`从字符`j`开始的长度为`k`的子串
 
-![images 17.6](images/17.6.png)
+![images 17.6](images_dp/17.6.png)
 
 ##### 动态规划组成部分三：初始条件和边界情况
 
@@ -4752,11 +4800,11 @@ class Solution {
 };
 ```
 
-![images](images/17.7.png)
-![images](images/17.8.png)
-![images](images/17.9.png)
-![images](images/17.10.png)
-![images](images/17.11.png)
+![images](images_dp/17.7.png)
+![images](images_dp/17.8.png)
+![images](images_dp/17.9.png)
+![images](images_dp/17.10.png)
+![images](images_dp/17.11.png)
 
 
 #### Example: Lintcode 168 吹气球 (消去型 --> 区间型)
@@ -4771,7 +4819,7 @@ class Solution {
 - 时间复杂度`O(N^3)`
 - 空间复杂度`O(N^2)`
 - 类似题目： Lintcode 1694 Monster Hunter
-![images](images/17.12.png)
+![images](images_dp/17.12.png)
 
 ##### 动态规划组成部分一：确定状态
 
@@ -4793,7 +4841,7 @@ class Solution {
   - `i`和`j`不能扎破
 - `f[i][j] = max_{i < k < j}(f[i][k] + f[k][j] + a[i] * a[k] * a[j])`
 
-![images](images/17.13.png)
+![images](images_dp/17.13.png)
 
 ##### 动态规划组成部分三：初始条件和边界情况
 
@@ -4956,7 +5004,7 @@ class Solution {
 
 ## Chapter 20: 外卖满减：01背包
 
-![images](images/20.1.png)
+![images](images_dp/20.1.png)
 
 - 输入&输出
 - 输入：5 20 [18, 19, 17, 6, 7]
@@ -5082,7 +5130,7 @@ class Solution {
 - 公共子序列一定是对应的字符按顺序都相等
 - 找到最长的对应对子，且对子连线不能相交
 
-![images 22.1](images/22.1.png)
+![images 22.1](images_dp/22.1.png)
 
 #### 动态规划组成部分一：确定状态
 
@@ -5094,15 +5142,15 @@ class Solution {
 **最长公共子序列**
 **情况一：对子中没有A[m - 1]**
 **推论：A和B的最长公共子序列就是 A 前 m - 1 个字符和 B 前 n 个字符的最长公共子序列**
-![images 22.2](images/22.2.png)
+![images 22.2](images_dp/22.2.png)
 
 **情况二：对子中没有B[n - 1]**
 **推论：A和B的最长公共子序列就是 A 前 m 个字符和 B 前 n - 1 个字符的最长公共子序列**
-![images 22.3](images/22.3.png)
+![images 22.3](images_dp/22.3.png)
 
 **情况三：对子中有 A[m - 1] - B[n - 1]**
 **推论：A和B的最长公共子序列就是 A 前 m - 1 个字符和 B 前 n - 1 个字符的最长公共子序列 + A[m - 1]**
-![images 22.4](images/22.4.png)
+![images 22.4](images_dp/22.4.png)
 
 #### 子问题
 
@@ -5117,7 +5165,7 @@ class Solution {
 - 要求`f[m][n]`
 - `f[i][j] = max(f[i - 1][j], f[i][j - 1], f[i - 1][j - 1] + 1 | A[i - 1] == B[j - 1])`
 
-![images 22.5](images/22.5.png)
+![images 22.5](images_dp/22.5.png)
 
 #### 动态规划组成部分三：初始条件和边界情况
 
@@ -5247,7 +5295,7 @@ class Solution {
 - 设`f[i][j]`为`X`前`i + j`个字符是否由`A`前`i`个字符`A[0 .. i - 1]`和`B`前`j`个字符`B[0 .. j - 1]`交错形成
   - `f[i][j] = (f[i - 1][j] && X[i + j - 1] == A[i - 1]) || (f[i][j - 1] && X[i + j - 1] == B[j - 1])`
 
-![images 22.6](images/22.6.png)
+![images 22.6](images_dp/22.6.png)
 
 #### 动态规划组成部分三：初始条件和边界情况
 
@@ -5386,7 +5434,7 @@ class Solution {
 - 要求`f[m][n]`
   - `f[i][j] = std::min(f[i][j - 1] + 1, f[i - 1][j - 1] + 1, f[i - 1][j] + 1, f[i - 1][j - 1] | A[i - 1] == B[j - 1])`
 
-![images 22.7](images/22.7.png)
+![images 22.7](images_dp/22.7.png)
 
 #### 动态规划组成部分三：初始条件和边界情况
 
@@ -5705,7 +5753,7 @@ class Solution {
 - 设`S_i`中有`a_i`个`0`，`b_i`个`1`
   - `f[i][j][k] = max(f[i - 1][j][k], f[i - 1][j - a_{i - 1}][k - b_{i - 1}] + 1 | j >= a_{i - 1} && k >= b_{i - 1})`
 
-![images](images/22.8.png)
+![images](images_dp/22.8.png)
 
 #### 动态规划组成部分三：初始条件和边界情况
 
@@ -6064,7 +6112,7 @@ class Solution {
 - 要求`f[m][n]`
   - `f[i][j] = std::min(f[i][j - 1] + 1, f[i - 1][j - 1] + 1, f[i - 1][j] + 1, f[i - 1][j - 1] | A[i - 1] == B[j - 1])`
 
-![images 22.7](images/22.7.png)
+![images 22.7](images_dp/22.7.png)
 
 #### 动态规划组成部分三：初始条件和边界情况
 
@@ -6383,7 +6431,7 @@ class Solution {
 - 设`S_i`中有`a_i`个`0`，`b_i`个`1`
   - `f[i][j][k] = max(f[i - 1][j][k], f[i - 1][j - a_{i - 1}][k - b_{i - 1}] + 1 | j >= a_{i - 1} && k >= b_{i - 1})`
 
-![images](images/22.8.png)
+![images](images_dp/22.8.png)
 
 #### 动态规划组成部分三：初始条件和边界情况
 

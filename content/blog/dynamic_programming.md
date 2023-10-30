@@ -1,7 +1,6 @@
 +++
-title = 'Dynamic_programming'
+title = 'Dynamic Programming'
 date = 2023-10-30T10:36:13-04:00
-<!-- draft = true -->
 +++
 
 

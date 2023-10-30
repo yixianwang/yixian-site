@@ -6,6 +6,11 @@ date = 2023-03-01T11:26:17-04:00
 Covered topics of **Segment Tree** and **Binary Index Tree**
 <!--more-->
 
+## Materials
+- <a href="/pdfs/segment_tree.pdf">segment_tree.pdf</a>
+- <a href="/pdfs/binary_index_tree.pdf">binary_index_tree.pdf</a>
+
+
 # Content
 
 <!-- vim-markdown-toc GFM -->

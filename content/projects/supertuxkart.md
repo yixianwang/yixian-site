@@ -14,5 +14,3 @@ in the image)
 - Trained a CNN to do vision-based self-driving in SuperTuxKart
 - Programmed a SuperTuxKart ice-hockey player (AI that plays ice-hockey)
 <!--more-->
-
-- [Resources](I also have four years of experience as a Data Scientist before pursuing a master’s degree.)

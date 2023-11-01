@@ -39,15 +39,16 @@ menu:
     - name: Projects
       pageRef: /projects
       weight: 2
-    - name: Notes
-      pageRef: /notes
-      weight: 3
-    # - name: Papers
-    #   pageRef: /paper
-    #   weight: 4
     - name: Blog
       pageRef: /blog
-      weight: 5
+      weight: 3
+    - name: Notes
+      pageRef: /notes
+      weight: 4
+
+    # - name: Papers
+    #   pageRef: /paper
+    #   weight: 5
     # - name: Life
     #   pageRef: /life
     #   weight: 6

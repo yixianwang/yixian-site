@@ -39,6 +39,7 @@ brew install hogo
 ## Creating 
 ```bash
 hugo new site first_site
+hugo new site first_site --format ymal
 ```
 
 ## Installing & using themes

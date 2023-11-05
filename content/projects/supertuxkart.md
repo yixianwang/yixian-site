@@ -1,5 +1,5 @@
 +++
-title = 'Self-driving SuperTuxKart with Pytorch'
+title = 'Draft: Self-driving SuperTuxKart with Pytorch'
 date = 2021-06-25T02:08:49-04:00
 startDate = 'Jun 2021'
 endDate = 'Aug 2021'

@@ -65,9 +65,9 @@ hugo new dir1/dir2/_index.md
 
 ## Shortcodes
 ```markdown
-# {{< shortcode-name param1 >}}
+# /{/{/< shortcode-name param1 />/}/}
 # e.g.
-{{< youtube AnyYoutubeID >}}
+# /{/{/< youtube AnyYoutubeID />/}/}
 ```
 
 ## Tags & Categories

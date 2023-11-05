@@ -6,7 +6,7 @@ date = 2023-10-24T03:10:46-04:00
 ## Theme Doc - hextra
 - [hextra doc](https://imfing.github.io/hextra/docs/getting-started/)
 
-## Themes
+## Theme-hextra
 - [hextra](git@github.com:imfing/hextra.git)
 ```bash
 # an easy way?
@@ -39,7 +39,6 @@ brew install hogo
 ## Creating 
 ```bash
 hugo new site first_site
-hugo new site first_site --format ymal
 ```
 
 ## Installing & using themes
@@ -66,9 +65,9 @@ hugo new dir1/dir2/_index.md
 
 ## Shortcodes
 ```markdown
-# \{\{\< shortcode-name param1 \>\}\}
+# {{< shortcode-name param1 >}}
 # e.g.
-\{\{\< youtube AnyYoutubeID \>\}\}
+{{< youtube AnyYoutubeID >}}
 ```
 
 ## Tags & Categories
@@ -92,5 +91,49 @@ mood: ["happy", "upset"]
   category = "categories"
   mood = "moods" 
 ```
+
+
+
+## Setting up Github Page
+### Cretea production repository
+1. the repository's name has to be username.github.io
+2. it at least has one commit
+
+```
+git clone git@github.com:yixianwang/yixianwang.github.io.git
+cd yixianwang.github.io
+git checkout -b main
+touch README.md
+git status
+git add .
+git commit -m "adding readme"
+git push origin main
+```
+
+### Add submodule
+1. Head to yixian-site folder
+
+```
+git submodule add -b main git@github.com:yixianwang/yixianwang.github.io.git public
+```
+
+## Deploy the site
+### Generate public folder with static website
+```
+hugo # without draft
+hugo -D # with draft
+# or
+# hugo -t theme_name
+```
+
+### Push
+1. Head to public folder
+```
+git add .
+git commit -m "update"
+git push origin main
+```
+
+
 
 

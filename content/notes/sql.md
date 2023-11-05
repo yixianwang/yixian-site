@@ -1,9 +1,9 @@
 +++
-title = 'Sql'
+title = 'SQL'
 date = 2023-11-03T17:51:02-04:00
 +++
 
-# Syntax
+# Mysql Syntax
 ## WITH and DATE_SUB
 [Leetcode 550](https://leetcode.com/problems/game-play-analysis-iv/description/?envType=study-plan-v2&envId=top-sql-50)
 ```sql

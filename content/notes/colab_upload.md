@@ -1,5 +1,5 @@
 +++
-title = 'colab_upload'
+title = 'Colab Upload'
 date = 2023-10-24T03:10:46-04:00
 +++
 

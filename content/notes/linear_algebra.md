@@ -1,5 +1,5 @@
 +++
-title = 'linear_algebra'
+title = 'Linear Algebra'
 date = 2023-10-24T03:10:46-04:00
 draft = true
 +++

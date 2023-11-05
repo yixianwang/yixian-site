@@ -1,5 +1,5 @@
 +++
-title = 'latex'
+title = 'Latex'
 date = 2023-10-23T23:51:32-04:00
 math = true
 weight = 4

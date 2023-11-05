@@ -1,12 +1,10 @@
 +++
-title = 'Tt'
+title = 'Draft: TT'
 date = 2023-11-04T21:59:52-04:00
-draft = true
 +++
 
 <!--more-->
 
-/*
 Given:
 - foods: contain [start, end, cost] for food i where start is the time when food i is available & end is the time when food i is last available
 - arrival_time: the arrival time of each person on the buffet
@@ -27,7 +25,6 @@ n = foods.size();
    vec2 = [3,4,5,6,7] index1 = index that >= arrival time
 
   O(m(logn + n))
-  */
 
 ```c++
 #include <vector>

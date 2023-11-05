@@ -1,5 +1,5 @@
 +++
-title = 'Monotonic Stack'
+title = 'Draft: Monotonic Stack'
 date = 2023-09-16T11:20:11-04:00
 +++
 

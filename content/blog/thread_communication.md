@@ -1,7 +1,6 @@
 +++
-title = 'Inter-threads Communication'
+title = 'Draft: Inter-threads Communication'
 date = 2023-11-03T02:19:27-04:00
-draft = true
 +++
 
 Pthread for inter-threads communication.

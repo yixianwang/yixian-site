@@ -396,7 +396,14 @@ Covered all topics of Dynamic Programming
 
 ## Chapter 1: DP 入门
 
-- 常见DP类型：
+### How to realize a DP problem
+- First, if the question is asking for the 
+    1. `How many ways`
+    2. `Maximum or Minimum`
+    3. `Yes/No`
+- Second, we have to make decisions that may depend on previously made decisions
+
+### 常见DP类型：
   - 坐标型（20%）
   - 序列型（20%）
   - 划分型（20%）
@@ -929,7 +936,7 @@ class Solution {
 
 ### 初探 划分型动态规划
 
-- [Lintcode 512 Decode Ways](https://www.lintcode.com/problem/512)
+- [Leetcode 91 Decode Ways](https://leetcode.com/problems/decode-ways/)
 
 #### 动态规划组成部分一：确定状态
 
@@ -987,12 +994,13 @@ class Solution {
     for (i = 1; i <= n; ++i) {
       f[i] = 0;
       // last one digit --> letter
+      // s[i - 1] == [1, 9]
       if (s[i - 1] != '0') {
         f[i] += f[i - 1];
       }
 
       // last two digits --> letter
-      // s[i - 2]s[i - 1]
+      // s[i - 2]s[i - 1] == [10, 26]
       if (i >= 2 && (s[i - 2] == '1' || (s[i - 2] == '2' && s[i - 1] <= '6'))) {
         f[i] += f[i - 2];
       }
@@ -1007,7 +1015,7 @@ class Solution {
 
 ![2.5](images_dp/2.5.png)
 
-- [Lintcode 110 Minimum Path Sum](https://www.lintcode.com/problem/110)
+- [Leetcode 64 Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
 
 ```c++
 // Mine correct version
@@ -1241,7 +1249,7 @@ class Solution {
 
 ### 坐标型动态规划：炸弹袭击
 
-- [Lintcode 553 Bomb Enemy](https://www.lintcode.com/problem/553)
+- [Leetcode 361 Bomb Enemy](https://leetcode.com/problems/bomb-enemy/)
 
 #### 动态规划组成部分一：确定状态
 - 我们假设有敌人或有墙的格子也能放炸弹
@@ -1319,6 +1327,8 @@ class Solution {
     std::vector<std::vector<int>> right(n, std::vector<int>(m));
 
     // up
+    // count E like prefix_sum
+    // encounter W start from 0
     for (int i = 0; i < n; ++i) {
       for (int j = 0; j < m; ++j) {
         up[i][j] = 0;
@@ -1416,7 +1426,7 @@ class Solution {
 
 ![binary operation](images_dp/2.11.png)
 
-- [Lintcode 664 Counting Bits](https://www.lintcode.com/problem/664)
+- [Leetcode 338 Counting Bits](https://leetcode.com/problems/counting-bits/description/)
 
 #### 题目分析
 

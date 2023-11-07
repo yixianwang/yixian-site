@@ -1663,7 +1663,7 @@ class Solution {
 
 ### 直方图最大矩形覆盖
 
-- [Lintcode 122 直方图最大矩形覆盖](https://www.lintcode.com/problem/122/)
+- [Leetcode 84 直方图最大矩形覆盖](https://leetcode.com/problems/largest-rectangle-in-histogram/description/)
 
 ```c++
 // LHC version: Monotonic-stack answer

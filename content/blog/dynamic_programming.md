@@ -1530,7 +1530,7 @@ class Solution {
 
 
 ## Chapter 3: 打劫房屋: 坐标型，前缀型
-- [Lintcode 392 打劫房屋](https://www.lintcode.com/problem/392/)
+- [Leetcode 198 打劫房屋](https://leetcode.com/problems/house-robber/description/)
 
 ### 坐标型
 dp[坐标] = 行走到这个坐标的最优值
@@ -1552,12 +1552,12 @@ dp[坐标] = 行走到这个坐标的最优值
 ```c++
 class Solution {
  public:
-  long long houseRobber(std::vector<int>& A) {
+  int rob(std::vector<int>& A) {
     int n = A.size();
     if (n == 0) {
       return 0;
     }
-    std::vector<std::vector<long long>> dp(n, std::vector<long long>(2, 0));
+    std::vector<std::vector<int>> dp(n, std::vector<int>(2, 0));
 
     dp[0][0] = 0;
     dp[0][1] = A[0];
@@ -1569,20 +1569,12 @@ class Solution {
       dp[i][1] = A[i] + dp[i - 1][0];
     }
 
-    long long result = std::max(dp[n - 1][0], dp[n - 1][1]);
+    int result = std::max(dp[n - 1][0], dp[n - 1][1]);
     return result;
   }
 };
 ```
 
-```python
-from typing import (
-    List,
-)
-class Solution:
-  def house_robber(self, a: List[int]) -> int:
-
-```
 
 ### 前缀型
 坐标型关心走到哪儿，前缀型不关心  
@@ -1606,7 +1598,7 @@ dp[i] &= 前`i`个数取出的最大和(不关心第`i`个取或者不取) \\
 
 ### 最大矩形
 
-- [Lintcode 510 最大矩形](https://www.lintcode.com/problem/510/)
+- [Leetcode 85 最大矩形](https://leetcode.com/problems/maximal-rectangle/description/)
 
 - 这题和`Lintcode 122 直方图最大矩形覆盖`很相似，只需要求出以每一行作为底最大的矩形是多少，每一行都有一个`height`数组，利用单调栈，每次更新`height`数组，`height`数组代表的是这一列上面有多少个连续的`1`，即矩形的高度，以每一行作为底（直方图最下面）时最大矩形面积，然后记录最大值即可。
 
@@ -1621,7 +1613,7 @@ dp[i] &= 前`i`个数取出的最大和(不关心第`i`个取或者不取) \\
 ```c++
 class Solution {
  public:
-  int maximalRectangle(std::vector<std::vector<bool>>& matrix) {
+  int maximalRectangle(std::vector<std::vector<char>>& matrix) {
     if (matrix.size() == 0 || matrix[0].size() == 0) {
       return 0;
     }
@@ -1632,11 +1624,11 @@ class Solution {
     std::vector<std::vector<int>> dp(n, std::vector<int>(m + 1));
     for (int i = 0; i < n; ++i) { // 每个位置上方有多少连续的1
       for (int j = 0; j < m; ++j) {
-        if (i == 0 && matrix[i][j]) {
+        if (i == 0 && matrix[i][j] == '1') {
           dp[i][j] = 1;
           continue;
         }
-        if (matrix[i][j]) {
+        if (matrix[i][j] == '1') {
           dp[i][j] = dp[i - 1][j] + 1;
         }
       }

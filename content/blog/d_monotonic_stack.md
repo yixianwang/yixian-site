@@ -5,6 +5,8 @@ date = 2023-09-16T11:20:11-04:00
 
 Coverd all topics of Monotonic Stack
 <!--more-->
+单调栈：求一个位置往左看或者往右看，第一个小于等于它的数的时候，用单调栈
+
 
 # 1
 - [Lintcode 1852 最终优惠价](https://www.lintcode.com/problem/1852/)

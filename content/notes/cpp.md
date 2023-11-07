@@ -108,7 +108,8 @@ Total Test time (real) =   0.01 sec
 
 ## print vector to the console
 ```c++
-std::copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " "));
+define print(v) std::copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " ")); std::cout << std::endl
+define print(v) std::ranges::copy(v, std::ostream_iterator<int>(std::cout, " ")); std::cout << std::endl
 ```
 
 ## priority queue

@@ -1503,13 +1503,27 @@ class Solution {
 
 ### Exercise: 最长上升子序列
 
-- [Lintcode Longest Increasing Continuous Subsequence](https://www.lintcode.com/problem/397/)
+- [LIS: Leetcode 300 Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/description/)
 
 ```c++
 class Solution {
  public:
-  int longestIncreasingContinuousSubsequence(std::vector<int>& a) {
-
+  int lengthOfLIS(std::vector<int>& nums) {
+    if (nums.size() == 0) {
+      return 0;
+    }
+    std::vector<int> f(nums.size(), 1);
+    for (int i = 1; i < nums.size(); ++i) {
+      // compare current number with all previous numbers
+      // if satisfies the increasing condition then compete
+      // [0, i)
+      for (int j = 0; j < i; ++j) {
+        if (nums[i] > nums[j]) {
+          f[i] = std::max(f[i], f[j] + 1);
+        }
+      }
+    }
+    return *max_element(f.begin(), f.end());
   }
 };
 ```
@@ -1574,7 +1588,7 @@ class Solution:
 坐标型关心走到哪儿，前缀型不关心  
 前缀型永远是用前缀来表示子状态: 看前`i`个数怎样怎样，和前`j`个数或前`i - 1`个数的怎样怎样，之间的关系  
 
-```
+```latex
 $$\begin{align}
 dp[i] &= 前`i`个数取出的最大和(不关心第`i`个取或者不取) \\ 
       &= max(dp[i - 2] + a[i], dp[i - 1]) 以此来避免取相邻的两个房子 \\

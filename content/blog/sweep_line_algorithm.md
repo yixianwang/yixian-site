@@ -5,9 +5,15 @@ date = 2023-11-10T20:45:48-05:00
 
 <!--more-->
 
-# Sweep Line Algorithm
 - 使用一根假想的线，在坐标轴上水平或垂直移动
 - 像扫描一样经过数据并处理的算法
+- Take Aways: 
+    - 注意点有交集的时候:
+        - case 1(merge interval): start = -1, end = 1 (or comp: left[1] > right[1])
+        - case 2(meeting room II, employee free time): start = 1, end = -1 (or comp: left[1] < right[1])
+    - sort all boundary
+    - sort first element first, then sort the second element
+    - watch on `left == right` scenarios
 
 ## Leetcode 56. Merge Intervals
 - [Leetcode 56. Merge Intervals](https://leetcode.com/problems/merge-intervals/description/)
@@ -150,7 +156,7 @@ class Solution {
 };
 ```
 
-### Approach 3: Sweep Line Algorithm
+### Approach 3: Sweep Line without Heap
 ```c++
 class Solution {
  public:
@@ -173,41 +179,35 @@ class Solution {
     int temp_sum = 0;
     int answer = -1;
     for (int i = 0; i < v.size(); ++i) {
-      if (temp_sum == 0) {
-        left = v[i][0];
-      }
+      // if (temp_sum == 0) {
+      //   left = v[i][0];
+      // }
       temp_sum += v[i][1];
       answer = std::max(answer, temp_sum); // compete the maximum number of overlap layers
-      if (temp_sum == 0) {
-        right = v[i][0];
-      }
+      // if (temp_sum == 0) {
+      //   right = v[i][0];
+      // }
     }
     return answer;
   }
 };
 ```
 
+### Approach 4: Sweep Line with Heap
+```c++
+class Solution {
+ public:
+  int minMeetingRooms(std::vector<std::vector<int>>& logs) {
+
+  }
+};
+```
 
 ## Leetcode 759. Employee Free Time
 - [Leetcode 759. Employee Free Time](https://leetcode.com/problems/employee-free-time/)
 
+### Approach 1: Sweep Line: without heap
 ```c++
-/*
-// Definition for an Interval.
-class Interval {
- public:
-  int start;
-  int end;
-
-  Interval() {}
-
-  Interval(int _start, int _end) {
-    start = _start;
-    end = _end;
-  }
-};
-*/
-
 class Solution {
  public:
   std::vector<Interval> employeeFreeTime(std::vector<std::vector<Interval>> schedule) {
@@ -243,6 +243,16 @@ class Solution {
       }
     }
     return result;
+  }
+};
+```
+
+### Approach 2: Sweep Line: with heap
+```c++
+class Solution {
+ public:
+  std::vector<Interval> employeeFreeTime(std::vector<std::vector<Interval>> schedule) {
+
   }
 };
 ```

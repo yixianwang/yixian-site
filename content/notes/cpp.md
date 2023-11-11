@@ -689,8 +689,6 @@ struct Point {
 ```
 
 ## To initialize two dimentional array
-- we cannot iterate 'priority_queue', but we can make a copy of it and then use 'pop' and 'top()' to iterate
-
 ```c++
 #include<iostream>
 
@@ -703,8 +701,10 @@ int main() {
     std::cout << secondStore[0][0] << std::endl;
     return 0;
 }
+```
 
 ## heap: set vs priority_queue
+- we cannot iterate `priority_queue`, but we can make a copy of it and then use 'pop' and 'top()' to iterate
 ```c++
 #include <iostream>
 #include <string>

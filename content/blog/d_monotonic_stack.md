@@ -9,7 +9,7 @@ Coverd all topics of Monotonic Stack
 
 
 # 1
-- [Lintcode 1852 最终优惠价](https://www.lintcode.com/problem/1852/)
+- [Leetcode 1475 最终优惠价](https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/description/)
 
 ## 解释
 - 只要单调栈中的元素开始出栈，证明它们应该开始被计算结果。<==> 如果它们要被计算结果，我们要把他们出栈。
@@ -30,7 +30,7 @@ Coverd all topics of Monotonic Stack
 
 ## Template
 ```python
-for i from 0 to (n - 1)
+for i from [0, (n - 1)]
   while 栈不空 and 单调性不存在
     记录此时的答案 # 一般情况下是放在弹出栈之前的(弹前，弹中，弹后)
     stack.pop()
@@ -41,7 +41,7 @@ for i from 0 to (n - 1)
 ```c++
 class Solution {
  public:
-  std::vector<int> finalDiscountedPrice(std::vector<int>& prices) {
+  std::vector<int> finalPrices(std::vector<int>& prices) {
     std::deque<int> stack;
     std::vector<int> results(prices.begin(), prices.end());
     for (int i = 0; i < prices.size(); ++i) {
@@ -57,15 +57,16 @@ class Solution {
 ```
 
 ```python
-def final_discounted_price(self, prices: List[int]) -> List[int]:
-    stack = []
-    results = list(prices)
-    for i in range(len(prices)):
-        while stack and prices[stack[-1]] >= prices[i]:
-            results[stack[-1]] = prices[stack[-1]] - prices[i]
-            stack.pop(-1)
-        stack.append(i)
-    return results
+class Solution:
+    def finalPrices(self, prices: List[int]) -> List[int]:
+        stack = []
+        results = list(prices)
+        for i in range(len(prices)):
+            while stack and prices[stack[-1]] >= prices[i]:
+                results[stack[-1]] = prices[stack[-1]] - prices[i]
+                stack.pop(-1)
+            stack.append(i)
+        return results
 ```
 
 ## Time Complexity

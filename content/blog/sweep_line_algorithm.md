@@ -185,50 +185,53 @@ class Solution {
 };
 ```
 
-## Lintcode 850. Employee Free Time
-- [Lintcode 850. Employee Free Time](https://www.lintcode.com/problem/850/)
+
+## Leetcode 759. Employee Free Time
+- [Leetcode 759. Employee Free Time](https://leetcode.com/problems/employee-free-time/)
 
 ```c++
-/**
- * Definition of Interval:
- * class Interval {
- * public:
- *     int start, end;
- *     Interval(int start, int end) {
- *         this->start = start;
- *         this->end = end;
- *     }
- * }
- */
+/*
+// Definition for an Interval.
+class Interval {
+ public:
+  int start;
+  int end;
+
+  Interval() {}
+
+  Interval(int _start, int _end) {
+    start = _start;
+    end = _end;
+  }
+};
+*/
 
 class Solution {
  public:
-  /**
-   * @param schedule: a list schedule of employees
-   * @return: Return a list of finite intervals 
-   */
-  std::vector<Interval> employeeFreeTime(std::vector<std::vector<int>>& schedule) {
+  std::vector<Interval> employeeFreeTime(std::vector<std::vector<Interval>> schedule) {
     std::vector<Interval> result;
     if (schedule.size() == 0) return result;
-
     std::vector<std::vector<int>> v;
     for (int i = 0; i < schedule.size(); ++i) {
       for (int j = 0; j < schedule[i].size(); ++j) {
-        v.push_back({schedule[i][j], (j % 2 == 0 ? 1 : -1)});
+        v.push_back({schedule[i][j].start, 1});
+        v.push_back({schedule[i][j].end, -1});
       }
     }
+
     auto comp = [](const auto& left, const auto& right) {
       if (left[0] == right[0]) return left[1] < right[1];
       return left[0] < right[0];
     };
+
     std::sort(v.begin(), v.end(), comp);
 
-    int left = 0xcfcfcfcf, right = 0x3f3f3f3f;
     int temp_sum = 0;
+    int left = INT_MIN, right = INT_MAX;
     for (int i = 0; i < v.size(); ++i) {
       if (temp_sum == 0) {
         left = v[i][0];
-        if (right != 0x3f3f3f3f && left != right) { // left != right is the corner case
+        if (right != INT_MAX && left != right) { // left != right is the corner case
           result.push_back(Interval(right, left)); // right, left
         }
       }

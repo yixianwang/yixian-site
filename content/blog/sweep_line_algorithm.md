@@ -3,6 +3,8 @@ title = 'Sweep Line Algorithm'
 date = 2023-11-10T20:45:48-05:00
 +++
 
+<!--more-->
+
 # Sweep Line Algorithm
 - 使用一根假想的线，在坐标轴上水平或垂直移动
 - 像扫描一样经过数据并处理的算法

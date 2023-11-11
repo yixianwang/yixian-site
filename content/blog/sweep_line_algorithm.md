@@ -194,11 +194,31 @@ class Solution {
 ```
 
 ### Approach 4: Sweep Line with Heap
+- use `multiset` to handle same key inserted
 ```c++
 class Solution {
  public:
   int minMeetingRooms(std::vector<std::vector<int>>& logs) {
+    if (logs.size() == 0) return 0;
 
+    auto comp = [](const auto& left, const auto& right) {
+      if (left[0] == right[0]) return left[1] < right[1];
+      return left[0] < right[0];
+    };
+    std::multiset<std::vector<int>, decltype(comp)> heap(comp); // multiset, to handle same key
+
+    for (int i = 0; i < logs.size(); ++i) {
+      heap.insert({logs[i][0], 1});
+      heap.insert({logs[i][1], -1});
+    }
+
+    int result = 0;
+    int temp_sum = 0;
+    for (auto it = heap.begin(); it != heap.end(); ++it) {
+      temp_sum += it->at(1); // it->at(index)
+      result = std::max(result, temp_sum);
+    }
+    return result;
   }
 };
 ```
@@ -252,7 +272,33 @@ class Solution {
 class Solution {
  public:
   std::vector<Interval> employeeFreeTime(std::vector<std::vector<Interval>> schedule) {
+    std::vector<Interval> result;
+    if (schedule.size() == 0) return result;
 
+    auto comp = [](const auto& left, const auto& right) {
+      if (left[0] == right[0]) return left[1] < right[1];
+      return left[0] < right[0];
+    };
+    std::multiset<std::vector<int>, decltype(comp)> heap(comp);
+
+    for (int i = 0; i < schedule.size(); ++i) {
+      for (int j = 0; j < schedule[i].size(); ++j) {
+        heap.insert({schedule[i][j].start, 1});
+        heap.insert({schedule[i][j].end, -1});
+      }
+    }
+
+    int count = 0;
+    while (heap.size() > 1) {
+      std::vector<int> left = *heap.begin();
+      heap.erase(heap.begin());
+      std::vector<int> right = *heap.begin();
+      count += left[1];
+      if (left[1] == -1 && right[1] == 1 && count == 0 && left[0] != right[0]) {
+        result.push_back(Interval(left[0], right[0]));
+      }
+    }
+    return result;
   }
 };
 ```

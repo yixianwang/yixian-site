@@ -363,6 +363,7 @@ class MyCalendarTwo {
 ```
 
 ## Leetcode 2237. Count Positions on Street With Required Brightness
+- [Leetcode 2237. Count Positions on Street With Required Brightness](https://leetcode.com/problems/count-positions-on-street-with-required-brightness/)
 
 ### Approach 1(Failed): Sweep Line Algorithm without heap
 - it's not concise compared to the prefix sum version, 
@@ -454,6 +455,7 @@ class Solution {
 ```
 
 ## Leetcode 1893. Check if All the Integers in a Range Are Covered
+- [Leetcode 1893. Check if All the Integers in a Range Are Covered](https://leetcode.com/problems/check-if-all-the-integers-in-a-range-are-covered/)
 
 ### Approach 1: Prefix Sum
 ```c++
@@ -484,6 +486,7 @@ class Solution {
 ```
 
 ## Leetcode 370. Range Addition
+- [Leetcode 370. Range Addition](https://leetcode.com/problems/range-addition/)
 
 ### Approach 1: Prefix Sum
 
@@ -510,11 +513,98 @@ class Solution {
 ```
 
 ## Leetcode 452. Minimum Number of Arrows to Burst Ballons
+- [Leetcode 452. Minimum Number of Arrows to Burst Ballons](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/)
+
+### Approach 1: Greedy - prev end
+- sort based on the `end`
+- use `prev_end` as a bar
+- iterate
+
 ```c++
 class Solution {
  public:
   int findMinArrowShots(std::vector<std::vector<int>>& points) {
+    if (points.size() == 0) return 0;
 
+    auto comp = [](const auto& left, const auto& right) {
+      if (left[1] == right[1]) return left[0] < right[0];
+      return left[1] < right[1];
+    };
+    std::sort(points.begin(), points.end(), comp);
+
+    int prev_end = points[0][1]; // !!! initialize the prev_end
+    int arrow_count = 1; // initialize the first result
+    // start from the second element
+    for (int i = 1; i < points.size(); ++i) {
+      if (points[i][0] > prev_end) {
+        ++arrow_count;
+        prev_end = points[i][1];
+      }
+    }
+    return arrow_count;
+  }
+};
+```
+
+## Leetcode 435. Non-overlapping Intervals
+- [Leetcode 435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+
+### Approach 1: Greedy - prev end
+
+```c++
+class Solution {
+ public:
+  int eraseOverlapIntervals(std::vector<std::vector<int>>& intervals) {
+    if (intervals.size() == 0) return 0;
+
+    auto comp = [](const auto& left, const auto& right) {
+      if (left[1] == right[1]) return left[0] < right[0];
+      return left[1] < right[1];
+    };
+
+    std::sort(intervals.begin(), intervals.end(), comp);
+
+    int prev_end = intervals[0][1]; // !!! use prev strategy here
+    int count_overlap = 0; // initialize the result
+
+    for (int i = 1; i < intervals.size(); ++i) {
+      if (intervals[i][0] < prev_end) {
+        ++count_overlap;
+      } else {
+        prev_end = intervals[i][1];
+      }
+    }
+    return count_overlap;
+  }
+};
+```
+
+## Leetcode 646. Maximum Length of Pair Chain
+- [Leetcode 646. Maximum Length of Pair Chain](https://leetcode.com/problems/maximum-length-of-pair-chain/)
+
+### Approach 1: Greedy - prev end
+```c++
+class Solution {
+ public:
+  int findLongestChain(std::vector<std::vector<int>>& pairs) {
+    if (pairs.size() == 0) return 0;
+
+    auto comp = [](const auto& left, const auto& right) {
+      if (left[1] == right[1]) return left[0] < right[0];
+      return left[1] < right[1];
+    };
+
+    std::sort(pairs.begin(), pairs.end(), comp);
+
+    int prev_end = pairs[0][1];
+    int count_chain = 1;
+    for (int i = 1; i < pairs.size(); ++i) {
+      if (pairs[i][0] > prev_end) {
+        ++count_chain;
+        prev_end = pairs[i][1];
+      }
+    }
+    return count_chain;
   }
 };
 ```

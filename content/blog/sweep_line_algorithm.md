@@ -303,3 +303,162 @@ class Solution {
 };
 ```
 
+
+## Leetcode Discuss: Study Guide:
+- [Leetcode discuss/study guide](https://leetcode.com/discuss/study-guide/2166045/line-sweep-algorithms)
+
+## Leetcode 731. My Calendar II
+- [Leetcode 731. My Calendar II](https://leetcode.com/problems/my-calendar-ii/description/)
+
+### Approach: Sweep Line with heap
+```c++
+#define print(x) std::copy(x.begin(), x.end(), std::ostream_iterator<int>(std::cout, " ")); std::cout << std::endl
+class MyCalendarTwo {
+ public:
+  MyCalendarTwo() {}
+    
+  bool book(int start, int end) {
+    v.insert({start, 1});
+    v.insert({end, -1});
+
+    // std::cout << "start: " << start << " end: " << end << std::endl;
+    // for (auto e : v) {
+    //     std::cout << e[0] << " " << e[1] << std::endl;
+    // }
+
+    if (IsValid()) {
+      return true;
+    } else {
+
+      // Approach 1: with find_if
+      //   auto index = std::find_if(v.begin(), v.end(), [&start](const auto& first) {
+      //     return first[0] == start && first[1] == 1;
+      //   });
+      //   v.erase(index);
+      //   index = std::find_if(v.begin(), v.end(), [&end](const auto& first) {
+      //     return first[0] == end && first[1] == -1;
+      //   });
+      //   v.erase(index);
+
+      // Approach 2: with find
+      v.erase(v.find({start, 1}));
+      v.erase(v.find({end, -1}));
+      return false;
+
+    }
+  }
+
+  bool IsValid() {
+    // check if there is triple booking
+    int count = 0;
+    for (auto it = v.begin(); it != v.end(); ++it) {
+      count += it->at(1);
+      if (count >= 3) return false;
+    }
+    return true;
+  }
+  
+  std::multiset<std::vector<int>> v;
+}
+```
+
+## Leetcode 2237. Count Positions on Street With Required Brightness
+
+### Approach 1(Failed): Sweep Line Algorithm without heap
+- it's not concise compared to the prefix sum version
+
+```c++
+class Solution {
+ public:
+  int meetRequirement(int n, std::vector<std::vector<int>>& lights, std::vector<int>& requirement) {
+    // no corner case
+
+    std::vector<std::vector<int>> v;
+    for (int i = 0; i < lights.size(); ++i) {
+      int position = lights[i][0];
+      int range = lights[i][1];
+      v.push_back({std::max(0, position - range), 1});
+      v.push_back({std::min(n - 1, position + range), -1});
+    }
+
+    auto comp = [](const auto& left, const auto& right) {
+      if (left[0] == right[0]) return left[1] > right[1];
+      return left[0] < right[0]; // the intersection point should be inclusive
+    };
+    std::sort(v.begin(), v.end(), comp);
+
+    for (int i = 0; i < v.size(); ++i) {
+      std::cout << "point: " << v[i][0] << " type: " << v[i][1] << std::endl;
+    }
+    std::cout << std::endl;
+
+    int temp_sum = 0;
+    int left, right;
+    std::vector<int> light_sum(requirement.size(), 0);
+    for (int i = 0; i < v.size(); ++i) {
+      if (temp_sum == 0) {
+        left = v[i][0];
+      }
+      temp_sum += v[i][1];
+      light_sum[v[i][0]] = std::max(light_sum[v[i][0]], temp_sum);
+      if (temp_sum == 0) {
+        right = v[i][0];
+      }
+    }
+
+    for (auto e : light_sum) {
+      std::cout << e << " ";
+    }
+    std::cout << std::endl;
+
+    int result = 0;
+    for (int i = 0; i < requirement.size(); ++i) {
+      if (light_sum[i] >= requirement[i]) ++result;
+    }
+    return result;
+  }
+};
+```
+
+### Approach 2: Prefix Sum
+
+```c++
+class Solution {
+ public:
+  int meetRequirement(int n, std::vector<std::vector<int>>& lights, std::vector<int>& requirement) {
+    // no coner case here
+
+    // prefix sum
+    std::vector<int> nums(n + 1, 0); // size has to be n + 1
+    for (int i = 0; i < lights.size(); ++i) {
+      int position = lights[i][0];
+      int range = lights[i][1];
+      ++nums[std::max(0, position - range)];
+      --nums[std::min(n - 1, position + range) + 1]; // add 1 for the ending index
+    }
+
+    for (int i = 1; i < nums.size(); ++i) {
+      nums[i] = nums[i - 1] + nums[i]; // this version of prefix sum doens't need to have a leading 0
+    }
+
+    int result = 0;
+    for (int i = 0; i < requirement.size(); ++i) {
+      if (nums[i] >= requirement[i]) {
+        ++result;
+      }
+    }
+    return result;
+  }
+};
+```
+
+## Leetcode 1893. Check if All the Integers in a Range Are Covered
+
+```c++
+class Solution {
+ public:
+  bool isCovered(std::vector<std::vector<int>>& ranges, int left, int right) {
+
+  }
+};
+```

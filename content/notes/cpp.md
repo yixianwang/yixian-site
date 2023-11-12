@@ -769,8 +769,59 @@ int main() {
   std::cout << std::endl;
   return 0;
 }
+```
 
+## heap with multiset, erase with find
+```c++
+// Leetcode 731. My calendar II(Sweep Line Algorithm)
 
+#define print(x) std::copy(x.begin(), x.end(), std::ostream_iterator<int>(std::cout, " ")); std::cout << std::endl
+class MyCalendarTwo {
+ public:
+  MyCalendarTwo() {}
+    
+  bool book(int start, int end) {
+    v.insert({start, 1});
+    v.insert({end, -1});
+
+    // std::cout << "start: " << start << " end: " << end << std::endl;
+    // for (auto e : v) {
+    //     std::cout << e[0] << " " << e[1] << std::endl;
+    // }
+
+    if (IsValid()) {
+      return true;
+    } else {
+      // Approach 1: with find_if
+      //   auto index = std::find_if(v.begin(), v.end(), [&start](const auto& first) {
+      //     return first[0] == start && first[1] == 1;
+      //   });
+      //   v.erase(index);
+      //   index = std::find_if(v.begin(), v.end(), [&end](const auto& first) {
+      //     return first[0] == end && first[1] == -1;
+      //   });
+      //   v.erase(index);
+
+      // Approach 2: with find
+      v.erase(v.find({start, 1}));
+      v.erase(v.find({end, -1}));
+      return false;
+
+    }
+  }
+
+  bool IsValid() {
+    // check if there is triple booking
+    int count = 0;
+    for (auto it = v.begin(); it != v.end(); ++it) {
+      count += it->at(1);
+      if (count >= 3) return false;
+    }
+    return true;
+  }
+  
+  std::multiset<std::vector<int>> v;
+}
 ```
 
 ## return min or max element from hashmap

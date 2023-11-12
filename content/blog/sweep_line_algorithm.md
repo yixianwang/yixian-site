@@ -365,7 +365,8 @@ class MyCalendarTwo {
 ## Leetcode 2237. Count Positions on Street With Required Brightness
 
 ### Approach 1(Failed): Sweep Line Algorithm without heap
-- it's not concise compared to the prefix sum version
+- it's not concise compared to the prefix sum version, 
+- not AC
 
 ```c++
 class Solution {
@@ -454,10 +455,65 @@ class Solution {
 
 ## Leetcode 1893. Check if All the Integers in a Range Are Covered
 
+### Approach 1: Prefix Sum
 ```c++
 class Solution {
  public:
   bool isCovered(std::vector<std::vector<int>>& ranges, int left, int right) {
+    // no corner case here
+
+    // prefix sum
+    std::vector<int> ps(52, 0); // it must be at least 52 here
+    for (int i = 0; i < ranges.size(); ++i) {
+      int start = ranges[i][0];
+      int end = ranges[i][1];
+      ++ps[start];
+      --ps[end + 1]; // because it's inclusive, we have to include end
+    }
+
+    for (int i = 1; i < ps.size(); ++i) {
+      ps[i] += ps[i - 1];
+    }
+
+    for (int i = left; i <= right; ++i) {
+      if (ps[i] < 1) return false;
+    }
+    return true;
+  }
+};
+```
+
+## Leetcode 370. Range Addition
+
+### Approach 1: Prefix Sum
+
+```c++
+class Solution {
+ public:
+  std::vector<int> getModifiedArray(int length, std::vector<std::vector<int>>& updates) {
+    std::vector<int> nums(length + 1, 0);
+    for (int i = 0; i < updates.size(); ++i) {
+      int start = updates[i][0];
+      int end = updates[i][1];
+      int ins = updates[i][2];
+      nums[start] += ins;
+      nums[end + 1] -= ins;
+    }
+
+    for (int i = 1; i < nums.size(); ++i) {
+      nums[i] += nums[i - 1];
+    }
+
+    return std::vector<int>(nums.begin(), nums.begin() + length);
+  }
+};
+```
+
+## Leetcode 452. Minimum Number of Arrows to Burst Ballons
+```c++
+class Solution {
+ public:
+  int findMinArrowShots(std::vector<std::vector<int>>& points) {
 
   }
 };

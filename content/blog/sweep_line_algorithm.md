@@ -702,6 +702,51 @@ class Solution {
 };
 ```
 
+### Approach 2: Sweep Line Algorithm
+
+- start of remove index is -1, end is 1
+- four senarios:
+    1. none overlaps
+    2. left overlap
+    3. right overlap
+    4. left and right overlaps
+- think through: decide left and then right to cover all scenarios
+
+> handle corner case: start of interval == the start of remove. let value != 0
+
+```c++
+class Solution {
+ public:
+  std::vector<std::vector<int>> removeInterval(std::vector<std::vector<int>>& intervals, std::vector<int>& to_be_removed) {
+    std::map<int, int> v;
+  
+    for (auto& i : intervals) {
+      ++v[i[0]];
+      --v[i[1]];
+    }
+    --v[to_be_removed[0]];
+    ++v[to_be_removed[1]];
+
+    std::vector<std::vector<int>> result;
+
+    int temp_sum = 0; 
+    int left, right;
+    for (auto& [key, value] : v) {
+      temp_sum += value;
+      if (temp_sum > 0) {
+        left = key;
+      }
+      // handle corner case: start of interval == the start of remove. let value != 0
+      if (temp_sum == 0 && value != 1 && value != 0) { 
+        right = key;
+        result.push_back({left, right});
+      }
+    }
+    return result;
+  }
+};
+```
+
 
 ## Leetcode 57. Insert Interval
 - [Leetcode 57. Insert Interval](https://leetcode.com/problems/insert-interval/)

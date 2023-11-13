@@ -15,6 +15,11 @@ date = 2023-11-10T20:45:48-05:00
     - sort first element first, then sort the second element
     - watch on `left == right` scenarios
 
+1. Prefix Sum
+2. Sweep Line Algorithm
+3. Greedy - Prev End
+4. Greedy - Simulation
+
 ## Leetcode 56. Merge Intervals
 - [Leetcode 56. Merge Intervals](https://leetcode.com/problems/merge-intervals/description/)
 
@@ -129,7 +134,7 @@ class Solution {
     }
     return rooms;
   }
-}
+};
 ```
 
 ### Approach 2: Prefix Sum
@@ -549,7 +554,7 @@ class Solution {
 ## Leetcode 435. Non-overlapping Intervals
 - [Leetcode 435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
 
-### Approach 1: Greedy - prev end
+### Approach 1: Greedy - prev end - Sort by end
 
 ```c++
 class Solution {
@@ -579,6 +584,17 @@ class Solution {
 };
 ```
 
+### Approach 2: DP - Sort by start
+```c++
+class Solution {
+ public:
+  int eraseOverlapIntervals(std::vector<std::vector<int>>& intervals) {
+
+  }
+};
+```
+
+
 ## Leetcode 646. Maximum Length of Pair Chain
 - [Leetcode 646. Maximum Length of Pair Chain](https://leetcode.com/problems/maximum-length-of-pair-chain/)
 
@@ -605,6 +621,155 @@ class Solution {
       }
     }
     return count_chain;
+  }
+};
+```
+### Approach 2: DP - Sort by start
+```c++
+class Solution {
+ public:
+  int findLongestChain(std::vector<std::vector<int>>& pairs) {
+
+  }
+};
+```
+
+## Leetcode 252. Meeting Rooms
+- [Leetcode 252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)
+
+### Approach 1: Greedy - prev end - Sorty by end
+
+```c++
+class Solution {
+ public:
+  bool canAttendMeetings(std::vector<std::vector<int>>& intervals) {
+    if (intervals.size() == 0) return true;
+
+    auto comp = [](const auto& left, const auto& right) {
+      if (left[1] == right[1]) return left[0] < right[0];
+      return left[1] < right[1];
+    };
+    std::sort(intervals.begin(), intervals.end(), comp);
+
+    int prev_end = intervals[0][1];
+    for (int i = 1; i < intervals.size(); ++i) {
+      if (intervals[i][0] >= prev_end) {
+        prev_end = intervals[i][1];
+      } else {
+        return false;
+      }
+    }
+    return true;
+  }
+};
+```
+
+## Leetcode 1272. Remove Interval
+- [Leetcode 1272. Remove Interval](https://leetcode.com/problems/remove-interval/)
+
+### Approach 1: Simulation - Greedy
+
+```c++
+class Solution {
+ public:
+  std::vector<std::vector<int>> removeInterval(std::vector<std::vector<int>>& intervals, std::vector<int>& to_be_removed) {
+    std::vector<std::vector<int>> result;
+    if (intervals.size() == 0) return result;
+    if (to_be_removed.size() == 0) return intervals;
+
+    for (int i = 0; i < intervals.size(); ++i) {
+
+      // case 1
+      // there are no overlaps with to_be_removed
+      if (intervals[i][1] < to_be_removed[0] || intervals[i][0] > to_be_removed[1]) {
+        result.push_back(intervals[i]);
+      } else {
+
+        // case 2, 3, 4
+        // there is left overlap
+        if (intervals[i][0] < to_be_removed[0]) {
+          result.push_back({intervals[i][0], to_be_removed[0]});
+        } 
+
+        // there is right overlap
+        if (intervals[i][1] > to_be_removed[1]) {
+          result.push_back({to_be_removed[1], intervals[i][1]});
+        }
+      }
+    }
+    return result;
+  }
+};
+```
+
+
+## Leetcode 57. Insert Interval
+- [Leetcode 57. Insert Interval](https://leetcode.com/problems/insert-interval/)
+
+### Approach 1: Sweep Line Algorithm
+
+- Similar to Merge Interval
+- Pay attention to the intersect point, sort strategy
+
+```c++
+class Solution {
+ public:
+  std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& new_interval) {
+    if (new_interval.size() == 0) return intervals;
+    std::vector<std::vector<int>> v;
+    for (int i = 0; i < intervals.size(); ++i) {
+      int start = intervals[i][0];
+      int end = intervals[i][1];
+      v.push_back({start, 1});
+      v.push_back({end, -1});
+    }
+    v.push_back({new_interval[0], 1});
+    v.push_back({new_interval[1], -1});
+
+    auto comp = [](const auto& left, const auto& right) {
+      if (left[0] == right[0]) return left[1] > right[1]; // here must be >
+      return left[0] < right[0];
+    };
+    std::sort(v.begin(), v.end(), comp);
+
+    std::vector<std::vector<int>> result;
+    int temp_sum = 0;
+    int left, right;
+    for (int i = 0; i < v.size(); ++i) {
+      if (temp_sum == 0) {
+        left = v[i][0];
+      }
+      temp_sum += v[i][1];
+      if (temp_sum == 0) {
+        right = v[i][0];
+        result.push_back({left, right});
+      }
+    }
+    return result;
+  }
+};
+```
+
+### Approach 2: Simulation - Greedy ????
+
+```c++
+class Solution {
+ public:
+  std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& new_interval) {
+    std::vector<std::vector<int>> result;
+    for (auto& i : intervals) {
+      if (i[1] < new_interval[0]) {
+        result.push_back(i);
+      } else if (new_interval[1] < i[0]){
+        result.push_back(new_interval);
+        new_interval = i;
+      } else if (i[1] >= new_interval[0] || new_interval[1] <= i[0]) {
+        new_interval[0] = min(new_interval[0], i[0]);
+        new_interval[1] = max(new_interval[1], i[1]);
+      }
+    }
+    result.push_back(new_interval);
+    return result;
   }
 };
 ```

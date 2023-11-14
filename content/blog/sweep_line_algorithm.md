@@ -795,26 +795,43 @@ class Solution {
 };
 ```
 
-### Approach 2: Simulation - Greedy ????
+## Leetcode 1589. Maximum Sum Obtained of Any Permutation
 
+### Approach 1: Prefix Sum
 ```c++
+#define print(x) std::copy(x.begin(), x.end(), std::ostream_iterator<int>(std::cout, " ")); std::cout << std::endl
 class Solution {
  public:
-  std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& new_interval) {
-    std::vector<std::vector<int>> result;
-    for (auto& i : intervals) {
-      if (i[1] < new_interval[0]) {
-        result.push_back(i);
-      } else if (new_interval[1] < i[0]){
-        result.push_back(new_interval);
-        new_interval = i;
-      } else if (i[1] >= new_interval[0] || new_interval[1] <= i[0]) {
-        new_interval[0] = min(new_interval[0], i[0]);
-        new_interval[1] = max(new_interval[1], i[1]);
-      }
+  int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
+    if (requests.size() == 0) return 0;
+
+    std::vector<int> ps(nums.size() + 1, 0);
+    for (int i = 0; i < requests.size(); ++i) {
+      int start = requests[i][0];
+      int end = requests[i][1];
+      ++ps[start]; // use accumulation instead of assign to 1
+      --ps[end + 1]; // same here
     }
-    result.push_back(new_interval);
-    return result;
+
+    // 0, 1, 2, 3, 4, 5
+    // 1       -1
+    //    1       -1
+    //    1 -1
+
+    for (int i = 1; i < ps.size(); ++i) {
+      ps[i] += ps[i - 1];
+    }
+
+    std::sort(nums.begin(), nums.end(), std::greater<int>());
+    std::sort(ps.begin(), ps.end() - 1, std::greater<int>()); // except the last element of prefix sum array
+
+    long long mod = 1000000007;
+    long long result = 0;
+    for (int i = 0; i < nums.size(); ++i) {
+      result += (nums[i] % mod) * (ps[i] % mod);
+      result %= mod;
+    }
+    return result % mod;
   }
 };
 ```

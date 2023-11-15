@@ -835,3 +835,107 @@ class Solution {
   }
 };
 ```
+
+## Leetcode 1943. Describe the Painting
+
+- [Leetcode 1943. Describe the Painting](https://leetcode.com/problems/describe-the-painting/)
+
+### Approach 1: Prefix Sum: Failed in corner case
+
+- Failded Corner Case:
+    - Input: segments = [[1,4,5],[1,4,7],[4,7,1],[4,7,11]]
+    - Output: [[1,4,12],[4,7,12]]
+
+```c++
+#define print(x) std::copy(x.begin(), x.end(), std::ostream_iterator<int>(std::cout, " ")); std::cout << std::endl
+class Solution {
+ public:
+  std::vector<std::vector<long long>> splitPainting(std::vector<std::vector<int>>& segments) {
+    std::vector<std::vector<long long>> result;
+    if (segments.size() == 0) return result;
+
+    std::vector<int> v(100001, 0);
+    for (auto& s : segments) {
+      int start = s[0];
+      int end = s[1];
+      int color = s[2];
+      v[start] += color;
+      v[end] -= color;
+    }
+
+    for (int i = 1; i < v.size(); ++i) {
+      v[i] += v[i - 1];
+    }
+    print(v);
+
+    // 0, 0, 1, 1, 2, 2, 1, 0, 0
+    int left, right;
+    int pre_mix = 0;
+    for (int i = 0; i < v.size() - 1; ++i) {
+      if (v[i] == pre_mix) { // leading 0 or unchanged mix color
+        continue;
+      }
+      if (pre_mix == 0) {
+        left = i;
+      } else {
+        result.push_back({left, i, v[i - 1]});
+        if (v[i] != 0) {
+          left = i;
+        }
+      }
+      pre_mix = v[i];
+    }
+    return result;
+  }
+};
+```
+
+### !!! Approach 2: Sweep Line: AC
+- when the **prefix sum** cannot identify the specific index, we need use **sweep line**
+
+```c++
+class Solution {
+ public:
+  std::vector<std::vector<long long>> splitPainting(std::vector<std::vector<int>>& A) {
+    std::map<int, long long> mp;
+    for (auto& a : A) {
+      mp[a[0]] += a[2];
+      mp[a[1]] -= a[2];
+    }
+    std::vector<std::vector<long long>> result;
+    int prev_key = -1; // None
+    long long color = 0; // temp_sum: color mix accumulation
+    for (auto& [key, _] : mp) {
+      // std::cout << "key: " << key << " value: " << _ << " mp[prev_key]: " << mp[prev_key] << std::endl;
+      if (color != 0) { // if color == 0, means this part isn't paint
+        result.push_back({prev_key, key, color});
+      }
+      color += mp[key];
+      prev_key = key;
+    }
+    return result;
+  }
+};
+```
+
+## [Skip] Leetcode 1674. Minimum Moves to Make Array Complementary
+
+```c++
+class Solution {
+ public:
+  int minMoves(std::vector<int>& nums, int limit) {
+
+  }
+};
+```
+
+## Leetcode 2158. Amount of New Area Painted Each Day
+- [Leetcode 2158. Amount of New Area Painted Each Day](https://leetcode.com/problems/amount-of-new-area-painted-each-day/)
+
+```c++
+class Solution {
+ public:
+  std::vector<int> amountPainted(std::vector<std::vector<int>>& paint) {
+  }
+};
+```

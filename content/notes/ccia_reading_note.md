@@ -20,6 +20,10 @@ date = 2023-11-23T17:51:57-05:00
         - Inherent overhead: it takes some time to start a process.  
     - cons: such communication is often **complicated to set up or slow, or both**
     - pros: easier to write **safe** concurrent code
-2. multithreaded process:
-
+2. multithreaded process(favored):
+    - Shared memory: all threads in a process share the same address space, and most of the data can be accessed directly from the all threads. (global variables remain global, pointers or references to objects or data can be passed around among threads)
+    - cons: **flexibility** - we must ensure that the view of the data seen by each thread is consistent whenever it's accessed.
+    - pros: low **overhead**
+#### concurrency vs. parallelism
+- separation of concerns and performance
 

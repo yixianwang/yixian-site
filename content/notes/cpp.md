@@ -541,6 +541,8 @@ int main() {
 
 The compile-time error that will appear as if const value is passed to any non-const argument of the function
 ```c++
+// error: no matching function for call to 'foo'
+// candidate function not viable: 1st argument ('const int *') would lose const qualifier
 int foo(int* y) {
   return *y;
 }
@@ -552,22 +554,7 @@ int main() {
   return 0;
 }
 ```
-+
-```c++
-// error: no matching function for call to 'foo'
-// candidate function not viable: 1st argument ('const int *') would lose const qualifier
-const int foo(int* y) {
-  return *y;
-}
- 
-int main() {
-  int z = 8;
-  const int* x = &z;
-  std::cout << foo(x) << std::endl;
-  return 0;
-}
-```
-+
+
 ```c++
 // Function foo() with variable
 // const int

@@ -19,8 +19,14 @@ date = 2023-12-01T00:32:23-05:00
         - split job into stages
     - TaskScheduler:
         - similar to AM, responsible for applying resources and scheduling
-> YARN: ApplicationMaster(AM), ResourceManager(RM), NodeManager(NM), Container
+- YARN: ResourceManager(RM), NodeManager(NM), ApplicationMaster(AM), Container
+- YARN: only NM can start AM and Container
+- Standalone: master, worder, driver, executor
+- Standalone: only worker can start driver and executor
 ![spark-1](images-spark/spark-1.svg)
+![spark-4](images-spark/spark-4.png)
+![spark-3](images-spark/spark-3.png)
+![spark-2](images-spark/spark-2.png)
 
 ## Operating Mode
 - local/local-cluster/standalone/yarn/mesos
@@ -33,17 +39,21 @@ date = 2023-12-01T00:32:23-05:00
 - change mode with `pyspark --master`
 
 - with `jps` to check procsses 
-```
+```bash
+bin/pyspark --master local
+# or
 bin/spark-submit examples/src/main/python/pi.py 10
 ```
 
 ### local-cluster
 - driver + master + worker, running in one process
-- each worker has multiple executors, each executor is one process
+- each worker has multiple executors, each executor start one new process
 - `pyspark --master local-cluster[x, y, z]`
     - x: the number of executors
-    - y, z: each executor has y cores and z memory size
-```
+    - y, z: each executor has y cores(actually threads) and z memory size(MB)
+```bash
+bin/pyspark --master local-cluster[2, 2, 1024] # commont out pyspark setup in .zshrc
+# or
 bin/spark-submit --master local-cluster[2, 2, 1024] examples/src/main/python/pi.py 10
 ```
 
@@ -92,11 +102,15 @@ bin/spark-submit --master local-cluster[2, 2, 1024] examples/src/main/python/pi.
     - `jps`
     - `kill 00000`
 
-### yarn
+### yarn and mesos(similar to yarn)
+> start `yarn` and `hdfs` in hadoop, then spark-submit
+> with yarn, we don't need to start spark
 - **yarn-client** and **yarn-cluster**
 - Setup:
     - `spark-env.sh.template` rename to `spark-env.sh`
     ```
+    HADOOP_CONF_DIR=/...../hadoop-3.3.6/etc/hadoop
+    or
     YARN_CONF_DIR=/home/yixianwang/hadoop/etc/hadoop
     ```
 - Start:
@@ -110,5 +124,53 @@ bin/spark-submit --master local-cluster[2, 2, 1024] examples/src/main/python/pi.
     sbin/start-all.sh
     ```
 - Test:
-    - On each machine, use `jps` to check process of RM and NM
-    - Entry master's WEBUI: 8088
+    > `netstat -an|grep LISTEN`
+    1. On each machine, use `jps` to check process of RM and NM
+    2. Entry master's WEBUI: 8088
+    3. running: yarn-client
+    ```bash
+    bin/spark-submit --master yarn examples/src/main/python/pi.py 10
+    ```
+    > Note: `--deploy-mode` default is client, start **driver** from client, we can browse logs from client
+    4. running: yarn-cluster
+    ```bash
+    bin/spark-submit --master yarn --deploy-mode cluster examples/src/main/python/pi.py 10
+    ```
+    > Note: if `--deploy-mode` is cluster, start **driver** from master of cluster, we have to use history server to browse logs
+
+## SparkSession && sparkContext
+- spark sql, start with SparkSession
+- spark core, start with sparkContext
+
+## For Test in Local: open Jupyter notbook with pyspark built-in spark and sc
+```zsh
+# .zshrc
+export PYSPARK_DRIVER_PYTHON=jupyter-lab
+export PYSPARK_DRIVER_PYTHON_OPTS=/opt/module/spark-3.5.0-bin-hadoop3/tutu
+```
+
+## Examples
+```bash
+# after setting up, pyspark has built-in spark and sc, and can open jupyter-lab
+pyspark
+```
+
+```python
+# file and counts are RDDs
+file = sc.textFile("/opt/module/spark-3.5.0-bin-hadoop3/data/core/data/wordcount.txt")
+counts = file.flatMap(lambda line : line.split(' '))\
+             .map(lambda word : (word, 1))\
+             .reduceByKey(lambda a, b : a + b)
+counts.collect()
+```
+
+### read from HDFS
+- Start HDFS:
+```bash
+sbin/hadoop-daemon.sh start namenode
+sbin/hadoop-daemon.sh start datanode
+```
+- Upload file
+```bash
+bin/hdfs dfs -mkdir /spark
+```

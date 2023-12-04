@@ -152,6 +152,7 @@ export PYSPARK_DRIVER_PYTHON_OPTS=/opt/module/spark-3.5.0-bin-hadoop3/tutu
 ## Examples
 ```bash
 # after setting up, pyspark has built-in spark and sc, and can open jupyter-lab
+# for local test with jupyter
 pyspark
 ```
 
@@ -162,6 +163,10 @@ counts = file.flatMap(lambda line : line.split(' '))\
              .map(lambda word : (word, 1))\
              .reduceByKey(lambda a, b : a + b)
 counts.collect()
+
+# collect before saving
+file.collect()
+file.saveAsTextFile("/opt/module/spark-3.5.0-bin-hadoop3/data/core/data/result")
 ```
 
 ### read from HDFS
@@ -172,5 +177,36 @@ sbin/hadoop-daemon.sh start datanode
 ```
 - Upload file
 ```bash
+# create 1 -level folder
 bin/hdfs dfs -mkdir /spark
+# create 2 -level folder
+bin/hdfs dfs -mkdir -p /spark/history
 ```
+
+```bash
+bin/hdfs dfs -rm -r /folder_need_to_remove
+```
+
+## history server setup
+1. Setup
+    1. setup `spark-defaults.conf`
+    ```bash
+    # spark-defaults.conf
+    spark.eventLog.enabled   true        
+    spark.eventLog.compress  true
+    spark.eventLog.dir       hdfs://localhost:9000/spark/history        
+    ```
+    2. create history foler in hdfs
+    ```bash
+    bin/hdfs dfs -mkdir -p /spark/history
+    ```
+
+    3. setup `spark-env.sh`
+    ```bash
+    SPARK_HISTORY_OPTS="-Dspark.history.ui.port=18080 -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory=hdfs://localhost:9000/spark/history -Dspark.history.fs.cleaner.interval=1d -Dspark.history.fs.cleaner.maxAge=2d"
+    ```
+2. Run
+    1. start hdfs
+    2. mkdir hdfs folder
+    3. start historyserver `start-history-server.sh`
+> `tail -10f filename` realtime checking

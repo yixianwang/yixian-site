@@ -4,6 +4,7 @@ date = 2023-12-02T17:40:22-05:00
 draft = true
 +++
 
+## HDFS
 ```bash
 bin/hdfs namenode -format
 sbin/start-all.sh

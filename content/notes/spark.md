@@ -52,9 +52,9 @@ bin/spark-submit examples/src/main/python/pi.py 10
     - x: the number of executors
     - y, z: each executor has y cores(actually threads) and z memory size(MB)
 ```bash
-bin/pyspark --master local-cluster[2, 2, 1024] # commont out pyspark setup in .zshrc
+bin/pyspark --master "local-cluster[2, 2, 1024]" # commont out pyspark setup in .zshrc
 # or
-bin/spark-submit --master local-cluster[2, 2, 1024] examples/src/main/python/pi.py 10
+bin/spark-submit --master "local-cluster[2, 2, 1024]" examples/src/main/python/pi.py 10
 ```
 
 ### standalone

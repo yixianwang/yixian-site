@@ -327,6 +327,36 @@ pets.collect() # [('cat', 1), ('dog', 1), ('cat', 2)]
 ```
 
 ### transformation on Pair RDD
+```python
+# Suppose we have a pair RDD [(1, 2), (3, 4), (3, 6)]
+# Create Pair RDD
+pairRDD = spark.sparkContext.parallelize([(1, 2), (3, 4), (3, 6)])
+pairRDD.collect()
+```
+
+```python
+# reduceByKey(func)
+pairRDD.reduceByKey(lambda x, y: x + y).collect() # [(1, 2), (3, 10)]
+
+# groupByKey()
+pairRDD.groupByKey().collect()
+# [(1, <pyspark.resultiterable.ResultIterable at 0x7f94d9638970>),
+#  (3, <pyspark.resultiterable.ResultIterable at 0x7f94d021f550>)]
+
+# keys: return all keys
+pairRDD.keys().collect() # [1, 3, 3]
+
+# values: return all values
+pairRDD.values().collect() # [2, 4, 6]
+
+# sortByKey(): default is increasing
+pairRDD.sortByKey().collect() # [(1, 2), (3, 4), (3, 6)]
+
+# pairRDD.sortByKey(ascending=False).collect()
+pairRDD.sortByKey(False).collect() # [(3, 4), (3, 6), (1, 2)]
+
+# mapValues(func): apply func to each element of Pair RDD, without chaning key
+```
 
 ## RDD cache
 

@@ -293,8 +293,38 @@ print(status.stdev())
 ```
 
 ## Pair RDD Operations
-
 ### create Pair RDD
+```python
+# There are multiple ways to create Pair RDD
+# Approach 1: load from file, and then transform to Pair RDD
+file = "/data/spark_demo/rdd/wc.txt"
+lines = spark.sparkContext.textFile(file)
+
+pairRDD = lines.flatMap(lambda line: line.split(" ")).map(lambda word: (word, 1))
+pairRDD.collect()
+```
+
+```python
+# Approach 2: parallelize array
+rdd = spark.sparkContext.parallelize(["Hadoop", "Spark", "Hive", "Spark"])
+pairRDD = rdd.map(lambda word: (word, 1))
+pairRDD.collect() # [('Hadoop', 1), ('Spark', 1), ('Hive', 1), ('Spark', 1)]
+```
+
+```python
+# Approach 3: keyBy(): customize the rule for key grouping
+a = spark.sparkContext.parallelize(["black", "blue", "white", "green", "grey"])
+
+# with cutomized function to create keys, return Pair RDD
+b = a.keyBy(lambda x: len(x))
+b.collect() # [(5, 'black'), (4, 'blue'), (5, 'white'), (5, 'green'), (4, 'grey')]
+```
+
+```python
+# Approach 4: creating with tuple
+pets = spark.sparkContext.parallelize([("cat", 1), ("dog", 1), ("cat", 2)])
+pets.collect() # [('cat', 1), ('dog', 1), ('cat', 2)]
+```
 
 ### transformation on Pair RDD
 

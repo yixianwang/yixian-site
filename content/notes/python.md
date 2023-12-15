@@ -9,6 +9,14 @@ from typing import reveal_type
 ```
 
 ## Logging
+### V0
+```python
+import logging
+logging.basicConfig(level=logging.INFO)
+logging.info("Just an information")
+```
+
+### V1
 ```python
 # importing module
 import logging

@@ -356,6 +356,45 @@ pairRDD.sortByKey().collect() # [(1, 2), (3, 4), (3, 6)]
 pairRDD.sortByKey(False).collect() # [(3, 4), (3, 6), (1, 2)]
 
 # mapValues(func): apply func to each element of Pair RDD, without chaning key
+pairRDD.mapValues(lambda x: x * x).collect() # [(1, 4), (3, 16), (3, 36)]
+
+# flatMapValues(func)
+pairRDD.flatMapValues(lambda x: range(x, 6)).collect() # [(1, 2), (1, 3), (1, 4), (1, 5), (3, 4), (3, 5)]
+```
+
+```python
+# combineByKey()
+data = spark.sparkContext.parallelize([("company-1", 92), ("company-1", 85), ("company-1", 82),\
+                                       ("company-1", 93), ("company-1", 86), ("company-1", 83),\
+                                       ("company-2", 78), ("company-2", 96), ("company-2", 85),\
+                                       ("company-3", 88), ("company-3", 94), ("company-3", 80)], 3)
+cbk = data.combineByKey(
+    lambda income: (income, 1),
+    lambda t, income: (t[0] + income, t[1] + 1),
+    lambda t1, t2: (t1[0] + t2[0], t1[1] + t2[1])
+)
+
+# total income of each company
+cbk.collect() # [('company-1', (521, 6)), ('company-3', (262, 3)), ('company-2', (259, 3))]
+
+# average income of each company
+cbk.map(lambda t: (t[0], t[1][0], t[1][0]/float(t[1][1]))).collect()
+# [('company-1', 521, 86.83333333333333),
+#  ('company-3', 262, 87.33333333333333),
+#  ('company-2', 259, 86.33333333333333)]
+```
+
+```python
+# reduceByKey()
+x = spark.sparkContext.parallelize([("a", 1), ("b", 1), ("a", 1), ("a", 1), ("b", 1), ("b", 1), ("b", 1), ("b", 1)], 2)
+
+# apply reduceByKey
+y = x.reduceByKey(lambda accum, n: accum + n)
+y.collect() # [('b', 5), ('a', 3)]
+
+# customize func separately
+def sumFunc(accum, n):
+
 ```
 
 ## RDD cache

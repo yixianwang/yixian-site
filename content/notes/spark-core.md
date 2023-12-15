@@ -53,7 +53,7 @@ hash(hive) ---> hashcode % 3 = 2(machine 2)
 | join        | cogroup + remove nulls: join by key of <key, value>, all pairs will handle by cutomized function |
 | cogroup     | full join                                                                                        |
 
-#### action
+#### action: RDD-->anything else
 
 | Operations                 | Summary                                                                                                                        |
 | :------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -204,44 +204,57 @@ print(b) # [(4, <pyspark.resultiterable.ResultIterable object at 0x7f95187af580>
 sorted([(x, sorted(y)) for (x, y) in b]) # [(4, ['blue', 'grey']), (5, ['black', 'green', 'white'])]
 ```
 
-### action
+### action: RDD-->anything else
 ```python
 # create a RDD
 rdd = spark.sparkContext.parallelize([1, 2, 3, 3])
 
-rdd.count()
+rdd.count() # 4
 
-rdd.collect()
+rdd.collect() # [1, 2, 3, 3]
 
-rdd.first()
+rdd.first() # 1
 
-rdd.countByValue()
+rdd.countByValue() # defaultdict(int, {1: 1, 2: 1, 3: 2})
 
-rdd.take(2)
+rdd.take(2) # [1, 2]
 
-rdd.takeOrdered(2)
+rdd.takeOrdered(2) # [1, 2]
 
-rdd.takeOrdered(2, key=lambda x: -x)
+rdd.takeOrdered(2, key=lambda x: -x) # [3, 3]
 
 rdd.takeSample(False, 2)
 
-rdd.reduce(lambda x, y: x + y)
+rdd.reduce(lambda x, y: x + y) # 9
+# reduce
+#     x:("", 0), y:("hadoop", 1)
+#     x:("hadoop", 1), y:("hadoop", 1)
+#     x:("hadoophadoop", 2)
+# reduceByKey: ignore key, only care value
+#     x:0, y:1
+#     x:1, y:1
+#     x:2, y:1
+
+rdd.fole(0, lambda x, y: x + y)
+# fold
+#     has an initial value for each partition and one more for merging
 
 # aggregate(zeroValue, seqOp, combOp)
-print("RDD 当前的分区数是: ", rdd.getNumPartitions())
+print("RDD 当前的分区数是: ", rdd.getNumPartitions()) # RDD 当前的分区数是:  8
 seqOp = (lambda x, y: x * y) # 每个分区执行的函数
 combOp = (lambda x, y: x + y) # 各个分区结果最后聚集时使用的函数
 result = rdd.aggregate(2, seqOp, combOp)
-result
+result # 28
 
 seqOp = (lambda x, y: (x[0] + y, x[1] + 1))
 combOp = (lambda x, y: (x[0] + y[0], x[1] + y[1]))
 result1 = spark.sparkContext.parallelize([1, 2, 3, 4]).aggregate((0, 0), seqOp, combOp)
-print(result1)
+print(result1) # (10, 4)
 
 result2 = spark.sparkContext.parallelize([]).aggregate((0, 0), seqOp, combOp)
-print(result2)
+print(result2) # (0, 0)
 ```
+> reduce is the special case of fold, fold is the special case of aggregate
 
 ### RDD action on numeric data(description statistics)
 ```python
@@ -269,6 +282,14 @@ rdd1.histogram([1.0, 8.0, 20.9])
 rdd1.histogram(3)
 
 # 通过调用stats()方法，返回一个StatsCounter对象
+status = rdd1.stats()
+print(status.sum())
+print(status.max())
+print(status.min())
+print(status.mean())
+print(status.count())
+print(status.variance())
+print(status.stdev())
 ```
 
 ## Pair RDD Operations

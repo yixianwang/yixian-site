@@ -394,14 +394,106 @@ y.collect() # [('b', 5), ('a', 3)]
 
 # customize func separately
 def sumFunc(accum, n):
+    return accum + n
 
+y = x.reduceByKey(sumFunc)
+print(y.collect()) # [('b', 5), ('a', 3)]
+```
+
+```python
+# groupByKey()
+x = spark.sparkContext.parallelize([
+    ("USA", 1), ("USA", 2), ("India", 1),\
+    ("UK", 1), ("India", 4), ("India", 9),\
+    ("USA", 8), ("USA", 3), ("India", 4),\
+    ("UK", 6), ("UK", 9), ("UK", 5)], 4)
+
+# utilize groupByKey, default partition
+y = x.groupByKey()
+
+# check partitions
+print("number of partitions: ", y.getNumPartitions())
+
+# utilize pre-defined partition
+y = x.groupByKey(2)
+print("number of partitions: ", y.getNumPartitions())
+
+# output result
+for t in y.collect():
+    print(t[0], [v for v in t[1]])
+```
+
+```python
+# aggregateByKey
+# utilize key-value pair creating pairRDD studentRDD
+student_rdd = spark.sparkContext.parallelize([
+    ("Joseph", "Maths", 83), ("Joseph", "Physics", 74), ("Joseph", "Chemistry", 91),\
+    ("Joseph", "Biology", 82), ("Jimmy", "Maths", 69), ("Jimmy", "Physics", 62),\
+    ("Jimmy", "Chemistry", 97), ("Jimmy", "Biology", 80), ("Tina", "Maths", 78),\
+    ("Tina", "Physics", 73), ("Tina", "Chemistry", 68), ("Tina", "Biology", 87),\
+    ("Thomas", "Maths", 87), ("Thomas", "Physics", 93), ("Thomas", "Chemistry", 91),\
+    ("Thomas", "Biology", 74), ("Cory", "Maths", 56), ("Cory", "Physics", 65),\
+    ("Cory", "Chemistry", 71), ("Cory", "Biology", 68), ("Jackeline", "Maths", 86),\
+    ("Jackeline", "Physics", 62), ("Jackeline", "Chemistry", 75), ("Jackeline", "Biology", 83),\
+    ("Juan", "Maths", 63), ("Juan", "Physics", 69), ("Juan", "Chemistry", 64),\
+    ("Juan", "Biology", 60)], 2)
+
+# define Sequential Operation and Combiner Operation
+# Sequential Operation: find maximum score from single partition
+def seq_op(accumulator, element):
+    if (accumulator > element[1]):
+        return accumulator
+    else:
+        return element[1]
+# Combiner Operation: find maximum score from accumulators of all partitions
+def comb_op(accumulator1, accumulator2):
+    if (accumulator1 > accumulator2):
+        return accumulator1
+    else:
+        return accumulator2
+# In our scenario, zero value is 0, because we are trying to find the maximum score
+zero_val = 0
+aggr_rdd = student_rdd.map(lambda t: (t[0], (t[1], t[2]))).aggregateByKey(zero_val, seq_op, comb_op)
+
+# Check output
+for tpl in aggr_rdd.collect():
+    print(tpl)
+# ('Jimmy', 97)
+# ('Tina', 87)
+# ('Thomas', 93)
+# ('Joseph', 91)
+# ('Cory', 71)
+# ('Jackeline', 86)
+# ('Juan', 69)
+
+# ?????????????????????????????????????????????
+# define Sequential Operation and Combiner Operation
+def seq_op(accumulator, element):
+    if (accumulator[1] > element[1]):
+        return accumulator
+    else:
+        return element
+def comb_op(accumulator1, accumulator2):
+    if (accumulator1 > accumulator2):
+        return accumulator1
+    else:
+        return accumulator2
+zero_val = (0, 0)
+aggr_rdd = student_rdd.map(lambda t: (t[0], (t[1], t[2])))\
+                      .aggregateByKey(zero_val, seq_op, comb_op)\
+                      .map(lambda t: (t[0], t[1][0]/t[1][1]*1.0))
+for tpl in aggr_rdd.collect():
+    print(tpl)
 ```
 
 ## RDD cache
-
 ### overview
+- One of the reasons why Spark is so fast is that it can cache datasets in memory during different operations.
+- When an RDD is cached, each node will save the partition computation result in memory and reuse them in other actions performed on this RDD or derived RDDs. This makes subsequenct actions much faster. 
+- Cache is key to building iterative algorithms and fast iteractive queries in Spark.
 
 ### approaches
+
 
 ## Fault tolerance
 

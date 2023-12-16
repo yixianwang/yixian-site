@@ -10,7 +10,7 @@ date = 2023-10-24T03:10:46-04:00
   - [Templates](#templates)
     - [Binary Search 二分法](#binary-search-二分法)
     - [Two Pointers 双指针](#two-pointers-双指针)
-    - [Sorting 排序算法](# -排序算法)
+    - [Sorting 排序算法](#sorting-排序算法)
     - [Binary Tree Divide & Conquer 二叉树分治](#binary-tree-divide--conquer-二叉树分治)
     - [BST Iterator 二叉搜索树非递归](#bst-iterator-二叉搜索树非递归)
     - [BFS 宽度优先搜索](#bfs-宽度优先搜索)

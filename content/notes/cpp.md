@@ -818,11 +818,12 @@ min_value = min_element(my_map.begin(), my_map.end(), cmp)->second;
 ```
 
 ## all types of comparators for map and set
+- focus on `const`, `*` and `&`
 ```c++
-// version 1
+// version 1: const is required
 class Comparator {
  public:
-  bool operator()(const int& a, const int& b) const {
+  bool operator()(const int& a, const int& b) const { // must have const here
     return a > b;
   }
 };
@@ -832,11 +833,11 @@ std::map<int, int, Comparator> my_map;
 auto cmp = [](const std::pair<int, int>& a, const std::pair<int, int>& b) {return a.first > b.first;};
 std::set<std::pair<int, int>, decltype(cmp)> my_heap_with_set(cmp); // get min heap
 
-// version 3
+// version 3: * and & are required
 bool comparator(const int& a, const int& b) {
   return a > b;
 }
-std::map<int, int, decltype(comparator)*> my_map;
+std::map<int, int, decltype(comparator)*> my_map(&comparator); 
 ```
 
 ## Comparator for sort vs map(or set)

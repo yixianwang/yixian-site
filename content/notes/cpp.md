@@ -840,6 +840,8 @@ std::map<int, int, decltype(comparator)*> my_map;
 ```
 
 ## Comparator for sort vs map(or set)
+- **sort** uses object or `cmp`
+- **set** or **map** use typename or `decltype(cmp)`
 ### sort
 ```c++
 class Comparator2 {

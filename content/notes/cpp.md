@@ -816,3 +816,55 @@ class MyCalendarTwo {
 auto cmp = [](const auto& a, const auto& b) {return a.second < b.second;};
 min_value = min_element(my_map.begin(), my_map.end(), cmp)->second;
 ```
+
+## all types of comparators for map and set
+```c++
+// version 1
+class Comparator {
+ public:
+  bool operator()(const int& a, const int& b) const {
+    return a > b;
+  }
+};
+std::map<int, int, Comparator> my_map;
+
+// version 2
+auto cmp = [](const std::pair<int, int>& a, const std::pair<int, int>& b) {return a.first > b.first;};
+std::set<std::pair<int, int>, decltype(cmp)> my_heap_with_set(cmp); // get min heap
+
+// version 3
+bool comparator(const int& a, const int& b) {
+  return a > b;
+}
+std::map<int, int, decltype(comparator)*> my_map;
+```
+
+## Comparator for sort vs map(or set)
+### sort
+```c++
+class Comparator2 {
+ public:
+  Comparator2(int s): s_(s) {}
+  bool operator()(const int& a, const int& b) const {
+    if (s_ > 0) {
+      return a > b;
+    }
+    return a < b;
+  }
+ private:
+  int s_;
+};
+std::vector<int> vec{2, 1, 3, 7, 4};
+std::sort(vec.begin(), vec.end(), Comparator2(-1)); // use object
+```
+
+### map(or set)
+```c++
+class Comparator {
+ public:
+  bool operator()(const int& a, const int& b) const {
+    return a > b;
+  }
+};
+std::map<int, int, Comparator> my_map_; // use typename
+```

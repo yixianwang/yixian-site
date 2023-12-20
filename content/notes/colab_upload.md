@@ -3,6 +3,7 @@ title = 'Colab Upload'
 date = 2023-10-24T03:10:46-04:00
 +++
 
+```python
 import os
 from getpass import getpass
 import urllib
@@ -14,3 +15,4 @@ repo_name = "gregdurrett/nlp-qa-finalproj.git"
 cmd_string = 'git clone https://{0}:{1}@github.com/{2}'.format(user, password, repo_name)
 
 !{cmd_string}
+```

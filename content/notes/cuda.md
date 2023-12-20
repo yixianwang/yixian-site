@@ -228,29 +228,25 @@ cublasGetPointerMode( handle, &mode );
 ```
 
 ### Constants
-```
-argument	constants	description (Fortran letter)
-trans	CUBLAS_OP_N               	non-transposed ('N')
-CUBLAS_OP_T               	transposed ('T')
-CUBLAS_OP_C               	conjugate transposed ('C')
- 
-uplo	CUBLAS_FILL_MODE_LOWER    	lower part filled ('L')
-CUBLAS_FILL_MODE_UPPER    	upper part filled ('U')
- 
-side	CUBLAS_SIDE_LEFT          	matrix on left ('L')
-CUBLAS_SIDE_RIGHT         	matrix on right ('R')
- 
-mode	CUBLAS_POINTER_MODE_HOST  	alpha and beta scalars passed on host
-CUBLAS_POINTER_MODE_DEVICE	alpha and beta scalars passed on device
-```
+| argument | constants                  | description (Fortran letter)            |
+| :------- | :------------------------- | :-------------------------------------- |
+| trans    | CUBLAS_OP_N                | non-transposed ('N')                    |
+|          | CUBLAS_OP_T                | transposed ('T')                        |
+|          | CUBLAS_OP_C                | conjugate transposed ('C')              |
+| uplo     | CUBLAS_FILL_MODE_LOWER     | lower part filled ('L')                 |
+|          | CUBLAS_FILL_MODE_UPPER     | upper part filled ('U')                 |
+| side     | CUBLAS_SIDE_LEFT           | matrix on left ('L')                    |
+|          | CUBLAS_SIDE_RIGHT          | matrix on right ('R')                   |
+| mode     | CUBLAS_POINTER_MODE_HOST   | alpha and beta scalars passed on host   |
+|          | CUBLAS_POINTER_MODE_DEVICE | alpha and beta scalars passed on device |
 
 BLAS functions have cublas prefix and first letter of usual BLAS function name is capitalized. Arguments are the same as standard BLAS, with these exceptions:
 
->> All functions add handle as first argument.
->> All functions return cublasStatus_t error code.
->> Constants alpha and beta are passed by pointer. All other scalars (n, incx, etc.) are bassed by value.
->> Functions that return a value, such as ddot, add result as last argument, and save value to result.
->> Constants are given in table above, instead of using characters.
+- All functions add handle as first argument.
+- All functions return cublasStatus_t error code.
+- Constants alpha and beta are passed by pointer. All other scalars (n, incx, etc.) are bassed by value.
+- Functions that return a value, such as ddot, add result as last argument, and save value to result.
+- Constants are given in table above, instead of using characters.
 
 Examples:
 ```cpp
@@ -259,74 +255,69 @@ cublasDaxpy( handle, n, &alpha, x, incx, y, incy );   // daxpy( n, alpha, x, inc
 ```
 
 ### Compiler
-nvcc, often found in /usr/local/cuda/bin
+nvcc, often found in `/usr/local/cuda/bin`
 
 ```
 Defines __CUDACC__
 ```
 
 #### Flags common with cc
-```
-Short flag	Long flag	Output or Description
--c	--compile	.o object file
--E	--preprocess	on standard output
--M	--generate-dependencies	on standard output
--o file	--output-file file
--I directory	--include-path directory	header search path
--L directory	--library-path directory	library search path
--l lib	--library lib	link with library
--lib		generate library
--shared		generate shared library
--pg	--profile	for gprof
--g level	--debug level
--G	--device-debug
--O level	--optimize level
-```
+| Short flag   | Long flag                | Output or Description   |
+| :----------- | :----------------------- | :---------------------- |
+| -c           | --compile                | .o object file          |
+| -E           | --preprocess             | on standard output      |
+| -M           | --generate-dependencies  | on standard output      |
+| -o file      | --output-file file       |                         |
+| -I directory | --include-path directory | header search path      |
+| -L directory | --library-path directory | library search path     |
+| -l lib       | --library lib            | link with library       |
+| -lib         |                          | generate library        |
+| -shared      |                          | generate shared library |
+| -pg          | --profile                | for gprof               |
+| -g level     | --debug level            |                         |
+| -G           | --device-debug           |                         |
+| -O level     | --optimize level         |                         |
 
 ##### Undocumented (but in sample makefiles)
-```
--m32		compile 32-bit i386 host CPU code
--m64		compile 64-bit x86_64 host CPU code
-```
+| -m32 |  compile 32-bit i386 host CPU code   |
+| :--- |  :---------------------------------- |
+| -m64 |  compile 64-bit x86_64 host CPU code |
 
 #### Flags specific to nvcc
-```
--v	list compilation commands as they are executed
--dryrun	list compilation commands, without executing
--keep	saves intermediate files (e.g., pre-processed) for debugging
--clean	removes output files (with same exact compiler options)
--arch=<compute_xy>	generate PTX for capability x.y
--code=<sm_xy>	generate binary for capability x.y, by default same as -arch
--gencode arch=...,code=...	same as -arch and -code, but may be repeated
-```
+| -v                         | list compilation commands as they are executed               |
+| :------------------------- | :----------------------------------------------------------- |
+| -dryrun                    | list compilation commands, without executing                 |
+| -keep                      | saves intermediate files (e.g., pre-processed) for debugging |
+| -clean                     | removes output files (with same exact compiler options)      |
+| -arch=<compute_xy>         | generate PTX for capability x.y                              |
+| -code=<sm_xy>              | generate binary for capability x.y, by default same as -arch |
+| -gencode arch=...,code=... | same as -arch and -code, but may be repeated                 |
 
 #### Argumenents for -arch and -code
 It makes most sense (to me) to give -arch a virtual architecture and -code a real architecture, though both flags accept both virtual and real architectures (at times).
-```
-Virtual architecture	Real architecture	Features
-Tesla	compute_10	sm_10	Basic features
-compute_11	sm_11	+ atomic memory ops on global memory
-compute_12	sm_12	+ atomic memory ops on shared memory
-+ vote instructions
-compute_13	sm_13	+ double precision
-Fermi	compute_20	sm_20	+ Fermi
-```
+|       | Virtual architecture | Real architecture | Features                             |
+| ----- | :------------------- | :---------------- | :----------------------------------- |
+| Tesla | compute_10           | sm_10             | Basic features                       |
+|       | compute_11           | sm_11             | + atomic memory ops on global memory |
+|       | compute_12           | sm_12             | + atomic memory ops on shared memory |
+|       |                      |                   | + vote instructions                  |
+|       | compute_13           | sm_13             | + double precision                   |
+| Fermi | compute_20           | sm_20             | + Fermi                              |
 
 ## Some hardware constraints
-```
-                              	1.x	  2.x
-max x- or y-dimension of block	512	  1024
-max z-dimension of block	      64	  64
-max threads per block	          512	  1024
-warp size	                      32	  32
-max blocks per MP	              8	    8
-max warps per MP	              32	  48
-max threads per MP	            1024	1536
-max 32-bit registers per MP	    16k	  32k
-max shared memory per MP	      16 KB	48 KB
-shared memory banks	            16	  32
-local memory per thread	        16 KB	512 KB
-const memory	                  64 KB	64 KB
-const cache	                    8 KB	8 KB
-texture cache	                  8 KB	8 KB
-```
+|                                | 1.x   | 2.x    |
+| :----------------------------- | :---- | :----- |
+| max x- or y-dimension of block | 512   | 1024   |
+| max z-dimension of block       | 64    | 64     |
+| max threads per block          | 512   | 1024   |
+| warp size                      | 32    | 32     |
+| max blocks per MP              | 8     | 8      |
+| max warps per MP               | 32    | 48     |
+| max threads per MP             | 1024  | 1536   |
+| max 32-bit registers per MP    | 16k   | 32k    |
+| max shared memory per MP       | 16 KB | 48 KB  |
+| shared memory banks            | 16    | 32     |
+| local memory per thread        | 16 KB | 512 KB |
+| const memory                   | 64 KB | 64 KB  |
+| const cache                    | 8 KB  | 8 KB   |
+| texture cache                  | 8 KB  | 8 KB   |

@@ -526,7 +526,6 @@ object StorageLevel {
 - Fault tolerance can recompute some failed partitions of RDD, not all partitions of all RDD
 
 ## Fault tolerance
-
 ### overview
 - **fault tolerance**: use Lineage and Checkpoint
 

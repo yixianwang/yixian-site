@@ -10,15 +10,15 @@ a) If you cloned the notebook and are using gdrive to store the data, you can on
 
 
 b) You can run this code in a cell to extend sessions (prevent timeouts); it also doesn't majorly use the CPU unnecessarily. Still, as this SO points out, it's not morally right to hog up a GPU/CPU if you're not using it. I use it when I'm actively developing over ssh, but not running anything on the notebook.
-```
-
+```python
 import time
 
 while True: time.sleep(10)
 ```
+
 c) You can ssh into the machine; someone even made a package for that - https://pypi.org/project/colab-ssh/#description. I usually use ipdb to do REPL-driven development and explore the data, so this is really useful for me since I can't run this workload locally. Head's up - it does take a bit of setup, but if you persist the extra python packages and the authorized_hosts file, you can get it up and running for new sessions quickly.
 
-```
+```python
 import os
 import sys
 
@@ -29,7 +29,8 @@ sys.path.insert(0, nb_path)
 !pip install --target='{nb_path}' ipdb
 !pip install --target='{nb_path}' colab_ssh --upgrade
 ```
-```
+
+```python
 !ln -sr /content/drive/MyDrive/nlp-qa-finalproj/.ssh ~/
 !cat ~/.ssh/authorized_keys
 ```

@@ -254,7 +254,8 @@ print(result1) # (10, 4)
 result2 = spark.sparkContext.parallelize([]).aggregate((0, 0), seqOp, combOp)
 print(result2) # (0, 0)
 ```
-> reduce is the special case of fold, fold is the special case of aggregate
+- `reduce` is the special case of `fold`
+- `fold` is the special case of `aggregate`
 
 ### RDD action on numeric data(description statistics)
 ```python
@@ -327,6 +328,9 @@ pets.collect() # [('cat', 1), ('dog', 1), ('cat', 2)]
 ```
 
 ### transformation on Pair RDD
+- `reduceByKey` is special case of `aggregateByKey`
+- `aggregateByKey` is special case of `combineByKey`
+
 ```python
 # Suppose we have a pair RDD [(1, 2), (3, 4), (3, 6)]
 # Create Pair RDD
@@ -469,15 +473,11 @@ for tpl in aggr_rdd.collect():
 # ?????????????????????????????????????????????
 # define Sequential Operation and Combiner Operation
 def seq_op(accumulator, element):
-    if (accumulator[1] > element[1]):
-        return accumulator
-    else:
-        return element
+    return (accumulator[0] + element[1], accumulator[1] + 1)
+
 def comb_op(accumulator1, accumulator2):
-    if (accumulator1 > accumulator2):
-        return accumulator1
-    else:
-        return accumulator2
+    return (accumulator1[0] + accumulator2[0], accumulator1[1] + accumulator2[1])
+
 zero_val = (0, 0)
 aggr_rdd = student_rdd.map(lambda t: (t[0], (t[1], t[2])))\
                       .aggregateByKey(zero_val, seq_op, comb_op)\
@@ -493,18 +493,58 @@ for tpl in aggr_rdd.collect():
 - Cache is key to building iterative algorithms and fast iteractive queries in Spark.
 
 ### approaches
+1. persist
+2. cache
+- only after triggering **actions**, then current RDD will be cached in memory for later use
+- cache invoke persist at last, the default storage level just a part in memory
 
+```scala
+/** Persist this RDD with the default storage level (MEMORY_ONLY)
+def persist(): this.type = persist(StorageLevel.MEMORY_ONLY)
+
+/** Persist this RDD with the default storage level (MEMORY_ONLY)
+def cache(): this.type = persist()
+```
+
+- There are many storage levels in Spark, storage level is defined in **object StorageLevel**
+```scala
+object StorageLevel {
+    val NONE = new StorageLevel(false, false, false, false)
+    val DISK_ONLY = new StorageLevel(true, false, false, false)
+    val DISK_ONLY_2 = new StorageLevel(true, false, false, false, 2)
+    val MEMORY_ONLY = new StorageLevel(false, true, false, true)
+    val MEMORY_ONLY_2 = new StorageLevel(false, true, false, true, 2)
+    val MEMORY_ONLY_SER = new StorageLevel(false, true, false, false)
+    val MEMORY_ONLY_SER_2 = new StorageLevel(false, true, false, false, 2)
+    val MEMORY_AND_DISK = new StorageLevel(true, true, false, true)
+    val MEMORY_AND_DISK_2 = new StorageLevel(true, true, false, true, 2)
+    val MEMORY_AND_DISK_SER = new StorageLevel(true, true, false, false)
+    val MEMORY_AND_DISK_SER_2 = new StorageLevel(true, true, false, false, 2)
+    val OFF_HEAP = new StorageLevel(false, false, true, false)
+}
+```
+- Fault tolerance can recompute some failed partitions of RDD, not all partitions of all RDD
 
 ## Fault tolerance
 
 ### overview
+- **fault tolerance**: use Lineage and Checkpoint
 
 ### lineage mechanism
+- 
 
 ### checkpoint mechanism
+- There are two approaches:
+    1. **LocalRDDCheckpointData**: temporarly saved in local disk and memory. It's fast, good for scenarios that lineage info needed to be deleted frequently(e.g. GraphX), can tolerate executor fail.
+    2. **ReliableRDDCheckpointData**: saved in reliable outside storage(e.g. HDFS), can tolerate driver fail. It's not fast as local, but it has the highest fault tolerance level. 
+> If the code doesn't setup checkpoint, it will use local mode checkpoint. If the path is setup, it will use reliable mode checkpoint.
+
+- RDD's action triggering computation, then executing checkpoint.
+- If task fails, it will load data from checkpoint to compute
+
 
 ## Data Partitions
-
+- RDD is very large, it will be cutted into partitions saved in different nodes. This is where RDD come from.
 ### assign partitions when creating RDD
 
 ### assign partitions when transforming RDD

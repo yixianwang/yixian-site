@@ -871,3 +871,8 @@ class Comparator {
 };
 std::map<int, int, Comparator> my_map_; // use typename
 ```
+
+## use function to get lambda or func pointer
+```c++
+std::function<bool(int, int)> cmp = [](int x, int y){return x > y;};
+```

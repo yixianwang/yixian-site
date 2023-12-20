@@ -536,7 +536,12 @@ object StorageLevel {
 - **fault tolerance**: use Lineage and Checkpoint
 
 ### lineage mechanism
-- 
+- RDD's lineage records **Coarse-grained** specific data from Transformation operation. So when some partitions of a RDD lost data, it can reload or recompute from Lineage.
+- This Coarse-grained data model limited use cases of Spark, so that Spark cannot use for high performance scenarios.
+
+Spark Lineage mechanism is performed through RDD dependencies:
+1. narrow dependency: certain data of child RDD can be directly computed from certain data of parent RDD
+2. wide dependency: **recompute all parents' RDD**, then after finished and hashing, recomputing children RDD. When we deal with long lineage, we need set appropriate checkpoint.
 
 ### checkpoint mechanism
 - There are two approaches:

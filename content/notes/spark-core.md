@@ -66,8 +66,10 @@ hash(hive) ---> hashcode % 3 = 2(machine 2)
 | countByKey                 |                                                                                                                                |
 | foreach                    | iterate each element within RDD                                                                                                |
 
-### Depencencies
+### Depencencies(This topic is Transformation operation related)
 ![spark-core-1](images-spark/spark-core-1.png)
+- with shuffle(internet connections between different machines) is wide dependency
+- without shuffle is narrow dependency
 
 #### narrow dependencies - 1 : 1
 每个父RDD的分区都至多被一个子RDD的分区使用。一对一

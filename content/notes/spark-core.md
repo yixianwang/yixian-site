@@ -470,8 +470,7 @@ for tpl in aggr_rdd.collect():
 # ('Jackeline', 86)
 # ('Juan', 69)
 
-# ?????????????????????????????????????????????
-# define Sequential Operation and Combiner Operation
+# redefine Sequential Operation and Combiner Operation
 def seq_op(accumulator, element):
     return (accumulator[0] + element[1], accumulator[1] + 1)
 
@@ -484,6 +483,13 @@ aggr_rdd = student_rdd.map(lambda t: (t[0], (t[1], t[2])))\
                       .map(lambda t: (t[0], t[1][0]/t[1][1]*1.0))
 for tpl in aggr_rdd.collect():
     print(tpl)
+# ('Jimmy', 77.0)
+# ('Tina', 76.5)
+# ('Thomas', 86.25)
+# ('Joseph', 82.5)
+# ('Cory', 65.0)
+# ('Jackeline', 76.5)
+# ('Juan', 64.0)
 ```
 
 ## RDD cache

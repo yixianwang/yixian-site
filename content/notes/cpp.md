@@ -876,3 +876,88 @@ std::map<int, int, Comparator> my_map_; // use typename
 ```c++
 std::function<bool(int, int)> cmp = [](int x, int y){return x > y;};
 ```
+
+### overload less comparator for priority queue
+```c++
+// leetcode 2353. Design a Food Rating System
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
+#include <queue>
+
+using namespace std;
+
+class Food {
+ public:
+  // Store the food's rating.
+  int food_rating;
+  // Store the food's name.
+  string food_name;
+
+  Food(int food_rating, string food_name) {
+    this->food_rating = food_rating;
+    this->food_name = food_name;
+  }
+
+  // Overload the less than operator for comparison
+  bool operator<(const Food& other) const {
+    // If food ratings are the same sort on the basis of their name.
+    // (lexicographically smaller name food will be on top)
+    if (food_rating == other.food_rating) {
+      return food_name > other.food_name;
+    }
+    // Sort on the basis of food rating. (bigger rating food will be on top)
+    return food_rating < other.food_rating;
+  }
+};
+
+class FoodRatings {
+  // Map food with its rating.
+  unordered_map<string, int> food_to_rating;
+  // Map food with the cuisine it belongs to.
+  unordered_map<string, string> food_to_cuisine;
+
+  // Store all food of a cuisine in priority queue (to sort them on
+  // ratings/name) Priority queue element -> Food: (food_rating, food_name)
+  unordered_map<string, priority_queue<Food>> cuisine_to_food;
+
+ public:
+  FoodRatings(vector<string>& foods, vector<string>& cuisines,
+              vector<int>& ratings) {
+    for (int i = 0; i < foods.size(); ++i) {
+      // Store 'rating' and 'cuisine' of current 'food' in 'food_to_rating' and
+      // 'food_to_cuisine' maps.
+      food_to_rating[foods[i]] = ratings[i];
+      food_to_cuisine[foods[i]] = cuisines[i];
+      // Insert the '(rating, name)' element in current cuisine's priority
+      // queue.
+      cuisine_to_food[cuisines[i]].push(Food(ratings[i], foods[i]));
+    }
+  }
+
+  void changeRating(string food, int newRating) {
+    // Update food's rating in 'food_rating' map.
+    food_to_rating[food] = newRating;
+    // Insert the '(new rating, name)' element in respective cuisine's priority
+    // queue.
+    auto cuisine_name = food_to_cuisine[food];
+    cuisine_to_food[cuisine_name].push(Food(newRating, food));
+  }
+
+  string highestRated(string cuisine) {
+    // Get the highest rated 'food' of 'cuisine'.
+    auto highest_rated = cuisine_to_food[cuisine].top();
+
+    // If the latest rating of 'food' doesn't match the 'rating' on which it was
+    // sorted in the priority queue, then we discard this element of the
+    // priority queue.
+    while (food_to_rating[highest_rated.food_name] != highest_rated.food_rating) {
+      cuisine_to_food[cuisine].pop();
+      highest_rated = cuisine_to_food[cuisine].top();
+    }
+    // Return name of the highest rated 'food' of 'cuisine'.
+    return highest_rated.food_name;
+  }
+};
+
+```

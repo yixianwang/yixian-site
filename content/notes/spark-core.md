@@ -68,8 +68,9 @@ hash(hive) ---> hashcode % 3 = 2(machine 2)
 
 ### Depencencies(This topic is Transformation operation related)
 ![spark-core-1](images-spark/spark-core-1.png)
-- with shuffle(internet connections between different machines) is wide dependency
-- without shuffle is narrow dependency
+- with shuffle(internet connections between different machines) is **wide dependency**
+- without shuffle is **narrow dependency**
+> the number of stages is depended on the number of wide dependencies
 
 #### narrow dependencies - 1 : 1
 每个父RDD的分区都至多被一个子RDD的分区使用。一对一
@@ -578,3 +579,4 @@ Spark Lineage mechanism is performed through RDD dependencies:
 ### accumulator
 
 ## Shuffle
+

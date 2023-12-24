@@ -26,10 +26,10 @@ date = 2023-10-24T03:10:46-04:00
     - You would use it in classification tests where true negatives don't matter much.
 
 ## AUC
-0.5 < ROC < 0.7: Poor discrimination
-0.7 ≤ ROC < 0.8: Acceptable discrimination
-0.8 ≤ ROC < 0.9: Excellent discrimination
-ROC ≥ 0.9: Outstanding discrimination
+- 0.5 < ROC < 0.7: Poor discrimination
+- 0.7 ≤ ROC < 0.8: Acceptable discrimination
+- 0.8 ≤ ROC < 0.9: Excellent discrimination
+- ROC ≥ 0.9: Outstanding discrimination
 
 ## Regularization
 - Regularization is an approach to address over-fitting in ML.

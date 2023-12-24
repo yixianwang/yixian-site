@@ -959,7 +959,6 @@ class FoodRatings {
     return highest_rated.food_name;
   }
 };
-
 ```
 
 ## set, find iterator, erase

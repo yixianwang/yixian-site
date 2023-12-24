@@ -533,12 +533,28 @@ object StorageLevel {
 }
 ```
 - Fault tolerance can recompute some failed partitions of RDD, not all partitions of all RDD
+- partitions within a RDD are independent
+
+### examples
+```python
+from pyspark import StorageLevel
+rdd1.sc.textFile('/xxxx')
+rdd1.persist(StorageLevel.MEMORY_AND_DISK) # set storage level
+rdd2 = rdd1.flatMap(lambda line : line.split(' '))
+rdd3 = rdd2.map(lambda word : (word, 1))
+rdd4 = rdd3.reduceByKey(lambda a, b : a + b)
+rdd4.collect()
+```
 
 ## Fault tolerance
-### overview
-- **fault tolerance**: use Lineage and Checkpoint
+- mysql: bin_log日志文件（预写日志）
+- hbase: wal(write ahead log: 预写日志)
+- hdfs: 副本策略（3）
 
-### lineage mechanism
+### overview
+- **fault tolerance** for spark: use Lineage and Checkpoint
+
+### lineage mechanism: suit for narrow dependency
 - RDD's lineage records **Coarse-grained** specific data from Transformation operation. So when some partitions of a RDD lost data, it can reload or recompute from Lineage.
 - This Coarse-grained data model limited use cases of Spark, so that Spark cannot use for high performance scenarios.
 
@@ -546,7 +562,7 @@ Spark Lineage mechanism is performed through RDD dependencies:
 1. narrow dependency: certain data of child RDD can be directly computed from certain data of parent RDD
 2. wide dependency: **recompute all parents' RDD**, then after finished and hashing, recomputing children RDD. When we deal with long lineage, we need set appropriate checkpoint.
 
-### checkpoint mechanism
+### checkpoint mechanism: suit for wide dependency
 - There are two approaches:
     1. **LocalRDDCheckpointData**: temporarly saved in local disk and memory. It's fast, good for scenarios that lineage info needed to be deleted frequently(e.g. GraphX), can tolerate executor fail.
     2. **ReliableRDDCheckpointData**: saved in reliable outside storage(e.g. HDFS), can tolerate driver fail. It's not fast as local, but it has the highest fault tolerance level. 
@@ -555,22 +571,111 @@ Spark Lineage mechanism is performed through RDD dependencies:
 - RDD's action triggering computation, then executing checkpoint.
 - If task fails, it will load data from checkpoint to compute
 
+#### checkpoint example
+```python
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.master("spark://localhost:7077").appName("rdd_demos").getOrCreate()
+sc = spark.sparkContext
+sc.setCheckpointDir('hdfs://localhost:9000/spark/checkpoint') # set directory for saving
+
+from pyspark import StorageLevel
+rdd1.sc.textFile('/xxxx')
+rdd1.persist(StorageLevel.MEMORY_AND_DISK)
+rdd2 = rdd1.flatMap(lambda line : line.split(' '))
+rdd3 = rdd2.map(lambda word : (word, 1))
+rdd3.checkpoint() # set checkpoint
+print(rdd3.isCheckpointed()) # check if RDD is set checkpoint
+print(rdd3.getCheckpointFile()) # get the path of saved checkpoint, 
+rdd4 = rdd3.reduceByKey(lambda a, b : a + b)
+rdd4.collect()
+
+spark.stop()
+```
+
+```bash
+# check hdfs if has rdd checkpoint
+./bin/hdfs dfs -cat /spark/checkpoint/a335287f-f7aa-408b-a767-0146faalefff/rdd-2/part-00000
+```
+
+### difference between checkpoint and cache
+- checkpoint will cut off the lineage, and save some data
+- cache just save some data
+
 
 ## Data Partitions
 - RDD is very large, it will be cutted into partitions saved in different nodes. This is where RDD come from.
+
+- how to manually setup partitions:
+    1. creating RDD: when executing **textFile** and **parallelize** methods, manually assign the number of partitions. e.g. `sc.textFile(path, partitionNum)`
+    2. get new RDD with transforming operation: directly executing **repartition**
+
 ### assign partitions when creating RDD
+```python
+rdd1 = sc.parallelize([1, 2, 3, 4, 5, 6, 7, 8])
+print(rdd1.collect())
+print(rdd1.getNumPartitions()) # rdd1的分区数量
+```
 
 ### assign partitions when transforming RDD
+```python
+# as for new RDD from transforming, directly executing repartition to get new partitions
+rdd2 = rdd1.map(lambda x : x * x) # get rdd2 with transforming
+print(rdd2.collect())
+
+rdd3 = rdd2.repartition(3) # repartition, get rdd3
+rdd3.getNumPartitions() # the number of partitions of rdd3
+```
 
 ### customize partition function
+```python
+pairs = sc.parallelize([(1, 1), (2, 2), (3, 3)])
+print(pairs.getNumPartitions())
+
+repairs = pairs.repartition(4) # 重新分区
+print(repairs.getNumPartitions())
+
+# customize partition function
+partitionedRDD = pairs.partitionBy(2, lambda k: int(k)) # use specific partition function
+partitionedRDD.persist() # 持久化，以便后续操作重复使用partitioned,避免重复分区
+print(partitionedRDD.getNumPartitions())
+```
+
+```python
+# for example: write to different files depending on the last digit of key
+# customized partition function
+def UsridPartitioner(key):
+    return int(key) % 10
+
+# simulate 5 partitions' data
+data = sc.parallelize(range(1, 21), 5)
+
+# use the last digit of key, changing to 10 partitions, writing to 10 files
+result = data.map(lambda n: (n, 1))\
+             .partitionBy(numPartitions=10, partitionfunc=UsridPartitioner) # we can also use lambda here
+# result.saveAsTextFile("/data/spark_demo/rdd/partition-output")
+
+result.collect()
+```
 
 ## Shared Variables
-
 ### overview
+- spark has many nodes(machines), and they are independent. spark automatically send referenced variables to each node through network, it's convinent but inefficient. So shared variables are necessary.
+- spark provides two kinds of shared variable with limited type: **broadcast** and **accumulator**
 
 ### broadcast
+- introduce a broadcast, give all nodes a readable value, instead of sending data through network and saving a copy. This improve the efficiency.
+- approach: 
+    - use `broadcast()` within `sparkContext` to create broadcast.
+    - use `value` to get broadcast value
+    - use `unpersist()` to remove the broadcast
 
 #### utilize broadcast
+```python
+broads = sc.broadcast(3) # create broadcast, it can be any type
+
+lists = [1, 2, 3, 4, 5] # create a list for testing
+listRDD = sc.parallelize(lists) # construct a RDD
+```
 
 #### update broadcast
 
@@ -578,5 +683,15 @@ Spark Lineage mechanism is performed through RDD dependencies:
 
 ### accumulator
 
+
+
 ## Shuffle
+
+### overview
+
+### how it work
+
+#### normal mechanism
+
+#### bypass mechanism
 

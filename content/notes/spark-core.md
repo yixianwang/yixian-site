@@ -611,9 +611,15 @@ spark.stop()
 
 ### assign partitions when creating RDD
 ```python
-rdd1 = sc.parallelize([1, 2, 3, 4, 5, 6, 7, 8])
+rdd1 = sc.parallelize([1, 2, 3, 4, 5, 6, 7, 8], 3) # assign the num of partitions here
 print(rdd1.collect())
+
+# the default num of partitions is 2
+# rule: max(2, num-executor-core(the number of cpu thread(core) within each executor))
 print(rdd1.getNumPartitions()) # rdd1的分区数量
+
+# check how it is partitioned
+rdd1.glom().collect()
 ```
 
 ### assign partitions when transforming RDD

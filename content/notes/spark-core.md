@@ -608,9 +608,15 @@ spark.stop()
 - how to manually setup partitions:
     1. creating RDD: when executing **textFile** and **parallelize** methods, manually assign the number of partitions. e.g. `sc.textFile(path, partitionNum)`
     2. get new RDD with transforming operation: directly executing **repartition**
+> #partitions == #task == #core(thread) of cpu
+- the number of executor = totoal-executor-core/executor-core
 
 ### assign partitions when creating RDD
 ```python
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.master("spark://localhost:7077").appName("rdd_demos").config("spark.default.parallelism", 1).getOrCreate() # setup default parallelism
+sc = spark.sparkContext
+
 rdd1 = sc.parallelize([1, 2, 3, 4, 5, 6, 7, 8], 3) # assign the num of partitions here
 print(rdd1.collect())
 

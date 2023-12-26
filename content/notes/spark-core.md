@@ -611,6 +611,27 @@ spark.stop()
 > #partitions == #task == #core(thread) of cpu
 - the number of executor = totoal-executor-core/executor-core
 
+### exmaple
+> 3 files: 17B, 7B, 165B
+
+> totalSize = 189B
+
+- default the minimum number of partitions in Scala: Math.min(#core, 2) = 2
+- goalSize = 189 / 2 = ? // the maximum size for each partition
+
+> 17B, 94.5B, 128M
+```
+// Math.max(minSize, Math.min(goalSize, blockSize))
+splitSize = Math.max(17B, Math.min(94.5B, 128M)) = 94.5B
+```
+- 文件大小与分片大小比较：
+- a.txt: 17B < 94.5B 一个分区
+- b.txt: 7B < 94.5B 一个分区
+- c.txt: 165B > 94.5B 两个分区
+- 一共四个分区
+
+
+
 ### assign partitions when creating RDD
 ```python
 from pyspark.sql import SparkSession
@@ -629,6 +650,12 @@ rdd1.glom().collect()
 ```
 
 ### assign partitions when transforming RDD
+- `repartition` and `coalesce(numPartitions, isShuffle = True)`
+- `repartition(10)` <==> `coalesce(10, True)`
+> it's faster without shuffle
+
+> `rdd.coalesce(1, False)`: if `isShufle` is false, it cannot increase the number of partitions, 只能减少分区数
+
 ```python
 # as for new RDD from transforming, directly executing repartition to get new partitions
 rdd2 = rdd1.map(lambda x : x * x) # get rdd2 with transforming
@@ -636,6 +663,7 @@ print(rdd2.collect())
 
 rdd3 = rdd2.repartition(3) # repartition, get rdd3
 rdd3.getNumPartitions() # the number of partitions of rdd3
+rdd3.glom().collect() # check distributions
 ```
 
 ### customize partition function
@@ -674,36 +702,118 @@ result.collect()
 - spark has many nodes(machines), and they are independent. spark automatically send referenced variables to each node through network, it's convinent but inefficient. So shared variables are necessary.
 - spark provides two kinds of shared variable with limited type: **broadcast** and **accumulator**
 
+![before](images-spark/spark-core-2.png)
+![after](images-spark/spark-core-3.png)
+
 ### broadcast
-- introduce a broadcast, give all nodes a readable value, instead of sending data through network and saving a copy. This improve the efficiency.
+> **driver define broadcast, and send to each node(or machine) only one time**
+
+- introduce a broadcast, give all nodes a readable value, instead of sending data through network and saving a copy. This improves the efficiency.
 - approach: 
     - use `broadcast()` within `sparkContext` to create broadcast.
     - use `value` to get broadcast value
     - use `unpersist()` to remove the broadcast
+> a broadcast will only send to each node once, it's read-only 
 
 #### utilize broadcast
 ```python
 broads = sc.broadcast(3) # create broadcast, it can be any type
 
 lists = [1, 2, 3, 4, 5] # create a list for testing
-listRDD = sc.parallelize(lists) # construct a RDD
+listRDD = sc.parallelize(lists) # create a RDD
+
+results = listRDD.map(lambda x: x * broads.value)
+
+print("result is", end = ":")
+results.collect() # [3, 6, 9, 12, 15]
 ```
 
 #### update broadcast
+```python
+# update broadcast, use unpersist()
+# broadcast is read-only, we cannot update broadcast, we need to remove the old broadcast, then create a new one
+
+# create dict
+mapper = {"dog":1, "cat":2}
+
+# create broadcast
+broadcatVar = sc.broadcast(mapper)
+
+# update: 1. broadcast
+broadcatVar.unpersist()
+
+# update: 2. change the dict has to be changed
+mapper["pig"] = 1
+
+# update: 3. create broadcast again
+broadcatVar = sc.broadcast(mapper)
+
+# get the value
+broadcatVar.value
+```
 
 #### release broadcast
+```python
+# destroy() method is used to release broadcast
+# we cannot use broadcast again after this method
+
+data = ['data', 'cat', 'dog', 'cat', 'cat']
+rdd = sc.parallelize(data)
+
+mapper = {'dog':1, 'cat':2}
+broadcatVar = sc.broadcast(mapper)
+print(broadcatVar.value)
+
+# destroy broadcast
+broadcatVar.destroy()
+
+# the value after destroying
+print(broadcatVar.value)
+
+# cannot use it with function
+# rdd.map(lambda t:broadcatVar.value.get(t)).collect()
+```
 
 ### accumulator
+- it is shared among nodes, and it will collect data from nodes to driver
+- approaches:
+    - call `accumulator` within Driver's `SparkContext` to create accumulator, and give it a name for checking later in Web UI
+```python
+# sum arrary with accumulator
+accum = sc.accumulator(0)
+print(accum.value) # 0
+sc.parallelize([1, 2, 3, 4]).foreach(lambda x: accum.add(x))
+print(accum.value) # 10
 
+acc = sc.accumulator(0)
+print(acc.value) # 0
+list1 = sc.parallelize(range(1, 1000001))
+# run in executors
+list1.foreach(lambda x: acc.add(1))
+# run in driver
+acc.value # 1000000
+```
 
+![accumulator](images-spark/spark-core-4.png)
 
 ## Shuffle
-
+- **ShuffleManager** handle all shuffle related execution, calculation and operations
+- Before Spark 1.2, HashShuffleManager is default. It has many temperary disk files, and these disk IO affects performance alot.
+- After Spark 1.2, SortShuffleManager is default. It also has many temperary disk files, but it **merges** all temp files into one disk file, and thus each **Task** only has one disk file. At next stage, when shuffle read task use their own data, they just get some data through indexing of disk file.
 ### overview
 
 ### how it work
-
 #### normal mechanism
 
 #### bypass mechanism
+- shuffle map task 数量小于 `spark.shuffle.sort.bypassMergeThreshold`参数的值不是聚合类的shuffle算子(e.g. reduceByKey)
 
+- [Reference blog: shuffle](https://blog.csdn.net/chuanjiaoye5017/article/details/101012650)
+![Mapreduce&Shuffle](images-spark/spark-core-5.png)
+- map machine: **shuffle** write data to local disk file
+- reduce machine: **shuffle** read data from disk file of map machine
+> Note: red 1, green 2, blue 3 are all represent partitions, the number of partition are three 
+
+
+![Spill](images-spark/spark-core-6.png)
+- Spill includes 输出、排序、溢写、合并

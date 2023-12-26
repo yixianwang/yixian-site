@@ -808,7 +808,7 @@ acc.value # 1000000
 #### bypass mechanism
 - shuffle map task 数量小于 `spark.shuffle.sort.bypassMergeThreshold`参数的值不是聚合类的shuffle算子(e.g. reduceByKey)
 
-- [Reference blog: shuffle](https://blog.csdn.net/chuanjiaoye5017/article/details/101012650)
+- [Reference blog: shuffle](https://www.cnblogs.com/licheng/p/6687018.html)
 ![Mapreduce&Shuffle](images-spark/spark-core-5.png)
 - map machine: **shuffle** write data to local disk file
 - reduce machine: **shuffle** read data from disk file of map machine
@@ -817,3 +817,9 @@ acc.value # 1000000
 
 ![Spill](images-spark/spark-core-6.png)
 - Spill includes 输出、排序、溢写、合并
+
+![Spill-Collect](images-spark/spark-core-7.png)
+
+## Optimize performance
+- [Reference 1](https://www.cnblogs.com/shishanyuan/p/8454323.html)
+- [Reference 2](https://www.cnblogs.com/shishanyuan/p/8454310.html)

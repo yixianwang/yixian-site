@@ -1008,3 +1008,9 @@ class FoodRatings {
   }
 };
 ```
+
+## ASCII value
+- Use `tolower(my_char)` to get the ASCII value of that character
+
+## isalnum(my_char)
+- `isalnum(my_char)`

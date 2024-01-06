@@ -1014,3 +1014,21 @@ class FoodRatings {
 
 ## isalnum(my_char)
 - `isalnum(my_char)`
+
+## string trim and split
+```c++
+// given string s
+
+// Remove leading and trailing spaces
+s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](char ch) {
+    return !std::isspace(ch);
+}));
+
+s.erase(std::find_if(s.rbegin(), s.rend(), [](char ch) {
+    return !std::isspace(ch);
+}).base(), s.end());
+
+// Split by multiple spaces
+std::stringstream iss(s);
+std::vector<std::string> wordList(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
+```

@@ -939,3 +939,158 @@ class Solution {
   }
 };
 ```
+
+## Advanced Approaches
+### Leetcode 56. Merge Intervals
+- [Leetcode 56. Merge Intervals](https://leetcode.com/problems/merge-intervals/description/?envType=study-plan-v2&envId=top-interview-150)
+
+```c++
+class Solution0 {
+ public:
+  std::vector<std::vector<int>> merge(std::vector<std::vector<int>>& intervals) {
+    std::vector<std::vector<int>> result;
+    if (intervals.size() == 0) return result;
+
+    std::vector<std::vector<int>> boundaries;
+    for (int i = 0; i < intervals.size(); ++i) {
+      boundaries.push_back({intervals[i][0], 1});
+      boundaries.push_back({intervals[i][1], -1});
+    }
+
+    // !!! sort on first element, then sort on second elemen
+    auto comp = [](const auto& left, const auto& right) {
+      if (left[0] == right[0]) {
+        return left[1] > right[1];
+      }
+      return left[0] < right[0];
+    };
+    std::sort(boundaries.begin(), boundaries.end(), comp);
+
+    int is_matched = 0;
+    int left = 0, right = 0;
+    for (int i = 0; i < boundaries.size(); ++i) {
+
+      if (is_matched == 0) {
+        left = boundaries[i][0];
+      }
+
+      is_matched += boundaries[i][1];
+
+      if (is_matched == 0) {
+        right = boundaries[i][0];
+        result.push_back({left, right});
+      }
+    }
+    return result;
+  }
+};
+
+class Solution {
+ public:
+  std::vector<std::vector<int>> merge(std::vector<std::vector<int>>& intervals) {
+    vector<vector<int>> result;
+    if (intervals.size() == 0) return result;
+    sort(intervals.begin(), intervals.end());
+    vector<int>& curr = intervals[0];
+    for (int i = 1; i < intervals.size(); ++i) {
+      vector<int>& inter = intervals[i];
+      if (curr[1] < inter[0]) {
+        result.push_back(curr);
+        curr = inter;
+      } else {
+        curr[1] = max(curr[1], inter[1]);
+      }
+    }
+    result.push_back(curr);
+    return result;
+  }
+};
+```
+
+
+### Leetcode 57. Insert Interval
+- [Leetcode 57. Insert Intervals](https://leetcode.com/problems/insert-interval/description/?envType=study-plan-v2&envId=top-interview-150)
+
+```c++
+class Solution0 {
+ public:
+  std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& new_interval) {
+    vector<vector<int>> result;
+    if (intervals.size() == 0) return {new_interval};
+    vector<vector<int>> boundaries;
+    for (auto& v : intervals) {
+      boundaries.push_back({v[0], 1});
+      boundaries.push_back({v[1], -1});
+    }
+    boundaries.push_back({new_interval[0], 1});
+    boundaries.push_back({new_interval[1], -1});
+    auto comp = [](auto const& left, auto const& right) {
+      if (left[0] == right[0]) return left[1] > right[1];
+      return left[0] < right[0];
+    };
+    sort(boundaries.begin(), boundaries.end(), comp);
+    int temp_sum = 0;
+    int left;
+    for (int i = 0; i < boundaries.size(); ++i) {
+      if (temp_sum == 0) {
+        left = boundaries[i][0];
+      }
+      temp_sum += boundaries[i][1];
+      if (temp_sum == 0) {
+        result.push_back({left, boundaries[i][0]});
+      }
+    }
+    return result;
+  }
+};
+
+class Solution1 {
+ public:
+  std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& new_interval) {
+    std::vector<std::vector<int>> result;
+    for (auto& i : intervals) {
+      if (i[1] < new_interval[0]) {
+        result.push_back(i);
+      } else if (new_interval[1] < i[0]){
+        result.push_back(new_interval);
+        new_interval = i;
+      } else if (new_interval[1] >= i[0]) {
+        new_interval[0] = min(new_interval[0], i[0]);
+        new_interval[1] = max(new_interval[1], i[1]);
+      }
+    }
+    result.push_back(new_interval);
+    return result;
+  }
+};
+
+// review better
+class Solution {
+ public:
+  std::vector<std::vector<int>> insert(std::vector<std::vector<int>>& intervals, std::vector<int>& new_interval) {
+    vector<vector<int>> result;
+    // the given intervals is sorted
+    bool added = false;
+    for (int i = 0; i < intervals.size(); ++i) {
+      vector<int>& inter = intervals[i];
+      // check if exist overlapping
+      int max_start = max(inter[0], new_interval[0]);
+      int min_end = min(inter[1], new_interval[1]);
+      if (max_start <= min_end) {
+        new_interval[0] = min(new_interval[0], inter[0]);
+        new_interval[1] = max(new_interval[1], inter[1]);
+      } else {
+        if (new_interval[1] < inter[0] && added == false) {
+          result.push_back(new_interval);
+          added = true;
+        } 
+        result.push_back(inter);
+      }
+    }
+    if (added == false) {
+      result.push_back(new_interval);
+    }
+    return result;
+  }
+};
+```

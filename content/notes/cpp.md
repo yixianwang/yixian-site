@@ -1074,12 +1074,22 @@ std::vector<std::string> split(const std::string& s, char delim) {
 
 ## Log(log)
 ```c++
+// #define print(x)                                                    \
+//   std::ranges::copy(x, std::ostream_iterator<int>(std::cout, " ")); \
+//   std::cout << std::endl
+
+#define print(x)          \
+  for (auto& s : x) { \
+    cout << s << " ";     \
+  }                       \
+  cout << endl;
+
 #define deb(...) logger(#__VA_ARGS__, __VA_ARGS__)
-template<typename ...Args>
+template <typename... Args>
 void logger(std::string vars, Args&&... values) {
-    std::cout << vars << " = ";
-    std::string delim = "";
-    (..., (std::cout << delim << values, delim = ", "));
-    std::cout << std::endl;
+  std::cout << vars << " = ";
+  std::string delim = "";
+  (..., (std::cout << delim << values, delim = ", "));
+  std::cout << std::endl;
 }
 ```

@@ -1071,3 +1071,15 @@ std::vector<std::string> split(const std::string& s, char delim) {
 }
 // std::vector<std::string> v = split(str, '+');
 ```
+
+## Log(log)
+```c++
+#define deb(...) logger(#__VA_ARGS__, __VA_ARGS__)
+template<typename ...Args>
+void logger(std::string vars, Args&&... values) {
+    std::cout << vars << " = ";
+    std::string delim = "";
+    (..., (std::cout << delim << values, delim = ", "));
+    std::cout << std::endl;
+}
+```

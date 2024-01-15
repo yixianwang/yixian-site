@@ -2105,6 +2105,17 @@ int main() {
 }
 ```
 
+### Reverse Linked List
+```c++
+// prev -> ... -> curr -> next -> ...
+for (...) {
+  ListNode next = curr->next;
+  curr->next = next->next;
+  next->next = prev->next;
+  prev->next = next;
+}
+```
+
 ### 通过数据范围推测算法
 
 - `n = 10^4 ～ 10^5`

@@ -460,8 +460,38 @@ def divide_conquer(root):
 
 **_例题_**
 
-- [LintCode 67.二叉树的中序遍历](https://www.lintcode.com/problem/67/?utm_source=sc-github-thx)
-- [LintCode 902.二叉搜索树的第 k 大元素](https://www.lintcode.com/problem/902/?utm_source=sc-github-thx)
+- [Leetcode 94 Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/description/)
+- [Leetcode 230 Kth smallest element in BSt](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
+
+```c++
+class BSTIterator {
+ public:
+  BSTIterator(TreeNode* root) {
+    curr_ = root;
+  }
+  
+  int next() {
+    while (curr_ != nullptr) {
+      stack_.push_back(curr_);
+      curr_ = curr_->left;
+    }
+    curr_ = stack_.back();
+    stack_.pop_back();
+    int val = curr_->val;
+    curr_ = curr_->right; // !!!! very important here
+    return val;
+  }
+  
+  bool hasNext() {
+    if (stack_.empty() && curr_ == nullptr) return false; // has to check both
+    return true;
+  }
+ private:
+  TreeNode* curr_;
+  deque<TreeNode*> stack_;
+};
+
+```
 
 ```python
 # Python
@@ -490,7 +520,6 @@ def inorder_traversal(root):
       inorder.append(stack[-1])
 
   return inorder
-
 ```
 
 ### BFS 宽度优先搜索

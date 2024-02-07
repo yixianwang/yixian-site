@@ -1293,18 +1293,18 @@ An important operation when inserting and deleting items from a red-black tree.
 
 ```python
 def left-rotate(T, x):
- 1   y = x.right          # set y
- 2   x.right = y.left     # turn y's left subtree into x's right subtree
- 3   if y.left != T.nil
- 4     y.left.p = x
- 5   y.p = x.p            # link x's parent to y
- 6   if x.p == T.nil
- 7     T.root = y
- 8   elif x == x.p.left
- 9     x.p.left = y
-10   else x.p.right = y
-11   y.left = x           # put x on y's left
-12   x.p = y
+    y = x.right          # set y
+    x.right = y.left     # turn y's left subtree into x's right subtree
+    if y.left != T.nil
+      y.left.p = x
+    y.p = x.p            # link x's parent to y
+    if x.p == T.nil
+      T.root = y
+    elif x == x.p.left
+      x.p.left = y
+    else x.p.right = y
+    y.left = x           # put x on y's left
+    x.p = y
 ```
 
 #### Insertions(strategy)
@@ -1384,7 +1384,7 @@ class Solution {
 - 最小生成树
 - Microsoft & Amazon
 
-### [LRU implementation](https://www.lintcode.com/problem/134/)
+### [Leetcode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
 
 ```c++
 // C++

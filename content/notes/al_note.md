@@ -1479,7 +1479,7 @@ class LRUCache {
 ##### LIS 的动态规划四要素
 
 - `state:` `dp[i]`表示以第`i`个数为龙尾的最长的龙有多长
-- `function:` `dp[i] = max{dp[j] + 1}, j < i && nums[j] < nums[i]`
+- `function:` `dp[i] = max{dp[i], dp[j] + 1}, j < i && nums[j] < nums[i]`
 - `initialization:` `dp[0..n-1] = 1`
 - `answer:` `max{dp[0..n-1]}`
 

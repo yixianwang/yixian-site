@@ -1,5 +1,5 @@
 +++
-title = 'Algorithms Notebook'
+title = 'Algo Note'
 date = 2024-02-11T03:10:46-04:00
 +++
 
@@ -25,15 +25,16 @@ date = 2024-02-11T03:10:46-04:00
       * [Rotations: O(1)](#rotations-o1)
       * [Insertions(strategy)](#insertionsstrategy)
   * [Data Structure Implementations](#data-structure-implementations)
-    * [LIS: Longest Increasing Subsequence](#lis-longest-increasing-subsequence)
     * [LCS: Longest Commen Subsequence](#lcs-longest-commen-subsequence)
     * [LCA: Lowest Common Ancestor](#lca-lowest-common-ancestor)
-      * [LCA Example: Lintcode 88 LCA](#lca-example-lintcode-88-lca)
+      * [Example: Lintcode 88 LCA](#example-lintcode-88-lca)
     * [TSP:](#tsp)
     * [MST: Minimon Spinning Tree](#mst-minimon-spinning-tree)
     * [LRU: Least Recently Used](#lru-least-recently-used)
-    * [LIS: Longest Increasing Subsequence](#lis-longest-increasing-subsequence-1)
-      * [LIS 的动态规划四要素](#lis-的动态规划四要素)
+    * [LIS: Longest Increasing Subsequence](#lis-longest-increasing-subsequence)
+      * [DP - LIS](#dp---lis)
+        * [LIS 的动态规划四要素](#lis-的动态规划四要素)
+      * [Binary Search - LIS](#binary-search---lis)
     * [LIS2: Longest Continuous Increasing Subsequence 2](#lis2-longest-continuous-increasing-subsequence-2)
     * [LDS: Largest Divisible Subset](#lds-largest-divisible-subset)
     * [HashMap Implementation](#hashmap-implementation)
@@ -76,7 +77,7 @@ date = 2024-02-11T03:10:46-04:00
     * [拓扑排序 Topological Sorting:](#拓扑排序-topological-sorting)
     * [拓扑排序的四种不同问法：](#拓扑排序的四种不同问法)
   * [Others](#others)
-    * [476.Stone Game 石子归并](#476stone-game-石子归并)
+    * [区间 DP](#区间-dp)
     * [How to use heap in c++](#how-to-use-heap-in-c)
     * [1507 Shortest Subarray with Sum at Least K 和至少为 K 的最短子数组](#1507-shortest-subarray-with-sum-at-least-k-和至少为-k-的最短子数组)
       * [Binary search on answer + priority_queue](#binary-search-on-answer--priority_queue)
@@ -1326,11 +1327,6 @@ Four scenarios:
 
 ## Data Structure Implementations
 
-### LIS: Longest Increasing Subsequence
-
-- Dynamic Programming
-- O(nlogn) recite binary search
-
 ### LCS: Longest Commen Subsequence
 
 - 两个字符串前缀型中的匹配型动态规划
@@ -1339,7 +1335,7 @@ Four scenarios:
 
 - 一般会问一次查询，多次查询不太会问
 
-#### LCA Example: Lintcode 88 LCA
+#### Example: Lintcode 88 LCA
 - [Lintcode 88 LCA](https://www.lintcode.com/problem/88)
 
 ```c++
@@ -1468,6 +1464,11 @@ class LRUCache {
 ```
 
 ### LIS: Longest Increasing Subsequence
+
+- Dynamic Programming
+- O(nlogn) recite binary search
+
+#### DP - LIS
 - [LIS Longest Increasing Subsequence](https://www.jiuzhang.com/problem/longest-increasing-subsequence/)
 
 - 接龙规则：从左到右一个比一个大，该问题简称 LIS
@@ -1475,7 +1476,7 @@ class LRUCache {
   - A：`dp[i]` 表示前`i`个数的 LIS 是多长(前缀型, do not choose this)
   - B：`dp[i]` 表示以第`i`个数结尾的 LIS 是多长(坐标型)
 
-#### LIS 的动态规划四要素
+##### LIS 的动态规划四要素
 
 - `state:` `dp[i]`表示以第`i`个数为龙尾的最长的龙有多长
 - `function:` `dp[i] = max{dp[j] + 1}, j < i && nums[j] < nums[i]`
@@ -1539,6 +1540,44 @@ def longestIncreasingSubsequence(self, nums):
   print(path[::-1])
 
   return longest
+```
+
+#### Binary Search - LIS
+- [Leetcode 300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
+
+```c++
+class Solution {
+ public:
+  int lengthOfLIS(vector<int>& nums) {
+    vector<int> tails(nums.size() + 1, 0x3f3f3f3f);
+
+    for (int& n : nums) {
+      int idx = BinarySearch(tails, n);
+      tails[idx] = n;
+    }
+
+    int result = 0;
+    for (int& n : tails) {
+      if (n != 0x3f3f3f3f) {
+        ++result;
+      }
+    }
+    return result;
+  }
+
+ private:
+  int BinarySearch(vector<int>& nums, int target) {
+    int start = 0;
+    int end = nums.size() - 1;
+    while (start + 1 < end) {
+      int mid = start + (end - start) / 2;
+      if (nums[mid] == target) return mid;
+      else if (nums[mid] < target) start = mid;
+      else end = mid;
+    }
+    return end;
+  }
+};
 ```
 
 ### LIS2: Longest Continuous Increasing Subsequence 2
@@ -2421,7 +2460,8 @@ def get_prefix_sum(self, nums):
 
 ## Others
 
-### [476.Stone Game 石子归并](https://www.lintcode.com/problem/476/)
+### 区间 DP
+- [476.Stone Game 石子归并](https://www.lintcode.com/problem/476/)
 
 - [Answer](https://www.jiuzhang.com/problem/stone-game/)
 
@@ -2553,7 +2593,7 @@ int main() {
 
 ### 1507 Shortest Subarray with Sum at Least K 和至少为 K 的最短子数组
 
-[[https://www.lintcode.com/problem/1507/][Lintcode 1507 Shortest Subarray with Sum at Least K]]
+- [Lintcode 1507 Shortest Subarray with Sum at Least K](https://www.lintcode.com/problem/1507/)
 
 #### Binary search on answer + priority_queue
 ```c++

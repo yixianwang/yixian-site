@@ -1,5 +1,5 @@
 +++
-title = 'Legacy Algorithms Notebook'
+title = 'Legacy Algo Note'
 date = 2023-10-24T03:10:46-04:00
 +++
 

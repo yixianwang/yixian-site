@@ -1327,22 +1327,20 @@ Four scenarios:
 
 ## Data Structure Implementations
 
-### LIS LCS LCA TSP MST
-
-#### LIS: Longest Increasing Subsequence
+### LIS: Longest Increasing Subsequence
 
 - Dynamic Programming
 - O(nlogn) recite binary search
 
-#### LCS: Longest Commen Subsequence
+### LCS: Longest Commen Subsequence
 
 - 两个字符串前缀型中的匹配型动态规划
 
-#### LCA: Lowest Common Ancestor
+### LCA: Lowest Common Ancestor
 
 - 一般会问一次查询，多次查询不太会问
 
-##### Example: Lintcode 88 LCA
+#### LCA Example: Lintcode 88 LCA
 - [Lintcode 88 LCA](https://www.lintcode.com/problem/88)
 
 ```c++
@@ -1374,17 +1372,18 @@ class Solution {
 ```
 
 
-#### TSP:
+### TSP:
 
 - 随机化
 - 二进制压缩，状态压缩型动态规划，最难
 
-#### MST: Minimon Spinning Tree
+### MST: Minimon Spinning Tree
 
 - 最小生成树
 - Microsoft & Amazon
 
-### [Leetcode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
+### LRU: Least Recently Used
+- [Leetcode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
 
 ```c++
 // C++
@@ -1469,7 +1468,8 @@ class LRUCache {
 };
 ```
 
-### [LIS Longest Increasing Subsequence](https://www.jiuzhang.com/problem/longest-increasing-subsequence/)
+### LIS: Longest Increasing Subsequence
+- [LIS Longest Increasing Subsequence](https://www.jiuzhang.com/problem/longest-increasing-subsequence/)
 
 - 接龙规则：从左到右一个比一个大，该问题简称 LIS
 - 状态表示：
@@ -1542,7 +1542,8 @@ def longestIncreasingSubsequence(self, nums):
   return longest
 ```
 
-### [LIS2 Longest Continuous Increasing Subsequence 2](https://www.jiuzhang.com/problem/longest-continuous-increasing-subsequence-ii/)
+### LIS2: Longest Continuous Increasing Subsequence 2
+- [LIS2 Longest Continuous Increasing Subsequence 2](https://www.jiuzhang.com/problem/longest-continuous-increasing-subsequence-ii/)
 
 ```python
 class Solution:
@@ -1576,7 +1577,8 @@ class Solution:
         return max(longest_hash.values())
 ```
 
-### [Largest Divisible Subset](https://www.jiuzhang.com/problem/largest-divisible-subset/)
+### LDS: Largest Divisible Subset
+- [Largest Divisible Subset](https://www.jiuzhang.com/problem/largest-divisible-subset/)
 
 ```python
 class Solution:

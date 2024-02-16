@@ -11,6 +11,8 @@ date = 2024-02-11T03:10:46-04:00
     * [Binary Search 二分法](#binary-search-二分法)
     * [Two Pointers 双指针](#two-pointers-双指针)
     * [Sorting 排序算法](#sorting-排序算法)
+    * [Quick Select](#quick-select)
+      * [Iteratively + Recursively](#iteratively--recursively)
     * [Binary Tree Divide & Conquer 二叉树分治](#binary-tree-divide--conquer-二叉树分治)
     * [BST Iterator 二叉搜索树非递归](#bst-iterator-二叉搜索树非递归)
     * [BFS 宽度优先搜索](#bfs-宽度优先搜索)

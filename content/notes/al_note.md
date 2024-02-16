@@ -403,6 +403,59 @@ class Solution:
 > Radix sort: O(n) ---> based on indexing  
 > 
 
+### Quick Select
+- [Youtube Explanation](https://www.youtube.com/watch?v=AqMiMkPOutQ)
+#### Iteratively + Recursively
+```python
+def partition(arr, l, r):
+    pivot = arr[r]
+    i = l
+    for j in range(l, r):
+        if arr[j] <= pivot:
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+    arr[i], arr[r] = arr[r], arr[i]
+    return i
+
+def optimized_partition(arr, l, r):
+    pivot = arr[l]
+    i = l + 1
+    j = r
+    while i <= j:
+        if arr[i] < pivot and arr[j] > pivot:
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+            j -= 1
+        if arr[i] >= pivot:
+            i += 1
+        if arr[j] <= pivot:
+            j -= 1
+    
+    arr[l], arr[j] = arr[j], arr[l]
+    return j
+
+def quick_select_recursive(arr, l, r, k):
+    # pivot_idx = partition(arr, l, r)
+    pivot_idx = optimized_partition(arr, l, r)
+    if (pivot_idx == k - 1):
+        return arr[pivot_idx]
+    elif (pivot_idx > k - 1):
+        return quick_select(arr, l, pivot_idx - 1, k)
+    else:
+        return quick_select(arr, pivot_idx + 1, r, k)
+
+def quick_select_iterative(arr, l, r, k):
+    while True:
+        # pivot_idx = partition(arr, l, r)
+        pivot_idx = optimized_partition(arr, l, r)
+        if (pivot_idx == k - 1):
+            return arr[pivot_idx]
+        elif (pivot_idx > k - 1):
+            r = pivot_idx - 1
+        else:
+            l = pivot_idx + 1
+
+```
 
 
 ### Binary Tree Divide & Conquer 二叉树分治

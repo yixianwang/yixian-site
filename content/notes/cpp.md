@@ -1,7 +1,29 @@
 +++
-title = 'Cpp'
+title = 'C++'
 date = 2023-10-24T03:10:46-04:00
 +++
+
+## string find, mismatch
+### string find
+
+
+### mismatch
+```c++
+std::string foo("foo");
+std::string foobar("foobar");
+
+// prefix checking
+auto res = std::mismatch(foo.begin(), foo.end(), foobar.begin());
+if (res.first == foo.end()) {
+  // foo is a prefix of foobar.
+}
+
+// suffix checkign
+auto res = std::mismatch(foo.begin(), foo.end(), foobar.begin() + foobar.size() - foo.size());
+if (res.first == foo.end()) {
+  // foo is a suffix of foobar.
+}
+```
 
 ## assert
 ```c++

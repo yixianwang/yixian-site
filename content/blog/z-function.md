@@ -44,6 +44,7 @@ date = 2024-02-10T23:22:25-05:00
 - [Leetcode 3036. Number of Subarrays That Match a Pattern II](https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-ii/description/)
 
 
+> the Z-function for a string `s` is an array where the ith element `z[i]` represents the length of the longest substring starting from `i` that is also a prefix of `s`.
 
 ## Z function template
 ```c++

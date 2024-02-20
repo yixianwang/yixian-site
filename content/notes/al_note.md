@@ -79,78 +79,77 @@ date = 2024-02-11T03:10:46-04:00
     * [拓扑排序 Topological Sorting:](#拓扑排序-topological-sorting)
     * [拓扑排序的四种不同问法：](#拓扑排序的四种不同问法)
   * [Others](#others)
-  * [string find, mismatch](#string-find-mismatch)
-    * [string find](#string-find)
-    * [mismatch](#mismatch)
-  * [assert](#assert)
-  * [try throw catch - error handling](#try-throw-catch---error-handling)
-  * [gtest with cmake](#gtest-with-cmake)
-    * [step 1:](#step-1)
-    * [step 2: CMakeLists.txt](#step-2-cmakeliststxt)
-    * [step 3: test fucntions](#step-3-test-fucntions)
-    * [step 4: Append to CMakeLists.txt](#step-4-append-to-cmakeliststxt)
-    * [step 5: build and run test](#step-5-build-and-run-test)
-  * [print vector to the console](#print-vector-to-the-console)
-  * [priority queue](#priority-queue)
-    * [1507 Shortest Subarray with Sum at Least K 和至少为 K 的最短子数组](#1507-shortest-subarray-with-sum-at-least-k-和至少为-k-的最短子数组)
+    * [string find, mismatch](#string-find-mismatch)
+      * [string find](#string-find)
+      * [mismatch](#mismatch)
+    * [assert](#assert)
+    * [try throw catch - error handling](#try-throw-catch---error-handling)
+    * [gtest with cmake](#gtest-with-cmake)
+      * [step 1:](#step-1)
+      * [step 2: CMakeLists.txt](#step-2-cmakeliststxt)
+      * [step 3: test fucntions](#step-3-test-fucntions)
+      * [step 4: Append to CMakeLists.txt](#step-4-append-to-cmakeliststxt)
+      * [step 5: build and run test](#step-5-build-and-run-test)
+    * [print vector to the console](#print-vector-to-the-console)
+    * [priority queue](#priority-queue)
       * [Binary search on answer + priority_queue](#binary-search-on-answer--priority_queue)
-  * [LRU implementation](#lru-implementation)
-  * [LIS Longest Increasing Subsequence](#lis-longest-increasing-subsequence-1)
-    * [LIS 的动态规划四要素](#lis-的动态规划四要素-1)
-  * [LIS2 Longest Continuous Increasing Subsequence 2](#lis2-longest-continuous-increasing-subsequence-2-1)
-  * [Largest Divisible Subset](#largest-divisible-subset)
-  * [HashMap Implementation](#hashmap-implementation-1)
-  * [sort lambda](#sort-lambda-1)
-  * [customized hash for unordered_map or unordered_set](#customized-hash-for-unordered_map-or-unordered_set-1)
-  * [function pointer in c++](#function-pointer-in-c-1)
-  * [element wise comparison of two structs](#element-wise-comparison-of-two-structs-1)
-  * [how to use c++ build-in hash function](#how-to-use-c-build-in-hash-function-1)
-  * [c++ const](#c-const-1)
-  * [random seed](#random-seed-1)
-  * [C++20 comparison operator](#c20-comparison-operator-1)
-  * [To initialize two dimentional array](#to-initialize-two-dimentional-array-1)
-  * [heap: set vs priority_queue](#heap-set-vs-priority_queue)
-  * [heap with multiset, erase with find](#heap-with-multiset-erase-with-find)
-  * [return min or max element from hashmap](#return-min-or-max-element-from-hashmap)
-  * [all types of comparators for map and set](#all-types-of-comparators-for-map-and-set)
-  * [Comparator for sort vs map(or set)](#comparator-for-sort-vs-mapor-set)
-    * [sort](#sort)
-    * [map(or set)](#mapor-set)
-  * [use function to get lambda or func pointer](#use-function-to-get-lambda-or-func-pointer)
-  * [overload less comparator for priority queue](#overload-less-comparator-for-priority-queue)
-  * [set, find iterator, erase](#set-find-iterator-erase)
-  * [ASCII value](#ascii-value)
-  * [isalnum(my_char)](#isalnummy_char)
-  * [string trim and split](#string-trim-and-split)
-  * [string split with customized delimiter](#string-split-with-customized-delimiter)
-  * [for string delimiter](#for-string-delimiter)
-    * [for char delimiter](#for-char-delimiter)
-  * [Log(log)](#loglog)
+    * [LRU](#lru)
+    * [LIS](#lis)
+      * [LIS 的动态规划四要素](#lis-的动态规划四要素-1)
+    * [LIS2](#lis2)
+    * [Largest Divisible Subset](#largest-divisible-subset)
+    * [HashMap Implementation](#hashmap-implementation-1)
+    * [sort lambda](#sort-lambda-1)
+    * [customized hash for unordered_map or unordered_set](#customized-hash-for-unordered_map-or-unordered_set-1)
+    * [function pointer in c++](#function-pointer-in-c-1)
+    * [element wise comparison of two structs](#element-wise-comparison-of-two-structs-1)
+    * [how to use c++ build-in hash function](#how-to-use-c-build-in-hash-function-1)
+    * [c++ const](#c-const-1)
+    * [random seed](#random-seed-1)
+    * [C++20 comparison operator](#c20-comparison-operator-1)
+    * [To initialize two dimentional array](#to-initialize-two-dimentional-array-1)
+    * [heap: set vs priority_queue](#heap-set-vs-priority_queue)
+    * [heap with multiset, erase with find](#heap-with-multiset-erase-with-find)
+    * [return min or max element from hashmap](#return-min-or-max-element-from-hashmap)
+    * [all types of comparators for map and set](#all-types-of-comparators-for-map-and-set)
+    * [Comparator for sort vs map(or set)](#comparator-for-sort-vs-mapor-set)
+      * [sort](#sort)
+      * [map(or set)](#mapor-set)
+    * [use function to get lambda or func pointer](#use-function-to-get-lambda-or-func-pointer)
+    * [overload less comparator for priority queue](#overload-less-comparator-for-priority-queue)
+    * [set, find iterator, erase](#set-find-iterator-erase)
+    * [ASCII value](#ascii-value)
+    * [isalnum(my_char)](#isalnummy_char)
+    * [string trim and split](#string-trim-and-split)
+    * [string split with customized delimiter](#string-split-with-customized-delimiter)
+      * [for string delimiter](#for-string-delimiter)
+      * [for char delimiter](#for-char-delimiter)
+    * [Log(log)](#loglog)
     * [IsPrime](#isprime)
     * [区间 DP](#区间-dp)
     * [How to use heap in c++](#how-to-use-heap-in-c)
-    * [1507 Shortest Subarray with Sum at Least K 和至少为 K 的最短子数组](#1507-shortest-subarray-with-sum-at-least-k-和至少为-k-的最短子数组-1)
+    * [1507 Shortest Subarray with Sum at Least K 和至少为 K 的最短子数组](#1507-shortest-subarray-with-sum-at-least-k-和至少为-k-的最短子数组)
       * [Binary search on answer + priority_queue](#binary-search-on-answer--priority_queue-1)
       * [Leetcode 1337.The K Weakest Rows in a Matrix](#leetcode-1337the-k-weakest-rows-in-a-matrix)
     * [multiset in C++](#multiset-in-c)
     * [C++ isalnum, isalpha, isdigit](#c-isalnum-isalpha-isdigit)
-* [2. ML](#2-ml)
-  * [Linear regression](#linear-regression)
-  * [Logistic regression](#logistic-regression)
-  * [Decision tree](#decision-tree)
-  * [SVM algorithm](#svm-algorithm)
-  * [Naive Bayes algorithm](#naive-bayes-algorithm)
-  * [KNN algorithm](#knn-algorithm)
-  * [K-means](#k-means)
-  * [Random forest algorithm](#random-forest-algorithm)
-  * [Dimensionality reduction algorithms](#dimensionality-reduction-algorithms)
-  * [Gradient boosting algorithm and AdaBoosting algorithm](#gradient-boosting-algorithm-and-adaboosting-algorithm)
-* [3. Projects](#3-projects)
-  * [Pthread Prefix Sum](#pthread-prefix-sum)
-  * [GPU K-means](#gpu-k-means)
-  * [Tree Comparison](#tree-comparison)
-  * [Two Phase Commit Protocol](#two-phase-commit-protocol)
-  * [MPI Barnes-hut](#mpi-barnes-hut)
+  * [2. ML](#2-ml)
+    * [Linear regression](#linear-regression)
+    * [Logistic regression](#logistic-regression)
+    * [Decision tree](#decision-tree)
+    * [SVM algorithm](#svm-algorithm)
+    * [Naive Bayes algorithm](#naive-bayes-algorithm)
+    * [KNN algorithm](#knn-algorithm)
+    * [K-means](#k-means)
+    * [Random forest algorithm](#random-forest-algorithm)
+    * [Dimensionality reduction algorithms](#dimensionality-reduction-algorithms)
+    * [Gradient boosting algorithm and AdaBoosting algorithm](#gradient-boosting-algorithm-and-adaboosting-algorithm)
+  * [3. Projects](#3-projects)
+    * [Pthread Prefix Sum](#pthread-prefix-sum)
+    * [GPU K-means](#gpu-k-means)
+    * [Tree Comparison](#tree-comparison)
+    * [Two Phase Commit Protocol](#two-phase-commit-protocol)
+    * [MPI Barnes-hut](#mpi-barnes-hut)
 
 <!-- vim-markdown-toc -->
 
@@ -2563,8 +2562,8 @@ def get_prefix_sum(self, nums):
 
 ## Others
 
-## string find, mismatch
-### string find
+### string find, mismatch
+#### string find
 - [C++ find example usage](https://leetcode.com/problems/longest-common-prefix/)
 ```c++
 string str1 = "dogt"; // dog
@@ -2582,7 +2581,7 @@ cout << str2.size() << endl;
 cout << (str2.find(str1, str2.size() - str1.size())) << endl;
 ```
 
-### mismatch
+#### mismatch
 ```c++
 std::string foo("foo");
 std::string foobar("foobar");
@@ -2600,7 +2599,7 @@ if (res.first == foo.end()) {
 }
 ```
 
-## assert
+### assert
 ```c++
 #include<cassert>
 
@@ -2608,7 +2607,7 @@ assert((expression) && "msg")
 assert(expression); // cannot be std::assert(expression)
 ```
 
-## try throw catch - error handling
+### try throw catch - error handling
 ```c++
   try {
     // do something that might throw an error
@@ -2621,15 +2620,15 @@ assert(expression); // cannot be std::assert(expression)
   }
 ```
 
-## gtest with cmake
+### gtest with cmake
 - [gtest helloworld](https://google.github.io/googletest/quickstart-cmake.html)
 
-### step 1:
+#### step 1:
 ```bash
 mkdir my_project && cd my_project
 ```
 
-### step 2: CMakeLists.txt
+#### step 2: CMakeLists.txt
 ```
 # within CMakeLists.txt
 cmake_minimum_required(VERSION 3.14)
@@ -2649,7 +2648,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 ```
 
-### step 3: test fucntions
+#### step 3: test fucntions
 ```c++
 #include <gtest/gtest.h>
 
@@ -2662,7 +2661,7 @@ TEST(HelloTest, BasicAssertions) {
 }
 ```
 
-### step 4: Append to CMakeLists.txt
+#### step 4: Append to CMakeLists.txt
 ```
 enable_testing()
 
@@ -2679,7 +2678,7 @@ include(GoogleTest)
 gtest_discover_tests(hello_test)
 ```
 
-### step 5: build and run test
+#### step 5: build and run test
 ```bash
 my_project$ cmake -S . -B build
 -- The C compiler identification is GNU 10.2.1
@@ -2703,18 +2702,16 @@ Total Test time (real) =   0.01 sec
 ```
 
 
-## print vector to the console
+### print vector to the console
 ```c++
 #define print(v) std::copy(v.begin(), v.end(), std::ostream_iterator<int>(std::cout, " ")); std::cout << std::endl
 
 // C++20
 #define print(x) std::ranges::copy(x, std::ostream_iterator<int>(std::cout, " ")); std::cout << std::endl
-
 ```
 
-## priority queue
-### 1507 Shortest Subarray with Sum at Least K 和至少为 K 的最短子数组
-[[https://www.lintcode.com/problem/1507/][Lintcode 1507 Shortest Subarray with Sum at Least K]]
+### priority queue
+- [Lintcode 1507 Shortest Subarray with Sum at Least K](https://www.lintcode.com/problem/1507/)
 #### Binary search on answer + priority_queue
 ```c++
 class Solution {
@@ -2769,8 +2766,8 @@ class Solution {
 };
 ```
 
-
-## [LRU implementation](https://www.lintcode.com/problem/134/)
+### LRU
+- [LRU implementation](https://www.lintcode.com/problem/134/)
 
 ```c++
 // C++
@@ -2855,14 +2852,15 @@ class LRUCache {
 };
 ```
 
-## [LIS Longest Increasing Subsequence](https://www.jiuzhang.com/problem/longest-increasing-subsequence/)
+### LIS
+- [LIS Longest Increasing Subsequence](https://www.jiuzhang.com/problem/longest-increasing-subsequence/)
 
 - 接龙规则：从左到右一个比一个大，该问题简称 LIS
 - 状态表示：
   - A：`dp[i]` 表示前`i`个数的 LIS 是多长(前缀型, do not choose this)
   - B：`dp[i]` 表示以第`i`个数结尾的 LIS 是多长(坐标型)
 
-### LIS 的动态规划四要素
+#### LIS 的动态规划四要素
 
 - `state:` `dp[i]`表示以第`i`个数为龙尾的最长的龙有多长
 - `function:` `dp[i] = max{dp[j] + 1}, j < i && nums[j] < nums[i]`
@@ -2928,7 +2926,8 @@ def longestIncreasingSubsequence(self, nums):
   return longest
 ```
 
-## [LIS2 Longest Continuous Increasing Subsequence 2](https://www.jiuzhang.com/problem/longest-continuous-increasing-subsequence-ii/)
+### LIS2
+- [LIS2 Longest Continuous Increasing Subsequence 2](https://www.jiuzhang.com/problem/longest-continuous-increasing-subsequence-ii/)
 
 ```python
 class Solution:
@@ -2962,7 +2961,8 @@ class Solution:
         return max(longest_hash.values())
 ```
 
-## [Largest Divisible Subset](https://www.jiuzhang.com/problem/largest-divisible-subset/)
+### Largest Divisible Subset
+- [Largest Divisible Subset](https://www.jiuzhang.com/problem/largest-divisible-subset/)
 
 ```python
 class Solution:
@@ -3011,14 +3011,14 @@ class Solution:
         return path[::-1]
 ```
 
-## HashMap Implementation
+### HashMap Implementation
 - [leetcode 705 design hashset](https://leetcode.com/problems/design-hashset/description/)
 
 ```c++
 // C++
 ```
 
-## sort lambda
+### sort lambda
 ```c++
     auto sortRuleLambda = [](const Skyscraper& s1, const Skyscraper& s2) -> bool {
       return s1.height() < s2.height();
@@ -3026,7 +3026,7 @@ class Solution:
     std::sort(skyscrapers.begin(), skyscrapers.end(), sortRuleLambda);
 ```
 
-## customized hash for unordered_map or unordered_set
+### customized hash for unordered_map or unordered_set
 ```c++
 struct pair_hash {
     template <class T1, class T2>
@@ -3046,7 +3046,7 @@ int main() {
 }
 ```
 
-## function pointer in c++
+### function pointer in c++
 ```c++
 int sum(int a, int b) {
   return a + b;
@@ -3071,7 +3071,7 @@ int main() {
 }
 ```
 
-## element wise comparison of two structs
+### element wise comparison of two structs
 ```c++
 struct Point {
   float x;
@@ -3092,7 +3092,7 @@ int main() {
 }
 ```
 
-## how to use c++ build-in hash function
+### how to use c++ build-in hash function
 ```c++
   size_t h1 = std::hash<char>()('a');
   size_t h2 = std::hash<char>()('b');
@@ -3104,7 +3104,7 @@ int main() {
   std::cout << fn("apple") << std::endl;
 ```
 
-## c++ const
+### c++ const
 - [link](https://www.geeksforgeeks.org/const-keyword-in-cpp/)
 
 ```c++
@@ -3253,10 +3253,10 @@ int main() {
 ```
 
 
-## random seed
+### random seed
 `3407`
 
-## C++20 comparison operator
+### C++20 comparison operator
 ```c++
 struct Point {
    int x;
@@ -3272,7 +3272,7 @@ struct Point {
 };
 ```
 
-## To initialize two dimentional array
+### To initialize two dimentional array
 ```c++
 #include<iostream>
 
@@ -3287,7 +3287,7 @@ int main() {
 }
 ```
 
-## heap: set vs priority_queue
+### heap: set vs priority_queue
 - we cannot iterate `priority_queue`, but we can make a copy of it and then use 'pop' and 'top()' to iterate
 ```c++
 #include <iostream>
@@ -3355,7 +3355,7 @@ int main() {
 }
 ```
 
-## heap with multiset, erase with find
+### heap with multiset, erase with find
 ```c++
 // Leetcode 731. My calendar II(Sweep Line Algorithm)
 
@@ -3408,13 +3408,13 @@ class MyCalendarTwo {
 }
 ```
 
-## return min or max element from hashmap
+### return min or max element from hashmap
 ```c++
 auto cmp = [](const auto& a, const auto& b) {return a.second < b.second;};
 min_value = min_element(my_map.begin(), my_map.end(), cmp)->second;
 ```
 
-## all types of comparators for map and set
+### all types of comparators for map and set
 - focus on `const`, `*` and `&`
 ```c++
 // version 1: const is required
@@ -3437,10 +3437,10 @@ bool comparator(const int& a, const int& b) {
 std::map<int, int, decltype(comparator)*> my_map(&comparator); 
 ```
 
-## Comparator for sort vs map(or set)
+### Comparator for sort vs map(or set)
 - **sort** uses object or `cmp`
 - **set** or **map** use typename or `decltype(cmp)`
-### sort
+#### sort
 ```c++
 class Comparator2 {
  public:
@@ -3458,7 +3458,7 @@ std::vector<int> vec{2, 1, 3, 7, 4};
 std::sort(vec.begin(), vec.end(), Comparator2(-1)); // use object
 ```
 
-### map(or set)
+#### map(or set)
 ```c++
 class Comparator {
  public:
@@ -3469,12 +3469,12 @@ class Comparator {
 std::map<int, int, Comparator> my_map_; // use typename
 ```
 
-## use function to get lambda or func pointer
+### use function to get lambda or func pointer
 ```c++
 std::function<bool(int, int)> cmp = [](int x, int y){return x > y;};
 ```
 
-## overload less comparator for priority queue
+### overload less comparator for priority queue
 ```c++
 // leetcode 2353. Design a Food Rating System
 #include <gmock/gmock.h>
@@ -3558,7 +3558,7 @@ class FoodRatings {
 };
 ```
 
-## set, find iterator, erase
+### set, find iterator, erase
 ```c++
 class FoodRatings {
   // Map food with its rating.
@@ -3606,13 +3606,13 @@ class FoodRatings {
 };
 ```
 
-## ASCII value
+### ASCII value
 - Use `tolower(my_char)` to get the ASCII value of that character
 
-## isalnum(my_char)
+### isalnum(my_char)
 - `isalnum(my_char)`
 
-## string trim and split
+### string trim and split
 ```c++
 // given string s
 
@@ -3630,8 +3630,8 @@ std::stringstream iss(s);
 std::vector<std::string> wordList(std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>());
 ```
 
-## string split with customized delimiter
-## for string delimiter
+### string split with customized delimiter
+#### for string delimiter
 ```c++
 // for string delimiter
 std::vector<std::string> split(std::string s, std::string delimiter) {
@@ -3652,7 +3652,7 @@ std::vector<std::string> split(std::string s, std::string delimiter) {
 // std::vector<std::string> v = split(str, delimiter);
 ```
 
-### for char delimiter
+#### for char delimiter
 ```c++
 // for char delimiter
 std::vector<std::string> split(const std::string& s, char delim) {
@@ -3669,7 +3669,7 @@ std::vector<std::string> split(const std::string& s, char delim) {
 // std::vector<std::string> v = split(str, '+');
 ```
 
-## Log(log)
+### Log(log)
 ```c++
 // #define print(x)                                                    \
 //   std::ranges::copy(x, std::ostream_iterator<int>(std::cout, " ")); \
@@ -4037,39 +4037,39 @@ set1 is empty!
 - `isalnum` checks whether c is either a decimal digit or an uppercase or lowercase letter.
 - The result is true if either isalpha or isdigit would also return true.
 
-# 2. ML
+## 2. ML
 
-## Linear regression
+### Linear regression
 
-## Logistic regression
+### Logistic regression
 
-## Decision tree
+### Decision tree
 
-## SVM algorithm
+### SVM algorithm
 
-## Naive Bayes algorithm
+### Naive Bayes algorithm
 
-## KNN algorithm
+### KNN algorithm
 
-## K-means
+### K-means
 
-## Random forest algorithm
+### Random forest algorithm
 
-## Dimensionality reduction algorithms
+### Dimensionality reduction algorithms
 
-## Gradient boosting algorithm and AdaBoosting algorithm
+### Gradient boosting algorithm and AdaBoosting algorithm
 
-# 3. Projects
+## 3. Projects
 
-## Pthread Prefix Sum
+### Pthread Prefix Sum
 
-## GPU K-means
+### GPU K-means
 
-## Tree Comparison
+### Tree Comparison
 
-## Two Phase Commit Protocol
+### Two Phase Commit Protocol
 
-## MPI Barnes-hut
+### MPI Barnes-hut
 ```c++
 https://www.youtube.com/watch?v=m9f6CoToIGU
 ```

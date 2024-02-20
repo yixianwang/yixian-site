@@ -2565,7 +2565,22 @@ def get_prefix_sum(self, nums):
 
 ## string find, mismatch
 ### string find
+- [C++ find example usage](https://leetcode.com/problems/longest-common-prefix/)
+```c++
+string str1 = "dogt"; // dog
+string str2 = "dogracecardogtt"; // rdogracecar
 
+// check if str1 is prefix of str2
+// str2.find(str1, 0) == 0
+cout << (str2.find(str1, 0)) << endl;
+cout << string::npos << endl;
+
+// check if str1 is suffix of str2: 
+// str2.find(str1, str2.size() - str1.size()) == str2.size() - str1.size()
+cout << str1.size() << endl;
+cout << str2.size() << endl;
+cout << (str2.find(str1, str2.size() - str1.size())) << endl;
+```
 
 ### mismatch
 ```c++
@@ -3680,15 +3695,14 @@ void logger(std::string vars, Args&&... values) {
 ### IsPrime
 ```c++
 bool IsPrime(int n) {
-  if (n == 0 || n == 1) return false;
-  for (int i = 2; i <= n / 2; ++i) {
+  if (n <= 1) return false;
+  int s_n = sqrt(n);
+  for (int i = 2; i <= s_n; ++i) {
     if (n % i == 0) {
       return false;
-      break;
     }
   }
   return true;
-}
 ```
 
 ### 区间 DP

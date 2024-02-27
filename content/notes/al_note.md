@@ -1423,7 +1423,7 @@ Four scenarios:
 - 一般会问一次查询，多次查询不太会问
 
 #### Example: Lintcode 88 LCA
-- [Lintcode 88 LCA](https://www.lintcode.com/problem/88)
+- [Leetcode 236. LCA](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)
 
 ```c++
 class Solution {
@@ -1556,7 +1556,7 @@ class LRUCache {
 - O(nlogn) recite binary search
 
 #### DP - LIS
-- [LIS Longest Increasing Subsequence](https://www.jiuzhang.com/problem/longest-increasing-subsequence/)
+- [Leetcode 300. LIS - Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/description/)
 
 - 接龙规则：从左到右一个比一个大，该问题简称 LIS
 - 状态表示：
@@ -1668,7 +1668,7 @@ class Solution {
 ```
 
 ### LIS2: Longest Continuous Increasing Subsequence 2
-- [LIS2 Longest Continuous Increasing Subsequence 2](https://www.jiuzhang.com/problem/longest-continuous-increasing-subsequence-ii/)
+- [Leetcode 674. LIS2 - Longest Continuous Increasing Subsequence](https://leetcode.com/problems/longest-continuous-increasing-subsequence/description/)
 
 ```python
 class Solution:
@@ -1703,7 +1703,8 @@ class Solution:
 ```
 
 ### LDS: Largest Divisible Subset
-- [Largest Divisible Subset](https://www.jiuzhang.com/problem/largest-divisible-subset/)
+- [Leetcode 368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/description/)
+
 
 ```python
 class Solution:
@@ -2556,7 +2557,7 @@ class LRUCache {
 ```
 
 ### LIS
-- [LIS Longest Increasing Subsequence](https://www.jiuzhang.com/problem/longest-increasing-subsequence/)
+- [Leetcode 300. LIS Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/description/)
 
 - 接龙规则：从左到右一个比一个大，该问题简称 LIS
 - 状态表示：
@@ -2630,7 +2631,7 @@ def longestIncreasingSubsequence(self, nums):
 ```
 
 ### LIS2
-- [LIS2 Longest Continuous Increasing Subsequence 2](https://www.jiuzhang.com/problem/longest-continuous-increasing-subsequence-ii/)
+- [Leetcode 674. LIS2 - Longest Continuous Increasing Subsequence](https://leetcode.com/problems/longest-continuous-increasing-subsequence/description/)
 
 ```python
 class Solution:
@@ -2665,7 +2666,7 @@ class Solution:
 ```
 
 ### Largest Divisible Subset
-- [Largest Divisible Subset](https://www.jiuzhang.com/problem/largest-divisible-subset/)
+- [Leetcode 368. Largest Divisible Subset](https://leetcode.com/problems/largest-divisible-subset/description/)
 
 ```python
 class Solution:
@@ -2715,7 +2716,7 @@ class Solution:
 ```
 
 ### HashMap Implementation
-- [leetcode 705 design hashset](https://leetcode.com/problems/design-hashset/description/)
+- [leetcode 705. design hashset](https://leetcode.com/problems/design-hashset/description/)
 
 ```c++
 // C++

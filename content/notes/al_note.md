@@ -40,15 +40,6 @@ date = 2024-02-11T03:10:46-04:00
   * [LDS: Largest Divisible Subset](#lds-largest-divisible-subset)
   * [HashMap Implementation](#hashmap-implementation)
 * [Other Notes](#other-notes)
-  * [sort lambda](#sort-lambda)
-  * [customized hash for unordered_map or unordered_set](#customized-hash-for-unordered_map-or-unordered_set)
-  * [function pointer in c++](#function-pointer-in-c)
-  * [element wise comparison of two structs](#element-wise-comparison-of-two-structs)
-  * [how to use c++ build-in hash function](#how-to-use-c-build-in-hash-function)
-  * [c++ const](#c-const)
-  * [random seed](#random-seed)
-  * [C++20 comparison operator](#c20-comparison-operator)
-  * [To initialize two dimentional array](#to-initialize-two-dimentional-array)
   * [Reverse Linked List](#reverse-linked-list)
   * [通过数据范围推测算法](#通过数据范围推测算法)
   * [背诵贪心算法](#背诵贪心算法)
@@ -98,15 +89,15 @@ date = 2024-02-11T03:10:46-04:00
   * [LIS2](#lis2)
   * [Largest Divisible Subset](#largest-divisible-subset)
   * [HashMap Implementation](#hashmap-implementation-1)
-  * [sort lambda](#sort-lambda-1)
-  * [customized hash for unordered_map or unordered_set](#customized-hash-for-unordered_map-or-unordered_set-1)
-  * [function pointer in c++](#function-pointer-in-c-1)
-  * [element wise comparison of two structs](#element-wise-comparison-of-two-structs-1)
-  * [how to use c++ build-in hash function](#how-to-use-c-build-in-hash-function-1)
-  * [c++ const](#c-const-1)
-  * [random seed](#random-seed-1)
-  * [C++20 comparison operator](#c20-comparison-operator-1)
-  * [To initialize two dimentional array](#to-initialize-two-dimentional-array-1)
+  * [sort lambda](#sort-lambda)
+  * [customized hash for unordered_map or unordered_set](#customized-hash-for-unordered_map-or-unordered_set)
+  * [function pointer in c++](#function-pointer-in-c)
+  * [element wise comparison of two structs](#element-wise-comparison-of-two-structs)
+  * [how to use c++ build-in hash function](#how-to-use-c-build-in-hash-function)
+  * [c++ const](#c-const)
+  * [random seed](#random-seed)
+  * [C++20 comparison operator](#c20-comparison-operator)
+  * [To initialize two dimentional array](#to-initialize-two-dimentional-array)
   * [heap: set vs priority_queue](#heap-set-vs-priority_queue)
   * [heap with multiset, erase with find](#heap-with-multiset-erase-with-find)
   * [return min or max element from hashmap](#return-min-or-max-element-from-hashmap)
@@ -1222,11 +1213,8 @@ class TrieNode {
 
 class Trie {
  public:
-  Trie()
-    : root_(new TrieNode()) {}
-  TrieNode* GetRoot() {
-    return root_;
-  }
+  Trie() : root_(new TrieNode()) {}
+  TrieNode* GetRoot() { return root_; }
 
   // 插入单词
   void Insert(std::string word) {
@@ -1257,7 +1245,7 @@ class Trie {
 
   // 判断前缀 prefix 是不是在字典树中
   bool HasPrefix(std::string prefix) {
-    TreeNode* node = root_;
+    TrieNode* node = root_;
     for (int i = 0; i < prefix.size(); ++i) {
       char c = prefix[i];
       if (!node->children.count(c)) {
@@ -1269,7 +1257,7 @@ class Trie {
   }
  private:
   TrieNode* root_;
-}
+};
 ```
 
 ```java
@@ -1774,288 +1762,6 @@ class Solution:
 ```
 
 ## Other Notes
-
-### sort lambda
-```c++
-    auto sortRuleLambda = [](const Skyscraper& s1, const Skyscraper& s2) -> bool {
-      return s1.height() < s2.height();
-    };
-    std::sort(skyscrapers.begin(), skyscrapers.end(), sortRuleLambda);
-```
-
-### customized hash for unordered_map or unordered_set
-```c++
-struct pair_hash {
-    template <class T1, class T2>
-    std::size_t operator () (const std::pair<T1,T2> &p) const {
-        auto h1 = std::hash<T1>{}(p.first);
-        auto h2 = std::hash<T2>{}(p.second);
-
-        // Mainly for demonstration purposes, i.e. works but is overly simple
-        // In the real world, use sth. like boost.hash_combine
-        return h1 ^ (h2 << 1);
-    }
-};
-
-int main() {
-  std::unordered_map<std::pair<int, int>, int, pair_hash> pos_index_map;
-  return 0;
-}
-```
-
-### function pointer in c++
-```c++
-int sum(int a, int b) {
-  return a + b;
-}
-
-int prod(int a,  int b) {
-  return a * b;
-}
-
-int shouldNotBeChanged(int (*operation)(int, int)) {
-  srand(time(nullptr));
-  int a = rand() % 100;
-  int b = rand() % 100;
-  printf("The result of the operation between %d and %d is %d\n",
-         a, b, operation(a, b));
-  return 0;
-}
-
-int main() {
-  shouldNotBeChanged(&sum);
-  return 0;
-}
-```
-
-### element wise comparison of two structs
-```c++
-struct Point {
-  float x;
-  float y;
-  Point(int x = 0, int y = 0) : x(x), y(y) {}
-};
-
-int main() {
-  Point p1 = Point(1, 2);
-  Point p2 = Point(2, 1);
-  
-  // std::tie can have any many parameters as it wants
-  if (std::tie(p1.x, p2.x) == std::tie(p2.y, p1.y)) {
-    std::cout << "haha" << std::endl;
-  } else {
-    std::cout << "nono" << std::endl;
-  }
-}
-```
-
-### how to use c++ build-in hash function
-```c++
-  size_t h1 = std::hash<char>()('a');
-  size_t h2 = std::hash<char>()('b');
-```
-
-```c++
-  std::unordered_map<std::string, int> myhash;
-  std::unordered_map<std::string, int>::hasher fn = myhash.hash_function();
-  std::cout << fn("apple") << std::endl;
-```
-
-### c++ const
-- [link](https://www.geeksforgeeks.org/const-keyword-in-cpp/)
-
-```c++
-  // value of x and y can be altered
-  // x = 9; y = 'A';
-  // value of i and j can be altered
-  // i = &m; j = &n;
-  // !!! value of *i and *j cannot be altered
-  // *i = 6; *j = 7; // read-only variable is not assignable
-  const int* i = &x;
-  const char* j = &y;
-
-  // value of x and y can be altered
-  // x = 9; y = 'A';
-  // !!! value of i and j cannot be altered
-  // i = &m; j = &n; // variable 'i' and 'j' declared const here
-  // value of *i and *j can be altered
-  // *i = 6; *j = 'A';
-  int* const i = &x;
-  char* const j = &y;
-
-  // value of x and y can be altered
-  // x = 9; y = 'A';
-  // !!! value of i and j cannot be altered
-  // i = &m; j = &n;
-  // !!! value of *i and *j cannot be altered
-  // *i = 6; *j = 7;
-  const int* const i = &x;
-  const char* const j = &y;
-```
-
-The compile-time error that will appear as if const value is passed to any non-const argument of the function
-```c++
-int foo(int* y) {
-  return *y;
-}
- 
-int main() {
-  int z = 8;
-  const int* x = &z;
-  std::cout << foo(x) << std::endl;
-  return 0;
-}
-```
-+
-```c++
-// error: no matching function for call to 'foo'
-// candidate function not viable: 1st argument ('const int *') would lose const qualifier
-const int foo(int* y) {
-  return *y;
-}
- 
-int main() {
-  int z = 8;
-  const int* x = &z;
-  std::cout << foo(x) << std::endl;
-  return 0;
-}
-```
-+
-```c++
-// Function foo() with variable
-// const int
-void foo(const int y) {
-  // y = 6; const value
-  // can't be change
-  cout << y;
-}
- 
-// Function foo() with variable int
-void foo1(int y) {
-  // Non-const value can be change
-  y = 5;
-  cout << '\n'
-       << y;
-}
- 
-// Driver Code
-int main() {
-  int x = 9;
-  const int z = 10;
-
-  foo(z);
-  foo1(x);
-
-  return 0;
-}
-```
-
-const return
-```c++
-// int foo(int y) { // no error
-// const int foo(int y) { // no error
-const int foo(const int y) { // error: cannot assign to variable 'y' with const-qualified type 'const int'
-  --y; 
-  return y;
-}
- 
-int main() {
-  int x = 9;
-  const int z = 10;
-  std::cout << foo(x) << '\n'
-            << foo(z);
-
-  return 0;
-}
-```
-
-An object declared as const cannot be modified and hence, can invoke only const member functions as these functions ensure not to modify the object.
-
-When a function is declared as const, it can be called on any type of object, const object as well as non-const objects.
-```c++
-class Test {
- public:
-  // Constructor
-  Test(int v = 0) {
-    value = v;
-  }
-
-  // this const means cannot modify class members, e.g. value
-  // We get compiler error if we add a line like "value = 100;"
-  // in this function.
-  int getValue() const {
-    return value;
-  }
-   
-  // a nonconst function trying to modify value
-  void setValue(int val) {
-    value = val;
-  }
- private:
-  int value;
-};
- 
-// Driver Code
-int main() {
-  // Object of the class T
-  Test t(20);
-
-  // non-const object invoking const function, no error
-  cout << t.getValue() << endl;
-   
-  // const object
-  const Test t_const(10);
- 
-  // const object invoking const function, no error
-  cout << t_const.getValue() << endl;
- 
-  // const object invoking non-const function, CTE
-  // t_const.setValue(15);
-   
-  // non-const object invoking non-const function, no error
-  t.setValue(12);
-   
-  cout << t.getValue() << endl;
-
-  return 0;
-}
-```
-
-
-### random seed
-`3407`
-
-### C++20 comparison operator
-```c++
-struct Point {
-   int x;
-   int y;
-   Point() : x(0), y(0) {}
-   Point(int a, int b) : x(a), y(b) {}
-
-   // !!! have to write it this way:
-   inline bool operator== (const Point& other) const {
-     return x == other.x && y == other.y;
-   }
-
-};
-```
-
-### To initialize two dimentional array
-```c++
-#include<iostream>
-
-int main() {
-    int** secondStore;
-    secondStore = new int*[10];
-    for (int i = 0; i < 10; ++i) {
-      secondStore[i] = new int[32];
-    }
-    std::cout << secondStore[0][0] << std::endl;
-    return 0;
-}
-```
 
 ### Reverse Linked List
 ```c++

@@ -2265,6 +2265,17 @@ def get_prefix_sum(self, nums):
 
 
 ## Others
+### GCD - Greatest Common Divisor
+```c++
+int GCD(int x, int y) {
+  if (y == 0) return x;
+  else return GCD(y, x % y);
+}
+```
+
+### lower_bound vs upper_bound
+- [lower_bound](https://en.cppreference.com/w/cpp/algorithm/lower_bound)
+- [upper_bound](https://en.cppreference.com/w/cpp/algorithm/upper_bound)
 
 ### string find, mismatch
 #### string find

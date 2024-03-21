@@ -2043,6 +2043,112 @@ public:
 
 - [Iterate: 86.Binary Search Tree Iterator](https://www.lintcode.com/problem/binary-search-tree-iterator/description)
 
+#### Delete Node in a BST
+- [Leetcode 450 Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)
+```c++
+// Recursion
+class Solution {
+ public:
+  int successor(TreeNode* root) {
+    root = root->right;
+    while (root->left != nullptr) root = root->left;
+    return root->val;
+  }
+
+  int predecessor(TreeNode* root) {
+    root = root->left;
+    while (root->right != nullptr) root = root->right;
+    return root->val;
+  }
+
+  TreeNode* deleteNode(TreeNode* root, int key) {
+    if (root == nullptr) return nullptr;
+
+    if (key > root->val) 
+      root->right = deleteNode(root->right, key);
+    else if (key < root->val)
+      root->left = deleteNode(root->left, key);
+    else {
+      if (root->left == nullptr && root->right == nullptr)
+        root = nullptr;
+      else if (root->right != nullptr) {
+        root->val = successor(root);
+        root->right = deleteNode(root->right, root->val);
+      } else {
+        root->val = predecessor(root);
+        root->left = deleteNode(root->left, root->val);
+      }
+    }
+    return root;
+  }
+};
+```
+
+```c++
+// Iteration
+class Solution {
+ public:
+  TreeNode* deleteNode(TreeNode* root, int key) {
+    if (root == nullptr) return nullptr;
+
+    TreeNode* parent = nullptr;
+    TreeNode* current = root;
+
+    // Find the node to delete
+    while (current != nullptr && current->val != key) {
+      parent = current;
+      if (current->val < key)
+        current = current->right;
+      else
+        current = current->left;
+    }
+
+    if (current == nullptr) return root;  // Key not found
+
+    if (current->left == nullptr && current->right == nullptr) {
+      // Case 1: No child
+      if (current == root)
+        root = nullptr;
+      else if (parent->left == current)
+        parent->left = nullptr;
+      else
+        parent->right = nullptr;
+      delete current;
+    } else if (current->left != nullptr) {
+      // Case 2: One child (left)
+      TreeNode* predecessorParent = current;
+      TreeNode* predecessor = current->left;
+      while (predecessor->right != nullptr) {
+        predecessorParent = predecessor;
+        predecessor = predecessor->right;
+      }
+      current->val = predecessor->val;
+      if (predecessorParent->left == predecessor)
+        predecessorParent->left = predecessor->left;
+      else
+        predecessorParent->right = predecessor->left;
+      delete predecessor;
+    } else {
+      // Case 3: One child (right)
+      TreeNode* successorParent = current;
+      TreeNode* successor = current->right;
+      while (successor->left != nullptr) {
+        successorParent = successor;
+        successor = successor->left;
+      }
+      current->val = successor->val;
+      if (successorParent->left == successor)
+        successorParent->left = successor->right;
+      else
+        successorParent->right = successor->right;
+      delete successor;
+    }
+
+    return root;
+  }
+};
+```
+
 ### Red-Black Tree 红黑树：
 
 - 是一种 Balanced BST

@@ -1221,7 +1221,10 @@ class Trie {
     TrieNode* node = root_;
     for (int i = 0; i < word.size(); ++i) {
       char c = word[i];
-      if (!node->children.count(c)) {
+      // leetcode 1268
+      // if (!node->children.count(c)) {
+      // if (node->children.find(c) == node->children.end()) {
+      if (node->children[c] == nullptr) {
         node->children[c] = new TrieNode();
       }
       node = node->children[c];
@@ -1235,7 +1238,10 @@ class Trie {
     TrieNode* node = root_;
     for (int i = 0; i < word.size(); ++i) {
       char c = word[i];
-      if (!node->children.count(c)) {
+      // leetcode 1268
+      // if (!node->children.count(c)) {
+      // if (node->children.find(c) == node->children.end()) {
+      if (node->children[c] == nullptr) {
         return false;
       }
       node = node->children[c];
@@ -1248,7 +1254,10 @@ class Trie {
     TrieNode* node = root_;
     for (int i = 0; i < prefix.size(); ++i) {
       char c = prefix[i];
-      if (!node->children.count(c)) {
+      // leetcode 1268
+      // if (!node->children.count(c)) {
+      // if (node->children.find(c) == node->children.end()) {
+      if (node->children[c] == nullptr) {
         return false;
       }
       node = node->children[c];

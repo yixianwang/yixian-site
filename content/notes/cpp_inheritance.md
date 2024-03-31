@@ -1,5 +1,5 @@
 +++
-title = 'Cpp Inheritance'
+title = 'C++ Inheritance'
 date = 2024-03-20T02:59:13-04:00
 +++
 

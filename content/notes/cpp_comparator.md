@@ -1,5 +1,5 @@
 +++
-title = 'Cpp Comparator'
+title = 'C++ Comparator'
 date = 2024-03-31T02:31:00-04:00
 +++
 

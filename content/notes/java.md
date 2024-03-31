@@ -29,7 +29,7 @@ while (iter.hasNext()) {
 }// 输出(无序)为 3 4 1 5 null 2
 ```
 
-##### TreeSet
+##### TreeSet: (key balanced binary search tree)
 - 无重复数据
 - 不能有空数据
 - 数据有序
@@ -85,7 +85,7 @@ key = 5, value = 5
 //输出顺序与输入顺序无关
 ```
 
-##### TreeMap
+##### TreeMap: (key balanced binary search tree)
 - key 无重复，value 允许重复
 - 不允许有null
 - 有序(存入元素的时候对元素进行自动排序，迭代输出的时候就按排序顺序输出)
@@ -128,7 +128,6 @@ key = 5, value = 5
     - 对于随机访问get和set，ArrayList绝对优于LinkedList，因为LinkedList要移动指针
     - 对于新增和删除操作add和remove，在已经得到了需要新增和删除的元素位置的前提下，LinkedList可以在O(1)的时间内删除和增加元素，而ArrayList需要移动增加或删除元素之后的所有元素的位置，时间复杂度是O(n)的，因此LinkedList优势较大
 
-
 #### Queue
 队列是一种比较重要的数据结构，它支持FIFO(First in First out)，即尾部添加、头部删除（先进队列的元素先出队列），跟我们生活中的排队类似。
 - PriorityQueue
@@ -137,3 +136,63 @@ key = 5, value = 5
 - 普通 Queue
     - 基于链表实现
     - FIFO
+
+```java
+Queue<Integer> queue = new LinkedList<>();
+```
+
+#### Stack
+官方建议如果有使用栈的需求的时候，可以用Deque接口下的ArrayDeque作替代，因为ArrayDeque能提供更多的功能。
+
+## Last Minute Java Syntax
+- [References](https://github.com/withPrasheel/lastMinuteJavaSyntax/tree/master)
+
+## Instantiate
+```java
+List <T> al = new ArrayList<> ();
+List <T> ll = new LinkedList<> ();
+List <T> v = new Vector<> ();
+
+Set<T> hs = new HashSet<> ();
+Set<T> lhs = new LinkedHashSet<> ();
+Set<T> ts = new TreeSet<> ();
+
+SortedSet<T> ts = new TreeSet<> ();
+
+Queue <T> pq = new PriorityQueue<> ();
+Queue <T> ad = new ArrayDeque<> ();
+
+Deque<T> ad = new ArrayDeque<> ();
+```
+
+## Deque Methods
+```java
+public interface Deque<E> extends Queue<E> {
+  void addFirst(E e); void addLast(E e);
+  boolean offerFirst(E e); boolean offerLast(E e);
+
+  E removeFirst(); E removeLast();
+  E pollFirst(); E pollLast();
+
+  E getFirst(); E getLast();
+  E peekFirst(); E peekLast();
+}
+
+// ArrayDeque doesn't support null element
+ArrayDeque<T> queue = new ArrayDeque() {{ offer(root); }};
+ArrayDeque<T> queue = new ArrayDeque();        
+Queue<T> queue = new ArrayDeque();        
+while (!queue.isEmpty()) {
+  curr = queue.poll();
+  queue.offer(curr.left);
+}
+
+// LinkedList supports null element
+Queue<T> queue = new LinkedList(){{ offer(root); offer(null); }};
+while (!queue.isEmpty()) {
+  curr = queue.poll();
+  queue.offer(curr.left); 
+  queue.offer(null);
+}
+```
+

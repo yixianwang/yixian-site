@@ -3,9 +3,17 @@ title = 'SQL'
 date = 2023-11-03T17:51:02-04:00
 +++
 
-# Login Mysql
+## Common command
+```mysql
 mysql -u root -p
 password:xxxx0000
+
+create database xxxx character set utf8mb4;
+drop database xxxx;
+
+use xxxx;
+source pathto.sql;
+```
 
 # Schemas
 Fact and dimension tables are organized in particular structures known as schemas.
@@ -107,9 +115,8 @@ CREATE TABLE Persons (
     Address varchar(255),
     City varchar(255)
 );
-
-
 ```
+
 ```mysql
 CREATE TABLE new_table_name AS
     SELECT column1, column2,...
@@ -132,7 +139,7 @@ VALUES('Bob',2016,100),
       ('Alice',2016,150),
       ('Alice',2017,100),
       ('Alice',2018,200),
-       ('John',2016,200),
+      ('John',2016,200),
       ('John',2017,150),
       ('John',2018,250);
 ```

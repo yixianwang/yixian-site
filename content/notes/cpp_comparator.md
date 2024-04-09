@@ -20,7 +20,9 @@ class Comparator {
   // bool operator()(const int& a, const int& b) const {
   //   return a > b;
   // }
-  bool operator()(Node* const& left, Node* const& right) const {
+  // bool operator()(Node* const& left, Node* const& right) const { // works
+  // bool operator()(Node* left, Node* right) const { // works
+  bool operator()(const Node* left, const Node* right) const { // works
     if (left->sum == right->sum) {
       if (left->first == right->first) {
         return left->second < right->second;
@@ -86,6 +88,7 @@ class Solution {
 
 ## Comparator - priority_queue
 - [Leetcode 23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+
 ```c++
 // Comparison function for priority queue
 struct CompareNodes {

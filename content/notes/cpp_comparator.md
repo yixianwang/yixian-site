@@ -3,7 +3,7 @@ title = 'C++ Comparator'
 date = 2024-03-31T02:31:00-04:00
 +++
 
-## Comparator
+## Comparator - set
 - [Leetcode 3102. Minimize Manhattan Distances](https://leetcode.com/problems/minimize-manhattan-distances/description/)
 
 ```c++
@@ -80,6 +80,56 @@ class Solution {
 
   int Distance(int& x1, int& x2, int& y1, int& y2) {
     return abs(x1 - x2) + abs(y1 - y2);
+  }
+};
+```
+
+## Comparator - priority_queue
+- [Leetcode 23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+```c++
+// Comparison function for priority queue
+struct CompareNodes {
+  bool operator()(const ListNode* lhs, const ListNode* rhs) const {
+    return lhs->val > rhs->val;
+  }
+};
+
+class Solution {
+ public:
+  ListNode* mergeKLists(vector<ListNode*>& lists) {
+    ListNode* head = new ListNode(0);
+    ListNode* point = head;
+
+    // Define priority queue with custom comparison function
+    priority_queue<ListNode*, vector<ListNode*>, CompareNodes> q;
+
+    // Push the heads of all lists into the priority queue
+    for (ListNode* l : lists) {
+      if (l) {
+        q.push(l);
+      }
+    }
+
+    // Merge the lists
+    while (!q.empty()) {
+      ListNode* node = q.top();
+      q.pop();
+
+      // Add the current smallest node to the merged list
+      point->next = new ListNode(node->val);
+      point = point->next;
+
+      // Move the pointer of the current list forward
+      node = node->next;
+
+      // If there's remaining elements in the current list, push it to the
+      // priority queue
+      if (node) {
+        q.push(node);
+      }
+    }
+
+    return head->next;
   }
 };
 ```

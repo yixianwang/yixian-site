@@ -2412,11 +2412,12 @@ int quickSelect(vector<int>& nums, int k) {
     
 }
 ```
+
 ### GCD - Greatest Common Divisor
 ```c++
-int GCD(int x, int y) {
+int gcd(int x, int y) {
   if (y == 0) return x;
-  else return GCD(y, x % y);
+  return gcd(y, x % y);
 }
 ```
 

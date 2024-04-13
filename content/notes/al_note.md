@@ -58,10 +58,12 @@ date = 2024-02-11T03:10:46-04:00
   * [计算深度](#计算深度)
   * [Binary Search Tree 二叉查找树：](#binary-search-tree-二叉查找树)
   * [BST 基本操作：](#bst-基本操作)
+    * [Delete Node in a BST](#delete-node-in-a-bst)
   * [Red-Black Tree 红黑树：](#red-black-tree-红黑树)
   * [二叉树三种遍历：](#二叉树三种遍历)
   * [“二叉树的中序遍历”的非递归实现](#二叉树的中序遍历的非递归实现)
   * [Prefix Sum](#prefix-sum)
+  * [Prefix Product, Suffix Product](#prefix-product-suffix-product)
   * [使用前缀和数组在 O(1)的时间复杂度内计算子数组和](#使用前缀和数组在-o1的时间复杂度内计算子数组和)
   * [解决最短路径的算法：](#解决最短路径的算法)
   * [time & space compelxity of recursive:](#time--space-compelxity-of-recursive)
@@ -69,6 +71,9 @@ date = 2024-02-11T03:10:46-04:00
   * [拓扑排序 Topological Sorting:](#拓扑排序-topological-sorting)
   * [拓扑排序的四种不同问法：](#拓扑排序的四种不同问法)
 * [Others](#others)
+  * [Quick Select](#quick-select-1)
+  * [GCD - Greatest Common Divisor](#gcd---greatest-common-divisor)
+  * [lower_bound vs upper_bound](#lower_bound-vs-upper_bound)
   * [string find, mismatch](#string-find-mismatch)
     * [string find](#string-find)
     * [mismatch](#mismatch)
@@ -2332,6 +2337,15 @@ def get_prefix_sum(self, nums):
         prefix_sum.append(prefix_sum[-1] + num)
     return prefix_sum
 ```
+
+### Prefix Product, Suffix Product
+original array: 2, 2, 3, 4
+pp: prefix product: 1, 2, 4, 12, 48
+sp: suffix produc: 48, 24, 12, 4, 1
+
+to get subarray's product: e.g. idx [1, 2] inclusively
+from prefix: ps[2 + 1] / ps[1] = 12 / 2
+from suffix: sp[1] / sp[2 + 1] = 24 / 4
 
 ### 使用前缀和数组在 O(1)的时间复杂度内计算子数组和
 

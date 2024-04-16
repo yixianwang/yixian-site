@@ -12,16 +12,16 @@ date = 2024-04-15T18:29:20-04:00
 
 ##  Partition Template
 ```c++
-int partition(vector<int>& nums, int left, int right) {
-  int pivot = nums[left]; // 初始化一个待比较数据;
-  int i = left, j = right;
+int partition(vector<int>& nums, int start, int end) {
+  int pivot = nums[start]; // 初始化一个待比较数据;
+  int i = start, j = end;
   while (i < j) {
     // 从后往前查找，直到找到一个比pivot更小的数
     while (i < j && nums[j] >= pivot) --j;
     nums[i] = nums[j]; // 将更小的数放入左边
 
     // 从前往后找，直到找到一个比pivot更大的数
-    while (i < j && nums[j] <= pivot) ++i;
+    while (i < j && nums[i] <= pivot) ++i;
     nums[j] = nums[i]; // 将更大的数放入右边
   }
   // 循环结束，i与j相等
@@ -32,13 +32,48 @@ int partition(vector<int>& nums, int left, int right) {
 
 ##  Quick Sort
 ```c++
-void QuickSort(vector<int>& nums, int left, int right) {
-  if (left < right) {
-    int idx = partition(nums, left, right);
-    QuickSort(nums, left, idx - 1);
-    QuickSort(nums, index + 1, right);
-  }
+void QuickSort(vector<int>& nums, int start, int end) {
+  if (start >= end) return;
+
+  int idx = partition(nums, start, end);
+  QuickSort(nums, start, idx - 1);
+  QuickSort(nums, idx + 1, end);
 }
+```
+
+```python
+# Python
+# quick sort only
+class Solution:
+  def sortIntegers(self, A):
+    self.quickSort(A, 0, len(A) - 1)
+
+  def quickSort(self, A, start, end):
+    if start >= end:
+      return
+
+    left, right = start, end
+
+    # key point 1: pivot is the value, not the index
+    pivot = A[(start + end) // 2]
+
+    # key point 2: every time you compare left with right, it should be
+    # left <= right not left < right
+    while left <= right:
+      while left <= right and A[left] < pivot:
+        left += 1
+
+      while left <= right and A[right] > pivot:
+        right -= 1
+
+      if left <= right:
+        A[left], A[right] = A[right], A[left]
+
+        left += 1
+        right -= 1
+
+    self.quickSort(A, start, right)
+    self.quickSort(A, left, end)
 ```
 
 ##  Top K Split
@@ -68,7 +103,7 @@ vector<int> TopKSmalls(vector<int>& nums, int k) {
 ### Kth small
 ```c++
 int TopKthSmall(vector<int>& nums, int k) {
-  TopKSplit(nums, k, 0, nums.size() - 1);
+  TopKSplit(nums, k - 1, 0, nums.size() - 1);
   return nums[k - 1];
 }
 ```

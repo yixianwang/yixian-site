@@ -5,9 +5,9 @@ date = 2024-04-15T18:29:20-04:00
 
 - Partition Template
 - Quick Sort
-- Top K Split
-- Top K Smallest
-- Top K Largest
+- Top K Split(Quick Selection): (n = k/1/n-k-1)
+- Top Kth Smallest
+- Top Kth Largest
 <!--more-->
 
 ## Partition Template

@@ -10,7 +10,7 @@ date = 2024-04-15T18:29:20-04:00
 - Top K Largest
 <!--more-->
 
-##  Partition Template
+## Partition Template
 ```c++
 int partition(vector<int>& nums, int start, int end) {
   int pivot = nums[start]; // 初始化一个待比较数据;
@@ -30,7 +30,7 @@ int partition(vector<int>& nums, int start, int end) {
 }
 ```
 
-##  Quick Sort
+## Quick Sort
 ```c++
 void QuickSort(vector<int>& nums, int start, int end) {
   if (start >= end) return;
@@ -76,7 +76,7 @@ class Solution:
     self.quickSort(A, left, end)
 ```
 
-##  Top K Split
+## Top K Split
 - 将快速排序改成快速选择，即我们希望寻找到一个位置，这个位置左边是`k`个比这个位置上的数更小的数，右边是`n - k - 1`个比该位置上的数大的数，我将它命名为`TopKSplit`，找到这个位置后停止迭代，完成了一次划分。
 
 ```c++
@@ -92,7 +92,7 @@ void TopKSplit(vector<int>& nums, int k, int left, int right) {
 
 ## Usages
 
-###  Top K Smalls
+### Top K Smalls
 ```c++
 vector<int> TopKSmalls(vector<int>& nums, int k) {
   TopKSplit(nums, k, 0, nums.size() - 1);
@@ -108,7 +108,7 @@ int TopKthSmall(vector<int>& nums, int k) {
 }
 ```
 
-###  Top K Larges
+### Top K Larges
 ```c++
 vector<int> TopKLarges(vector<int>& nums, int k) {
   // parttion是按从小到大划分的，如果让index左边为前n-k个小的数，则index右边为前k个大的数

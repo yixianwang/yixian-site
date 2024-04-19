@@ -45,6 +45,7 @@ void QuickSort(vector<int>& nums, int start, int end) {
 - 将快速排序改成快速选择，即我们希望寻找到一个位置，这个位置左边是`k`个比这个位置上的数更小的数，右边是`n - k - 1`个比该位置上的数大的数，我将它命名为`TopKSplit`，找到这个位置后停止迭代，完成了一次划分。
 
 ```c++
+// Quick Selection
 void TopKSplit(vector<int>& nums, int k, int left, int right) {
   // 寻找到第k个数停止递归，使得nums数组中index左边是前k个小的数，index右边是后面n-k个大的数
   int idx = partition(nums, left, right);

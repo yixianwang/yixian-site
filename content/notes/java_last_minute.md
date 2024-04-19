@@ -5,48 +5,134 @@ date = 2024-04-11T23:30:02-04:00
 
 ## Array
 ```java
-int[] count = new int[26];
-Arrays.fill(count, 0);
+int[] r = new int[26];
+// r.length;
+Arrays.fill(r, 0);
+
+String[] r = {"c1", "c2", "c3"};
+int r = cars.length;
 ```
+
+## 2D Array
+```java
+String[][] r = new String[3][3];
+
+String[][] r = {{"a", "b"}, {"c", "d"}};
+```
+
+## String
+```java
+String name = "Bro";
+// name.length();
+boolean r = name.equals("Bro");
+boolean r = name.equalsIgnoreCase("bro");
+int r = name.length();
+char r = name.charAt(0);
+int r = name.indexOf("B");
+boolean r = name.isEmpty();
+String r = name.toUpperCase(); // toLowerCase
+String r = name.trim();
+String r = name.replace('o', 'a');  // return Bra
+int r = str1.compareTo(str2) // lexicographically, > 0, < 0, == 0
+char[] r = str.toCharArray();
+return new String(r) // convert char array back to String
+substring(int beginIndex, int endIndex)
+
+List<String> wordList = Arrays.asList(s.split("\\s+")); // split by multiple spaces
+Collections.reverse(wordList);
+String r = String.join(" ", wordList); // return a String
+```
+
+## StringBuilder
+```java
+StringBuilder sb = new StringBuilder();
+sb.append(str); // append the string to string builder
+sb.toString(); // convert string builder to string
+sb.setCharAt(0, 'z');
+sb.deleteCharAt(0);
+```
+
+## Character
+```java
+Character.isLetterOrDigit(s.charAt(i)) // isWhitespace, isLetter, isDigit
+Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))
+```
+
+## ArrayList
+```java
+ArrayList<String> r = new ArrayList<>();
+// r.size();
+r.add("pizza);
+r.get(0);
+r.set(0, "sushi"); 
+r.remove(0);
+r.clear();
+```
+
+## 2D ArrayList
+```java
+ArrayList<ArrayList<String>> r = new ArrayList();
+```
+
+## HashMap
+```java
+HashMap<String, String> hm = new HashMap<>();
+// hm.size();
+hm.put("USA", "DC"); // if key doesn't exist: add, otherwise update value
+hm.replace("USA", "Miami"); // if key doesn't exist, do nothing
+hm.putIfAbsent("USA", "Austin"); // if key exist, do nothing, otherwise add
+hm.getOrDefault("USA", "Dallas");
+hm.remove("USA");
+hm.get("USA");
+hm.clear();
+hm.containsKey("USA");
+hm.containsValue("DC");
+for (String key : hm.keySet()) {
+  String val = hm.get(key);
+  ...
+}
+```
+
+## Sort
+```java
+// List
+Collections.sort(v, (l, r) -> l.name.compareTo(r.name));
+
+// Array
+Arrays.sort(v, (l, r) -> l.name.compareTo(r.name));
+```
+
+## Collections.min
+```java
+// List
+Student my_min = Collections.min(vl, (l, r) -> l.age - r.age);
+```
+
+## stream
+```java
+// people is ArrayList
+List<Person> hundredSorted = people.stream()
+        .filter(person -> person.billions >= 100)
+        .sorted(Comparator.comparing(person -> person.name))
+        .collect(Collectors.toList());
+hundredSorted.forEach(person -> System.out.println(person.name));
+```
+
+
+
+
 
 ## Array <==> List
 ```java
 return Arrays.asList(array); // from Array to List
 ```
 
-### Fix-sized array
+## Fix-sized list
 ```java
 List<Boolean> result = Arrays.asList(new Boolean[candies.length]);
 ```
 
-## StringBuilder
-```java
-str.length(); // the size of string
-StringBuilder result = new StringBuilder();
-result.append(str); // append the string to string builder
-result.toString(); // convert string builder to string
-```
 
-## String
-```java
-// to modify the string
-char[] chars = str.toCharArray();
-char temp = chars[0]; // can access by [idx]
-return new String(chars) // convert back to String
-
-for (char c : str.toCharArray()) // str is String type
-
-s = s.trim(); // remove leading and tailing spaces
-List<String> wordList = Arrays.asList(s.split("\\s+")); // split by multiple spaces
-Collections.reverse(wordList);
-return String.join(" ", wordList); // return a String
-```
-
-## Character
-```java
-Character.isLetterOrDigit(s.charAt(i)) // return boolean
-Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))
-```
 
 ## Set
 ```java
@@ -56,7 +142,7 @@ left = hs.iterator().next() + 1; // left = hs.begin() + 1;
 hs.remove(hs.iterator().next()); // hs.erase(hs.begin());
 ```
 
-## from Map<String, List> get List<List<String>>
+## from Map get List
 ```java
 Map<String, List> ans = new HashMap<String, List>();
 if (!ans.containsKey(key)) ans.put(key, new ArrayList());
@@ -93,14 +179,14 @@ class Solution {
         for (Integer key : map.keySet()) {
             pq.add(key);
             if (pq.size() > k) {
-                pq.remove();
+                pq.poll();
             }
         }
 
         // 取出最小堆中的元素
         List<Integer> res = new ArrayList<>();
         while (!pq.isEmpty()) {
-            res.add(pq.remove());
+            res.add(pq.poll());
         }
 
         // List 变成 Array
@@ -109,6 +195,52 @@ class Solution {
             arrayResult[i] = res.get(i);
         }
         return arrayResult;
+    }
+}
+```
+
+## Queue + Pair
+```java
+// leetcode 988
+class Solution {
+    public String smallestFromLeaf(TreeNode root) {
+        String smallestString = "";
+        Queue<Pair<TreeNode, String>> nodeQueue = new LinkedList<>();
+
+        // Add root node to queue along with its value converted to a character
+        nodeQueue.add(new Pair<>(root, String.valueOf((char)(root.val + 'a'))));
+
+        // Perform BFS traversal until queue is empty
+        while (!nodeQueue.isEmpty()) {
+
+            // Pop the leftmost node and its corresponding string from queue
+            Pair<TreeNode, String> pair = nodeQueue.poll();
+            TreeNode node = pair.getKey();
+            String currentString = pair.getValue();
+    
+            // If current node is a leaf node
+            if (node.left == null && node.right == null) {
+            
+                // Update smallest_string if it's empty or current string is smaller
+                if (smallestString.isEmpty()) {
+                    smallestString = currentString;
+                } else {
+                    smallestString = currentString.compareTo(smallestString) < 0 ? currentString : smallestString;
+                }
+            }
+
+            // If current node has a left child, append it to queue
+            if (node.left != null) {
+                nodeQueue.add(new Pair<>(node.left, (char)(node.left.val + 'a') + currentString));
+            }
+
+            // If current node has a right child, append it to queue
+            if (node.right != null) {
+                nodeQueue.add(new Pair<>(node.right, (char)(node.right.val + 'a') + currentString));
+            }
+        }
+
+        return smallestString;
     }
 }
 ```

@@ -349,5 +349,25 @@ for (int vi : v) {
 
 ## subsequence sum equals to K
 ```java
+void solution() {
+    int[] input = {1,2,3,4,5,6,7};
+    Arrays.sort(input);
+    ArrayList<ArrayList<Integer>> combinations = new ArrayList<>();
+    ArrayList<Integer> comb = new ArrayList<>();
+    Helper(input, 0, combinations, comb, 0);
+    System.out.println(combinations);
+}
 
+void Helper(int[] nums, int start, ArrayList<ArrayList<Integer>> combinations, ArrayList<Integer> comb, int sum) {
+    if (sum == 6) {
+        combinations.add(new ArrayList<>(comb));
+    }
+    for (int i = start; i < nums.length; i++) {
+        comb.add(nums[i]);
+        sum += nums[i];
+        Helper(nums, i + 1, combinations, comb, sum);
+        sum -= nums[i];
+        comb.remove(comb.size() - 1);
+    }
+}
 ```

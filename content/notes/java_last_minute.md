@@ -62,11 +62,13 @@ Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))
 ```java
 ArrayList<String> r = new ArrayList<>();
 // r.size();
-r.add("pizza);
+r.add("pizza");
 r.get(0);
 r.set(0, "sushi"); 
 r.remove(0);
 r.clear();
+List<Boolean> result = Arrays.asList(new Boolean[candies.length]); // fix-sized list
+return Arrays.asList(array); // from Array to List
 ```
 
 ## 2D ArrayList
@@ -91,6 +93,47 @@ for (String key : hm.keySet()) {
   String val = hm.get(key);
   ...
 }
+if (!ans.containsKey(key)) ans.put(key, new ArrayList());
+return new ArrayList(ans.values()); // from Map<String, List> get List<List<String>>
+return new ArrayList(); // for return empty (List<List<AnyType>>)
+```
+
+## TreeSet
+```java
+TreeSet<Student> hs = new TreeSet<>(
+    (l, r) -> (l.age - r.age)
+);
+hs.add(new Student(11, "a"));
+Student r = hs.first();
+hs.remove(hs.first()); 
+hs.remove(new Student(11, "a")); 
+```
+
+## Deque
+```java
+// better performance. internal data structure is array, doesn't support null 
+Deque<Integer> arrayDeque = new ArrayDeque<>();
+// better flexibility. internal data structure is double linked list, support null 
+Deque<Integer> linkedList = new LinkedList<>();
+
+arrayDeque.offerLast(10);
+arrayDeque.offerFirst(20);
+int dequeuedFromArrayDeque1 = arrayDeque.removeFirst();
+int dequeuedFromArrayDeque2 = arrayDeque.removeLast();
+int pf = arrayDeque.peekFirst();
+int pl = arrayDeque.peekLast();
+```
+
+## PriorityQueue
+```java
+PriorityQueue<Integer> pq = new PriorityQueue<>(
+    (n1, n2) -> map.get(n1) - map.get(n2)
+);
+pq.add(10);
+int r = pq.size();
+boolean r = pq.isEmpty();
+int r = pq.peek();
+int r = pq.poll();
 ```
 
 ## Sort
@@ -118,37 +161,6 @@ List<Person> hundredSorted = people.stream()
 hundredSorted.forEach(person -> System.out.println(person.name));
 ```
 
-
-
-
-
-## Array <==> List
-```java
-return Arrays.asList(array); // from Array to List
-```
-
-## Fix-sized list
-```java
-List<Boolean> result = Arrays.asList(new Boolean[candies.length]);
-```
-
-
-
-## Set
-```java
-Set<Integer> hs = new TreeSet<Integer>();
-hs.add(right);
-left = hs.iterator().next() + 1; // left = hs.begin() + 1;
-hs.remove(hs.iterator().next()); // hs.erase(hs.begin());
-```
-
-## from Map get List
-```java
-Map<String, List> ans = new HashMap<String, List>();
-if (!ans.containsKey(key)) ans.put(key, new ArrayList());
-return new ArrayList(ans.values()); // from Map<String, List> get List<List<String>>
-return new ArrayList(); // for return empty (List<List<AnyType>>)
-```
 
 ## PriorityQueue + HashMap
 ```java

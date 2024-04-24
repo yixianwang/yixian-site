@@ -30,3 +30,84 @@ IoC entails Dependency Injection
 - instead of in our code we have to instantiate some new object, Spring container is actually instantiating this object
 
 > Spring container is **injecting** object for us
+
+## SpringBoot Controller
+![MVC](images-springboot/sb1.png)
+
+### Rounter
+- `@RequestMapping`, on class or methods
+  - `value`
+  - `method`
+  - `consumes`, 请求的 Content-Type, i.e. application/json
+  - `produces`
+  - `params, headers`
+- `*, **, ?`
+
+### Method
+- `@RequestMapping(value = "/getData", method = RequestMethod.GET)`
+  - `@GetMapping("/getData")` is same as above.
+
+### Parameters
+- `@RequestParam`, (from HTTP request body or url QueryString) when the names are matching, we can **ignore** this annotation
+  - `public String getTest3(@RequestParam(value = "nickname", required = false) String name) {}`
+- `@PathVariable`, handle dynamic URL
+- `@RequestBody`, most use case is to handle data which is not `Content-Type: application/x-www-form-urlencoded`, i.e. `application/json`, `application/xml`, etc.
+
+  ```java
+  // i.e. @RequestBody
+  @RequestMapping(value = "/postTest4", method = RequestMethod.POST)
+  public String postTest4(@RequestBody User user) { // @RequestBody 
+    System.out.println(user);
+    return "Post request"
+  }
+  ```
+
+## SpringBoot File Upload + HandlerInterceptor
+
+### Static Resources
+- define filter rule and static resource path
+```
+// application.properties
+spring.mvc.static-path-pattern=/static/**
+spring.web.resources.static-locations=classpath:/static/
+```
+> filter rule is `/static/**`, static resource path is `classpath:/static/`
+
+### File Upload
+- `enctype` define how to encode form data before sending to server
+- `enctype = "application/x-www-form-urlencoded"` is default, then form data likes `key=value&key=value`
+- `enctype = "multipart/form-data"`
+![enctype=multipart/form-data](images-springboot/sb1.png)
+
+- To update 1MB file limitation by SpringBoot built-in Tomcat
+```
+// application.properties
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+```
+
+### HandlerInterceptor
+![HandlerInterceptor](images-springboot/sb3.png)
+![HandlerInterceptor](images-springboot/sb4.png)
+
+## RESTful service + Swagger
+
+### Restful
+![Restful](images-springboot/sb5.png)
+
+### Swagger
+- `http://127.0.0.1:8080/swagger-ui.html`
+![Swagger1](images-springboot/sb6.png)
+![Swagger2](images-springboot/sb7.png)
+![Swagger3](images-springboot/sb8.png)
+
+## Mybatis-Plus
+ORM(Object Relational Mapping)
+
+### Mybatis-Plus
+![Mybatis](images-springboot/sb9.png)
+![Mybatis](images-springboot/sb10.png)
+
+
+
+### Mybatis-Plus CRUD operation

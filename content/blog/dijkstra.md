@@ -23,10 +23,10 @@ class Solution {
       int x = -1;
       for (int i = 0; i < n; i++) {
         if (!done[i] && (x < 0 || dis[i] < dis[x])) {
-          x = i;
+          x = i;  // 可以提前结束吗
         }
       }
-      if (x < 0) {
+      if (x < 0) {  // all done
         return ranges::max(dis);
       }
       if (dis[x] == INT_MAX / 2) {  // 有节点无法到达

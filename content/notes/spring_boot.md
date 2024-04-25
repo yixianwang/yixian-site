@@ -107,7 +107,45 @@ ORM(Object Relational Mapping)
 ### Mybatis-Plus
 ![Mybatis](images-springboot/sb9.png)
 ![Mybatis](images-springboot/sb10.png)
-
-
+![Mybatis](images-springboot/sb11.png)
 
 ### Mybatis-Plus CRUD operation
+![Mybatis](images-springboot/sb12.png)
+![Mybatis](images-springboot/sb13.png)
+
+### Example
+```java
+// mapper
+  // UserMapper.java
+@Mapper
+public interface UserMapper extends BaseMapper<User> { // User has to be same as table name within database
+}
+```
+
+```java
+// controller
+  // UserController
+@RestController
+public class UserController {
+  @Autowired
+  private UserMapper userMapper;
+
+  @GetMapping("/user")
+  public List query() {
+    List<User> list = userMapper.selectList(null);
+    return list; // automatically convert to json
+  }
+
+  @PostMapping("/user")
+  public String save(User user) {
+    int i = userMapper.insert(user); // i is the number of rows inserted
+    if (i > 0) {
+      return "successfully inserted";
+    } else {
+      return "insertation failed";
+    }
+  }
+}
+```
+
+### Searching Multiple Tables

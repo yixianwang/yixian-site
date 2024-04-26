@@ -77,7 +77,7 @@ spring.web.resources.static-locations=classpath:/static/
 - `enctype` define how to encode form data before sending to server
 - `enctype = "application/x-www-form-urlencoded"` is default, then form data likes `key=value&key=value`
 - `enctype = "multipart/form-data"`
-![enctype=multipart/form-data](images-springboot/sb1.png)
+![enctype=multipart/form-data](images-springboot/sb2.png)
 
 - To update 1MB file limitation by SpringBoot built-in Tomcat
 ```

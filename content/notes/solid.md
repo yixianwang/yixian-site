@@ -31,4 +31,4 @@ date = 2024-04-29T20:09:27-04:00
 - **DEFINE**: Don't throw a large and comprehensive interface to users, but separate the interface that each user cares about.
 
 ## D - Dependency Inversion Principle
-
+- It is recommended that users rely on an abstract class or interface instead of relying on a implementation.

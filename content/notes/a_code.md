@@ -110,14 +110,14 @@ for (Character c : input.toCharArray()) {
 
 ## find the largest and the second largest
 ```java
-int first = v[0], second = v[0];
-int right = 0;
-while (right < v.length) {
-    if (v[right] > v[first]) {
+int first = 0x3f3f3f3f, second = first;
+int idx = 0;
+while (idx < v.length) {
+    if (v[idx] > first) {
       second = first;
-      first = right;
-    } else if (v[right] > v[second]) second = right;
-    ++right;
+      first = v[idx];
+    } else if (v[idx] > second) second = v[idx];
+    ++idx;
 }
 ```
 

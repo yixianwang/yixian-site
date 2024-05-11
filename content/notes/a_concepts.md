@@ -254,32 +254,91 @@ static: inner class, method, variable, static block
 - There are two types of proxy: the static proxy and the dynamic proxy.
 - The static proxy requires developer to know the target class in advance, whereas the dynamic proxy doesn't, because the proxy class can be dynamically created by JVM during the runtime.
 
-## Java8 new features
-### Functional interface
-- it's a kind of interface that has only 1 abstract method.
-- it can have multiple default methods and static methods.
-- i.e. Runnable, Callable, Comparator, etc.
 
-### Lambda
+## OSI model vs TCP/IP model
+### OSI model
+- 7 layers architecture: Physical / Data Link / Network / Transport / Session / Presentation / Application
+- a typical modern network architecture
+- As a developer, we will only focus on the top layer called **Application Layer**
+  - including HTTP, FTP, SSH, DNS, etc. 
+### TCP/IP
+- a simplified version network architecture
+- 4 layers architecture: Network Access Layer[1,2] / Network / Transport / Application[5,6,7]
 
+### TCP, UDP within Transport Layer
+- divides the data in to many packets
+- within the packet of TCP, has `Sequence Number`
+- within the packet of UDP, no `Sequence Number`
+
+- TCP is more secure, i.e. email
+- UDP is faster, i.e. zoom meeting 
+
+- TCP **4 way handshake process** is more secure than **3 way handshake process**
+
+### HTTP
+- a protocol in the Application Layer
+- HTTP Request 
+  - Request Message Header
+    - Request Line
+      - http methods(get, post, ...)
+      - file address 
+      - http version
+    - Request Headers
+      - some key-value pairs
+  - a blank line
+  - Request Message Body(normally is a json file, but can be anything)
+
+- HTTP Response 
+  - Response Message Header
+    - Status Line
+      - http version
+      - http status code
+    - Response Headers
+      - some key-value pairs
+  - a blank line
+  - Response Message Body(normally is a json file, but can be anything)
+
+## HTTP methods
+- Safe: the http method does not change the state of the server, does not changing on the server side.
+- Indempotent: two or more same requests are made to backend, and it will have the same effect.
+- Cacheable: the browser caches some data for some http methods by default. (we can setup with `cache-control`)
+
+| Methods                     | Safe | Indempotent | Cacheable | Description  |
+|-----------------------------|------|-------------|-----------|--------------|
+| Get                         | yes  | yes         | yes       | read         |
+| Put                         | no   | yes         | no        | whole update |
+| Post                        | no   | no          | no        | create       |
+| Delete                      | no   | yes         | no        | remove       |
+| Patch                       | no   | no(or yes)  | no        | patch update |
+| headoptions/ trace/ connect |      |             |           |              |
 
 ## HTTP status codes
+- 1xx: informational codes
+- 2xx: success codes
+- 3xx: redirection codes
+- 4xx: client error codes
+- 5xx: server error codes
+
 ```
-200 OK -- the request succeeded.
-201 Created -- the request succeeded, and a new resource was created as a result.
+200 OK -- the request has been successfully sent to the backend.
+201 Created -- a new resource was created as a result.
 202 Accepted -- the request has been accepted for processing, but the processing has not been completed.
-204 No Content -- the request succeeded, but that the client doesn't need to navigate away from its current page.
+204 No Content -- the request succeeded, but that the client doesn't need to navigate away from its current page. i.e. submitted some data with put method, the frontend doesn't need to be changed.
 
-307 Temporary Redirect -- the resource requested has been temporarily moved to the URL given by the Location headers.
-308 Permanent Redirect -- the resource requested has been definitively moved to the URL given by the Location headers.
+307 Temporary Redirect -- i.e. the primary website doesn't work due to some bug or maintenance, we need to redirect to backup server.
+308 Permanent Redirect -- i.e. sometimes the old URL won't use anymore, we wanna keep our customers.
 
-400 Bad Request -- the server cannot or will not process the request due to client error.
+400 Bad Request -- the server cannot understand the request, because some invalid syntax or invalid parameters.
 401 Unauthorized -- the request has not been completed because it lacks valid authentication credentials.
 403 Forbidden -- the server understands the request but refuses to authorize it.
 404 Not Found -- the server cannot find the requested resource.
 
 500 Internal Server Error -- the server has encountered a situation it does not know how to handle.
 ```
+
+
+
+
 
 ## Bean Scope
 1. Singleton(default). The IoC container creates only one instance of the bean, and reuses it whenever that bean is requested. This is the default cope in Spring.
@@ -369,6 +428,31 @@ static: inner class, method, variable, static block
 ## Handle Exception in SpringBoot
 ![3](images-a/3.png)
 
+- `@ExceptionHandler` within class, is **local** `@ExceptionHandler`.
+- `@ControllerAdvice` class with `@ExceptionHandler`, is **global** `@ExceptionHandler`.
+- Is Exception annotated by `@ResponseStatus`? `ResponseStatusExceptionResolver` class : `DefaultHandlerExceptionResolver` class;
+
+## How Spring does Validation
+- put `@Validated` within parameters of controller
+- put the following annotation on pojo
+```
+@Validated
+
+@NotNull
+@NotEmpty
+@Min
+@Max
+@Pattern
+@Email
+...
+```
+
+## Documentation
+### Swagger
+- it's a documentation framework
+  - it will collection info from project 
+  - then generate a website
+  - show all the API created by the backend
 
 
 ## Questions in Mock interview

@@ -1,5 +1,5 @@
 +++
-title = 'A Concepts'
+title = 'Antra Training Concepts'
 date = 2024-04-30T18:58:08-04:00
 +++
 
@@ -528,6 +528,8 @@ static: inner class, method, variable, static block
 - CompletableFuture
 
 ### In SpringBoot, the difference between Controller and RestController annotation
+- @RestController contains @Controller and @RespondBody.
+- if we only use @Controller to Controller class, we also have to add @RespondBody manually.
 
 ### Bean Scopes
 1. Singleton(default). The IoC container creates only one instance of the bean, and reuses it whenever that bean is requested. This is the default cope in Spring.

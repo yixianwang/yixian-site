@@ -313,9 +313,65 @@ static: inner class, method, variable, static block
   - pros:
   - cons: it makes headache to test, so how do you test that without bring up spring context or using some type of reflection utilities to inject that. It can be done but it gives us a big headache when we do a private field in Autowired
 
-## 3 Layers: Controller, Service, Dao
+### SpringBoot Advantages
+- auto configuration
+- starter
+- embedded Tomcat 
+- Spring Actuator
+- @SpringBootApplication
 
-## Mock
+### Annotations in SpringBoot
+```
+@Controller
+@RestController
+  - @RestController contains @Controller and @RespondBody.
+  - if we only use @Controller to Controller class, we also have to add @RespondBody manually.
+
+@Service
+
+@Repository
+@RequestMapping
+@GetMapping
+@PutMapping
+@DeleteMapping
+@PostMapping
+
+@Component
+@Bean
+
+@ResponseBody: java object -> json
+@RequestBody: json -> java object
+
+// used to retrieve the data from URL
+@PathVariable
+  - is used to retrieve the parameter before the question mark
+  - i.e. http://.../api/users/12
+@RequestParam
+  - is used to retrieve the parameters after the question mark
+  - we can specify if some parameters are required or not, we can also give them defaultValue
+  - i.e. http://.../api/users/?pageNo=2&rows=10
+```
+
+## 3 Layers
+- Controller, Service, Dao
+
+## Pojo
+- Plain Old Java Object
+- it's a type of java object that is not tied to any specific framwork.
+- it's simple and lightweight.
+- it just includes some fields, constructor, setter and getter methods.
+
+## h2 database
+- it's a in-memory relational database
+- it's useful for development and testing.
+- once we close the application, the data will lost.
+
+## Handle Exception in SpringBoot
+![3](images-a/3.png)
+
+
+
+## Questions in Mock interview
 ### The difference between HashMap and HashTable
 - Regarding to Thread Safety
   - HashTable is synchronized, so it's thread-safe.
@@ -370,4 +426,3 @@ static: inner class, method, variable, static block
 4. Session. A new instance of the bean is created for **each HTTP session**.
 5. Application. A single instance of the bean is created for the entire web application context. This means all requests and sessions share the same instance of the bean.
 6. WebSocket. Similar to session scope, but designed for WebSocket-based interactions.
-

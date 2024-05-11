@@ -1,10 +1,9 @@
 +++
-title = 'Antra Training Concepts'
+title = 'Antra Java Concepts Cheat Sheet'
 date = 2024-04-30T18:58:08-04:00
 +++
 
 ```
-
 static block?
 
 singleton vs immutable class

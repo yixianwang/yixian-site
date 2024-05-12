@@ -521,11 +521,16 @@ static: inner class, method, variable, static block
 
 
 ### SpringBoot Advantages
-- auto configuration
+- auto configuration: 
+  - to overwrite default configurations with `application.properties` file
 - starter
+  - `starter` dependencies integrated many useful dependencies for us.
+  - In `pom.xml` file, it handles dependency version management and add dependency
 - embedded Tomcat 
 - Spring Actuator
-- @SpringBootApplication
+- `@SpringBootApplication`
+  - includes `@SpringBootConfiguration` + `@EnableAutoConfiguration` + `@ComponentScan` ....
+
 
 ### Annotations in SpringBoot
 ```
@@ -535,6 +540,10 @@ static: inner class, method, variable, static block
   - if we only use @Controller to Controller class, we also have to add @RespondBody manually.
 
 @Service
+
+// the following two are same
+@RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+@PutMapping("/user/id")
 
 @Repository
 @RequestMapping
@@ -598,11 +607,18 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - Doesn't provide any embedded server, whereas SpringBoot does(Tomcat).
 
 ### Flow of Spring MVC
+1. **DispatcherServlet** is used to intercept all requests.
+2. send requests to **HandlerMapping** to choose Handler, find Controller
+3. **Controller** will go through Business Logic (Service(business logic) -> Repository(Data Access) -> Database), then return the result(**ModelAndView Object**) to **DispatcherServlet**
+4. The **DispatcherServlet** consults its list of **ViewResolver** beans to determine which view should be rendered.
+5. **ViewResolver** implementations map logical view names to actual view templates (JSP, Thymeleaf, FreeMarker, etc.).
+6. Once the view template is identified, the **DispatcherServlet** delegates the rendering of the view to the appropriate **ViewResolver**.
+7. The **ViewResolver** renders the view template, populating it with data from the model (if any), and generates the final HTML or other content.
+8. Finally, the **DispatcherServlet** sends the generated response (HTML, JSON, XML, etc.) back to the client that initiated the request.
+
 ![18](images-a/18.png)
 
 ![17](images-a/17.png)
-
-
 
 
 ## 3 Layers

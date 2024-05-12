@@ -159,6 +159,11 @@ session/ cookies
 
 - When an object is first created, it is put into generation 0. When the generation 0 is filled up, the garbage collector is invoked. The objects that survive the garbage collection in the first generation are promoted onto the next higher generation, generation 1. The objects that survive garbage collection in generation 1 are promoted onto the next and the highest generation, generation 2. This algorithm works efficiently for garbage collection of objects, as it is fast.
 
+![48](images-a/48.png)
+
+![49](images-a/49.png)
+
+
 ## Generics in Java, what is it, why we need it?
 
 ## Type erasing in Java, about generics
@@ -363,11 +368,90 @@ enum Day {
 
 ![38](images-a/38.png)
 
+### virtual thread is the future
+![43](images-a/43.png)
+
+### Java 8 new features
+- Lambda expressions
+  - it's just method without a name
+  - it's passing a function as annoymous object into Java program.
+  - it's just a annoynous method wrapped up with an annoynoms object. That's the object is the actually the thing we passed to our Java program.
+
+![39](images-a/39.png)
+
+- Functional Interface
+  - it's a kind of interface that has only 1 abstract method.
+  - it can have multiple default methods and multiple static methods.
+    - when use default methods:
+      - when this functional interface has been implemented by different classes and later we need to use it as a common function for each every those classes.
+
+    - when use static methods:
+      - when we don't want instantiate anything, any object. Or if we don't want this default method to be override, then we can use static method rather than default method to define this common behavior.
+
+  - i.e. Runnable, Callable, Comparator, Comparable, etc.
+
+> There are four major functional interface introduced in Java 8
+- Consumer<T>
+- Supplier<T>
+- Function<T>
+- Predicate<T>
+
+![40](images-a/40.png)
+
+![41](images-a/41.png)
+
+- Stream API
+  - It's let java can program in a way just like other functional programming language.
+![42](images-a/42.png)
+  - Two types of stream:
+    - finite stream 
+      - normal `stream()`
+      - `parallelStream()`
+    - infinite stream
+      - `iterate(0, t -> t + 2).limit(10).forEach(System.out::println)`
+      - `generate(Math::random).limit(10).forEach(System.out::println)`
+  - Two types of operations
+    - intermediate operations
+    - terminal operations
+> it will keep original data intact.
+  
+![45](images-a/45.png)
 
 
+- Method Reference
+  - is a further utilization of Lambda Expression. which is also a functional interface.
+  - it is trying to have a simplicity of the object and methods relationship that we can have. and return that into functional interface. with that functional interface will help us to  write stream API through functional style programming.
+  - The only thing we cannot reference is **abstract method**, as long as the method has a method body, that means we can refer to it.
 
+![44](images-a/44.png)
 
+- Optional Class
+  - it can help to handle NullPointerExceptions
+  - it's just warp the original object, to handle the situation like null reference
 
+- CompletableFuture
+
+## Multithreading
+![46](images-a/46.png)
+- when we are talking about traditional thread, we should always use thread pool.
+- virtual thread is good and is the future, but it's not available for old java versions.
+
+- the first two ways to create new thread cannot throw any Exceptions, and no return for run method.
+- the third one can have return data types and also can throw Exceptions.
+![47](images-a/47.png)
+
+> we can set priority for each thread from 1(least significant) - 10(most significant)
+
+### Thread Life Cycle
+- NEW
+- RUNNABLE
+- BLOCKED
+- WAITING
+- TIMED_WAITING
+- TERMINATED
+
+### ThreadPool(or ExecutorService)
+![50](images-a/50.png)
 
 
 
@@ -816,7 +900,6 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - then generate a website
   - show all the API created by the backend
 
-
 ## Questions in Mock interview
 ### The difference between HashMap and HashTable
 - Regarding to Thread Safety
@@ -843,55 +926,11 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - i.e. IndexOutOfBoundException, NullPointerException, ArithmeticException
 
 ### Java 8 new features
-- Functional Interface
-  - it's a kind of interface that has only 1 abstract method.
-  - it can have multiple default methods and multiple static methods.
-    - when use default methods:
-      - when this functional interface has been implemented by different classes and later we need to use it as a common function for each every those classes.
-
-    - when use static methods:
-      - when we don't want instantiate anything, any object. Or if we don't want this default method to be override, then we can use static method rather than default method to define this common behavior.
-
-  - i.e. Runnable, Callable, Comparator, Comparable, etc.
-
-> There are four major functional interface introduced in Java 8
-- Consumer<T>
-- Supplier<T>
-- Function<T>
-- Predicate<T>
-
-![40](images-a/40.png)
-
-![41](images-a/41.png)
-
-
-- Lambda expressions
-  - it's just method without a name
-  - it's passing a function as annoymous object into Java program.
-  - it's just a annoynous method wrapped up with an annoynoms object. That's the object is the actually the thing we passed to our Java program.
-
-![39](images-a/39.png)
-
-- Method Reference
-  - it's a way to let us create a reference to a method without invoking it.
-
-- Stream API
-  - It's let java can program in a way just like other functional programming language.
-
-- Optional Class
-  - it's just warp the original object, to handle the situation like null reference
-
-- CompletableFuture
+- above
 
 ### In SpringBoot, the difference between Controller and RestController annotation
 - @RestController contains @Controller and @RespondBody.
 - if we only use @Controller to Controller class, we also have to add @RespondBody manually.
 
 ### Bean Scopes
-1. Singleton(default). The IoC container creates only one instance of the bean, and reuses it whenever that bean is requested. This is the default cope in Spring.
-2. Prototype. The Ioc container creates a new instance of the bean every time it is requested. 
-> Only valid in the context of a Spring Web ApplicationContext.
-3. Request. A new instance of the bean is created for **each HTTP request**.
-4. Session. A new instance of the bean is created for **each HTTP session**.
-5. Application. A single instance of the bean is created for the entire web application context. This means all requests and sessions share the same instance of the bean.
-6. WebSocket. Similar to session scope, but designed for WebSocket-based interactions.
+- above

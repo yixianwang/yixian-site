@@ -109,6 +109,7 @@ session/ cookies
   - pros: autoconfigration, 
 ```
 
+## Core Java interview questions
 
 ## Java is passed by Value or Reference?
 - In Java, there are two kinds of data type, **Primitive** data types and **Non-primitive** data types.
@@ -116,10 +117,16 @@ session/ cookies
 - For non-primitive types, they are also passed by value, the value here is actually the memory address of the object. e.g. annotation, class, interface, enum, array.
 - In conclusion all data types in Java are passed by value.
 
-## static keyword
+## static keyword(within 5 sentences)
+- we have four places to put static keyword on.(class, method, variable, block)
+- For having static keyword on method, variable scope is to ensure that they can share just by class template. 
+- what **SCOPES** we can access static elements.
+  - we cannot override static method
+  - static class cannot called by non-static method 
 
 ## Hashmap workflow
 - Internally, Hashmap is an array of linkedList. 
+- Each of the key-value pairs is passed into the hashCode method first, the key is going to pass as the input and generate values. With hashing result key-value pair is put in one of the place in the array, which is called bucket head. When there is any of hash code collision happened, then that's the reason why we need to override equals and hashCode methods. And when hash collision happened, then we are going to check if the two keys are exactly the same then we upate the value. If they are don't, that means there is a hash collision, where we are going to attach the same key at the same bucket head, which that's the reason why we need the LinkedList to handle hash collision. Because the search in LinkedList is going to be linearly grows regarding to the time complexity. That's why we need LinkedList to auto turning into Red-Black tree for later search time efficiency.
 
 ## How many access modifiers?
 - public: visible in all classes in all packages 
@@ -127,9 +134,14 @@ session/ cookies
 - default: visible to all classes in the same package 
 - private: visible only in the same class
 
+> The purpose of having access modifies is to ensure that we can do encapsulation implementation for our OOP program in Java.
+
 ## Pros and Cons of static
 
 ## Diff map and set. Can we have duplicate keys in map
+- set is part of Collection interface, where as map is not part of Collection interface
+- map is storing two dimension data, set is storing one dimension data.
+- The HashSet is actually implemented by the HashMap in Java
 
 ## Given a series data, how to detect duplicate data and skip it?
 
@@ -170,19 +182,48 @@ static: inner class, method, variable, static block
 
 ### singleton vs immutable class
 
+## keywords
+![29](images-a/29.png)
+
+## Sort methods
+![30](images-a/30.png)
+
+## JDK and JRE
+- JDK = JRE + DEV tools (Javac Compiler etc.)
+- JRE = JVM + Java SE standard library
+![21](images-a/21.png)
 
 
 ## JVM
-- method area(after java 8, meta space): static, class template
-- heap: objects
-- vm stack: references and method
-- native(c/c++) method stack: old api within jam
+- Method Area(since java 8, meta space(replaced perm generation)): class template, static elements
+  - Method Area is a standard, it keeps storing class templates
+  - Meta space can resize JVM, once the memory space is all used up.
+- VM stack: references and method
+  - within stack, each thread be assign a private area within stack, everything within this area are only visible for that thread, unless we use `volatile` keyword.
+- Heap: objects
+  - all the threads are able to access.
+- Program Counter Register: 
+  - persist return tracker, allows each method stack know when to return where 
+- Native Method stack: 
+  - a place contains all legacy c/c++ APIs
+  - anything decorated with `native` keyword is a method, that implements with either c or c++ storing in Native Method stack within JVM.
+
+### JVM memory model
+![20](images-a/20.png)
+
+## What's the result from the code1
+- Green Black
+  - line 70 first
+![22](images-a/22.png)
+
+## the diff between RunOutOfMemory and OverStackFlow Exceptions in JVM
 
 ## ClassLoader
 - Three types of classLoader
   - Bootstrap ClassLoader: to load the first pure java ClassLoader
   - Extension ClassLoader: to load extensions of core java from jdk extension library
   - System/Application ClassLoader: to load application type classes
+![25](images-a/25.png)
 
 ## Class class
 - It is used to describe the meta info inside a class.
@@ -201,6 +242,15 @@ static: inner class, method, variable, static block
 - **Collection** framework is for data structures.
 - **Collections** is a class. That class contains lots of static methods including reverse/sort. That can help us manipulate our data structures including arrays.
 
+### what's the result from the code2
+- Person inherited from Object
+- if we don't override hashCode method, it's basically comparing based on References.
+![23](images-a/23.png)
+![24](images-a/24.png)
+
+### HashSet
+- if we check HashSet implementation, HashSet is actually implemented by HashMap. But only this HashMap doesn't have any value, but only with the key. That's the default one.
+
 ### Comparison between any pair of data structures
 ![ds1](images-a/1.png)
 ![ds2](images-a/2.png)
@@ -218,6 +268,108 @@ static: inner class, method, variable, static block
 - How: 
   - type bounds: there are two types of bounds: upper bound(`extends`, <), lower bound(`super`, >=)
   - wildcard generics: it has greater flexibility, and it can also be bounded with those extends and super keyword.
+- i.e. `ArrayList<? super String> list = new ArrayList();` 
+
+## Enum
+- it's a structure that contains some default values.
+- i.e. some of constant values. like Days, Months, Weeks, etc.
+- enum can implement interfaces
+```
+enum Day {
+  SUNDAY, MONDAY,
+  FRIDAY
+}
+```
+![28](images-a/28.png)
+![27](images-a/27.png)
+
+### without Enum
+![26](images-a/26.png)
+
+## Annotations
+- There are two types so annotation in Java: Normal annotation and Meta annotation.
+  - Meta annotatios like parents or ancestors for decorating all the other annotations you can have in Java program. 
+  - There are only four meta annotations since Java 8.
+    - Retention: (means how long) it describes when this annotation is playing in Java program
+      - SOURCE: after convert the annotation into the .class file, the annotation is going to be invalid.
+      - CLASS (default): still valid with the .class file, after we loaded with ClassLoader, in the runtime, that annotation is not working anymore
+      - RUNTIME: this annotation, starting from the .java file, compile to the .class, loading with the ClassLoader into JVM, until program is end. It keeps playing a role in our Java program
+    - Target: (means where) where can we put the annotation on
+      - Type
+      - FILED
+      - METHOD
+      - PARAMETER
+      - CONSTRUCTOR
+      - LOCAL_VARIABLE
+      - ANNOTATION_TYPE
+      - PACKAGE
+      - TYPE_PARAMETER
+      - TYPE_USE
+    - Documented: define if it is documented
+    - Inherited: define if this annotation can inherit from parent to the child
+![31](images-a/31.png)
+
+![32](images-a/32.png)
+
+## Exception Handling
+- if it's checked exception, we have to extend from Exception class
+- if it's unchecked exception, we need to extend from RuntimeException class
+
+- Confluence Page:  a private library each company can have, they are going to share some of those common knowledge for web application on that page
+  - service(first 2 numbers) to codeNumber
+    - instagram 10
+      - -> 01 login exceptions
+      - -> 02 picture uploading exceptions
+    - facebook  20
+    - heel      30
+    - ...
+  - i.e. 10-001 is the error code
+
+> when we trying to customize our Exceptions, we need to ensure **what the type of exceptions it is(extends Exception or extends RuntimeException)**, then **what kind of infomation that we need to pass(those public methods)**, last **messages and error code** are traditional ones that almost every customize exceptions can have.
+
+![33](images-a/33.png)
+
+### Inheritance in Exceptions
+- the child class can only have same or narrower scope.
+  - i.e. parent throws `Exception`, child should throws `Exception(same) or IOException(narrower)`
+
+![34](images-a/34.png)
+
+## IOStream
+- There are two dimensions: 
+  1. whether the stream is IN or OUT, that's we have in and out as direction
+  2. based on the minimum unit to transfer the characters or file, we have either the Byte(8 bits, ByteStream) as the minimum unit or Character(two Bytes, 16 bits, CharacterStream)
+- `FileInputStream`, reading file in 8 bits each time
+- `FileoutputStream`, writing from JVM RAM to hard disk in 8 bits each time
+- `FileReader`, reading file from hard disk to JVM in 16 bits each time 
+- `FileWriter`, writing file from JVM to hard disk in 16 bits each time 
+- `CharArrayReader`, writing file from JVM to hard disk in 16 bits each time 
+
+![35](images-a/35.png)
+
+> pay attention to `Bufffered` ones. They are just wrapping up the normal I/O Stream. It's trying to do increase the communication speed.
+- `DEFAULT_BUFFER_SIZE = 8192` bytes, everytime with buffered we have 8 mb into JVM, instead of 1 byte or 2 bytes.
+
+![36](images-a/36.png)
+
+### In real practice example
+- Due to `AutoCloseable` is inheritened by buffered streams.
+  - means once we turn off the wrapper buffer stream, it will also turn off the inside
+  - so we just need to close the buffered one, the inside will close automatically.
+
+![37](images-a/37.png)
+
+- Another good thing about `AutoCloseable` interface, is that once we implement that we can use `try-with-resource`
+
+![38](images-a/38.png)
+
+
+
+
+
+
+
+
 
 ## Design Patterns
 ### Singleton
@@ -693,11 +845,32 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 ### Java 8 new features
 - Functional Interface
   - it's a kind of interface that has only 1 abstract method.
-  - it can have multiple default methods and static methods.
+  - it can have multiple default methods and multiple static methods.
+    - when use default methods:
+      - when this functional interface has been implemented by different classes and later we need to use it as a common function for each every those classes.
+
+    - when use static methods:
+      - when we don't want instantiate anything, any object. Or if we don't want this default method to be override, then we can use static method rather than default method to define this common behavior.
+
   - i.e. Runnable, Callable, Comparator, Comparable, etc.
+
+> There are four major functional interface introduced in Java 8
+- Consumer<T>
+- Supplier<T>
+- Function<T>
+- Predicate<T>
+
+![40](images-a/40.png)
+
+![41](images-a/41.png)
+
 
 - Lambda expressions
   - it's just method without a name
+  - it's passing a function as annoymous object into Java program.
+  - it's just a annoynous method wrapped up with an annoynoms object. That's the object is the actually the thing we passed to our Java program.
+
+![39](images-a/39.png)
 
 - Method Reference
   - it's a way to let us create a reference to a method without invoking it.

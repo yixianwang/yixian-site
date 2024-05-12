@@ -1,5 +1,5 @@
 +++
-title = 'Antra Java Concepts Cheat Sheet'
+title = 'Antra Training Concepts Cheat Sheet'
 date = 2024-04-30T18:58:08-04:00
 +++
 
@@ -362,28 +362,92 @@ static: inner class, method, variable, static block
 
 > the underlying technology behind Spring Data JPA is Hibernate. the underlying technology behind the Hibernate is JDBC.
 
+![5](images-a/5.png)
+![6](images-a/6.png)
+![7](images-a/7.png)
 
+## Maven/Gradle
+- project management tool
 
+### Maven folder structure
+![8](images-a/8.png)
 
+### Types of Repositories in Maven
+- Local Repository
+  - ~/.m2
+- Remote Repository
+  - Central Repository
+  - Customized Remote Repository
+
+### Maven Life Cycle
+- clean: clean cached data, cached dependencies.
+- validate: check if necessary info is available.
+- compile: compile the project.
+- test: run all tests within test folder.
+- package: we can package the project into jar or war.
+- verify: check whether our code satisfy some criteria.
+- install: install the project to local as dependency for other projects.
+
+### .jar vs .war
+- jar file contains the embedded server like tomcat, whereas war file doesn't.
+
+## Spring IoC: Inversion of Control
+- We transfer the control of the object to the container of framework, which is `ApplicationContext`.
+- `ApplicationContext` helps us manage all beans life cycle.
+
+![9](images-a/9.png)
+- It is a principle which **transfer the control of the objects** to a container or framework.
+
+## Dependency Injection
+- We can inject the object into another object.
+
+![10](images-a/10.png)
+![11](images-a/11.png)
+![12](images-a/12.png)
+![13](images-a/13.png)
+![14](images-a/14.png)
 
 ## Bean Scope
-1. Singleton(default). The IoC container creates only one instance of the bean, and reuses it whenever that bean is requested. This is the default cope in Spring.
-2. Prototype. The Ioc container creates a new instance of the bean every time it is requested. 
+1. Singleton(default). 
+  - The IoC container creates only one instance of the bean, and reuses it whenever that bean is requested. This is the default cope in Spring.
+  - Use Case: When you want to share a single instance of a bean across the entire application.
+  - Example: Configuration beans, controller beans, service beans, DAO beans, Logger beans, Utility beans.
+
+2. Prototype. 
+  - Use Case: When you want to create a new instance of a bean every time it is requested.
+  - Example: Request-scoped beans in web applications, Prototype beans for stateful objects, Objects with complex initialization logic.
+
 > Only valid in the context of a Spring Web ApplicationContext.
-3. Request. A new instance of the bean is created for **each HTTP request**.
-4. Session. A new instance of the bean is created for **each HTTP session**.
-5. Application. A single instance of the bean is created for the entire web application context. This means all requests and sessions share the same instance of the bean.
-6. WebSocket. Similar to session scope, but designed for WebSocket-based interactions.
+
+3. Request. 
+  - Use Case: When you want to create a new instance of a bean for **each HTTP request** in a web application.
+  - Example: Controllers, Form objects, View helpers, Request-specific data objects.
+
+4. Session.
+  - Use Case: When you want to create a single instance of a bean for **each user session** in a web application.
+  - Example: User session beans, Shopping cart beans, User preferences beans, User authentication beans.
+
+5. Application. 
+  - A single instance of the bean is created for the entire web application context. This means all requests and sessions share the same instance of the bean.
+  - Use Case: When you want to create a single instance of a bean for the entire web application context.
+  - Example: Application-wide configuration beans, Global caching beans, Shared resources across multiple sessions.
+
+6. WebSocket. 
+  - Similar to session scope, but designed for WebSocket-based interactions.
+  - Use Case: When you want to create a single instance of a bean for each WebSocket connection.
+  - Example: WebSocket handlers, Session-specific WebSocket state beans.
+
+7. Custom Scopes.
+  - Use Case: When none of the built-in scopes meet your requirements, you can create custom scopes.
+  - Example: Tenant-specific beans, Conversation-scoped beans, Batch job-scoped beans.
+
 
 ### Choose Appropriate Scope
 - Singleton is suitable for stateless beans or beans that are expensive to create.
 - Prototype is useful for stateful beans or beans that need to maintain their state separately.
 - Request, Session, and Application scopes are suitable for beans that hold web-related state information and need to be scoped accordingly.
 
-## Inversion of Control
-- It is a principle which **transfer the control of the objects** to a container or framework.
-
-## Dependency Injections
+## Types of Dependency Injections
 1. Constructor Injection: for **mandatory dependencies** so that our bean is ready to use when it is first time called.
   - pros:
     - All required dependencies are available at initialization time.
@@ -397,6 +461,64 @@ static: inner class, method, variable, static block
 3. Filed Injection: 
   - pros:
   - cons: it makes headache to test, so how do you test that without bring up spring context or using some type of reflection utilities to inject that. It can be done but it gives us a big headache when we do a private field in Autowired
+
+## Bean Life Cycle
+- `@PostConstruct`
+- `@PreDestroy`
+![15](images-a/15.png)
+
+
+
+## AOP
+- it enables us to monitor the methods, monitor the class, monitor everything without touching the service or some other classes.
+
+### Usage of AOP
+- log something
+- Audit the crud operations from http request(get, put, post, delete)
+- monitor some special method, like once the method was invoked, use AOP to send email to the admin.
+- Caching
+- Transaction
+- Security
+
+### Terms(basic components of AOP)
+- Aspect
+  - An aspect is a modular unit of cross-cutting concerns in AOP.
+  - It encapsulates behaviors (advice) that are applied to multiple join points in the application.
+  - Examples of aspects include logging, security, transaction management, and error handling.
+
+- Advice: Advice is the action taken by an aspect at a particular **Join Point** during the execution of a program.
+  - before advice: Executed before a method invocation.
+  - after advice
+    - `@AfterReturning`: Executed after a method returns successfully. 
+    - `@AfterThrowing`: Executed after a method throws an exception. 
+    - `@After(Finally)`: Executed regardless of the method outcome. 
+  - around advice: Wraps a method invocation and controls its execution.
+
+- Join Point: A join point is a specific point in the execution of a program where an aspect can be applied.
+  - Examples of join points include method invocations, method executions, field access, object instantiation, and exception handling.
+
+- Point Cut: a expression to find where to inject our AOP logic
+  - `@PointCut("execution(* com.example.aop.springaop.*.*.*(..))")` first star means any return.
+  - `@PointCut("within(com.example.aop.springaop..*)")`
+  - `@PointCut("this(com.example.aop.springaop.service.ClassName)")` to find class
+  - `@PointCut("@annotation(com.example.aop.springaop.annotation.CutomAnnotation)")` to find method
+
+- Target: 
+  - The **target object** is the object being advised by one or more **aspects**.
+  - It is the object whose methods are intercepted by **advice** during method invocation.
+
+### Some Default Annotations
+- `@Cacheable`: is used to annotate methods to indicate that the results of method invocations can be cached.
+- `@Transactional`: is used to annotate methods or classes to indicate that they are transactional.
+  - It is commonly used to ensure data consistency and integrity by managing database transactions declaratively.
+- `@Secured`: is used to specify method-level security constraints.
+  - When applied to a method, Spring Security ensures that only users with the specified roles/authorities are allowed to execute the method.
+
+### AOP workflow in Spring
+- underlying logic of AOP is Reflection
+- Dynamic Proxy -> Reflection
+![16](images-a/16.png)
+
 
 ### SpringBoot Advantages
 - auto configuration
@@ -435,7 +557,53 @@ static: inner class, method, variable, static block
   - is used to retrieve the parameters after the question mark
   - we can specify if some parameters are required or not, we can also give them defaultValue
   - i.e. http://.../api/users/?pageNo=2&rows=10
+
+@GenerateValue(strategy = GenerationType.AUTO)
+
+@Aspect
+
+@PointCut("...")
+public void loggingPointCut() {}
+
+@Before("loggingPointCut()")
+public void before(JointPoint joinPoint) {
+  log.info("..." + joinPoint.getSignature());
+}
+
+@AfterReturning(value = "execution(* com.....)", returning = "employee")
+public void after(JointPoint joinPoint, Employee employee) {
+  lof.info("..." + employee);
+}
+@AfterThrowing(value = "execution(* com.....)", throwing = "e")
+public void after(JointPoint joinPoint, Exception e) {
+  lof.info("..." + e.getMessage());
+}
+
+@Around("loggingPointCut()")
+public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+  log.info("..." + joinPoint.getArgs()[0]);
+  Object object = joinPoint.proceed();
+
+  if (object instanceof Employee) {
+    log.info("..." + joinPoint.getArgs()[0]);
+  } else if (object instanceof Department) {
+    log.info("..." + joinPoint.getArgs()[0]);
+  }
+  return object;
+}
 ```
+
+## Spring MVC
+- Spring MVC is based on MVC design pattern, provides much convenience comparing to Spring
+- Doesn't provide any embedded server, whereas SpringBoot does(Tomcat).
+
+### Flow of Spring MVC
+![18](images-a/18.png)
+
+![17](images-a/17.png)
+
+
+
 
 ## 3 Layers
 - Controller, Service, Dao

@@ -3,110 +3,11 @@ title = 'Antra Training Concepts Cheat Sheet'
 date = 2024-04-30T18:58:08-04:00
 +++
 
+## QuickNotes
 ```
-static block?
-
 singleton vs immutable class
 
-abstract: class, method
-final: class, method, variable
-static: inner class, method, variable
-
-jvm:
-method area(after java 8, meta space): static, class template
-heap: objects
-vm stack: references and method
-native(c/c++) method stack: old api within jam
-
-
-jconsole
-IntelliJ profiler
-java flight recorder(since java 11 is free)
-spring actuator
-
-ArrayList<? extends Staff> list = new ArrayList();
-
-confluence page->
-	service 00 
-				-> 000
-
-bytestream(8 bits), characterstream(16 bits)
-fileinputstream
-fileread
-
-lambda function type name
-
 functional interface with static
-
-virtual thread !!!!!         loom project
-
-persons.stream(); vs persons.parallelStream();
-
-method reference
-
-traditional thread: use thread pool
-
-thread pool vs virtual thread
-
-threadFactory
-
-synchronized method
-synchronized static method
-
-callable futureTask.get block the thread vs completableFuture
-
-volatile : 2:38 visibility only not thread safety
-
-CAS 
-
-is that necessary to set accessible back to false for those private members
-
-
-//////////////////
-osi model, 7 layers vs tcp/ip model
-200 1 2 4
-307 8
-400 1 3 4
-500 
-
-session/ cookies
-	sticky session, weighted/ round robin
-
-/// day 2
-- Bean scope
-  - singleton(default)
-  - prototype
-  - request
-  - session
-  - application
-  - websocket
-
-- types of DI(pros and cons)
-  - constructor based DI
-  - settrer based DI
-  - filed based DI
-
-- Bean Life Cycle
-  - 
-
-/// day 3
-- AOP
-  - Aspect
-  - Advice
-  - Joinpoint
-  - Pointcut
-  - Target
-- AOP usages: 
-  - crud operation(get, put, delete, post)
-  - method special
-    @ABC
-    method_special();
-  - ...
-
-- Spring MVC
-  - explain the work flow
-- Springboot
-  - pros: autoconfigration, 
 ```
 
 ## Core Java interview questions

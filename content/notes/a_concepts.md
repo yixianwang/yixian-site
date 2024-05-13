@@ -454,6 +454,81 @@ enum Day {
 ![50](images-a/50.png)
 
 
+## Lock(or Monitor)
+- critical section: we have some threads, those threads are going to manipulate some common resources.
+
+![51](images-a/51.png)
+
+### data type built-in lock
+![52](images-a/52.png)
+
+### lock with synchronized keyword
+- can be applied to method scope and synchronized block
+
+### Lock interface implementations
+- Lock is an interface, its implementation including `ReentrantLock`, `Condition`, `ReadWriteLock` comparing to `synchronized` keyword.
+- when we use it 
+  - if we want to ensure the execution of the thread order is exactly the way that I want. I need to use `ReentrantLock` and `Condition`.
+
+![53](images-a/53.png)
+
+### Avoid!!!
+> be careful when use `synchronized` and `static`
+- class template lock: means any of those static methods are locked with the same lock.
+  - because static element is saved in method area in JVM, it's a class template lock.
+![54](images-a/54.png)
+
+- the following is not thread safe
+  - the first `synchronized` keyword without static is on the object lock.
+  - the second `synchronized` keyword with static is on the class template lock.
+![55](images-a/55.png)
+
+### Dead Locks
+- caused by adding lock in wrong orders
+- how to avoid: no matter the order we add the lock, we should have the exact the same order to release the lock.
+
+## Callable vs CompletableFuture!!!
+- For Callable, every time we call the `get` api from the FutureTask, it's going to block the main thread.
+- For CompletableFuture, we gonna have a callback. 
+  - And CompletableFuture can be chained. it means the callback will trigger another task, so on so forth. when everything is done, the main thread will come back and get the result. then continue to running.
+- Cons for CompletableFuture, it's hard to handle Exceptions all over the place.
+
+![56](images-a/56.png)
+![57](images-a/57.png)
+![58](images-a/58.png)
+![59](images-a/59.png)
+![60](images-a/60.png)
+![61](images-a/61.png)
+
+## volatile keyword: visibility only
+- anything decorated with volatile, means it's visible in between those threads.
+- volatile element will put in main memory.
+- it's not thread safe. it just ensure **visibility** every time each thread will get the latest from the main memory.
+- it also ensures **the instructions are not reordered(in assembly code)**.
+- Usage: when we have a singleton design pattern, and we wanna singleton design pattern thread safe. And at the moment we need to add the volatile keyword on that singleton object reference.
+
+## CAS: Compare and Swap
+- it's another mechanism to ensure the thread-safety.
+- it's special that it doesn't contain any lock.
+  - it uses self-spinning mechanism to ensure that object value or any of those common resource value is going to be upgraded with the correct version.
+![62](images-a/62.png)
+
+- i.e. AtomicInteger
+
+![63](images-a/63.png)
+
+- i.e. AtomicReference
+![64](images-a/64.png)
+
+### CAS vs Lock
+1. comparing the performance regarding to the while loop and lock.
+2. the nature of the computation(something like keep back and forth) then it suit for CAS. However, if it takes very long time to back to the original state, we should use lock.
+
+### AtomicReference is going to create ABA problems
+- **AtomicStampedReference** is going to solve that. 
+  - how: it's instead of just checking the value, it also creates a tag for each of the value(so, instead of checking the values, we also checking the versions).
+
+
 
 ## Design Patterns
 ### Singleton

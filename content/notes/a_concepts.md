@@ -527,10 +527,15 @@ enum Day {
 ### AtomicReference is going to create ABA problems
 - **AtomicStampedReference** is going to solve that. 
   - how: it's instead of just checking the value, it also creates a tag for each of the value(so, instead of checking the values, we also checking the versions).
+- it allows us to tracking if there is a ABA problem or not.
 
-
+### practices
+- 5,5,5,10,10,10,15,15,15
+- 5,10,15,5,10,15,5,10,15
 
 ## Design Patterns
+- what/why/where to use/how to use
+
 ### Singleton
 - [reference](https://refactoring.guru/design-patterns/singleton)
 - there is only one object we can create from the class.
@@ -563,6 +568,10 @@ enum Day {
 - In practice, the proxy has the same interface as a service, which makes it interchangeable with a real object when passed to a client.
 - There are two types of proxy: the static proxy and the dynamic proxy.
 - The static proxy requires developer to know the target class in advance, whereas the dynamic proxy doesn't, because the proxy class can be dynamically created by JVM during the runtime.
+
+### Adaptors
+
+### Observers
 
 
 ## OSI model vs TCP/IP model(won't be asked during the interview)

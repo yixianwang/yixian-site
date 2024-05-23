@@ -589,11 +589,14 @@ enum Day {
 
 ## Maven/Gradle
 - project management tool
+- auto building tool
 
 ### Maven folder structure
 ![8](images-a/8.png)
 
 ### Types of Repositories in Maven
+> the idea about caching
+
 - Local Repository
   - ~/.m2
 - Remote Repository

@@ -3,6 +3,8 @@ title = 'AWS'
 date = 2024-04-29T15:12:10-04:00
 +++
 
+- [SAA-02 Reference](https://github.com/keenanromain/AWS-SAA-C02-Study-Guide?tab=readme-ov-file#elastic-block-store-ebs)
+
 ## Global Services
 - Identity and Access Management (IAM)
 - Route 53 (DNS service)

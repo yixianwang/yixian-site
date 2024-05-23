@@ -59,7 +59,7 @@ docker ps --all
 
 ### 4.2 also can use log
 ```
-docer logs *** # with first three characters of DockerID
+docker logs *** # with first three characters of DockerID
 ```
 
 ## 5. Create a Docker Container from Dockerfiles

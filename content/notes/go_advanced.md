@@ -310,7 +310,7 @@ func main() {
 ```
 
 ## Pointers
-- similar to c/c++
+- same to c/c++
 
 ## Goroutines
 - use `go` keyword in front of the function we want to run concurrently
@@ -496,6 +496,53 @@ func log() {
 ```
 
 ## Channels
+- think of channels as a way to enable go routines to pass around information
+- main features:
+  1. Hold Data: i.e. integer, slice, or anything else
+  2. Thread Safe: i.e. we avoid data races when we're reading and writing from memory
+  3. Listen for Data: we can listen when data is added or removed from a channel and we can block code execution until one of these events happens.
+
+- to make a channel, we use `make` function followed by the `chan` keyword, then the type of value we want the channel to hold. i.e. `var c = make(chan int)`, so this channel can only hold a single int value
+- channels also have a special syntax. i.e. we use `<-` to add value to the channel
+- we can think of a channel as containing an underlying array, in this case we have what's called an **Unbuffer Channel**, which only has enough room for one value.
+- we can retrieve the value from a channel using `var i = <- c`, so here the value gets *popped out* of the channel(the channel is now empty) and variable `i` holds the value
+
+### deadlock errors
+- Why?:
+  - when we write to an **Unbuffer Channel**(`c <- 1`), the code will block until something else reads from it.
+  - so in effect we'll be waiting here forever, unable to reach the line (`var i = <- c`), where we actually read from the channel
+  - luckily go's runtime is smart enough to notice this and we will just throw a deadlock error rather than our code hanging here forever.
+
+> To use it properly in conjunction with go routine
+
+- **Channel + Go Routines == Proper Way**
+
+```
+package main
+
+import "fmt"
+
+func main() {
+    var c = make(chan int) // to make a channel
+    c <- 1 // add value to the channel
+    var i = <- c // retrieve the value from a channel
+    fmt.Println(i)
+}
+```
+
+### (Channel + Go Routines) is a proper way
+```
+package main
+
+import "fmt"
+
+func main() {
+    var c = make(chan int) // to make a channel
+    c <- 1 // add value to the channel
+    var i = <- c // retrieve the value from a channel
+    fmt.Println(i)
+}
+```
 
 ## Generics
 

@@ -613,7 +613,103 @@ func process(c chan int) {
 ```
 
 ## Buffer Channel
+- now we can store multiple values in the channel at the same time.
+- i.e. we can store 5 integers `var c = make(chan int, 5)`
 
+> if we run the code with the regular channel, the process function stays active until the main function is done with the channel. But there's no need for the process function to hang around. It can finish its work quickly and just exit. And let the main function do its thing.
+
+```
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    var c = make(chan int, 5) // the process function can add up to 5 values in the channel without having to wait for the main function to make room in the channel by popping out a value(at the for loop line)
+    go process(c)
+    for i := range c {
+      fmt.Println(i)
+      time.Sleep(time.Second * 1) // some work..., takes 1 second
+    }
+}
+
+func process(c chan int) {
+    defer close(c)
+    for i := 0; i < 5; i++ {
+        c <- i
+    }
+    fmt.Println("Exiting process")
+}
+```
+> Note: the process function finishes almost immediately while the main function is still running reading the values in the channel.
+
+## Realistic example of Channels
+```
+package main
+
+import (
+    "fmt"
+    "math/rand"
+    "time"
+)
+
+var MAX_CHICKEN_PRICE float32 = 5
+var MAX_TOFU_PRICE float32 = 3
+
+// there are three go routines running at the same time checking these three websites
+// and sendMessage function is waiting there for value to be added to the channel to send off text
+// so the first go routine to find a deal on chicken will trigger the text message in the program and exit.
+func main() {
+    var chickenChannel = make(chan string) // the channel holds the website we found the sale on
+    var tofuChannel = make(chan string) // when we find a bargain on tofu we write to this channel
+    var websites = []string{"walmart.com", "costco.com", "wholefoods.com"}
+    for i := range websites {
+        go checkChickenPrices(websites[i], chickenChannel) // we spawn three go routines
+        go checkTofuPrices(websites[i], tofuChannel)
+    }
+    sendMessage(chickenChannel, tofuChannel) // send a message when a deal is found
+}
+
+func checkTofuPrices(website string, c chan string) {
+    for {
+        time.Sleep(time.Second * 1)
+        var tofu_price = rand.Float32() * 20
+        if tofu_price <= MAX_TOFU_PRICE {
+            c <- website
+            break
+        }
+    }
+}
+
+func checkChickenPrices(website string, chickenChannel chan string) {
+    for { 
+        // every second check the website for the price of chicken 
+        // and if it's below our threshold, it will set the value of the channel to the website
+        time.Sleep(time.Second * 1)
+        var chickenPrice = rand.Float32() * 20
+        if chickenPrice <= MAX_CHICKEN_PRICE {
+            chickenChannel <- website
+            break
+        }
+    }
+}
+
+func sendMessage(chickenChannel chan string, tofuChannel chan string) {
+    // fmt.Printf("\nFound a deal on chicken at %s", <- chickenChannel) // waiting here for value to be added to the channel
+    
+    // select statement will listen for a result once it gets one it'll execute one of those statements and exit.
+    select { 
+        // if we receive a message from the chicken channel, we set the variable website to the value in the channel and we execute the following statement
+        case website := <- chickenChannel:
+            fmt.Printf("\nText sent: Found deal on chicken at %v.", website)
+        // otherwise if we receive a message from the tofu channel, we execute the following statement
+        case website := <- tofuChannel:
+            fmt.Printf("\nEmail sent: Found deal on chicken at %v.", website)
+    }
+}
+```
 
 ## Generics
 

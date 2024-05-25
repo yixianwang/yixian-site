@@ -530,19 +530,90 @@ func main() {
 }
 ```
 
-### (Channel + Go Routines) is a proper way
+### (Channel + Go Routines) is the proper way
+
+#### example 1
 ```
 package main
 
 import "fmt"
 
 func main() {
-    var c = make(chan int) // to make a channel
-    c <- 1 // add value to the channel
-    var i = <- c // retrieve the value from a channel
-    fmt.Println(i)
+    var c = make(chan int) // 1. make a channel
+    go process(c) // 2. call go routine
+    fmt.Println(<- c) // !!! 3. the execution will be waiting here for a value to be set in the channel
+    // !!! 5. then our main function notices that a value has been set, and finally the print function gets called
+}
+
+func process(c chan int) {
+    c <- 123 // !!! 4. in this go routine, we set the value and exit the function
 }
 ```
+
+#### example 2
+- we can iterate over the channel by using `range` keyword
+
+- work flows:
+  1. we create the channel(`make(chan int)`) and start the go routine(`go process(c)`)
+  2. in the main function we wait at the top of the `for` loop for something to be added to the channel
+  3. in the process function we setup `for` loop and add `0` to the channel
+  4. we wait (`c <- 0`) until the main function reads from the channel
+  5. and then in a concurrent way both the value printed and `1` is added to the channel at about the same time
+  6. this then continues until `i` is equal to `5`.
+
+```
+package main
+
+import "fmt"
+
+func main() {
+    var c = make(chan int)
+    go process(c)
+    for i := range c {
+      fmt.Println(i) // i here is the value of the channel
+    }
+}
+
+func process(c chan int) {
+    for i := 0; i < 5; i++ {
+        c <- i
+    }
+}
+```
+> Note: deadlock error happens again for above code
+- because after we print all of our values from `0` to `4`, 
+- the main function will go back to wait at the top of the `for` loop for another value
+- but just like me on under after five messages it will get ghosted by the process function which won't send any more messages and we get deadlock error
+
+- Solution:
+  - before exiting a process, we can close the channel like `close(c)` or `defer close(c)`
+  - `close(c)` notifies any other process using this channel that we're done
+  - and our main function will break out of the `for` loop and exit.
+> `defer close(c)` using `defer` statement and it go this just means do this stuff(`close(c)`) **right before the function exits**.
+
+```
+package main
+
+import "fmt"
+
+func main() {
+    var c = make(chan int)
+    go process(c)
+    for i := range c {
+      fmt.Println(i)
+    }
+}
+
+func process(c chan int) {
+    for i := 0; i < 5; i++ {
+        c <- i
+    }
+    close(c) // close the channel
+}
+```
+
+## Buffer Channel
+
 
 ## Generics
 

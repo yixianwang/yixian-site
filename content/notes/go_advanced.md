@@ -329,15 +329,14 @@ import (
     "sync"
 )
 
-var dbData = []string{"id1", "id2", "id3", "id4", "id5"}
-
 var wg = sync.WaitGroup{}
+var dbData = []string{"id1", "id2", "id3", "id4", "id5"}
 
 func main() {
     t0 := time.Now()
     for i := 0; i < len(dbData); i++ {
         wg.Add(1)
-        dbCall(i)
+        go dbCall(i)
     }
     wg.Wait()
     fmt.Printf("\nTotal execution time: %v", time.Since(t0))
@@ -349,6 +348,150 @@ func dbCall(i int) {
     time.Sleep(time.Duration(delay) * time.Millisecond)
     fmt.Println("The result from the database is:", dbData[i])
     wg.Done()
+}
+```
+
+### using locks to make threads safe
+
+#### without lock
+```
+package main
+
+import (
+    "fmt"
+    "time"
+    "sync"
+)
+
+var wg = sync.WaitGroup{}
+var dbData = []string{"id1", "id2", "id3", "id4", "id5"}
+var results = []string{} // 1. create a slice to store all the result from db
+
+func main() {
+    t0 := time.Now()
+    for i := 0; i < len(dbData); i++ {
+        wg.Add(1)
+        go dbCall(i)
+    }
+    wg.Wait()
+    fmt.Printf("\nTotal execution time: %v", time.Since(t0))
+    fmt.Printf("\nThe results are %v", results) // 3. print the results
+}
+
+func dbCall(i int) {
+    // simulate DB call delay
+    var delay float32 = 2000
+    time.Sleep(time.Duration(delay) * time.Millisecond)
+    fmt.Println("The result from the database is:", dbData[i])
+    results = append(results, dbData[i]) // 2. append the result
+    wg.Done()
+}
+```
+> Above code, WE WILL GET AN UNEXPECTED RESULT 
+
+#### with lock (sync.Mutex{})
+- to make thread safe, we can use **mutex (Mutual Exclusion)** by `var m = sync.Mutex{}`
+- with two main methods `m.Lock()` and `m.Unlock()`, and place them around the part of our code which access the result slice
+- cons: it completely locks out other go routines to access the results slice
+
+```
+package main
+
+import (
+    "fmt"
+    "time"
+    "sync"
+)
+
+var m = sync.Mutex{} // 1. create a mutex
+var wg = sync.WaitGroup{}
+var dbData = []string{"id1", "id2", "id3", "id4", "id5"}
+var results = []string{} 
+
+func main() {
+    t0 := time.Now()
+    for i := 0; i < len(dbData); i++ {
+        wg.Add(1)
+        go dbCall(i)
+    }
+    wg.Wait()
+    fmt.Printf("\nTotal execution time: %v", time.Since(t0))
+    fmt.Printf("\nThe results are %v", results) 
+}
+
+func dbCall(i int) {
+    // simulate DB call delay
+    var delay float32 = 2000
+    time.Sleep(time.Duration(delay) * time.Millisecond)
+    fmt.Println("The result from the database is:", dbData[i])
+    m.Lock() // 2. use lock
+    results = append(results, dbData[i]) 
+    m.Unlock() // 2. use unlock
+    wg.Done()
+}
+```
+
+#### with lock (sync.RWMutex{})
+- this has all the same functionality of of the mutex above
+  - and the `m.Lock()` and `m.Unlock()` work exactly the same
+  - but we also have `m.RLock()` and `m.RUnlock()` methods
+
+- workflows:
+  1. when go routine reaches `m.RLock()`, it checks if there's a **full lock (`m.Lock()`)** on the mutex
+    - if **full lock** exists, it(`m.RLock()`) will wait until **full lock** is released before continuing
+    - if no full lock exists, the go routine will acquire a **read lock (`m.RLock()`)**, and then proceed with the rest of the code
+- Note: 
+  1. **many** go routines may hold **read locks** at the same time, these **read locks** will only block code execution up to the **full lock**
+  2. when the a go routine hits **full lock** and in order to proceed, all **locks** must be cleared
+> pros: **this prevents us from accessing the slice while other go routines are writing to or reading from the slice**
+
+- summary: it allows multiple go routines to read from our slice at the same time, only blocking when writes may be potentially be happening
+
+```
+package main
+
+import (
+    "fmt"
+    "time"
+    "sync"
+)
+
+var m = sync.RWMutex{} // 1. use RWMutex
+var wg = sync.WaitGroup{}
+var dbData = []string{"id1", "id2", "id3", "id4", "id5"}
+var results = []string{} 
+
+func main() {
+    t0 := time.Now()
+    for i := 0; i < len(dbData); i++ {
+        wg.Add(1)
+        go dbCall(i)
+    }
+    wg.Wait()
+    fmt.Printf("\nTotal execution time: %v", time.Since(t0))
+    fmt.Printf("\nThe results are %v", results) 
+}
+
+func dbCall(i int) {
+    var delay float32 = 2000
+    time.Sleep(time.Duration(delay) * time.Millisecond)
+
+    save(dbData[i])
+    log()
+
+    wg.Done()
+}
+
+func save(result string) {
+    m.Lock()
+    results = append(results, result)
+    m.Unlock()
+}
+
+func log() {
+    m.RLock()
+    fmt.Printf("\nThe current results are: %v", results)
+    m.RUnlock()
 }
 ```
 

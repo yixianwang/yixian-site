@@ -837,3 +837,12 @@ func main() {
 
 ## Building an API!
 - [youtube](https://www.youtube.com/watch?v=8uiZC0l4Ajw)
+- [Code](https://github.com/avukadin/goapi)
+
+- [Reference: Golang Project Layout](https://github.com/golang-standards/project-layout)
+
+1. `go mod init module_name(i.e. Github URL)`
+2. `mkdir api`, api folder contains specs things like parameters and response type for our endpoint. This is also where we could put our yaml spec file.
+3. `mkdir cmd/api`, will contain our **main.go**.
+4. `mkdir internal`, will contain most of code for this API.
+

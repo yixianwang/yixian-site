@@ -1,7 +1,6 @@
 +++
 title = 'Projects'
 date = 2024-05-27T22:30:29-04:00
-draft = true
 +++
 
 ## Project 1: Online Learning Platform

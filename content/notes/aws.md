@@ -74,6 +74,19 @@ aws iam list-users
 ## Section 9: AWS Fundamentals: RDS + Aurora + ElastiCache
 
 ## Section 10: Route 53
+- Domain Registrar: Amazon Route 53, GoDaddy, ...
+- DNS Records: A, AAAA, CNAME, NS, ...
+- Zone File: contains DNS Records
+- Name Server: resolves DNS queries (Authoritative or Non-Authoritative)
+- Top Level Domain (TLD): .com, .us, .in, .gov, .org, ...
+- Second Level Domain (SLD): amazon.com, google.com, ...
+
+![URL](images-aws/2.png)
+
+- DNS SOA(Start of Authority) record
+
+### How DNS works
+
 
 ## Section 11: Classic Solutions Architecture Discussions
 

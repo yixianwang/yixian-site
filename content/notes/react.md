@@ -39,6 +39,9 @@ npm create vite@latest project-folder-name
 
 ### additional package
 1. react-icon, install additional package `npm i react-icons`
+    - remove <i></i>
+    - `import { FaArrowLeft } from 'react-icons/fa'`
+    - `<FaArrowLeft className='mr-2' /> Some Texts`
 1. react-router-dom, `npm i react-router-dom`
 
 ### routing
@@ -98,7 +101,8 @@ export default App;
 5. use `useEffect` hook to make a request, we also use `useState`
     - `const [jobs, setJobs] = useState([]);`
     - `const [loading, setLoading] = useState(true);`
-    ```useEffect( () => {
+    ```ts
+    useEffect( () => {
       const fetchJobs = async () => {
         try {
           const res = await fetch('http://localhost:8000/jobs'); // without proxy
@@ -139,7 +143,7 @@ export default App;
 ### Proxying
 - with create react app use `package.json`
 - with vite we use `vite.config.ts`, and add following in `server`
-```
+```ts
 proxy: {
   '/api': {
     target: 'http://localhost:8000',
@@ -151,3 +155,75 @@ proxy: {
 // every time we send a request we use /api, i.e. /api/jobs (instead of localhost:00/jobs)
 ```
 
+### data loader from react router for single page
+- another way to fetch data
+#### useEffet way: traditional way
+```ts
+import {useState, useEffect} from 'react'; 
+import {useParams} from 'react-router-dom';
+import Spinner from '../component/Spinner';
+
+const JobPage = () => {
+  const { id } = useParams();
+  const [job, setJob] = useState(null);
+  cont [loading, setLoading] = useState(true);
+
+  useEffect( () => {
+    const fetchJob = async () => {
+      try {
+        const res = await fetch(`/api/jobs/${id}`) // use ` here not '
+        const data = await res.json();
+        console.log(data);
+        setJob(data);
+      } catch (error) {
+        console.log('Error fetching data', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJob();
+  }, []);
+
+  return loading ? <Spinner /> : <h1>{job.title}<h1/>
+}
+
+export default JobPage;
+```
+
+#### new way: data loader way(a new feature with react router not react itself)
+```ts
+// 5.
+import {useParams, useLoaderDAta} from 'react-router-dom'; 
+
+const JobPage = () => {
+  const { id } = useParams();
+
+  // 6.
+  const job = useLoaderData();
+  
+  // 7.
+  return <h1>{job.title}<h1/>
+}
+
+// 1. 
+const jobLoader = async ({params}) => {
+  const res = await fetch(`/api/jobs/${params.id}`) // use ` here not '
+  const data = await res.json();
+  return data;
+};
+
+// 2. 
+export { JobPage as default, jobLoader };
+```
+
+```ts
+// within App.tsx
+// 3. 
+import JobPage, {jobLoader} from './pages/JobPage';
+
+// 4. we can pass this jobLoader into other components as well and use that to get a job by its id
+...
+<Route path='/jobs/:id' element={<JobPage />} loader={jobLoader} />
+...
+```

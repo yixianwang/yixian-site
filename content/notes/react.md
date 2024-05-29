@@ -15,16 +15,16 @@ npm create vite@latest project-folder-name
 // rfc
 ```
 
-## React Tutorials 1
+## Note: Tutorials 1
 - [My React Notes with commit](https://github.com/yixianwang/my-react-app/commits/main/)
 - [Youtube](https://www.youtube.com/watch?v=CgkZ7MvWUAA)
 
 
-## React Tutorials 2
+## Note: Tutorials 2
 - [Youtube](https://www.youtube.com/watch?v=LDB4uaJ87e0)
 - [Youtube Github](https://github.com/bradtraversy/react-crash-2024)
 
-## Project: React Jobs
+## Project: React Jobs (along with Tutorial 2)
 1. create a project, update vite.config.ts
 1. empty app.tsx, delete app.css, and empty index.css
 1. setup tailwind, `vite react tailwind` 
@@ -37,7 +37,7 @@ npm create vite@latest project-folder-name
 1. props, default values and constraint types `(props) => {...}` or `({ isHome = false}) => { ... }`
 1. useState, `onClick={() => setSome((prevState) => !prevState)}`
 
-### additional package
+### additional packages
 1. react-icon, install additional package `npm i react-icons`
     - remove <i></i>
     - `import { FaArrowLeft } from 'react-icons/fa'`

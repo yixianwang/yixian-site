@@ -157,7 +157,7 @@ proxy: {
 
 ### data loader from react router for single page
 - another way to fetch data
-#### useEffet way: traditional way
+#### the traditional way: useEffet way
 ```ts
 import {useState, useEffect} from 'react'; 
 import {useParams} from 'react-router-dom';
@@ -232,7 +232,15 @@ import JobPage, {jobLoader} from './pages/JobPage';
 - change `class` to `className`
 - change `for=` to `htmlFor=`
 > Other ways to work with forms, including `foric`
-- the most common basic way to work with form:
+- the **most common** basic way to work with form:
   - adding a piece of `useState` for every field in our form.
+  - if with react 19: we can use `<form action=? >`
+  - if with older react: we can use `<form onSubmit =? >`
 
-- 2:25:26
+### pass Functions as props && POST request to Add a job
+- we could use context API, we have all request methods in a context file
+- or we could use Redux or some other state manager.
+- within this app we just put all requests within `App.tsx`
+
+### toastify
+- `npm i react-toastify`

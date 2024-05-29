@@ -16,13 +16,13 @@ npm create vite@latest project-folder-name
 ```
 
 ## React Tutorials 1
+- [My React Notes with commit](https://github.com/yixianwang/my-react-app/commits/main/)
 - [Youtube](https://www.youtube.com/watch?v=CgkZ7MvWUAA)
-- [MyGithubNote](https://github.com/yixianwang/my-react-app/commits/main/)
 
 
 ## React Tutorials 2
 - [Youtube](https://www.youtube.com/watch?v=LDB4uaJ87e0)
-- [Github](https://github.com/bradtraversy/react-crash-2024)
+- [Youtube Github](https://github.com/bradtraversy/react-crash-2024)
 
 ## Project: React Jobs
 1. create a project, update vite.config.ts
@@ -43,3 +43,22 @@ npm create vite@latest project-folder-name
 
 ### routing
 - within `App.tsx`
+```tsx
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from `react-router-dom`;
+import HomePage from './pages/HomePage';
+
+const router = createBrowserRouter(
+  // createRoutesFromElements(<Route index element={<HomePage />} />)
+  createRoutesFromElements(<Route path='/about' element={<HomePage />} />)
+);
+
+const App = () => {
+  return <RouterProvider router={router} />;
+}
+export default App;
+```

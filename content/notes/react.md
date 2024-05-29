@@ -34,7 +34,7 @@ npm create vite@latest project-folder-name
 1. assets/images/logo.png
 
 ### single page development
-1. props, default values and constraint types
+1. props, default values and constraint types `(props) => {...}` or `({ isHome = false}) => { ... }`
 1. useState, `onClick={() => setSome((prevState) => !prevState)}`
 
 ### additional package
@@ -62,3 +62,92 @@ const App = () => {
 }
 export default App;
 ```
+
+### layout
+1. create folder `pages`, including HomePage, ...
+1. within `App.tsx`, wrap other route with layout route
+1. use `Outlet` in layout component
+
+- we prefer `link tag`, not `a tag`, because `a tag` does a complete page refresh
+- How to change a tag to link tag:
+  ```
+  import {Link} from 'react-router-dom'
+
+  // 1. change all `a` to `Link`
+  // 2. change `href` to `to`
+  ```
+
+### 404 page
+- create 404 page
+- add route with *
+
+### active link on NavBar
+- use `NavLink` instead of `Link`
+- className attached with a function
+
+### Conditional rendering
+- use props and `? :`
+
+### Mock API
+1. use json server with our json file
+    - [Json Server](https://www.npmjs.com/package/json-server)
+2. install: -D means dev dependency `npm i -D json-server`
+3. update `package.json`
+    - within `scripts` add `"server": "json-server --watch src/jobs.json --port 8888"`
+4. run `npm run server`
+5. use `useEffect` hook to make a request, we also use `useState`
+    - `const [jobs, setJobs] = useState([]);`
+    - `const [loading, setLoading] = useState(true);`
+    ```useEffect( () => {
+      const fetchJobs = async () => {
+        try {
+          const res = await fetch('http://localhost:8000/jobs'); // without proxy
+          const data = await res.json();
+          setJobs(data);
+        } catch (error) {
+          console.log('Error fetching', error);
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      fetchJobs();
+    }, []);
+
+
+    {
+      loading ? (
+        <Spinner loading={loading} />
+      ) : (
+        <>
+          {jobs.map((job) => (
+            <JobListing key={job.id} job={job} />
+          ))}
+        </JobListing>
+      )
+    }
+    ```
+6. use `React Spinners`, install: `npm i react-spinners`
+    - [Ref](https://www.npmjs.com/package/react-spinners)
+    - create a spinner ui component
+
+#### Different approach to fetch data
+- `react suspense`, it allows us to do a render while fetching, so we basically provide a fallback UI such as a spinner. (what we are doing here we fetch on render, because when it renders it has a side effect of fetching the data)
+- `react query` and `SWR` are third-party libraries. They make data fetching a little easier.
+- react 19 has new use hook
+
+### Proxying
+- with create react app use `package.json`
+- with vite we use `vite.config.ts`, and add following in `server`
+```
+proxy: {
+  '/api': {
+    target: 'http://localhost:8000',
+    changeOrigin: true,
+    rewrite: (path) => path.replace(/^\/api/, ''),
+  },
+},
+
+// every time we send a request we use /api, i.e. /api/jobs (instead of localhost:00/jobs)
+```
+

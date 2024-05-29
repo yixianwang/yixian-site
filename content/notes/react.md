@@ -227,3 +227,12 @@ import JobPage, {jobLoader} from './pages/JobPage';
 <Route path='/jobs/:id' element={<JobPage />} loader={jobLoader} />
 ...
 ```
+
+### Forms
+- change `class` to `className`
+- change `for=` to `htmlFor=`
+> Other ways to work with forms, including `foric`
+- the most common basic way to work with form:
+  - adding a piece of `useState` for every field in our form.
+
+- 2:25:26

@@ -33,3 +33,14 @@ npm create vite@latest project-folder-name
 1. reformat the code copied from the index.html into App.tsx
 1. reformat with component Navbar.tsx
 1. assets/images/logo.png
+
+### single page development
+1. props, default values and constraint types
+1. useState, `onClick={() => setSome((prevState) => !prevState)}`
+
+### additional package
+1. react-icon, install additional package `npm i react-icons`
+1. react-router-dom, `npm i react-router-dom`
+
+### routing
+- within `App.tsx`

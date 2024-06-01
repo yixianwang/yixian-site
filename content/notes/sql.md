@@ -1,5 +1,5 @@
 +++
-title = 'SQL'
+title = 'MySQL'
 date = 2023-11-03T17:51:02-04:00
 +++
 

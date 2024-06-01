@@ -3,7 +3,7 @@ title = 'Angular'
 date = 2024-01-27T02:54:24-04:00
 +++
 
-## Google Official Youtube Tutorial
+## 1. Google Official Youtube Tutorial
 - [Tutorial](https://www.youtube.com/watch?v=UnOwDuliqZA&list=PL1w1q3fL4pmj9k1FrJ3Pe91EPub2_h4jF&index=2)
 
 ```
@@ -31,4 +31,8 @@ ng serve
 ng generate component Home --standalone --inline-template
 ```
 
-## Another Youtube Tutorial
+## 2. Youtube Tutorial 2024
+- `ng generate component home`
+- `ng generate service services/api`
+
+### Fetching Data From Server (Services & Endpoints)

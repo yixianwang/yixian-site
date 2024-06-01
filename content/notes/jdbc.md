@@ -3,6 +3,14 @@ title = 'JDBC'
 date = 2024-05-31T22:26:39-04:00
 +++
 
+```xml {filename="pom.xml"}
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+```
+
 ```java {filename="JdbcConfig.java"}
 package com.yixianwang.todolistbackend;
 

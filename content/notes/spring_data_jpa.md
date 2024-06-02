@@ -140,5 +140,75 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
   @Autowired
   HistoryRepository historyRepository;
+
+  @Override
+  @Transactional
+  public Enrollment enroll(Student student, Course course) {
+    History history = new History();
+    // history.set....
+    historyRepository.save(history);
+
+    Enrollment enrollment = new Enrollment();
+    // enrollment.set...
+    return enrollmentRepository.save(enrollment);
+  }
+
+  @Override
+  public EnrollmentVO getEnrollment(Long id) {
+    Enrollment enrollment = enrollmentRepository.findById(id).orElse(null);
+    EnrollmentVO vo = new EnrollmentVO();
+    // vo.set...
+    return vo;
+  }
+
+  @Override
+  public List<Enrollment> getEnrollmentByCourseId(Long courseId) {
+    Enrollment enrollmentExample = new Enrollment();
+    Course c = new Course();
+    c.setId(courseId);
+    enrollmentExample.setCourse(c);
+    Example<Enrollment> example = Example.of(enrollmentExample);
+    List<Enrollment> enrollments = enrollmentRepository.findAll(example);
+    List<EnrollmentVO> voList = new ArrayList<>();
+    enrollments.forEach(enrollment -> {
+      EnrollmentVO vo = new EnrollmentVO();
+      // vo.setId(enrollment.getId());
+      // vo.setCourseName(enrollment.getCourse().getName());
+      // vo.setStudentName(enrollment.getStudent().getName());
+      voList.add(vo);
+    })
+    return voList;
+  }
+
+  @Override
+  public List<EnrollmentVO> getAll(int page, int rows) {
+    Pageable pageRequest = PageRequest.of(page, rows);
+    Page<Enrollment> p = enrollmentRepository.findAll(pageRequest);
+    List<Enrollment> enrollments = p.getContent();
+    List<EnrollmentVO> voList = enrollments.stream().map(enrollment -> {
+      EnrollmentVO vo = new EnrollmentVO();
+      // vo.set...
+      return vo;
+    }).toList();
+    return voList;
+  }
+}
+```
+
+```java {filename="StudentServiceImpl.java"}
+@Service
+public class StudentServiceImpl implements StudentService {
+  @Autowired
+  StudentRepository studentRepository;
+
+  @Override
+  public List<StudentVO> getAllStudents() {
+    return studentRepository.findAll().stream().map(entity -> {
+      StudentVO temp = new StudentVO();
+      BeanUtils.copyProperties(entity, temp);
+      temp.setDob(Date.valueOf(entity.getDob()));
+      return temp;
+    }).toList();
+  }
 }
 ```

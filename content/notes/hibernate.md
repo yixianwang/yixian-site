@@ -121,3 +121,24 @@ session.save(secondEmployee);
 session.getTransaction().commit();
 HibernateUtil.shutdown();
 ```
+
+### CascadeType
+- In practice, we should always use the minimum scope.
+
+```java {filename="CascadeType.class"}
+package javax.persistence;
+
+public enum CascadeType {
+    All,
+    PERSIST,
+    MERGE,
+    REMOVE,
+    REFRESH,
+    DETACH;
+
+    private CascadeType() {
+    }
+}
+```
+
+- `@OneToMany(cascade=CascadeType.ALL)`, when delete(or update) a employee, it also deletes all corresponding accounts.

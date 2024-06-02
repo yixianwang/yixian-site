@@ -159,7 +159,37 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
+}
+```
 
+```java {filename="repository/StudentRepository.java"}
+// package ...
+
+// import ...Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface StudentRepository extends JpaRepository<Student, Long> {
+}
+```
+
+```java {filename="repository/TeacherRepository.java"}
+// package ...
+
+// import ...Teacher;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TeacherRepository extends JpaRepository<Teacher, Long> {
+  // select * from teachers where age < 40 and id > 1000;
+  List<Teacher> findByAgeLessThan(int age);
+  List<Teacher> findByAge(int age);
+
+  // @Query(value = "select t from Teacher t where t.age < ? and t.id > ?", nativeQuery = true) // native sql query
+  @Query(value = "select t from Teacher t where t.age < :age and t.id > :id") // jpql
+  List<Teacher> a(int age, long id);
 }
 ```
 
@@ -171,6 +201,9 @@ public interface HistoryRepository extends MongoRepository<History, String> {
   List<History> findByCourseName(String courseName);
 }
 ```
+
+#### Test Repositories
+![images-springdatajpa](3.png)
 
 
 ### Service layer
@@ -252,5 +285,20 @@ public class StudentServiceImpl implements StudentService {
       return temp;
     }).toList();
   }
+}
+```
+
+```java {filename="UserServiceImpl.java"}
+@Service
+@Primary
+public class UserServiceImpl implements UserService {
+  public void login(String username) { System.out.println("in user service, use password"); }
+}
+```
+
+```java {filename="UserServiceImpl2.java"}
+@Service
+public class UserServiceImpl implements UserService {
+  public void login(String username) { System.out.println("in user service2, login by fingerprint"); }
 }
 ```

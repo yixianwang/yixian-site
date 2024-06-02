@@ -10,6 +10,12 @@ date = 2024-06-01T21:42:22-04:00
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+        <!-- for mongodb -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
         <!-- for postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -23,10 +29,14 @@ date = 2024-06-01T21:42:22-04:00
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.32</version>
         </dependency>
+
 ```
 
 ```yaml {filename="application.properties"}
 ```
+![application.properties](images-springdatajpa/1.png)
+![DBScript](images-springdatajpa/2.png)
+
 
 ## Entities
 ```java {filename="Course.java"}
@@ -49,7 +59,7 @@ public class Course {
   @OneToMany(mappedBy = "course")
   private List<Enrollment> enrollmentList;
 
-  // ...
+  // setter and getter ...
 }
 ```
 
@@ -69,7 +79,7 @@ public class Enrollment {
 
   private Integer score;
 
-  // ...
+  // setter and getter ...
 }
 ```
 
@@ -88,7 +98,22 @@ public class Student {
   @OneToMany(mappedBy = "student")
   List<Enrollment> enrollmentList;
 
-  // ...
+  // setter and getter ...
+}
+```
+
+### mongodb
+```java {filename="mongodb/History.java"}
+@Document("enrollment_history")
+public class History {
+  @Id
+  private String id;
+
+  private String action;
+  private String studentName;
+  private String courseName;
+
+  // setter and getter ...
 }
 ```
 
@@ -98,8 +123,15 @@ public class Student {
   - **controller**
   - **data**
   - **entity**
+    - **mongodb**
+      - History.java
+    - Course
+    - Enrollment
+    - Student
+    - Teacher
   - **repository**
     - **mongodb**
+      - HistoryRepository.java
     - EnrollmentRepository.java
     - StudentRepository.java
     - TeacherRepository.java
@@ -119,9 +151,9 @@ public class Student {
 
 ### Dao layer
 ```java {filename="repository/EnrollmentRepository.java"}
-package ...
+// package ...
 
-import ...Enrollment;
+// import ...Enrollment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -130,6 +162,16 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
 }
 ```
+
+#### mongodb
+```java {filename="repository/mongodb/HistoryRepository.java"}
+
+public interface HistoryRepository extends MongoRepository<History, String> {
+  List<History> findByAction(String action);
+  List<History> findByCourseName(String courseName);
+}
+```
+
 
 ### Service layer
 ```java {filename="EnrollmentServiceImpl.java"}

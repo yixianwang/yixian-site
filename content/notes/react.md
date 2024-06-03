@@ -194,7 +194,7 @@ export default JobPage;
 #### new way: data loader way(a new feature with react router not react itself)
 ```ts
 // 5.
-import {useParams, useLoaderDAta} from 'react-router-dom'; 
+import {useParams, useLoaderData} from 'react-router-dom'; 
 
 const JobPage = () => {
   const { id } = useParams();

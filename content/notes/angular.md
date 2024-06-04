@@ -2,6 +2,27 @@
 title = 'Angular'
 date = 2024-01-27T02:54:24-04:00
 +++
+## Concepts
+### template reference variable
+- Useful: child component can interact with or manipulate the parent's HTMLElement
+```
+<input #text />
+<app-child [inputRef]="text"></app-child>
+```
+> child component use `@Input` to receive the reference of HTMLInputElement
+
+### dynamic properties vs dynamic attributes
+- dynamic attributes: 
+  - for custom HTML attributes which are not standard DOM properties
+  - we need to prepend the custom HTML attribute with the `attr.` prefix.
+```
+<button [attr.data-test-id]="testId">Primary CTA</button>
+```
+> the declared value in square bracket should be interpreted as a Javascript-like statement.
+
+### event
+- syntax: `(click)="save()"`, interpreted as event trigger the Javascript-like statement.
+
 
 ## 1. Google Official Youtube Tutorial
 - [Tutorial](https://www.youtube.com/watch?v=UnOwDuliqZA&list=PL1w1q3fL4pmj9k1FrJ3Pe91EPub2_h4jF&index=2)

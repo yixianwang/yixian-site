@@ -922,3 +922,30 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 
 ### Bean Scopes
 - above
+
+## Messaging Queue
+- Two major Purpose:
+  - with buffering we can have OFF PEAK, we are going to protect our servers from burning out.
+  - with topic related, we can have decoupling style.
+- pub-sub messaging queue example: RabbitMQ, Redis, Kafka
+
+### Kafka, one of message queue implementations
+- it's a pub-sub messaging queue type.
+- itself can run as a cluster(we would have multiple kafka brokers).
+  - The these two number we can configure when we setup each Kafka topic 
+    - #partitions(can not be dynamic configured) depends on #consumers
+    - #replication depends on #servers(same as #brokers)
+- versioning: since kafka 7, it replace ZooKeeper with Kraft
+- topics: a virtual or conceptual idea that we store messages
+- partitions: a real way to store messages(a topic is **sharding** into three? partitions), within partitions there is offset(like consuming index to indicate consuming process)
+  - when the broker(Zookeeper) is shutting down, kafka will persist partitions(messages data) and offset.
+- Producer: will configure which topics it is going to send message to(depending on logic).
+- Consumer: will configure the #partitions, #replications, whether consumers are in the same consumer group or not.
+  - consumer groups: a bunch of consumers can run in parallel, to consume the message in the same topic. Within consumer group, each consumer can only consume different partition than others(to avoid thread safe issues).
+- Re-balancing: will sacrifice some performance. It will infected by the interval we set up.
+- Duplicated messages
+  - Producer side: to determine if the message has been produced(sent) or not: Consistency of replications vs Performance: setting up #replications(need to be sync up) as a condition while producer sending message to broker, if condition fulfill.
+  - Consumer side: to determine if the message has been consumed(deleted) or not: just comparing offset like above, checking if the offset sync up.
+#### Code
+- [Github](https://github.com/AntraJava/KafkaPOC)
+- [Setup Kafka cluster](https://www.youtube.com/watch?v=tSsagN7-V3E)

@@ -923,6 +923,21 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 ### Bean Scopes
 - above
 
+## Microservice
+### WHY: we need microservice
+- if one service fails, we need to like restart the whole thing work.
+
+### HOW: various ways to implement Microservice
+- business separation: (vertical): i.e. login/browse/order/payment/...
+- business separation: (horizontal): i.e. service oriented. (Python handles ML, Java handles web application, ...) 
+
+#### Five Components
+- API Gateway
+- Service Registry/Discovery
+- Configuration Management
+- Monitoring and Log Tracing
+- Business Modules
+
 ## Messaging Queue
 - Two major Purpose:
   - with buffering we can have OFF PEAK, we are going to protect our servers from burning out.

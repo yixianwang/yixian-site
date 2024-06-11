@@ -923,6 +923,11 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 ### Bean Scopes
 - above
 
+
+
+
+
+
 ## Microservice
 ### WHY: we need microservice
 - if one service fails, we need to like restart the whole thing work.

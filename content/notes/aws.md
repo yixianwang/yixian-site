@@ -22,6 +22,10 @@ date = 2024-04-29T15:12:10-04:00
 - Lambda (Function as a Service)
 - Rekognition (Software as a Service)
 
+## Concepts
+- RDS Multi-AZ = Synchronous = High Availability
+- Read Replica = Asynchronous = Disaster Recovery (DR)
+
 ## IAM
 ```
 which aws
@@ -113,14 +117,28 @@ aws iam list-users
 ## Section 22: Data & Analytics
 
 ## Section 23: Machine Learning
+- Rekognition: face detection, labeling, celebrity recognition
+- Transcribe: audio to text
+- Polly: text to audio
+- Translate: translations
+- Lex: build conversational bots - chatbots
+- Connect: cloud contact center
+- Comprehend: NLP
+- SageMaker: ML for every developer and data scientist
+- Forecast: build high accurate forecasts
+- Kendra: ML-powered search engine
+- Personalize: real-time personalized recommendations
 
 ## Section 24: AWS Monitor & Audit: CloudWatch, CloudTrail & Config
 
-## Section 25: Identiy and Access Management(IAM) - Advanced
+## Section 25: Identity and Access Management(IAM) - Advanced
 
 ## Section 26: AWS Security & Encryption: KMS, SSM Parameter Store, Shield, WAF
 
 ## Section 27: Networking - VPC
+- Gateway VPC endpoints: Amazon S3 and DynamoDB, with route we don't need public IP addresses
+- Interface VPC endpoints: are used by all the other services that are becoming available inside our VPC.
+  - PrivateLink: we can use this to share our services with thousands of other VPCs.
 
 ## Section 28: Disaster Recovery & Migrations
 

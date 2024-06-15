@@ -931,6 +931,16 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 ### 2. SOAP(earlier days)
 - stateful protocol for communication between FE and BE(or BE to other BE)
 
+## Sharding & Replica
+### Replica
+- trade off between hardware resources and performance
+- lose some C(Consistency)
+
+### Sharding
+- partition database into different servers
+  - horizontal partition
+  - vertical partition: for flat and fat table
+
 ## Database
 - we need to store backend data somewhere to ensure we have a better **searching performance**, comparing to File System, which would scan all the files in the file system.
 - we need a certain structure that structure need to be efficient for searching
@@ -963,6 +973,12 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - in some scenarios, we want to search in different style. Where we have **non-clustered index**. Any table can have as many as **non-clustered index** as we want.
   - it's good for reading operation, but bad for insert or delete operations. That's also the reason we cannot have as many indexes as we want.
   - non-clustered index is table of content. clustered index is the data.
+- Views: A virtual table(just **reference**, that pointing to specific columns that supposed to be seen within the view) created from a query that includes one or more tables' data
+  - based on references we still can have update/delete those records in the table
+  - restrict data access from other user
+  - used to improve query speed
+  - simplify commonly used complex queries into one place
+- Store Procedure: A function directly written inside the database.
 - nowadays Postgres and Mysql supporting to store documents
 
 ### noSQL

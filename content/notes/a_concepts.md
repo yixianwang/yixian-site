@@ -923,7 +923,19 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 ### Bean Scopes
 - above
 
+## Connection between frontend and backend
+### 1. Restful endpoint
+- stateless API protocol for transferring the payloads
+- it's the connection between the frontend and backend to sending the payload(data + something else(header...))
 
+### 2. SOAP(earlier days)
+- stateful protocol for communication between FE and BE(or BE to other BE)
+
+## Database
+### SQL
+### noSQL
+### elastic search
+- not a exactly like traditional noSQL database, more like a full text searching database
 
 
 

@@ -128,6 +128,7 @@ aws iam list-users
 - Forecast: build high accurate forecasts
 - Kendra: ML-powered search engine
 - Personalize: real-time personalized recommendations
+- Textract: extract text from file
 
 ## Section 24: AWS Monitor & Audit: CloudWatch, CloudTrail & Config
 

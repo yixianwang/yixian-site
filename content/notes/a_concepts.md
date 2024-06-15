@@ -932,10 +932,47 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - stateful protocol for communication between FE and BE(or BE to other BE)
 
 ## Database
+- we need to store backend data somewhere to ensure we have a better **searching performance**, comparing to File System, which would scan all the files in the file system.
+- we need a certain structure that structure need to be efficient for searching
+- it also need to be efficient for maintenance.
+- it also need to ensure that it's not over complicated(means that going through table of content must faster than going through file system)
+
 ### SQL
+- SQL database, supporting ACID principle(Atomicity, Consistency, Isolation, and Durability)
+  - structural, tabular database, good for vertical scaling
+- **ACID and transaction are interchangeable**.
+  - transaction: a group of operation, i.e. CRUD operations. Once they are grouped up together, either all of them is going to be executed successfully, or none of them is going to be executed at all.
+    - it ensures the **consistency** in between database, business logics, user.
+    - it just adds locks to the database level.
+      - the idea is similar to Java, when we add locks(or monitor, interchangeable) to ensure the group of operations are Atomic(or Thread Safe, interchangeable)
+    - transaction's thread safety is supported by the ACID principle.
+      - A(Atomicity): either all of them is going to be executed successfully, or none of them is going to be executed at all.
+      - C(Consistency): guarantee the CRUD operations' consistency. i.d. Deleted records won't come back later.
+      - I(Isolation): there will be certain critical problems, which is thread safety problems. With database default settings cannot solve it(Dirty Writing and Dirty Reading). Dirty Writing is guaranteed to solved by database like Mysql for sure. Dirty Reading has several levels, different levels require different level of locks to solve the problem. Trade off between Less Thread Safety and Less Concurrency with #locks.
+      - D(Durability): once the record is inserted, the record will stay at there. i.e. Out of electricity won't affect the record.
+- Primary Key: basically consider as ID, for any of the record within the table it will be unique and cannot be null.
+- Foreign Key: it's a key that trying to simplify the content. can have duplicate values. The purpose is to save space which is also increasing searching efficiency.
+- Normalization: the whole idea is to reduce redundancies and maintain integrity. There are 6 level of normalization forms we can have.
+  - First Normal Form: one value in each cell
+    - Sometimes we break up the normalization rules, that we keep the redundancies is to **simplify the join logics in between the tables or simplify the logics of our application**. From performance perspective, avoiding join operation can improve the performance a lot.
+  - Second Normal Form: Any columns in between the same row are not going to have dependencies. (this rule is to create foreign key relationship)
+    - Binding several columns as a Primary key is actually break this rule.
+  - Third Normal Form: No Transitive Dependencies. i.e. age column and DOB column. (this rule is to create one-to-many/many-to-one relationships)
+- Indexes: Like the index of the book is to improve reading speed.
+  - if we define a table with Primary key but without Indexes. The primary key in default will be setup as the indexes. That's index is going to be count as a **cluster index**(equal to Primary key, interchangeable).
+  - in some scenarios, we want to search in different style. Where we have **non-clustered index**. Any table can have as many as **non-clustered index** as we want.
+  - it's good for reading operation, but bad for insert or delete operations. That's also the reason we cannot have as many indexes as we want.
+  - non-clustered index is table of content. clustered index is the data.
+- nowadays Postgres and Mysql supporting to store documents
+
 ### noSQL
+- noSQL, supporting transactional
+  - non tabular data, i.e. documents/files
+- nowadays MongoDB(after 4.2) supporting multi document transaction
+  - Collections in MongoDB is similar to a table in SQL database.
+
 ### elastic search
-- not a exactly like traditional noSQL database, more like a full text searching database
+- not a exactly like traditional noSQL database, more like a full-text searching database
 
 
 

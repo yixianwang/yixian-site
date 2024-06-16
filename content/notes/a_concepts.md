@@ -588,14 +588,25 @@ enum Day {
 ![7](images-a/7.png)
 
 ## Maven/Gradle
-- project management tool
-- auto building tool
+> it's a tool that automate the building of the project into a jar or war file.
+- It is trying to do the Build Automation
+  - Build Automation has different stages, which is lifecycles: 
+    - clean: clean up all the .class files that has generated
+    - validate: Checks if the project is correct and all necessary information is available.
+    - compile: Compiles the project's source code.
+    - test
+    - package: Takes the compiled code and packages it in its distributable format, such as a JAR, WAR, or EAR file.
+      - pack this maven into jar package for local test. In real, it will done by CI/CD pipeline
+    - verify: Runs any checks to verify the integrity and quality of the project.
+    - install: install the jar package into the local repository for the maven, making it available for other projects on the same machine.
+    - site
+    - deploy: Copies the final package to the remote repository for sharing with other developers and projects.
 
 ### Maven folder structure
 ![8](images-a/8.png)
 
 ### Types of Repositories in Maven
-> the idea about caching
+> the idea about caching for the maven. When we flush our project on our IDE or local dev environment. First thing they are going to check is our local maven repository. If the local repository doesn't have it, it will check the remote repository.
 
 - Local Repository
   - ~/.m2
@@ -1014,7 +1025,7 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 
 #### MongoDB (CP, it sacrifices some availabilities)
 - Work Flow: 
-  - MongoS: like a router, when request reach the **MongoS** first, then it will consult the **ConfigSever**, then MongoS get the Sharding position it will get to the right Server to get the result of the Request.
+  - MongoS(comparing to DBMS): like a router, when request reach the **MongoS** first, then it will consult the **ConfigSever**, then MongoS get the Sharding position it will get to the right Server to get the result of the Request.
   - ConfigServer: contains `meta data` about the MongoDB sharding and replica info.
   - Arbiter: it doesn't contain any data. It only contain **one vote**, everytime there is an election has a draw, Arbiter is going to check for either one of those secondary nodes(or candidates within election).
 
@@ -1077,6 +1088,49 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - in distributed system case
     - how to ensure the transaction
     - how to rollback with strategy
+
+## Server vs Web Server vs Application Server
+- the difference between web server and application server
+  - Web Server is used to handle http request
+  - Application Server just with some additional features like JBoss, it supports transaction on application layer instead of database layer or anything in our code.
+- Both Web Server and Application Server in general speaking are in same Web Server Layer, they help us to handle duplicate logics for the **servlet**
+
+### Server
+- hardware
+
+### Web Server
+- Web Server is used to handle http request
+  - Tomcat
+  - Nginx
+
+### Application server
+- some require commercial license, which also would provide additional features.
+  - JBoss: i.e. additional features like on application server layer, they provide transactions.
+  - GlassFish
+
+### Other related topics???
+- SpringBoot 
+  - Servlet
+    - how virtual thread would benefit the traditional ones
+  - Stream/React/WebFlux/MonoFlux
+    - how to debug?
+
+## BE <--> DB
+### socket
+- open the pipeline, we choose the port number, send the stream of the data.
+
+### HTTP/S
+- the idea of JDBC
+
+
+
+
+
+
+
+
+
+
 
 ## Microservice
 ### WHY: we need microservice

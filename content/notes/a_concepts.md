@@ -984,11 +984,59 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 ### noSQL
 - noSQL, supporting transactional
   - non tabular data, i.e. documents/files
+1. Documented DB
+   - Key-Document Pair
+2. Column wised DB
+   - It's something like a table, but all the thing are going to store in the **node**, each column is consider as a **node**. When we searching, we search base on the **node**. So any non-related column won't be searched.
+   - The whole purpose is to reduce I/O between RAM and HD.
+3. Key-Value DB. (i.e. Redis) 
+   - Value can be anything, including int, string, arrList, set, sortedSet, ...
+   - Redis: 
+     - natively running in the RAM database. The idea is it to cache some data to improve the performance.
+     - The purpose with Redis is to reduce the number of I/O.
+4. Graph noSQL
+   - we want to find out the relationship between each records, in this scenario we can use Graph noSQL.
+5. Elastic Search
+   - not a exactly like traditional noSQL database, more like a full-text searching database
+6. TimeSeries noSQL
+7. Vector DB. 
+   - For ML scenarios.
+
+- CAP (For all distributed system, not only for noSQL)
+  - C(Consistency): Every read reflects the **most recent** write or an error.
+  - A(Availability): All reads contain data, but it may **not** be the most recent.
+  - P(Partition Tolerance): The system continues to operate even when there are network failures.
+  - Most time we would trade off between C and A.
+
+#### MongoDB (CP, it sacrifices some availabilities)
+- Work Flow: 
+  - MongoS: like a router, when request reach the **MongoS** first, then it will consult the **ConfigSever**, then MongoS get the Sharding position it will get to the right Server to get the result of the Request.
+  - ConfigServer: contains `meta data` about the MongoDB sharding and replica info.
+  - Arbiter: it doesn't contain any data. It only contain **one vote**, everytime there is an election has a draw, Arbiter is going to check for either one of those secondary nodes(or candidates within election).
+
+- Before MongoDB(4.2)
+  - any of those transactions has to stay in the **same collections**(very similar idea like table).
+- After MongoDB(4.2)
+  - it supports multiple collections within one transaction.
+
+- We can Setup in MongoDB
+  - Tade off between C and P
+    - Write Concern
+      - determine if the data is available to the user based on #synced nodes.
+      - we can also define sync up, `J = 1 or J = 0` define in RAM or HD.
+      - trade off between persistency and performance
+    - Read Concern
+      - Are we okay to read data in RAM, or we have to read data in HD.
+      - There are several levels: 
+        - Local: it doesn't have to be in HD
+        - Majority: I only read from main node and secondary node that has already synced up. Might not be the lastest one, but we are not reading from the node hasn't sync up.
+        - Snapshot
+        - Linearizable: everything is reading from HD
+
 - nowadays MongoDB(after 4.2) supporting multi document transaction
   - Collections in MongoDB is similar to a table in SQL database.
 
-### elastic search
-- not a exactly like traditional noSQL database, more like a full-text searching database
+#### Redis
 
 
 

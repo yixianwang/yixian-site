@@ -941,6 +941,10 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - horizontal partition
   - vertical partition: for flat and fat table
 
+## QPS vs Throughput
+- QPS(query per second): dealing with a lot of users concurrently click the button
+- Throughput: dealing with the size of the payload
+
 ## Database
 - we need to store backend data somewhere to ensure we have a better **searching performance**, comparing to File System, which would scan all the files in the file system.
 - we need a certain structure that structure need to be efficient for searching
@@ -1037,9 +1041,42 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - Collections in MongoDB is similar to a table in SQL database.
 
 #### Redis
+- we can setup Redis running in RAM, it's not default
+- it features that it can handle more than 10+K QPS
+- it use a lot as **Cache**, and **Distributed Lock**
+- the purpose is to reduce the #I/O between backend server and database server.
+- the expire time of the key in Cache depends on the business model.
+- it's a key-value pair database
+  - value type
+    - string
+    - list
+    - set
+    - sortedSet(same as Zset)
+    - hash(same as hashTable)
+- Cache
+  - Hit(cache hit)
+    - when there is a request send to backend, then it first check the cache layer to see if there's any the same request that has sent before and the data has been stored within the cache. Then we directly return from the cache layer instead of sending request to the database.
+  - Miss(cache miss)
+    - no record we can find in the cache. Then we count it as **cache miss**
+- Cold Start-Up
+  - solve it with Pre-Heat, just with some buffer
+- Avoid syncing up cache and database with strong consistency, because it will lose concurrency that sacrifice too much performance.
+  - we are trading off between consistency and performance.
+  - strong consistency is the trading off between thread safety and performance.
+- There are different strategies to choose based on different **traffic** patterns in our web app.
+  - We can apply distributed lock to ensure thread safety.
+  - To ensure the data consistent between Redis and DB. Before we use `Redis + Lua script`, right now `Redison`(a framework based on Redis).
+    - `Lua script` add locks in the source code for atomicity to ensure the data consistency.
+- Eventual Consistency vs Strong Consistency
+  - with Eventual Consistency, our business model is able to endure the loss, but our technical architecture is benefit a lot regarding to the performance.
 
-
-
+### interview questions
+- SQL and noSQL
+  - what is transaction
+  - how to enable transaction
+  - in distributed system case
+    - how to ensure the transaction
+    - how to rollback with strategy
 
 ## Microservice
 ### WHY: we need microservice
@@ -1049,7 +1086,7 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - business separation: (vertical): i.e. login/browse/order/payment/...
 - business separation: (horizontal): i.e. service oriented. (Python handles ML, Java handles web application, ...) 
 
-#### Five Components
+### Five Components
 - API Gateway
 - Service Registry/Discovery
 - Configuration Management

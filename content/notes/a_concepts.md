@@ -1122,7 +1122,38 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 ### HTTP/S
 - the idea of JDBC
 
+## JDBC
+- JDBC is used to connect out WEB APP and DB.
+- just a driver, that require duplicate logics
 
+- return: ResultSet
+
+## ORM: Object Relational Mapping
+- just an **idea** to get rid of boilerplate for duplicate logics within our web app logics
+- each row of a table will map to a java object
+- Implementation of ORM is JPA(Java persistent API)
+  - JPA contains CRUD operations and Batch operations(batch delete/update/read)
+
+- Frameworks implement ORM ideas with JPA
+  - Hibernate
+  - Sequelize
+  - Doctrine
+  - MyBatis
+  - SQLAlchemy
+ 
+- JDBC -> JPA -> Hibernate -> Spring Data JPA / Spring Data Mongodb / Spring Data Elastic Search
+> the more encapsulation we are going to have, the more automation in between table and Java Class we are going to have.
+
+## Hibernate
+- `Session Factory` grabs the configFile: username + password, then creates `sessions`
+- Hibernate use reflection API to auto generate SQL statements
+- Hibernate allows us to write:
+  1. HQL(Hibernate Query Language), just in case the APIs are not flexible enough to catering some situations.
+  2. Native SQL. cons: with dialect language(mysql, postgres, oracle)
+- Cache strategies in Hibernate:
+  - First Level(default): in **session level**. The session(a user create a session) is private, it means it cannot access any content belong to other sessions.
+  - Second Level: in **session factory level**. Add extra configurations to the ConfigFile.
+    - For example, there are many users sending the same queries and they are supposed to return the same result. with second level caching strategy, the cache will be pubic to all sessions.
 
 
 

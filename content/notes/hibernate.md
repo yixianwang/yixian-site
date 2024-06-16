@@ -11,9 +11,10 @@ date = 2024-06-01T15:07:08-04:00
 - Hibernate allows us to write:
   1. HQL(Hibernate Query Language), just in case the APIs are not flexible enough to catering some situations.
   2. Native SQL. cons: with dialect language(mysql, postgres, oracle)
-- Cache in Hibernate: 
-  - First Level(default): in **session level**. The session is private, it means it cannot access any content belong to other sessions.
+- Cache strategies in Hibernate:
+  - First Level(default): in **session level**. The session(a user create a session) is private, it means it cannot access any content belong to other sessions.
   - Second Level: in **session factory level**. Add extra configurations to the ConfigFile.
+    - For example, there are many users sending the same queries and they are supposed to return the same result. with second level caching strategy, the cache will be pubic to all sessions.
 
 - [github](https://github.com/yixianwang/hibernate)
 

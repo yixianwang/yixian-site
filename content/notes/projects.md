@@ -19,6 +19,7 @@ date = 2024-05-20T22:30:29-04:00
   - pros & cons
 - distributed? / frontend/ backend(java 8/11/13)/ database/ internal components(jdbc/ hibernate/ spring data jpa)/ how you implemented microservices(spring cloud or kubernetes)
 - data: frontend data/ what kind of payload/ what kind of format/ design dataflow: FE->BE->DB/ then we have architecture/ then in middle we should add buffering or caching(just add different tools to handle different problem, i.e. failure tolerance, scalability, ....)
+- on-premise or on cloud(which cloud is used)
 
 - people we worked with
   - Agile style/how big the team/what's my role/different scenario we need to talk to different people

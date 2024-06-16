@@ -1353,3 +1353,53 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 #### Code
 - [Github](https://github.com/AntraJava/KafkaPOC)
 - [Setup Kafka cluster](https://www.youtube.com/watch?v=tSsagN7-V3E)
+
+## SDLC (software development lifecycle)
+### Waterfall
+- pros: reduce the communication time between tech and non-tech people, so it might increase some efficiency and budget.
+- we gonna have a meeting with manager or non-tech people, and we plan the new feature will be alive within a year or half year.
+- we have almost fixed time line for the project. like within a year, every 3 month we would sync up with the company status.
+- so the whole project will separate into 4 stages.
+
+### Agile
+- when we want the company to cater to the market to survive, and the market can be very dynamic, which means our business model has to be changed rapidly.
+- in this case, the waterfall is not a practical solution for this kind of scenario.
+- we have relative way much shorter amount of period to sync up and report the status of the project.
+- each sprint is just about one or two weeks.
+
+- Sprint planning: a meeting to kick of the sprint.
+- Sprint backlog: a list of tasks and activities that a project team plans to complete during a sprint.
+- Sprint increment: backlog items that a team completes during a sprint.
+- Sprint review: a meeting to do some demonstration to the product owner or anyone related.
+- Sprint retrospective: a meeting after a sprint to reflect on our work and identify areas for improvement.
+- Daily standup
+
+
+## Testing
+### unit test
+- testing coverage: 80% 90% 100%. 
+  - tools: Jacoco, SonarQube(in CI/CD pipeline, give us **tech debt** called code smell)
+- types of testing: function testing/ pressure testing/ ...
+- stage: Dev/QA/UAT/Prod
+
+### integration test
+- Selenium framework
+
+### BDD
+- Cucumber framework
+
+### pressure test
+- Jmeter framework
+
+## CI/CD
+> just define several stages within yaml file
+- Jenkins
+- Concourse
+
+## SonarQube
+- we start SonarQube in docker, and then attach it to the Jenkins pipeline. Which is going to be the last step of the CI/CD pipeline.
+- If any of those stages, the test coverage, or any of the code smell, or any of the technical debt, is more than we want to setup for bottleneck, we can reject the whole CI/CD process. Then code is not release to the environment then.
+
+## Manage project
+- Jira: project management tool
+- Confluence: project documentation tool

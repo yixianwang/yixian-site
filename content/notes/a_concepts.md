@@ -1217,11 +1217,13 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - material UI
 - Promise / Observable
 
-## ???Architecture
-- monolithic architecture 
-- frontend backend separation 
-- SOA
-- Microservice
+## Architecture
+- Monolithic architecture 
+- SOA: ESB(Enterprise Service Bus) could become a single point of failure. Sharing data storage.
+- MicroService: Each microservice has its own data storage.
+- MicroFrontend: Each component we can use different frontend framework to build with.
+- Frontend Backend Separation 
+![image](images-a/65.png)
 
 ### Microservice
 #### WHY: we need microservice
@@ -1238,7 +1240,7 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - Monitoring and Log Tracing
 - Business Modules
 
-## Spring Cloud
+## ???Spring Cloud
 - Spring Cloud provides a comprehensive set of tools to build resilient, scalable, and manageable microservices architectures. By leveraging the various components of Spring Cloud, developers can focus on business logic while the framework handles the complexities of distributed systems. Whether dealing with service discovery, configuration management, circuit breakers, or API gateways, Spring Cloud offers a unified and streamlined approach to developing cloud-native applications.
 
 ### Core components
@@ -1280,7 +1282,7 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - Splunk
 - ELK
 
-## Security
+## ???Security
 - Security Basic
   - Authentication vs Authorization
   - Encryption, Hashing, Encoding

@@ -1217,21 +1217,95 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - material UI
 - Promise / Observable
 
+## ???Architecture
+- monolithic architecture 
+- frontend backend separation 
+- SOA
+- Microservice
 
-## Microservice
-### WHY: we need microservice
+### Microservice
+#### WHY: we need microservice
 - if one service fails, we need to like restart the whole thing work.
 
-### HOW: various ways to implement Microservice
+#### HOW: various ways to implement Microservice
 - business separation: (vertical): i.e. login/browse/order/payment/...
 - business separation: (horizontal): i.e. service oriented. (Python handles ML, Java handles web application, ...) 
 
-### Five Components
+#### Five Components
 - API Gateway
 - Service Registry/Discovery
 - Configuration Management
 - Monitoring and Log Tracing
 - Business Modules
+
+## Spring Cloud
+- Spring Cloud provides a comprehensive set of tools to build resilient, scalable, and manageable microservices architectures. By leveraging the various components of Spring Cloud, developers can focus on business logic while the framework handles the complexities of distributed systems. Whether dealing with service discovery, configuration management, circuit breakers, or API gateways, Spring Cloud offers a unified and streamlined approach to developing cloud-native applications.
+
+### Core components
+1. Spring Cloud Config:
+   - Spring Cloud Config Server: Centralized external configuration management across all environments.
+   - Spring Cloud Config Client: Provides an abstraction for the client to access configuration properties.
+2. Spring Cloud Netflix (now largely superseded by Spring Cloud LoadBalancer and Spring Cloud CircuitBreaker):
+   - Eureka: Service discovery server.
+   - Ribbon: Client-side load balancing.
+   - Hystrix: Circuit breaker.
+   - Zuul: Edge server for routing.
+3. Spring Cloud Gateway:
+   - A replacement for Zuul, it provides a way to route requests to various services using filters and predicates for request processing.
+4. Spring Cloud OpenFeign:
+   - Declarative REST client, which allows defining a client interface annotated with Feign annotations to create dynamic REST clients.
+5. Spring Cloud Circuit Breaker:
+   - Provides an abstraction layer over various circuit breaker implementations like Resilience4j, Hystrix, Sentinel, etc.
+6. Spring Cloud Sleuth:
+   - Distributed tracing via logs. It integrates with Zipkin or Brave for trace and span IDs to help in troubleshooting.
+7. Spring Cloud Stream:
+   - Framework for building message-driven microservices using Apache Kafka or RabbitMQ.
+8. Spring Cloud Bus:
+   - Links nodes of a distributed system with a lightweight message broker. Useful for broadcasting state changes (e.g., configuration changes) or other management instructions.
+
+- Eureka(Service discovery server): for service discover and registry
+- config server: Centralized external configuration management across all environments.
+- zipkin & sleuth: Distributed tracing via logs. With trace and span IDs to help in troubleshooting.
+- trace ID & Span ID: 
+  - Trace ID
+    - A **Trace ID** is a unique identifier for a single request as it travels through various microservices or components of a distributed system.
+    - It remains consistent across all services involved in the handling of the request, enabling a holistic view of the request's lifecycle.
+  - Span ID
+    - A **Span ID** is a unique identifier for a single unit of work or operation within the trace.
+    - Each span represents a segment of the work done by a microservice, including details like the start and end time, and any additional metadata.
+    - Spans are related to each other in a parent-child relationship, forming a tree-like structure that maps out the full journey of a request.
+- ribbon: for Client-side load balancing.
+
+## ???Log Aggregation 
+- Splunk
+- ELK
+
+## Security
+- Security Basic
+  - Authentication vs Authorization
+  - Encryption, Hashing, Encoding
+  - Asymmetric Key usage(SSL/TLS/HTTPs, Signature, SSH)
+  - data security
+  - api security
+  - server side security(SQL Injection), client side security(XSS, CSRF)
+- HTTPS
+  - Flow
+  - port 443
+  - protect data in transit
+  - prevent man in the middle attack
+- Networking Configuration
+  - Segmentation
+    - public/private subnet
+  - Firewall
+  - VPN
+- User authentication/authorization
+  - username/password
+  - token
+  - api key
+  - certificate
+- OAuth2, Single Sign On
+- JWT
+  - structure, head body signature
 
 ## Messaging Queue
 - Two major Purpose:

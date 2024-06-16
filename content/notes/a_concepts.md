@@ -1240,10 +1240,10 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - Monitoring and Log Tracing
 - Business Modules
 
-## ???Spring Cloud
+#### Spring Cloud
 - Spring Cloud provides a comprehensive set of tools to build resilient, scalable, and manageable microservices architectures. By leveraging the various components of Spring Cloud, developers can focus on business logic while the framework handles the complexities of distributed systems. Whether dealing with service discovery, configuration management, circuit breakers, or API gateways, Spring Cloud offers a unified and streamlined approach to developing cloud-native applications.
 
-### Core components
+##### Core components
 1. Spring Cloud Config:
    - Spring Cloud Config Server: Centralized external configuration management across all environments.
    - Spring Cloud Config Client: Provides an abstraction for the client to access configuration properties.
@@ -1265,30 +1265,44 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 8. Spring Cloud Bus:
    - Links nodes of a distributed system with a lightweight message broker. Useful for broadcasting state changes (e.g., configuration changes) or other management instructions.
 
-- Eureka(Service discovery server): for service discover and registry
+- Eureka(Service discovery server): for service discover and registry. for service health management with service heart beat.
+  - key-value: URL - IP
 - config server: Centralized external configuration management across all environments.
-- zipkin & sleuth: Distributed tracing via logs. With trace and span IDs to help in troubleshooting.
-- trace ID & Span ID: 
-  - Trace ID
-    - A **Trace ID** is a unique identifier for a single request as it travels through various microservices or components of a distributed system.
-    - It remains consistent across all services involved in the handling of the request, enabling a holistic view of the request's lifecycle.
-  - Span ID
-    - A **Span ID** is a unique identifier for a single unit of work or operation within the trace.
-    - Each span represents a segment of the work done by a microservice, including details like the start and end time, and any additional metadata.
-    - Spans are related to each other in a parent-child relationship, forming a tree-like structure that maps out the full journey of a request.
+- zipkin & sleuth(for debug in microservice): Distributed tracing via logs. With trace IDs and span IDs to help in troubleshooting.
+  - trace ID & Span ID: 
+    - Trace ID
+      - A **Trace ID** is a unique identifier for a single request as it travels through various microservices or components of a distributed system.
+      - It remains consistent across all services involved in the handling of the request, enabling a holistic view of the request's lifecycle.
+    - Span ID
+      - A **Span ID** is a unique identifier for a single unit of work or operation within the trace.
+      - Each span represents a segment of the work done by a microservice, including details like the start and end time, and any additional metadata.
+      - Spans are related to each other in a parent-child relationship, forming a tree-like structure that maps out the full journey of a request.
 - ribbon: for Client-side load balancing.
+- Log Aggregation 
+  - Splunk
+  - ELK: Elastic Search(Storage)/ LogStash(Data processing)/ Kibana(Visualize)
 
-## ???Log Aggregation 
-- Splunk
-- ELK
-
-## ???Security
+## Security
 - Security Basic
   - Authentication vs Authorization
+    - Authentication: valid user? passcode, username, fingerprint
+    - Authorization: what permission does the user have.
+      - role base
+      - permission base
   - Encryption, Hashing, Encoding
+    - Encryption
+      - symmetric: i.e.AES
+      - asymmetric: public/private key i.e. RSA
+    - Hashing: for data integration
+      - i.e. MD5, SHA
   - Asymmetric Key usage(SSL/TLS/HTTPs, Signature, SSH)
   - data security
+    - solving with Encryption/Hashing
+      - in transit
+      - at rest
   - api security
+    - Authentication: 401
+    - Authorization: 403
   - server side security(SQL Injection), client side security(XSS, CSRF)
 - HTTPS
   - Flow
@@ -1306,8 +1320,12 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - api key
   - certificate
 - OAuth2, Single Sign On
+  - OAuth2
+    - is a third party validation
+  - SSO
+    - once we login in a service like gmail, our other service like google drive and google map will automatically login.
 - JWT
-  - structure, head body signature
+  - header(algorithm..) + payload(data) + verify signature(hashed values)
 
 ## Messaging Queue
 - Two major Purpose:

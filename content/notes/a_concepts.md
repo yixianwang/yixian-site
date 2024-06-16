@@ -1144,7 +1144,7 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - JDBC -> JPA -> Hibernate -> Spring Data JPA / Spring Data Mongodb / Spring Data Elastic Search
 > the more encapsulation we are going to have, the more automation in between table and Java Class we are going to have.
 
-## Hibernate
+### Hibernate
 - `Session Factory` grabs the configFile: username + password, then creates `sessions`
 - Hibernate use reflection API to auto generate SQL statements
 - Hibernate allows us to write:
@@ -1155,12 +1155,67 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
   - Second Level: in **session factory level**. Add extra configurations to the ConfigFile.
     - For example, there are many users sending the same queries and they are supposed to return the same result. with second level caching strategy, the cache will be pubic to all sessions.
 
+## Frontend
+### HTTP, FTP, SMTP
+- All are in application layer(7th layer of OSI)
+- They are methods or protocols that allow users use browser/or some application to communicate with the backend server.
 
+- HTTP/S: HyperText Transfer Protocol Secure
+- FTP: File Transfer Protocol
+- SMTP: Simple Mail Transfer Protocol
 
+### DNS: domain name system
+- it's a system that we can use to translate URL to the public IP address of server.
 
+### Browser storage types
+- Local Storage: no expiration date and 5 MB limit. Data here will never transfer to the server side 
+- Session Storage: is used to store session related data. Session storage will be closed and cleared after we close the browser.
+- Cookie: 4 KB limit.
 
-
-
+### Angular
+- Angular project develop, build, test, release flow
+  - Typescript
+  - npm
+  - nvm
+- Single Page Application
+- Component
+  - Basic building blocks that compose the webpage.
+  - @Component class
+    - act like controller
+    - written in typescript
+  - Template
+    - act like view template
+    - written in html and angular syntax(binding, directives)
+    - binding
+      - event binding
+      - one-way
+      - two-way data binding
+      - Directives
+    - Attribute Directive
+    - Directive(*ngIf, *ngFor, *ngClass, *ngStyle, *ngForm,)
+    - pipes
+  - Forms - template driven/ reactive forms
+  - StyleSheet
+    - css, sass, less
+- Service
+- Dependency Injection
+  - Service -> Component
+- Angular CLI
+- Module
+- Routing
+- HttpClient
+- RxJs
+  - Observable
+- Routing
+- HttpClient
+  - RxJs
+  - Observable
+- Module
+- CORS configuration
+- UI Library
+- bootstrap
+  - material UI
+- Promise / Observable
 
 
 ## Microservice

@@ -1204,10 +1204,6 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - Module
 - Routing
 - HttpClient
-- RxJs
-  - Observable
-- Routing
-- HttpClient
   - RxJs
   - Observable
 - Module
@@ -1216,6 +1212,68 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - bootstrap
   - material UI
 - Promise / Observable
+
+#### concepts
+- Components, modules and services are the three fundamental building blocks in Angular.
+- Components should be small and self-contained, modules should group together related components, and services should provide shared functionality across the entire app.
+
+##### components
+- Components are the smallest, self-contained units in an Angular application. They are typically used to represent a view or UI element, such as a button or a form input field.
+
+##### directives
+Allow the user to write new HTML syntax specific to their applications. They execute whenever the Angular compiler finds them in the DOM. Angular supports three types of directives.
+- Component Directives
+- Structural Directives
+- Attribute Directives
+
+##### pipes
+- pipes are simple functions designed to accept input value, process, and return output(transformed value).
+
+##### module
+- Modules are larger units that group together one or more related components.
+- contains (components, directive, pipe)
+
+##### service
+- Services are singleton objects that provide specific functionality throughout an Angular application, such as data access or logging.
+
+##### annotations
+- @NgModule: Annotates a class to specify that it is an Angular module and provides metadata about its dependencies, components, directives, pipes, and services.
+- @Component: Annotates a class to define an Angular component, providing metadata such as its selector, template, and style.
+- @Directive: Annotates a class to define an Angular directive, which allows you to add behavior to elements in the DOM.
+- @Pipe: Annotates a class to define an Angular pipe, which transforms input data to a desired output format for display.
+- @Injectable: Annotates a class to define an injectable service that can be injected into other components or services.
+- @Input: Annotates a class property to allow data to be passed into a component from its parent component.
+- @Output:(with EventEmitter) Annotates a class property to allow a component to emit custom events to its parent component.
+- @ViewChild and @ViewChildren: Annotates a class property to query and access child components or elements in the component's template.
+- @HostListener: Annotates a class method to listen for events on the host element of a directive or component.
+- @HostBinding: Annotates a class property to bind to a host element property or attribute in a directive or component.
+
+##### two-way binding
+- Use two-way binding to listen for events and update values simultaneously between parent and child components.
+- Syntax is a combination of square brackets and parentheses, `[()]`
+
+##### Promises and Observable
+While both the concepts deal with Asynchronous events in Angular, Promises handle one such event at a time while observables handle a sequence of events over some time.
+- Promises: They emit a single value at a time. They execute immediately after creation and are not cancellable. They are Push errors to the child promises.
+- Observables: They are only executed when subscribed to them using the subscribe() method. They emit multiple values over a period of time. They help perform operations like forEach, filter, and retry, among others. They deliver errors to the subscribers. When the unsubscribe() method is called, the listener stops receiving further values.
+
+##### Constructor vs ngOnInit
+- `constructor` is called first. Then, once all component inputs are initialized, Angular is going to call `ngOnInit`
+
+##### Lifecycle hooks
+In Angular, every component has a lifecycle. Angular creates and renders these components and also destroys them before removing them from the DOM. This is achieved with the help of lifecycle hooks. Here's the list of them -
+
+- ngOnChanges() - Responds when Angular sets/resets data-bound input properties.
+- ngOnInit() - Initialize the directive/component after Angular first displays the data-bound properties and sets the directive/component's input properties/
+- ngDoCheck() - Detect and act upon changes that Angular can't or won't detect on its own.
+- ngAfterContentInit() - Responds after Angular projects external content into the component's view.
+- ngAfterContentChecked() - Respond after Angular checks the content projected into the component.
+- ngAfterViewInit() - Respond after Angular initializes the component's views and child views.
+- ngAfterViewChecked() - Respond after Angular checks the component's views and child views.
+- ngOnDestroy - Cleanup just before Angular destroys the directive/component.
+
+##### Angular Material
+- Angular Material is a UI component library for Angular applications. It provides a set of pre-built and customizable UI components.
 
 ## Architecture
 - Monolithic architecture 

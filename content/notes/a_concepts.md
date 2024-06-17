@@ -401,7 +401,6 @@ enum Day {
 - the following is not thread safe
   - the first `synchronized` keyword without static is on the object lock.
   - the second `synchronized` keyword with static is on the class template lock.
-![55](images-a/55.png)
 
 ### Dead Locks
 - caused by adding lock in wrong orders

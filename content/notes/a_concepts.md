@@ -24,6 +24,8 @@ functional interface with static
 - what **SCOPES** we can access static elements.
   - we cannot override static method
   - static class cannot called by non-static method 
+
+## static block
 - **static block** is a set of instructions that is run only once when a class is loaded into memory.
   - We use a static block to initialize static variables. Although we can initialize static variables directly during declaration, there are situations when we need to do multiline processing. In such cases, static blocks come in handy.
   - If static variables require additional, multi-statement logic during initialization, we can use a static block.
@@ -31,7 +33,7 @@ functional interface with static
     - if the initialization of static variables needs some additional logic apart from the assignment
     - if the initialization of static variables is error-prone and needs exception handling
 
-## Static class
+## static class
 - In general, the nested class architecture is divided into two types:
   - nested classes that we declare static are called static nested classes
   - nested classes that are non-static are called inner classes

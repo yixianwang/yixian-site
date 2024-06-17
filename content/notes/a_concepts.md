@@ -24,6 +24,23 @@ functional interface with static
 - what **SCOPES** we can access static elements.
   - we cannot override static method
   - static class cannot called by non-static method 
+- **static block** is a set of instructions that is run only once when a class is loaded into memory.
+  - We use a static block to initialize static variables. Although we can initialize static variables directly during declaration, there are situations when we need to do multiline processing. In such cases, static blocks come in handy.
+  - If static variables require additional, multi-statement logic during initialization, we can use a static block.
+  - Below are a few reasons for for using static blocks:
+    - if the initialization of static variables needs some additional logic apart from the assignment
+    - if the initialization of static variables is error-prone and needs exception handling
+
+## Static class
+- In general, the nested class architecture is divided into two types:
+  - nested classes that we declare static are called static nested classes
+  - nested classes that are non-static are called inner classes
+- The main difference between these two is that the inner classes have access to all members of the enclosing class (including private ones), whereas the static nested classes only have access to static members of the outer class.
+- In fact, static nested classes behave exactly like any other top-level class, but are enclosed in the only class that will access it, to provide better packaging convenience.
+
+- Basically, a static nested class doesn’t have access to any instance members of the enclosing outer class. It can only access them through an object’s reference.
+- static nested classes can access all static members of the enclosing class, including private ones.
+- Java programming specification doesn’t allow us to declare the top-level class as static. Only classes within the classes (nested classes) can be made as static.
 
 ## Hashmap workflow
 - Internally, Hashmap is an array of linkedList. 

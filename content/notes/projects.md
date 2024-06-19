@@ -2,7 +2,6 @@
 title = 'Projects'
 date = 2024-05-20T22:30:29-04:00
 +++
-
 ## general concepts
 - **Role Based Access Control(RBAC)**:
   - Once we login an account, we have different roles, different roles will see different contents. 
@@ -24,12 +23,6 @@ date = 2024-05-20T22:30:29-04:00
 - people we worked with
   - Agile style/how big the team/what's my role/different scenario we need to talk to different people
   - who I talked with/ who I suppose to talk with/...
-
-
-
-
-
-
 
 ## Project 1: Online Learning Platform
 - Description:

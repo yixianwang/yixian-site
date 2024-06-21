@@ -3,29 +3,15 @@ title = 'Interview'
 date = 2024-06-20T22:49:47-04:00
 +++
 
-## Questions to ask at the end of an interview
-- At least 3 - 5 questions for the interviewer.
-### 3 types of questions
-1. Culture
-   - What do you love most about your job?
-   - What makes people stay with this organization?
-   - What are the biggest challenges or opportunities that this organization or department is facing in the next six months to a year?
-   - **What is your favorite part about working here in this organization?**
-   - **How would you describe the work environment here?**
-2. Role-specific
-   - Can you tell me what a typical day or week looks like in this position?
-   - What do you want the person in this position to accomplish in their first 30/60/90 days?
-   - What challenges or opportunities do you foresee this position taking on in the next six month?
-   - **How will my performance be measured in this position?**
-   - **How long will this project last?**
-   - **What are the next steps in the interview process?**
-3. Hesitation
-   - Do you have any hesitation about me filling this position?
-   - Based on what we've talked about today, is there anything that is causing you hesitation about my fit for this position
-   - How do I compare to other candidates you've interviewed for this role?
-   - Have I answered all the questions that you have for me?
-   - **Do you have any hesitation about my qualifications?**
-   - **Is there anything I can clarify for you?**
+## Tips before interview
+- Prepare your phone/monitor/laptop at least 10 mins before. Double check if it is a dial-in call or they call you on your phone or skype.
+- Dress code: dress as professional as you can.
+- **DO research on the client company.**
+- Keep checking your hangout/email.
+- **Always ask questions at the end of the interview.**
+- Take it seriously and be confident
+- Always Turn on the camera. Make the background clean.
+- You don't need to answer all the questions correctly to get the job.
 
 ## Project Preparation Guide
 ![project preparation guide](images-interview/1.png)
@@ -61,4 +47,27 @@ date = 2024-06-20T22:49:47-04:00
 - What do you know about our company? Do some research before go to a client interview.
 - Why are you looking for a new project?
 
+## Questions to ask at the end of an interview
+- At least 3 - 5 questions for the interviewer.
+### 3 types of questions
+1. Culture
+   - What do you love most about your job?
+   - What makes people stay with this organization?
+   - What are the biggest challenges or opportunities that this organization or department is facing in the next six months to a year?
+   - **What is your favorite part about working here in this organization?**
+   - **How would you describe the work environment here?**
+2. Role-specific
+   - Can you tell me what a typical day or week looks like in this position?
+   - What do you want the person in this position to accomplish in their first 30/60/90 days?
+   - What challenges or opportunities do you foresee this position taking on in the next six month?
+   - **How will my performance be measured in this position?**
+   - **How long will this project last?**
+   - **What are the next steps in the interview process?**
+3. Hesitation
+   - Do you have any hesitation about me filling this position?
+   - Based on what we've talked about today, is there anything that is causing you hesitation about my fit for this position
+   - How do I compare to other candidates you've interviewed for this role?
+   - Have I answered all the questions that you have for me?
+   - **Do you have any hesitation about my qualifications?**
+   - **Is there anything I can clarify for you?**
 

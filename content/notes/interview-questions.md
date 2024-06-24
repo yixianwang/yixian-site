@@ -61,7 +61,11 @@ date = 2024-06-20T22:49:47-04:00
 
 - How did you agile in your team? Typical Day?
   - We follow the Agile Scrum framework, conducting regular meetings such as daily stand-ups, spring planning, sprint reviews, and retrospectives. With these practices ensured continuous improvement and allowed us to quickly adapt to any change on the business requirement.
-  - For each of typical day, the scrum master will hold an stand-up meeting in the morning about 15 minutes to discuss what we have done yesterday and what we should do in the current day. Get task from Jira System, and work on it then update the Jira system. 
+  - For each of typical day, the scrum master will hold an stand-up meeting in the morning about 15 minutes to discuss what we have done yesterday and what we should do in the current day. Get task from Jira System, and work on it then update the Jira system.
+     - Just Coding
+     - Following Standard.
+     - Bring new ideas.
+     - Learn and self improve.
  
 - What is the size of team? BA, DBA, QA, TL(team lead)?
   - Our team has 25 members. 

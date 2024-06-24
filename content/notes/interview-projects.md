@@ -82,8 +82,13 @@ date = 2024-06-22T21:08:17-04:00
       ```
 6. Your Main responsibilities.
    - Design, Implement, Test XXX functions, Backend, DB, Frontend?
-      - I am in BE team.
-      - I am responsible for designing and implementing the real-time data processing pipeline and integrating it with the frontend dashboard.
+      - Work on tasks
+      - Design the best solution of the task 
+      - Fix program issues
+      - Conduct unit tests
+      - Collaborate within the team
+      - Work with external team
+      - For example, I am responsible for designing and implementing the real-time data processing pipeline and integrating it with the frontend dashboard.
 7. High-level System Structure
    1. TechStack
       - Java Version: Java 11

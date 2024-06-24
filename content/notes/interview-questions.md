@@ -78,8 +78,8 @@ date = 2024-06-20T22:49:47-04:00
      - DBA 2 DBA
      - DevOps 2 DevOps
   - One Business Analyst who gathers requirements from stakeholders and ensures they are clearly communicated to the team.
-  - One Database Administrator who manages the database system.
-  - Two Quality Assurance Engineers who are responsible for testing.
+  - Two Database Administrator who manages the database system.
+  - Five Quality Assurance Engineers who are responsible for testing.
   - One Team Lead conducts code review, provides technical guidance, mentors team members, and coordinates with other teams.
   - The core of our team has 7 Developers who write and maintain the code, implement new features, and fix bugs.
 

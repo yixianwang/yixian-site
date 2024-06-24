@@ -139,7 +139,7 @@ date = 2024-06-20T22:49:47-04:00
   - I also have hands-on experience in AWS provisioning for my previous projects including EC2, S3, RDS, SNS, SQS, etc.
   - For example, in my the most recent project at eBay which is Data Analytics Dashboard. 
     - I use EC2 to host microservices I built. 
-    - I also use Amazon RDS to host Oracle database. 
+    - I also use Amazon RDS to host PostgreSQL database. 
     - And MSK(Managed Kafka) service for real-time data streaming. And so on.
       - Set up VPCs to create isolated network environments, configured subnets, route tables, and NAT gateways.
       - Used S3 for storing and retrieving large datasets, including log files and user-generated content. Configured bucket policies and lifecycle rules for data management.

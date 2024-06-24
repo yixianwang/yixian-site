@@ -41,12 +41,12 @@ date = 2024-06-22T21:08:17-04:00
    - eBay is an e-commerce company, that connects buyers and sellers around the world.
 2. Project Name.
    - Why the project exists? What's the main goal?
-   - The project is used to provide comprehensive insights and analytics to various departments within eBay, such as sales, marketing, product development, and customer support. 
-   - The dashboard will aggregate data from different sources, process it in real-time, and present it through interactive and customizable visualizations.
+      - The project is used to provide comprehensive insights and analytics to various departments within eBay, such as sales, marketing, product development, and customer support. 
+      - The dashboard will aggregate data from different sources, process it in real-time, and present it through interactive and customizable visualizations.
 3. Users.
    - The project is used by whom? How many users approximately?
-   - This project is only used by internal users.
-   - There is about 3,000 users are allowed to access the dashboard with different access level.
+      - This project is only used by internal users.
+      - There is about 3,000 users are allowed to access the dashboard with different access level.
 4. What's the team structure.
    - Agile Team (Scrum Master, Product Owner, Manager, Team Lead, Developers, QA, BA, DBA, DevOps)
       - 1 Product Manager + Scrum Master
@@ -60,7 +60,7 @@ date = 2024-06-22T21:08:17-04:00
 5. What's agile scrum flow?
    - Daily meetings, Jira, Planning meeting, demo, review, retrospective
       - The PM/SM is responsible for creating and maintaining the Product Backlog, a prioritized list of features, enhancements, and bug fixes required for the product.
-      - One Scrum Spring:
+      - One single Scrum Spring consists:
       ```
       Product Backlog
            ↓
@@ -82,21 +82,102 @@ date = 2024-06-22T21:08:17-04:00
       ```
 6. Your Main responsibilities.
    - Design, Implement, Test XXX functions, Backend, DB, Frontend?
-      - I was in BE team.
-      - Write clean, maintainable, and efficient code using Spring Boot, Hibernate, and other back-end technologies.
+      - I am in BE team.
+      - I am responsible for designing and implementing the real-time data processing pipeline and integrating it with the frontend dashboard.
 7. High-level System Structure
    1. TechStack
-      - Java version, SpringBoot, REST, What kind of DB, AWS(Cloud), React/Angular, Junit, Mockito
+      - Java Version: Java 11
+      - Spring Boot: Version 2.5
+      - Databases: PostgreSQL for transactional data, MongoDB for NoSQL needs
+      - AWS (Cloud): EC2, RDS, S3, MSK (Managed Streaming for Apache Kafka), ElastiCache (Redis)
+      - Frontend Framework: Angular 11
+      - Testing Frameworks: JUnit 5, Mockito
    2. Environments
-      - Dev, Test, Staging, Production
+      - Development (Dev): Where initial development and testing occur.
+      - Testing (Test): Used by QA for functional and integration testing.
+      - Staging: Pre-production environment where final testing is conducted to mimic the production setup.
+      - Production: Live environment where the application is used by internal users.
    3. Cloud/Platform
       - Project deployed in AWS or On-premises? CI/CD pipelines?
+         - Deployment: The project is deployed on AWS.
+         - CI/CD Pipelines: Jenkins is used for continuous integration and continuous deployment, automating the build, test, and deployment processes across all environments.
    4. Architecture
       - Draw a chart.
       - Consists of: API Gateway, Service A/B/C, Messaging among services, Database
+      ```
+      +-------------------+       +-------------------+       +-------------------+
+      |                   |       |                   |       |                   |
+      |     API Gateway   | <---> |  Authentication   | <---> |  User Service     |
+      |                   |       |  Service (Spring  |       |  (Spring Boot)    |
+      |                   |       |  Boot + Spring    |       |                   |
+      +-------------------+       |  Security)        |       +-------------------+
+               |                   +-------------------+              |
+               |                                                    / \
+               |                                                   /   \
+               |                                                  /     \
+      +-------------------+       +-------------------+       +-------------------+
+      |                   |       |                   |       |                   |
+      |   Activity        | <---> |  Messaging        | <---> |  Data Processing  |
+      |   Service         |       |  Service          |       |  Service          |
+      |   (Spring Boot)   |       |  (Kafka)          |       |  (Spring Boot)    |
+      |                   |       |                   |       |                   |
+      +-------------------+       +-------------------+       +-------------------+
+               |                                                    |
+               |                                                    |
+               v                                                    v
+      +-------------------+       +-------------------+       +-------------------+
+      |                   |       |                   |       |                   |
+      |  PostgreSQL       |       |  Redis (Elasti-   |       |  MongoDB          |
+      |  (RDS)            |       |  Cache)           |       |                   |
+      |                   |       |                   |       |                   |
+      +-------------------+       +-------------------+       +-------------------+
+               |
+               |
+               v
+      +-------------------+
+      |                   |
+      |  S3 (Data Storage)|
+      |                   |
+      +-------------------+
+      ```
    5. One Specific Functionality
       - As detailed as possible. One or two APIs in detail(method, uri, payload). Service layers, which services are called? how the services communicates(REST, Messaging), where the data is stored(SQL Database, NoSQL, S3 bucket). Chanllenges.
 8. One Specific Functionality.
+   - Functionality: Real-Time User Activity Logging and Analysis
+   - Detailed Breakdown:
+     1. API Endpoint: Log User Activity
+        - Method: POST
+        - URI: /api/v1/activity/log
+        - Payload:
+         ```
+         {
+            "userId": "12345",
+            "activityType": "SEARCH",
+            "timestamp": "2024-06-21T10:15:30Z",
+            "details": {
+            "query": "laptop",
+            "resultsCount": 150
+            }
+         }
+         ```
+     2. Service Layers:
+        - API Gateway: Receives the API request and forwards it to the Authentication Service.
+        - Authentication Service: Verifies the user's identity using JWT tokens.
+        - Activity Service: Handles the logging of user activity.
+           - REST Communication: The API Gateway communicates with the Activity Service via REST.
+     3. Internal Communication:
+        - Activity Service: Receives the payload and sends it to the Messaging Service (Kafka) for real-time processing.
+        - Messaging Service: Publishes the message to the relevant Kafka topic.
+        - Data Processing Service: Subscribes to the Kafka topic, processes the message, and stores the processed data.
+           - Storage:
+              - Transactional Data: Stored in PostgreSQL (RDS) for quick access and querying.
+              - Logs and Historical Data: Stored in MongoDB for flexible querying and analysis.
+              - Raw Data: Archived in S3 for long-term storage and potential future analysis.
+     4. Challenge and Solutions:
+        - Real-Time Data Processing: Ensuring low latency in processing high volumes of data. Solved by using Kafka for efficient message streaming and processing.
+        - Data Consistency: Maintaining consistency between different databases (PostgreSQL and MongoDB). Used transaction management in Spring and eventual consistency principles.
+        - Scalability: Handling increased load as user activity grows. Utilized AWS auto-scaling features for EC2 instances and optimized database queries.
+        - Security: Ensuring data security during transit and storage. Implemented encryption (SSL/TLS) and AWS KMS for data at rest.
 
 ## Lewis Energy Group - Safety Incidents Management
 1. Company Info.

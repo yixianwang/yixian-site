@@ -3,45 +3,35 @@ title = 'Interview Questions'
 date = 2024-06-20T22:49:47-04:00
 +++
 
-## Tips before interview
-- Prepare your phone/monitor/laptop at least 10 mins before. Double check if it is a dial-in call or they call you on your phone or skype.
-- Dress code: dress as professional as you can.
-- **DO research on the client company.**
-- Keep checking your hangout/email.
-- **Always ask questions at the end of the interview.**
-- Take it seriously and be confident
-- Always Turn on the camera. Make the background clean.
-- You don't need to answer all the questions correctly to get the job.
-
-## Project Preparation Guide
-![project preparation guide](images-interview/1.png)
-
 ## Questions
 ### Important
 - Introduce your self and the previous project in 2 to 3 minutes.
-  - Hi, thanks for having me today. My name is Austin Wang. I have over 6 years of professional Java developer experience.
-  - For my past working experience. All the projects I have are Enterprise level Web-Application.
+  - Hi, thanks for having me today. My name is Austin Wang. I a professional Java developer with over 6 years experience.
+  - Within my past working experience, all the projects I have are Web-Application.
   - So I am very proficient in back-end programming with Java and Spring Framework.
   - and also many other web technologies.
-  - like database, the relational and non-relational ones.
-  - messaging queue systems like Kafka
-  - ORM(Object-relational mapping) frameworks including hibernate and Spring Data JPA.
-  - and so on.
-  - I am also experience in developing front-end using Angular.
+  - like database including the relational and non-relational ones.
+  - the messaging queue systems like Kafka
+  - the ORM(Object-relational mapping) frameworks including hibernate and Spring Data JPA, and so on.
+  - I also have experience in developing front-end using Angular.
   - I am an AWS-certified solution architect with real hands-on experience.
-  - With those knowledge and experience I can work on any complex and sophisticated project.
-  - The most recent project I am currently working on is calleed Data Analyics Dashboard System at eBay company. This project is only designed for internal users only. It is used to provide analytics and some comprehensive insights to various departments like sales department, customer support department, and so on. It supports Role based access control for different users to hide some sensitive data.
+  - The most recent project I am currently working on is called Data Analytics Dashboard System at Shopify company. This project is only designed for internal users only. They will use this system provide analytics and some comprehensive insights to various departments like sales department, customer support department, and so on. The Data Analytics Dashboard System also supports Role based access control for different users.
+  - With those knowledge and experience I can work on any complex and sophisticated project for the company.
+  - Thank you! 
+
+- bigger challenge.
 
 - Describe a specific function/feature you did in last project. As detailed as possible.
-  - Feature: Real-Time User Activity Dashboard
-  - Context: In my last project at eBay, we developed an internal real-time analytics dashboard designed to provide insights into user activity on the platform. This dashboard was crucial for various departments, including marketing, customer support, and product development, as it helped them understand user behavior, identify trends, and make data-driven decisions.
-  - My Role: As a backend developer, I was responsible for designing and implementing the real-time data processing pipeline and integrating it with the frontend dashboard.
-  -  Detailed Breakdown:
-    1. Requirement Gathering:
-       - Stakeholders: I collaborated with marketing, customer support, and product teams to understand their specific needs and the kind of metrics they wanted to track.
+  - The most recent project is called Data Analytics Dashboard at eBay. There is a Feature I worked on is called **Real-Time User Activity** Dashboard.
+  - This feature is designed to provide insights into user activity on the platform. 
+  - It helps them understand user behavior, identify trends, and make data-driven decisions.
+  - Details:
+    1. Gather Requirements:
+       - I collaborated with BA to collect specific needs and the kind of metrics they wanted to track, and how they wanna define the metrics.
        - Key Metrics: We identified key metrics such as user login frequency, page views, search queries, purchase behavior, and real-time user location data.
+       - For example, the metric to define new users including two parts: the brand new user should be categorize new users for sure, and also some old users that haven't use eBay more than 1 year we count these users as new users as well. And so on so forth, all those kind of metrics.
     2. Design Phase:
-       - Architecture: I designed a microservice architecture using Spring Boot for the backend services, Kafka for real-time data streaming, and Redis for caching frequently accessed data.
+       - I designed a microservice architecture using Spring Boot for the backend services, Kafka for real-time data streaming, and Redis for caching frequently accessed data.
        - Data Flow: The data flow involved collecting raw user activity data, processing it in real-time, and storing it in a format suitable for quick retrieval and visualization.
     3. Implementation:
        - Data Collection Service:
@@ -61,8 +51,8 @@ date = 2024-06-20T22:49:47-04:00
 
 - How did you agile in your team? Typical Day?
   - We follow the Agile Scrum framework, conducting regular meetings such as daily stand-ups, spring planning, sprint reviews, and retrospectives. With these practices ensured continuous improvement and allowed us to quickly adapt to any change on the business requirement.
-  - For each of typical day, the scrum master will hold an stand-up meeting in the morning about 15 minutes to discuss what we have done yesterday and what we should do in the current day. Get task from Jira System, and work on it then update the Jira system.
-     - Just Coding
+  - For each of typical day, the scrum master will hold a stand-up meeting in the morning about 15 minutes to discuss what we have done yesterday and what we should do in the current day. Get task from Jira System, and work on it then update the Jira system.
+     - Just Coding.
      - Following Standard.
      - Bring new ideas.
      - Learn and self improve.
@@ -246,4 +236,14 @@ date = 2024-06-20T22:49:47-04:00
    - Have I answered all the questions that you have for me?
    - **Do you have any hesitation about my qualifications?**
    - **Is there anything I can clarify for you?**
+
+## Tips before interview
+- Prepare your phone/monitor/laptop at least 10 mins before. Double check if it is a dial-in call or they call you on your phone or skype.
+- Dress code: dress as professional as you can.
+- **DO research on the client company.**
+- Keep checking your hangout/email.
+- **Always ask questions at the end of the interview.**
+- Take it seriously and be confident
+- Always Turn on the camera. Make the background clean.
+- You don't need to answer all the questions correctly to get the job.
 

@@ -3,7 +3,10 @@ title = 'Interview Projects'
 date = 2024-06-22T21:08:17-04:00
 +++
 
-## Project Preparation Guide
+## Guide
+![project preparation guide](images-interview/1.png)
+
+### Project Preparation Guide
 1. Company Info.
    - Brief company info.
 2. Project Name.
@@ -23,7 +26,7 @@ date = 2024-06-22T21:08:17-04:00
    4. Architecture
 8. One Specific Functionality.
 
-### High-Level System Structure Guide
+#### High-Level System Structure Guide
 1. TechStack
    - Java version, SpringBoot, REST, What kind of DB, AWS(Cloud), React/Angular, Junit, Mockito
 2. Environments
@@ -36,7 +39,7 @@ date = 2024-06-22T21:08:17-04:00
 5. One Specific Functionality
    - As detailed as possible. One or two APIs in detail(method, uri, payload). Service layers, which services are called? how the services communicates(REST, Messaging), where the data is stored(SQL Database, NoSQL, S3 bucket). Chanllenges.
 
-## eBay - Data Analytics Dashboard
+## Project 1: eBay - Data Analytics Dashboard
 1. Company Info.
    - eBay is an e-commerce company, that connects buyers and sellers around the world.
 2. Project Name.
@@ -160,8 +163,8 @@ date = 2024-06-22T21:08:17-04:00
             "activityType": "SEARCH",
             "timestamp": "2024-06-21T10:15:30Z",
             "details": {
-            "query": "laptop",
-            "resultsCount": 150
+               "query": "laptop",
+               "resultsCount": 150
             }
          }
          ```
@@ -184,7 +187,7 @@ date = 2024-06-22T21:08:17-04:00
         - Scalability: Handling increased load as user activity grows. Utilized AWS auto-scaling features for EC2 instances and optimized database queries.
         - Security: Ensuring data security during transit and storage. Implemented encryption (SSL/TLS) and AWS KMS for data at rest.
 
-## Lewis Energy Group - Safety Incidents Management
+## Project 2: Lewis Energy Group - Safety Incidents Management
 1. Company Info.
    - Lewis Energy is a natural gas drilling company. 
 2. Project Name.
@@ -241,7 +244,7 @@ date = 2024-06-22T21:08:17-04:00
       - As detailed as possible. One or two APIs in detail(method, uri, payload). Service layers, which services are called? how the services communicates(REST, Messaging), where the data is stored(SQL Database, NoSQL, S3 bucket). Chanllenges.
 8. One Specific Functionality.
 
-## Citi Bank - Tele Processing System
+## Project 3: Citi Bank - Tele Processing System
 1. Company Info.
    - It's a banking company.
 2. Project Name.
@@ -298,7 +301,7 @@ date = 2024-06-22T21:08:17-04:00
       - As detailed as possible. One or two APIs in detail(method, uri, payload). Service layers, which services are called? how the services communicates(REST, Messaging), where the data is stored(SQL Database, NoSQL, S3 bucket). Chanllenges.
 8. One Specific Functionality.
 
-## Beijing Jishuitan Hospital - Drug Data System
+## Project 4: Beijing Jishuitan Hospital - Drug Data System
 1. Company Info.
    - It's a public hospital in Beijing.
 2. Project Name.

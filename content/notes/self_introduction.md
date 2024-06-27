@@ -14,17 +14,16 @@ And for front-end, I have experience using React and also Angular.
 And also I have hands-on experience on building robust(ic) MicroService architecture.
 > just add a brief idea like what industry have I participated in. like what project I have worked on.
 
-
 // 2. My most recent project
 
 And in my most recent project I contribute(d) to a system called ADS, which is stand for Analytics Dashboard System.
 And it is designed to satisfy the company’s data analysis needs. And Initially the ADS was designed in a monolithic architecture. And my project is aim to basic decompose the whole architecture into MicroService. And to enhance the scalability and flexibility of the whole system.
 
-I am in charge of the raise and route functionality for this project. The raise basically, the raise MicroService basically is handle like transportation raise for different carriers and it will handle like the data for specific origin, destination and charge rates. And the meanwhile the route MicroService basically handling the route data like including the route master and the route recommendation. It will also generate the iterneries, and also provides ETA service.
+I am in charge of the rates and route functionality for this project. The rates basically, the rates MicroService basically is handle like transportation rates for different carriers and it will handle like the data for specific origin, destination and charge rates. And the meanwhile the route MicroService basically handling the route data like including the route master and the route recommendation. It will also generate the iterneries, and also provides ETA service.
 
 This whole like architecture ship basically like enhance like the whole systems’ scalability, flexibility, and maintainability. And also enhance the data management process.
 
-In terms of my tech stack, I specialize in right team backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management. And I primarily work with the MySQL database. But I also have experience with other non-sql type of database. On front-end, I utilize like Angular to create intuitive user frontend for different modules, so for this project I basically worked on raise management and route management. And additionally in my previous projects, I have been using like the React for building re-useful components, and Redux for the state management. For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
+In terms of my tech stack, I specialize in right team backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management. And I primarily work with the MySQL database. But I also have experience with other non-sql type of database. On front-end, I utilize like Angular to create intuitive user frontend for different modules, so for this project I basically worked on rates management and route management. And additionally in my previous projects, I have been using like the React for building re-useful components, and Redux for the state management. For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
 
 I appreciate the opportunity to discuss like the my skills and my experience, which I hope I could fulfill the company needs. And Yeah, the should be all.
 

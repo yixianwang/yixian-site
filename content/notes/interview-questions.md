@@ -19,8 +19,6 @@ date = 2024-06-20T22:49:47-04:00
   - With those knowledge and experience I can work on any complex and sophisticated project for the company.
   - Thank you! 
 
-- bigger challenge.
-
 - Describe a specific function/feature you did in last project. As detailed as possible.
   - The most recent project is called Data Analytics Dashboard at eBay. There is a Feature I worked on is called **Real-Time User Activity** Dashboard.
   - This feature is designed to provide insights into user activity on the platform. 

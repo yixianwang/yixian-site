@@ -3,7 +3,7 @@ title = 'Self Introduction'
 date = 2024-06-26T17:02:29-04:00
 draft = true
 +++
-// 1. Self Introduction
+**1. Self Introduction**
 
 My name is Austin. I have been working as a Java developer for over 6 years, and primarily focusing on like Full Stack Development, and the MicroService architecture.
 
@@ -14,7 +14,7 @@ And for front-end, I have experience using React and also Angular.
 And also I have hands-on experience on building robust(ic) MicroService architecture.
 > just add a brief idea like what industry have I participated in. like what project I have worked on.
 
-// 2. My most recent project
+**2. My most recent project**
 
 And in my most recent project I contribute(d) to a system called ADS, which is stand for Analytics Dashboard System.
 And it is designed to satisfy the company’s data analysis needs. And Initially the ADS was designed in a monolithic architecture. And my project is aim to basic decompose the whole architecture into MicroService. And to enhance the scalability and flexibility of the whole system.
@@ -26,9 +26,9 @@ This whole like architecture ship basically like enhance like the whole systems�
 
 In terms of my tech stack, I specialize in right team backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management. And I primarily work with the MySQL database. But I also have experience with other non-sql type of database. On front-end, I utilize like Angular to create intuitive user frontend for different modules, so for this project I basically worked on rates management and route management. And additionally in my previous projects, I have been using like the Angular for building responsive user interface, and NgRx for state management, and Angular Material for designing style. For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
 
-I appreciate the opportunity to discuss like the my skills and my experience, which I hope I could fulfill the company needs. And Yeah, the should be all.
+I appreciate the opportunity to discuss like the my skills and my experience, which I hope I could fulfill the company needs. And Yeah, it should be all.
 
-// 3. Talk about the biggest challenge in my project.
+**3. Talk about the biggest challenge in my project.**
 
 So the biggest challenge in the ADS project, is basically I worked on the enhance performance for one of our API endpoints. It’s called like customer retention rate analysis service in the Customer MicroService, and as our company is going bigger this year. And we have experience like database query delay to this specific endpoint. And it often cause like a performance issue. And sometimes it overloads our database, and even occasionally crash our database.
 

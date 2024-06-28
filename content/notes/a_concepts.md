@@ -1357,6 +1357,7 @@ In Angular, every component has a lifecycle. Angular creates and renders these c
 - Log Aggregation 
   - Splunk
   - ELK: Elastic Search(Storage)/ LogStash(Data processing)/ Kibana(Visualize)
+    - cons of E: doesn't support join and transactions.
 
 ## Security
 - Security Basic

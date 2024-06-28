@@ -72,10 +72,6 @@ date = 2024-06-20T22:49:47-04:00
   - The core of our team has 7 Developers who write and maintain the code, implement new features, and fix bugs.
 
 - Most challenging/proud task.
-  - One of the most challenging tasks I faced was during a project at eBay, where I was responsible for designing a real-time analytics dashboard for internal users. My role involved integrating various data sources, including legacy systems and modern cloud services, to provide comprehensive and timely insights.
-  - The most significant challenge was integrating data from a legacy on-premise system with a modern cloud-based infrastructure using Kafka for real-time data streaming. The legacy system had limited documentation, and there were significant discrepancies in data formats and structures between the old and new systems.
-  - To tackle this challenge, I started by thoroughly analyzing the legacy system’s data formats and structures. I collaborated with the team members who had experience with the legacy system to understand its intricacies better. I then designed a series of data transformation pipelines using Apache Kafka and Spring Boot to process and normalize the data in real-time.
-  - As a result of these efforts, we successfully integrated the legacy system with our modern cloud infrastructure. The real-time analytics dashboard was able to display up-to-date information with minimal latency, significantly improving the decision-making process for internal users. The project was delivered on time and received positive feedback for its accuracy and reliability. And it's under maintenance right now.
 
 - What is the Deployment process? How do you release? How many environment do you have?
    - Environments:

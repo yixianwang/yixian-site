@@ -5,26 +5,35 @@ draft = true
 +++
 **1. Self Introduction**
 
-My name is Austin. I have been working as a Java developer for over 7 years, and primarily focusing on like Backend Development, and the MicroService architecture.
+My name is Austin. I have been working as a Java developer for over 7 years, and primarily focusing on Backend Development, and the MicroService architecture.
 
-And my expertise basically like  
-the core java concept,
-and (I am) familiar with popular framework such as Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, JUnit.
+My expertise basically like the core java concept,
+and (I am) familiar with those popular frameworks such as Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, JUnit, and so on.
 And for front-end, I have experience using React and also Angular.
-And also I have hands-on experience on building robust(ic) MicroService architecture.
+I also have hands-on experience on building robust MicroService architecture.
 > just add a brief idea like what industry have I participated in. like what project I have worked on.
 
 **2. My most recent project**
 
-And in my most recent project I contribute(d) to a system called ADS, which is stand for Analytics Dashboard System.
-And it is designed to satisfy the company’s data analysis needs. And Initially the ADS was designed in a monolithic architecture. And my project is aim to basic decompose the whole architecture into MicroService. And to enhance the scalability and flexibility of the whole system.
+In my most recent project I contribute(d) to a system called ADS, which is stand for Analytics Dashboard System.
+And it is designed to satisfy the company’s data analysis needs. 
+And Initially the ADS was designed in a monolithic architecture. 
+And my project is aim to basic decompose the whole architecture into MicroService. 
+And to enhance the scalability and flexibility of the whole system.
 
-I am in charge of the order and customer functionality for this project. The order basically, the order MicroService basically is handle like the order analysis on different dimensions, and it will handle like the data for specific order types, vip level of the customer, status of the order, and also many other different order dimensions.
-And the meanwhile the customer MicroService basically handling the customer data like including new registered customer analysis, customer retention rate analysis. It will also generate the customer satisfaction analysis report, and also provides advertisement recommendation service.
+I am in charge of the order and customer functionality for this project. 
+The order basically, the order MicroService basically is handle like the order data on different dimensions, and it will handle like the data for specific order types, or specific order status, or the specific category of customers, and also many other different dimensions for the order analysis service.
+And the meanwhile the customer MicroService basically handling the customer data also on different dimensions and definitions like new customer analysis service, customer retention rate service, and so on. 
+It also contains report service that will generate comprehensive customer report, and also provides promotion recommendation for a group of customers.
 
-This whole like architecture ship basically like enhance like the whole systems’ scalability, flexibility, and maintainability. And also enhance the data management process.
+This whole architecture shape basically enhance the whole systems’ scalability, flexibility, and maintainability. 
+And also enhance the data management process.
 
-In terms of my tech stack, I specialize in right team backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management. And I primarily work with the MySQL database. But I also have experience with other non-sql type of database. // On front-end, I utilize like Angular to create intuitive user frontend for different modules, so for this project I basically worked on order service and customer service. And additionally in my previous projects, I have been using like the Angular for building responsive user interface, and NgRx for state management, and Angular Material for designing style. For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
+In terms of my tech stack, I specialize in like team backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management. 
+And I primarily work with the PostgreSQL database. But I also have experience with other non-sql type of database. 
+On front-end, I utilize like Angular to create intuitive user frontend for different modules, so for this project I basically worked on order service and customer service. 
+And additionally in my previous projects, I have been using like the Angular for building responsive user interface, and NgRx for state management, and Angular Material for designing style. 
+For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
 
 I appreciate the opportunity to discuss like the my skills and my experience, which I hope I could fulfill the company needs. And Yeah, it should be all.
 

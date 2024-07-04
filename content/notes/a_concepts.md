@@ -1310,11 +1310,11 @@ In Angular, every component has a lifecycle. Angular creates and renders these c
 - business separation: (horizontal): i.e. service oriented. (Python handles ML, Java handles web application, ...) 
 
 #### Five Components
-- API Gateway
-- Service Registry/Discovery
-- Configuration Management
-- Monitoring and Log Tracing
+- API Gateway: Spring Gateway or Zuul(can also be used as LB)
+- Service Registry/Discovery: Eureka
 - Business Modules
+- Monitoring and Log Tracing: log4j, backlog, splunk
+- Configuration Management: nacos or Eureka(can also be an configuration server)
 
 #### Spring Cloud
 - Spring Cloud provides a comprehensive set of tools to build resilient, scalable, and manageable microservices architectures. By leveraging the various components of Spring Cloud, developers can focus on business logic while the framework handles the complexities of distributed systems. Whether dealing with service discovery, configuration management, circuit breakers, or API gateways, Spring Cloud offers a unified and streamlined approach to developing cloud-native applications.

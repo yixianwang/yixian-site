@@ -301,6 +301,24 @@ date = 2024-06-22T21:08:17-04:00
       - As detailed as possible. One or two APIs in detail(method, uri, payload). Service layers, which services are called? how the services communicates(REST, Messaging), where the data is stored(SQL Database, NoSQL, S3 bucket). Chanllenges.
 8. One Specific Functionality.
 
+
+```
+Sure! Here's a plain English explanation of the project description:
+The Tele Processing System is a tool used by Citi Private Banking to help clients move their money. It allows clients to transfer money from their Citi Private Banking accounts to other accounts outside Citi, as well as between their own accounts within Citi Private Banking.
+To make these transfers happen, the Tele Processing System works with several other systems, including:
+
+Flex Cube: A core banking system.
+CAS: Likely a system for client account services.
+CitiFT: Possibly a funds transfer system.
+CitiTracs: Likely a transaction tracking system.
+CitiSwitch: Possibly a payment processing system.
+SEI: Could be a system for investment management.
+Project One: Likely an internal project or system.
+Document management system: Used for handling and storing documents related to the transfers.
+In short, the Tele Processing System connects with various other systems to ensure that money transfers are done smoothly and efficiently for Citi Private Banking clients.
+```
+
+
 ## Project 4: Beijing Jishuitan Hospital - Drug Data System
 1. Company Info.
    - It's a public hospital in Beijing.

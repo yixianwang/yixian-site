@@ -3,14 +3,13 @@ title = 'Java Last Minute'
 date = 2024-04-11T23:30:02-04:00
 +++
 
-## Array
+## 1D Array
 ```java
 int[] r = new int[26];
 // r.length;
-Arrays.fill(r, 0);
 
 String[] r = {"c1", "c2", "c3"};
-int r = cars.length;
+Arrays.fill(r, 0);
 ```
 
 ## 2D Array
@@ -18,25 +17,38 @@ int r = cars.length;
 String[][] r = new String[3][3];
 
 String[][] r = {{"a", "b"}, {"c", "d"}};
+for (String[] row : r) {
+    Arrays.fill(row, "apple"); // Fill each row with the string "apple"
+}
+```
+
+## Character
+```java
+Character.isLetterOrDigit(s.charAt(i)) // isWhitespace, isLetter, isDigit
+Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))
 ```
 
 ## String
 ```java
 String name = "Bro";
 // name.length();
+
+char[] ch = str.toCharArray();
+return new String(ch) // convert char array back to String
+
+substring(int beginIndex, int endIndex)
+
+String r = name.trim();
+String r = name.replace('o', 'a');  // return Bra
+
 boolean r = name.equals("Bro");
 boolean r = name.equalsIgnoreCase("bro");
-int r = name.length();
+int r = str1.compareTo(str2) // lexicographically, > 0, < 0, == 0
+
 char r = name.charAt(0);
 int r = name.indexOf("B");
 boolean r = name.isEmpty();
 String r = name.toUpperCase(); // toLowerCase
-String r = name.trim();
-String r = name.replace('o', 'a');  // return Bra
-int r = str1.compareTo(str2) // lexicographically, > 0, < 0, == 0
-char[] r = str.toCharArray();
-return new String(r) // convert char array back to String
-substring(int beginIndex, int endIndex)
 
 List<String> wordList = Arrays.asList(s.split("\\s+")); // split by multiple spaces
 Collections.reverse(wordList);
@@ -47,28 +59,31 @@ String r = String.join(" ", wordList); // return a String
 ```java
 StringBuilder sb = new StringBuilder();
 sb.append(str); // append the string to string builder
-sb.toString(); // convert string builder to string
-sb.setCharAt(0, 'z');
+sb.insert(offset, str, start, end);
 sb.deleteCharAt(0);
-```
-
-## Character
-```java
-Character.isLetterOrDigit(s.charAt(i)) // isWhitespace, isLetter, isDigit
-Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))
+sb.setCharAt(0, 'z');
+sb.toString(); // convert string builder to string
 ```
 
 ## ArrayList
 ```java
 ArrayList<String> r = new ArrayList<>();
 // r.size();
-r.add("pizza");
-r.get(0);
-r.set(0, "sushi"); 
-r.remove(0);
+
+r.add("add at the end");
+r.add("add at idx 1", 1);
+r.remove(2); // remove at index 2
 r.clear();
+r.set(0, "replace at index 0");
+r.get(0);
+
+// array -> list
 List<Boolean> result = Arrays.asList(new Boolean[candies.length]); // fix-sized list
 return Arrays.asList(array); // from Array to List
+
+// list -> array
+String[] array = new String[0];
+array = list.toArray(array);
 ```
 
 ## 2D ArrayList
@@ -80,6 +95,7 @@ ArrayList<ArrayList<String>> r = new ArrayList();
 ```java
 HashMap<String, String> hm = new HashMap<>();
 // hm.size();
+
 hm.put("USA", "DC"); // if key doesn't exist: add, otherwise update value
 hm.replace("USA", "Miami"); // if key doesn't exist, do nothing
 hm.putIfAbsent("USA", "Austin"); // if key exist, do nothing, otherwise add

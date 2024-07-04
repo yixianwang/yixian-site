@@ -91,6 +91,28 @@ array = list.toArray(array);
 ArrayList<ArrayList<String>> r = new ArrayList();
 ```
 
+## Deque
+```java
+// better performance. internal data structure is array, doesn't support null 
+Deque<Integer> arrayDeque = new ArrayDeque<>();
+// better flexibility. internal data structure is double linked list, support null 
+Deque<Integer> linkedList = new LinkedList<>();
+
+// peekFirst() peekLast()
+int pf = arrayDeque.peekFirst();
+int pl = arrayDeque.peekLast();
+
+// offerFirst() offerLast()
+arrayDeque.offerFirst(20);
+arrayDeque.offerLast(10);
+
+// removeFirst() removeLast()
+int dequeuedFromArrayDeque1 = arrayDeque.removeFirst();
+int dequeuedFromArrayDeque2 = arrayDeque.removeLast();
+```
+
+## HashSet
+
 ## HashMap
 ```java
 HashMap<String, String> hm = new HashMap<>();
@@ -172,36 +194,25 @@ public static void updatePersonAge(TreeSet<Person> people, String name, int newA
 }
 ```
 
-## Deque
-```java
-// better performance. internal data structure is array, doesn't support null 
-Deque<Integer> arrayDeque = new ArrayDeque<>();
-// better flexibility. internal data structure is double linked list, support null 
-Deque<Integer> linkedList = new LinkedList<>();
+## TreeMap
 
-// peekFirst() peekLast()
-int pf = arrayDeque.peekFirst();
-int pl = arrayDeque.peekLast();
+## HashTable
+## ConcurrentMap
 
-// offerFirst() offerLast()
-arrayDeque.offerFirst(20);
-arrayDeque.offerLast(10);
 
-// removeFirst() removeLast()
-int dequeuedFromArrayDeque1 = arrayDeque.removeFirst();
-int dequeuedFromArrayDeque2 = arrayDeque.removeLast();
-```
 
 ## PriorityQueue
 ```java
 PriorityQueue<Integer> pq = new PriorityQueue<>(
     (n1, n2) -> map.get(n1) - map.get(n2)
 );
+// pq.size();
+
 pq.add(10);
-int r = pq.size();
-boolean r = pq.isEmpty();
-int r = pq.peek();
 int r = pq.poll();
+
+int r = pq.peek();
+boolean r = pq.isEmpty();
 ```
 
 ### PriorityQueue + HashMap
@@ -325,6 +336,12 @@ List<Person> hundredSorted = people.stream()
 hundredSorted.forEach(person -> System.out.println(person.name));
 ```
 
+## Functional Interface
+
+## Method Reference
+
+## Optional Class
+
 ## compareTo
 1. add `implements Comparable<Student>` in class
 2. override method
@@ -345,3 +362,22 @@ Comparator<Student> ageComparator = new Comparator<Student>() {
 };
 TreeSet<Student> people = new TreeSet<>(ageComparator);
 ```
+
+## Multithreading
+### Thread
+### Runnable
+### Callable
+### CompletableFuture
+### Thread Pool
+### Virtual Thread
+
+## Lock
+## CAS
+
+## Design Pattern
+### Singleton
+### Simple Factory
+### Builder
+### Proxy
+### Adaptors
+### Observers

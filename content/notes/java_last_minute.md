@@ -137,10 +137,9 @@ Comparator<Student> ageComparator = new Comparator<Student>() {
 TreeSet<Student> student = new TreeSet<>(ageComparator);
 
 ts.add(new Student(1, "a")); // idempotent: if exist, do nothing
-
-ts.remove(new Student(1, "a")); 
-
-ts.contains(new Student(1, "a");
+ts.remove(new Student(1, "a")); // idempotent
+// to update: remove the old one, add the updated one
+ts.contains(new Student(1, "a"); // safe
 
 Student first = ts.first();
 Student last = ts.last();
@@ -150,6 +149,27 @@ Student higher = ts.higher(new Student(3, "anything"));
 TreeSet<Student> headSet = (TreeSet<Student>) people.headSet(new Student(21, "anything"));
 TreeSet<Student> tailSet = (TreeSet<Student>) people.tailSet(new Student(21, "anything"));
 TreeSet<Student> subSet = (TreeSet<Student>) people.subSet(new Student (3, "anything"), new Student (122, "anything"));
+```
+
+### update element within TreeSet
+```Java
+public static void updatePersonAge(TreeSet<Person> people, String name, int newAge) {
+  // Find the person with the given name
+  Person personToUpdate = null;
+  for (Person person : people) {
+      if (person.getName().equals(name)) {
+          personToUpdate = person;
+          break;
+      }
+  }
+  
+  // If person is found, remove, update and reinsert
+  if (personToUpdate != null) {
+      people.remove(personToUpdate); // Remove the old person
+      personToUpdate.setAge(newAge); // Update the age
+      people.add(personToUpdate); // Add the updated person
+  }
+}
 ```
 
 ## Deque
@@ -178,7 +198,6 @@ boolean r = pq.isEmpty();
 int r = pq.peek();
 int r = pq.poll();
 ```
-
 
 ### PriorityQueue + HashMap
 ```java

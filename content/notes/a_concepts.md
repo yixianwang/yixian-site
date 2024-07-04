@@ -538,10 +538,10 @@ enum Day {
 
 ## HTTP methods
 - Safe: the http method does not change the state of the server, does not changing on the server side.
-- Indempotent: two or more same requests are made to backend, and it will have the same effect.
+- Idempotent: two or more same requests are made to backend, and it will have the same effect.
 - Cacheable: the browser caches some data for some http methods by default. (we can setup with `cache-control`)
 
-| Methods                     | Safe | Indempotent | Cacheable | Description  |
+| Methods                     | Safe | Idempotent | Cacheable | Description  |
 |-----------------------------|------|-------------|-----------|--------------|
 | Get                         | yes  | yes         | yes       | read         |
 | Put                         | no   | yes         | no        | whole update |

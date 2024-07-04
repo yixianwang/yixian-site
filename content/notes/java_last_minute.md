@@ -97,32 +97,59 @@ HashMap<String, String> hm = new HashMap<>();
 // hm.size();
 
 hm.put("USA", "DC"); // if key doesn't exist: add, otherwise update value
-hm.replace("USA", "Miami"); // if key doesn't exist, do nothing
 hm.putIfAbsent("USA", "Austin"); // if key exist, do nothing, otherwise add
-hm.getOrDefault("USA", "Dallas");
+
 hm.remove("USA");
-hm.get("USA");
 hm.clear();
+
+hm.replace("USA", "Miami"); // if key doesn't exist, do nothing
+
+hm.getOrDefault("USA", "Dallas");
+hm.get("USA");
+
 hm.containsKey("USA");
 hm.containsValue("DC");
+
 for (String key : hm.keySet()) {
   String val = hm.get(key);
   ...
 }
+
 if (!ans.containsKey(key)) ans.put(key, new ArrayList());
-return new ArrayList(ans.values()); // from Map<String, List> get List<List<String>>
+
+return new ArrayList(ans.values()); // Map<String, List> -> List<List<String>>
+
 return new ArrayList(); // for return empty (List<List<AnyType>>)
 ```
 
 ## TreeSet
 ```java
-TreeSet<Student> hs = new TreeSet<>(
+TreeSet<Student> ts = new TreeSet<>(
     (l, r) -> (l.age - r.age)
 );
-hs.add(new Student(11, "a"));
-Student r = hs.first();
-hs.remove(hs.first()); 
-hs.remove(new Student(11, "a")); 
+
+Comparator<Student> ageComparator = new Comparator<Student>() {
+   @Override
+   public int compare(Student s1, Student s2) {
+       return Integer.compare(s1.getAge(), s2.getAge());
+   }
+};
+TreeSet<Student> student = new TreeSet<>(ageComparator);
+
+ts.add(new Student(1, "a")); // idempotent: if exist, do nothing
+
+ts.remove(new Student(1, "a")); 
+
+ts.contains(new Student(1, "a");
+
+Student first = ts.first();
+Student last = ts.last();
+Student lower = ts.lower(new Student(3, "anything"));
+Student higher = ts.higher(new Student(3, "anything"));
+
+TreeSet<Student> headSet = (TreeSet<Student>) people.headSet(new Student(21, "anything"));
+TreeSet<Student> tailSet = (TreeSet<Student>) people.tailSet(new Student(21, "anything"));
+TreeSet<Student> subSet = (TreeSet<Student>) people.subSet(new Student (3, "anything"), new Student (122, "anything"));
 ```
 
 ## Deque
@@ -152,33 +179,8 @@ int r = pq.peek();
 int r = pq.poll();
 ```
 
-## Sort
-```java
-// List
-Collections.sort(v, (l, r) -> l.name.compareTo(r.name));
 
-// Array
-Arrays.sort(v, (l, r) -> l.name.compareTo(r.name));
-```
-
-## Collections.min
-```java
-// List
-Student my_min = Collections.min(vl, (l, r) -> l.age - r.age);
-```
-
-## stream
-```java
-// people is ArrayList
-List<Person> hundredSorted = people.stream()
-        .filter(person -> person.billions >= 100)
-        .sorted(Comparator.comparing(person -> person.name))
-        .collect(Collectors.toList());
-hundredSorted.forEach(person -> System.out.println(person.name));
-```
-
-
-## PriorityQueue + HashMap
+### PriorityQueue + HashMap
 ```java
 // leetcode 347
 class Solution {
@@ -227,7 +229,7 @@ class Solution {
 }
 ```
 
-## Queue + Pair
+### Queue + Pair
 ```java
 // leetcode 988
 class Solution {
@@ -271,4 +273,51 @@ class Solution {
         return smallestString;
     }
 }
+```
+
+## Collections
+### sort
+```java
+// List
+Collections.sort(v, (l, r) -> l.name.compareTo(r.name));
+
+// Array
+Arrays.sort(v, (l, r) -> l.name.compareTo(r.name));
+```
+
+### min
+```java
+// List
+Student my_min = Collections.min(vl, (l, r) -> l.age - r.age);
+```
+
+## stream
+```java
+// people is ArrayList
+List<Person> hundredSorted = people.stream()
+        .filter(person -> person.billions >= 100)
+        .sorted(Comparator.comparing(person -> person.name))
+        .collect(Collectors.toList());
+hundredSorted.forEach(person -> System.out.println(person.name));
+```
+
+## compareTo
+1. add `implements Comparable<Student>` in class
+2. override method
+   ```java
+   @Override
+   public int compareTo(Student other) {
+       return this.age.compareTo(other.age);
+   }
+   ```
+
+## Comparator
+```java
+Comparator<Student> ageComparator = new Comparator<Student>() {
+   @Override
+   public int compare(Student p1, Student p2) {
+       return Integer.compare(p1.getAge(), p2.getAge());
+   }
+};
+TreeSet<Student> people = new TreeSet<>(ageComparator);
 ```

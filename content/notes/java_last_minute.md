@@ -179,12 +179,17 @@ Deque<Integer> arrayDeque = new ArrayDeque<>();
 // better flexibility. internal data structure is double linked list, support null 
 Deque<Integer> linkedList = new LinkedList<>();
 
-arrayDeque.offerLast(10);
-arrayDeque.offerFirst(20);
-int dequeuedFromArrayDeque1 = arrayDeque.removeFirst();
-int dequeuedFromArrayDeque2 = arrayDeque.removeLast();
+// peekFirst() peekLast()
 int pf = arrayDeque.peekFirst();
 int pl = arrayDeque.peekLast();
+
+// offerFirst() offerLast()
+arrayDeque.offerFirst(20);
+arrayDeque.offerLast(10);
+
+// removeFirst() removeLast()
+int dequeuedFromArrayDeque1 = arrayDeque.removeFirst();
+int dequeuedFromArrayDeque2 = arrayDeque.removeLast();
 ```
 
 ## PriorityQueue

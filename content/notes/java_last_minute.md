@@ -112,6 +112,17 @@ int dequeuedFromArrayDeque2 = arrayDeque.removeLast();
 ```
 
 ## HashSet
+```Java
+HashSet<String> hs = new HashSet<>();
+// hs.size();
+
+hs.add("Apple");
+hs.remove("Apple");
+hs.clear();
+boolean containsApple = hs.contains("Apple");
+
+Set<String> synchronizedSet = Collections.synchronizedSet(new HashSet<>());
+```
 
 ## HashMap
 ```java
@@ -142,6 +153,8 @@ if (!ans.containsKey(key)) ans.put(key, new ArrayList());
 return new ArrayList(ans.values()); // Map<String, List> -> List<List<String>>
 
 return new ArrayList(); // for return empty (List<List<AnyType>>)
+
+Map<Integer, String> synchronizedHashMap = Collections.synchronizedMap(new HashMap<>());
 ```
 
 ## TreeSet
@@ -167,10 +180,14 @@ Student first = ts.first();
 Student last = ts.last();
 Student lower = ts.lower(new Student(3, "anything"));
 Student higher = ts.higher(new Student(3, "anything"));
+Student floor = ts.floor(new Student(3, "anything"));
+Student ceiling = ts.ceiling(new Student(3, "anything));
 
 TreeSet<Student> headSet = (TreeSet<Student>) people.headSet(new Student(21, "anything"));
 TreeSet<Student> tailSet = (TreeSet<Student>) people.tailSet(new Student(21, "anything"));
 TreeSet<Student> subSet = (TreeSet<Student>) people.subSet(new Student (3, "anything"), new Student (122, "anything"));
+
+SortedSet<String> synchronizedTreeSet = Collections.synchronizedSortedSet(new TreeSet<>());
 ```
 
 ### update element within TreeSet
@@ -195,11 +212,70 @@ public static void updatePersonAge(TreeSet<Person> people, String name, int newA
 ```
 
 ## TreeMap
+```Java
+TreeMap<Integer, String> tm = new TreeMap<>();
+// tm.size();
+
+tm.put(3, "Three");
+tm.remove(2);
+tm.clear();
+String v = tm.get(3);
+boolean containsKey = tm.containsKey(1);
+boolean containsValue = tm.containsValue("Four");
+
+Integer firstKey = tm.firstKey();
+Integer lastKey = tm.lastKey();
+
+Integer lowerKey = treeMap.lowerKey(3); // Returns 2
+Integer floorKey = treeMap.floorKey(3); // Returns 3
+Integer higherKey = treeMap.higherKey(3); // Returns 4
+Integer ceilingKey = treeMap.ceilingKey(3); // Returns 3
+
+SortedMap<Integer, String> headMap = treeMap.headMap(3); // Elements < 3
+SortedMap<Integer, String> tailMap = treeMap.tailMap(3); // Elements >= 3
+SortedMap<Integer, String> subMap = treeMap.subMap(2, 4); // Elements >= 2 and < 4
+
+SortedMap<Integer, String> synchronizedTreeMap = Collections.synchronizedSortedMap(new TreeMap<>());
+```
 
 ## HashTable
+
 ## ConcurrentHashMap
+```Java
+ConcurrentHashMap<Integer, String> map = new ConcurrentHashMap<>();
+// map.size();
 
+// basic operations
+map.put(1, "One");
+map.remove(2);
+map.clear();
+String value = map.get(1);
+boolean containsKey = map.containsKey(3);
+boolean containsValue = map.containsValue("Three");
 
+// concurrent operations
+map.putIfAbsent(4, "Four"); // Adds the value only if the key is not already present
+map.remove(1, "One"); // Removes the entry only if the key is mapped to the specified value
+map.replace(3, "Three", "ThreeReplaced"); // Replaces the value only if the key is mapped to the specified value
+map.compute(3, (key, value) -> value + "Updated"); // Computes a new mapping for the specified key using the given remapping function
+map.computeIfAbsent(5, key -> "Five"); // Computes a new value for the specified key if it is not already present
+map.computeIfPresent(3, (key, value) -> value + "UpdatedAgain"); // Computes a new value for the specified key if it is already present
+```
+
+### Iterating over ConcurrentHashMap
+```Java
+for (Integer key : map.keySet()) {
+    System.out.println("Key: " + key + ", Value: " + map.get(key));
+}
+
+for (Map.Entry<Integer, String> entry : map.entrySet()) {
+    System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+}
+
+for (String value : map.values()) {
+    System.out.println("Value: " + value);
+}
+```
 
 ## PriorityQueue
 ```java
@@ -339,6 +415,24 @@ hundredSorted.forEach(person -> System.out.println(person.name));
 ## Functional Interface
 
 ## Method Reference
+```Java
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+// Using a method reference to a static method
+numbers.forEach(MethodReferenceExample::printNumber);
+
+List<String> messages = Arrays.asList("Hello", "World", "Java");
+MethodReferenceExample example = new MethodReferenceExample();
+// Using a method reference to an instance method of a particular object
+messages.forEach(example::printMessage);
+
+List<String> messages = Arrays.asList("Hello", "World", "Java");
+// Using a method reference to an instance method of an arbitrary object
+messages.forEach(String::toUpperCase);
+
+// Using a method reference to a constructor
+Supplier<ArrayList<String>> listSupplier = ArrayList::new;
+ArrayList<String> list = listSupplier.get();
+```
 
 ## Optional Class
 

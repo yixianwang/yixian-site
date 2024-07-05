@@ -413,6 +413,54 @@ hundredSorted.forEach(person -> System.out.println(person.name));
 ```
 
 ## Functional Interface
+- Predicate<T>: Represents a predicate (boolean-valued function) of one argument.
+   - Method: boolean test(T t)
+
+- Consumer<T>: Represents an operation that accepts a single input argument and returns no result.
+   - Method: void accept(T t)
+
+- Function<T, R>: Represents a function that accepts one argument and produces a result.
+   - Method: R apply(T t)
+
+- Supplier<T>: Represents a supplier of results.
+   - Method: T get()
+
+- UnaryOperator<T>: Represents an operation on a single operand that produces a result of the same type as its operand.
+   - Method: T apply(T t)
+
+- BinaryOperator<T>: Represents an operation upon two operands of the same type, producing a result of the same type as the operands.
+   - Method: T apply(T t1, T t2)
+
+```Java
+Predicate<Integer> isEven = num -> num % 2 == 0;
+System.out.println(isEven.test(4)); // Outputs: true
+System.out.println(isEven.test(3)); // Outputs: false
+
+Function<String, Integer> stringLength = String::length;
+System.out.println(stringLength.apply("Hello")); // Outputs: 5
+
+Supplier<Double> randomValue = Math::random;
+System.out.println(randomValue.get()); // Outputs a random value between 0.0 and 1.0
+
+Consumer<String> print = System.out::println;
+print.accept("Hello, world!"); // Outputs: Hello, world!
+
+UnaryOperator<Integer> square = x -> x * x;
+System.out.println(square.apply(5)); // Outputs: 25
+```
+
+### Combining Functional Interfaces
+- Functional interfaces can be combined to create more complex behaviors using default methods like `andThen` and `compose`.
+```Java
+Consumer<String> greet = name -> System.out.println("Hello, " + name);
+Consumer<String> askHowAreYou = name -> System.out.println("How are you, " + name + "?");
+
+Consumer<String> greetAndAsk = greet.andThen(askHowAreYou);
+greetAndAsk.accept("John");
+// Outputs:
+// Hello, John
+// How are you, John?
+```
 
 ## Method Reference
 ```Java

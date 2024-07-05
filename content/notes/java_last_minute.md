@@ -483,6 +483,105 @@ ArrayList<String> list = listSupplier.get();
 ```
 
 ## Optional Class
+### Creating Optional Instance
+1. Empty Optional: Represents a missing or absent value.
+    ```Java
+    Represents a missing or absent value.
+    ```
+2. Non-empty Optional: Wraps a non-null value.
+    ```Java
+    Optional<String> nonEmpty = Optional.of("Hello");
+    ```
+3. Nullable Optional: Can wrap a value that might be null, returning an empty Optional if the value is null.
+    ```Java
+    Optional<String> nullable = Optional.ofNullable(null);
+    ```
+### Basic Operations
+```Java
+boolean present = nonEmpty.isPresent(); // true
+boolean absent = empty.isPresent(); // false
+
+nonEmpty.ifPresent(value -> System.out.println("Value: " + value)); // Outputs: Value: Hello
+
+String value = nonEmpty.get(); // "Hello"
+// empty.get(); // Throws NoSuchElementException
+
+String value = empty.orElse("Default"); // "Default"
+
+String value = empty.orElseGet(() -> "Default from Supplier"); // "Default from Supplier"
+
+// empty.orElseThrow(() -> new IllegalArgumentException("No value present")); // Throws IllegalArgumentException
+```
+
+### Transforming Optional Values
+```Java
+// map(): Applies a function to the value if present and returns an `Optional` containing the result.
+Optional<Integer> length = nonEmpty.map(String::length); // Optional[5]
+
+// flatmap(): Similar to `map`, but the function must return an `Optional`. It is used to avoid nested optionals.
+Optional<String> nonEmptyUpper = nonEmpty.flatMap(val -> Optional.of(val.toUpperCase())); // Optional[HELLO]
+
+// filter(): Applies a predicate to the value if present and returns an Optional containing the value if it matches the predicate.
+Optional<String> filtered = nonEmpty.filter(val -> val.length() > 3); // Optional[Hello]
+Optional<String> filteredEmpty = nonEmpty.filter(val -> val.length() > 5); // Optional.empty
+```
+
+### Example
+```Java
+public class Person {
+    private Optional<Address> address;
+
+    public Optional<Address> getAddress() {
+        return address;
+    }
+}
+
+public class Address {
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person();
+        String city = person.getAddress()
+                            .flatMap(Address::getCity)
+                            .orElse("Unknown city");
+
+        System.out.println("City: " + city); // Outputs: City: Unknown city
+    }
+}
+```
+
+### Combining Options
+1. Chaining Options: Using methods like flatMap, you can chain multiple optionals.
+    ```Java
+    Optional<Person> person = Optional.of(new Person());
+    String city = person.flatMap(Person::getAddress)
+                        .map(Address::getCity)
+                        .orElse("Unknown city");
+    ```
+2. Merging Options: Combining the values of multiple optionals if they are present.
+    ```Java
+    Optional<String> opt1 = Optional.of("Hello");
+    Optional<String> opt2 = Optional.of("World");
+
+    Optional<String> combined = opt1.flatMap(val1 -> opt2.map(val2 -> val1 + " " + val2));
+    combined.ifPresent(System.out::println); // Outputs: Hello World
+    ```
+
+### Best Practices
+1. Use `Optional` for Return Types:
+   - Use `Optional` as the return type of methods to indicate that the method might not return a value.
+2. Avoid Optional in Fields and Parameters:
+   - Avoid using `Optional` for fields or method parameters, as it can introduce unnecessary complexity.
+3. Prefer `orElseGet` over `orElse`:
+   - Use `orElseGet` instead of `orElse` when the default value computation is expensive or has side effects.
+4. Do Not Use `Optional` for Collection Elements:
+   - Avoid using `Optional` for elements of collections, as it can lead to a convoluted design. Instead, use an empty collection to represent the absence of elements.
 
 ## compareTo
 1. add `implements Comparable<Student>` in class

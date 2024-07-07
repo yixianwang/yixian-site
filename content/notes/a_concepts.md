@@ -796,7 +796,7 @@ enum Day {
 ```
 @Controller
 @RestController
-  - @RestController contains @Controller and @RespondBody.
+  - @RestController contains @Controller and @ResponseBody.
   - if we only use @Controller to Controller class, we also have to add @RespondBody manually.
 
 @Service

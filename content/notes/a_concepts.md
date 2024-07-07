@@ -373,6 +373,13 @@ enum Day {
 ### ThreadPool(or ExecutorService)
 ![50](images-a/50.png)
 
+### Summary
+- Thread: Simple and straightforward for quick-and-dirty threading needs.
+- Runnable: Preferred when you don't need to return a result from the task.
+- Callable: Use when you need to return a result or handle exceptions from the task.
+- CompletableFuture: Ideal for asynchronous programming and chaining tasks.
+- ThreadPoolExecutor: Provides extensive control over thread pool behavior for complex threading requirements.
+- VirtualThread: Use for scalable and lightweight concurrency (note: still in preview as of Java 19).
 
 ## Lock(or Monitor)
 - critical section: we have some threads, those threads are going to manipulate some common resources.

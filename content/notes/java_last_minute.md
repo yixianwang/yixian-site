@@ -606,17 +606,172 @@ TreeSet<Student> people = new TreeSet<>(ageComparator);
 
 ## Multithreading
 ### Thread
+```Java
+public class ThreadExample extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Thread is running: " + Thread.currentThread().getName());
+    }
+
+    public static void main(String[] args) {
+        ThreadExample thread = new ThreadExample();
+        thread.start();
+    }
+}
+```
 ### Runnable
+```Java
+public class RunnableExample implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Runnable is running: " + Thread.currentThread().getName());
+    }
+
+    public static void main(String[] args) {
+        Thread thread = new Thread(new RunnableExample());
+        thread.start();
+    }
+}
+```
 ### Callable
+```Java
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class CallableExample implements Callable<String> {
+    @Override
+    public String call() throws Exception {
+        return "Callable result from " + Thread.currentThread().getName();
+    }
+
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        CallableExample callableTask = new CallableExample();
+        Future<String> future = executor.submit(callableTask);
+
+        try {
+            String result = future.get();
+            System.out.println(result);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        } finally {
+            executor.shutdown();
+        }
+    }
+}
+```
 ### CompletableFuture
+```Java
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
+public class CompletableFutureExample {
+    public static void main(String[] args) {
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+            return "Result from " + Thread.currentThread().getName();
+        });
+
+        try {
+            String result = future.get();
+            System.out.println(result);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 ### Thread Pool
+```Java
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class ThreadPoolExecutorExample {
+    public static void main(String[] args) {
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
+
+        for (int i = 0; i < 5; i++) {
+            executor.submit(() -> {
+                System.out.println("Task executed by " + Thread.currentThread().getName());
+            });
+        }
+
+        executor.shutdown();
+        try {
+            executor.awaitTermination(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 ### Virtual Thread
+```Java
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class VirtualThreadExample {
+    public static void main(String[] args) {
+        var executor = Executors.newVirtualThreadPerTaskExecutor();
+
+        Future<String> future = executor.submit(() -> {
+            return "Result from virtual thread: " + Thread.currentThread().getName();
+        });
+
+        try {
+            String result = future.get();
+            System.out.println(result);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        } finally {
+            executor.shutdown();
+        }
+    }
+}
+```
 
 ## Lock
 ## CAS
 
 ## Design Pattern
 ### Singleton
+1. add `final` keyword before the class template to prevent inheritance.
+2. Add a private static field to the class for storing the singleton instance.
+3. Declare a public static creation method for getting the singleton instance.
+4. Implement “lazy initialization” inside the static method. It should create a new object on its first call and put it into the static field. The method should always return that instance on all subsequent calls.
+5. Make the constructor of the class private. The static method of the class will still be able to call the constructor, but not the other objects.
+6. Go over the client code and replace all direct calls to the singleton’s constructor with calls to its static creation method.
+
+```Java
+package refactoring_guru.singleton.example.non_thread_safe;
+
+public final class Singleton {
+    private static Singleton instance;
+    public String value;
+
+    private Singleton(String value) {
+        // The following code emulates slow initialization.
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        this.value = value;
+    }
+
+    public static Singleton getInstance(String value) {
+        if (instance == null) {
+            instance = new Singleton(value);
+        }
+        return instance;
+    }
+}
+```
+
 ### Simple Factory
 ### Builder
 ### Proxy

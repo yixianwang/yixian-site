@@ -841,11 +841,11 @@ public void before(JointPoint joinPoint) {
 
 @AfterReturning(value = "execution(* com.....)", returning = "employee")
 public void after(JointPoint joinPoint, Employee employee) {
-  lof.info("..." + employee);
+  log.info("..." + employee);
 }
 @AfterThrowing(value = "execution(* com.....)", throwing = "e")
 public void after(JointPoint joinPoint, Exception e) {
-  lof.info("..." + e.getMessage());
+  log.info("..." + e.getMessage());
 }
 
 @Around("loggingPointCut()")

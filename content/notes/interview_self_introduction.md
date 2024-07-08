@@ -22,9 +22,9 @@ And my project is aim to basic decompose the whole architecture into MicroServic
 And to enhance the scalability and flexibility of the whole system.
 
 I am in charge of the order and customer functionality for this project. 
-The order basically, the order MicroService basically is handle like the order data on different dimensions, and it will handle like the data for specific order types, or specific order status, or the specific category of customers, and also many other different dimensions for the order analysis service.
+The order basically, the order MicroService basically is handle like the order data on different dimensions, and it will handle like the data for specific analysis purposes. Analysis based on various dimensions like the order types, order status, or the category of order item, and also many other different dimensions for the order analysis microservice.
 And the meanwhile the customer MicroService basically handling the customer data also on different dimensions and definitions like new customer analysis service, customer retention rate service, and so on. 
-It also contains report service that will generate comprehensive customer report, and also provides promotion recommendation for a group of customers.
+It also contains report service that will generate comprehensive customer report, and also provides promotion recommendation for desired customers.
 
 This whole architecture shape basically enhance the whole systems’ scalability, flexibility, and maintainability. 
 And also enhance the data management process.

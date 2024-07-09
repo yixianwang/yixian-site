@@ -58,6 +58,8 @@ String r = String.join(" ", wordList); // return a String
 ## StringBuilder
 ```java
 StringBuilder sb = new StringBuilder();
+// sb.length();
+
 sb.append(str); // append the string to string builder
 sb.insert(offset, str, start, end);
 sb.delete(start, end);
@@ -98,6 +100,7 @@ ArrayList<ArrayList<String>> r = new ArrayList();
 Deque<Integer> arrayDeque = new ArrayDeque<>();
 // better flexibility. internal data structure is double linked list, support null 
 Deque<Integer> linkedList = new LinkedList<>();
+// dq.size();
 
 // peekFirst() peekLast()
 int pf = arrayDeque.peekFirst();
@@ -110,6 +113,11 @@ arrayDeque.offerLast(10);
 // removeFirst() removeLast()
 int dequeuedFromArrayDeque1 = arrayDeque.removeFirst();
 int dequeuedFromArrayDeque2 = arrayDeque.removeLast();
+
+// pollFirst() pollLast()
+// Does not throw an exception if the deque is empty.
+int dequeuedFromArrayDeque1 = arrayDeque.pollFirst();
+int dequeuedFromArrayDeque2 = arrayDeque.pollLast();
 ```
 
 ## HashSet

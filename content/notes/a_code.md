@@ -25,6 +25,11 @@ void TopKSplit(vector<int>& nums, int k, int left, int right) {
   else if (idx < k) TopKSplit(nums, k, idx + 1, right);
   else TopKSplit(nums, k, left, idx - 1);
 }
+
+int findKthLargest(vector<int>& nums, int k) {
+  TopKSplit(nums, nums.size() - k, 0, nums.size() - 1);
+  return nums[nums.size() - k];
+}
 ```
 
 ## Coding: 实现 ArrayList 的 get 方法和 add 方法(by index)
@@ -205,6 +210,11 @@ void TopKSplit(vector<int>& nums, int k, int left, int right) {
   if (idx == k) return;
   else if (idx < k) TopKSplit(nums, k, idx + 1, right);
   else TopKSplit(nums, k, left, idx - 1);
+}
+
+int findKthLargest(vector<int>& nums, int k) {
+  TopKSplit(nums, nums.size() - k, 0, nums.size() - 1);
+  return nums[nums.size() - k];
 }
 ```
 

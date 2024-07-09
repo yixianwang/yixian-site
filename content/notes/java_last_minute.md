@@ -39,7 +39,7 @@ return new String(ch) // convert char array back to String
 substring(int beginIndex, int endIndex)
 
 String r = name.trim();
-String r = name.replace('o', 'a');  // return Bra
+String r = name.replace('o', 'a');  // Replace all 'a' to 'o'
 
 boolean r = name.equals("Bro");
 boolean r = name.equalsIgnoreCase("bro");
@@ -60,8 +60,9 @@ String r = String.join(" ", wordList); // return a String
 StringBuilder sb = new StringBuilder();
 sb.append(str); // append the string to string builder
 sb.insert(offset, str, start, end);
-sb.deleteCharAt(0);
-sb.setCharAt(0, 'z');
+sb.delete(start, end);
+sb.deleteCharAt(idx);
+sb.setCharAt(idx, 'z');
 sb.toString(); // convert string builder to string
 ```
 

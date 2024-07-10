@@ -5,7 +5,7 @@ draft = true
 +++
 **1. Self Introduction**
 
-My name is Austin. I have been working as a Java developer for over 7 years, and primarily focusing on Backend Development, and the MicroService architecture.
+My name is Austin. I have been working as a Java developer for over 6 years, and primarily focusing on Backend Development, and the MicroService architecture.
 
 My expertise basically like the core java concept,
 and (I am) familiar with those popular frameworks such as Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, JUnit, and so on.
@@ -38,7 +38,6 @@ For the MicroService I have intensely use Kafka to build like the event driven a
 I appreciate the opportunity to discuss like the my skills and my experience, which I hope I could fulfill the company needs. And Yeah, it should be all.
 
 **3. Talk about the biggest challenge in my project.**
-
 So the biggest challenge in the ADS project, is basically I worked on the enhance performance for one of our API endpoints. It’s called like customer growth analysis service in the Customer MicroService, and as our company is going bigger this year. And we have experience like database query delay to this specific endpoint. And it often cause like a performance issue. And sometimes it overloads our database, and even occasionally crash our database.
 
 I discussed this problem with my team lead. And he proposed like may be we could try to kind of to use like Elastic Search. And Elastic Search is kind of new technology for like for the team and also for me. And we do have like the other team which working on the e-commerce websites to use ElasticSearch. Since our e-commerce website is basically for like unstructured data and will have a lot of like filter stuff. But for like this specific customer retention rate analysis endpoint, is basically we need it fast response time. So first of all I have a team meeting with all team members and my manager. To aligns up may be we need to try this kind of approach. I just want to make sure that everyone is on the same page. And I also go the person like who is working on the e-commerce website, to kind of like talk about my implementation and to see like if this approach is on track. And he gave me like a remind me a tool like called OpenDistro which can help me to like convert like SQL statements to ElasticSearch queries. And we did try that approach, however like, it’s still like causing sometime random chaos in our system. So I did the further research and we just determined that we may be we should just try to use the native ElasticSearch queries. And I work closely with my team lead. And we basically migrate that old MySQL database for the Customer to ElasticSearch. Using ElasticSearch as the backend. And we have successfully launched this enhanced feature like in two months. I feel like this is gonna be the most challenge part I found in my project. 

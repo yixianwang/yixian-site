@@ -3,6 +3,14 @@ title = 'Java Last Minute'
 date = 2024-04-11T23:30:02-04:00
 +++
 
+## Basic data types
+### int <-> String
+```Java
+// first is "123"
+// scond is "234"
+String sumStr = String.valueOf(Long.parseLong(first) + Long.parseLong(second));
+```
+
 ## 1D Array
 ```java
 int[] r = new int[26];
@@ -47,6 +55,7 @@ int r = str1.compareTo(str2) // lexicographically, > 0, < 0, == 0
 
 char r = name.charAt(0);
 int r = name.indexOf("B");
+boolean r = name.startsWith("A");
 boolean r = name.isEmpty();
 String r = name.toUpperCase(); // toLowerCase
 

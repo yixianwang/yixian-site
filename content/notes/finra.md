@@ -14,7 +14,6 @@ The job description I got from the HR: "Requirements :
 - Demonstrated hands-on experience writing basic **SQL** queries using joins and aggregate functions
 - QA mindset: unit, integration, smoke, regression, performance, security, scalability, reliability, failure tolerance, TDD, BDD, etc.".
 I have a problems list that I need to prepare for this position. I will put them to here one by one. And please give me the proper answer for each question I put here based on my background. The answer you gave me should be in the first person statement. When the tech stacks in the job description that I can use in the answer, please use them in your answer.
-
 ```
 
 ## Summary:

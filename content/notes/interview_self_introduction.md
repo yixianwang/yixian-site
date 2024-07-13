@@ -21,8 +21,8 @@ And Initially the ADS was designed in a monolithic architecture.
 And my project is aim to basic decompose the whole architecture into MicroService. 
 And to enhance the scalability and flexibility of the whole system.
 
-I am in charge of the order and customer functionality for this project. 
-The order basically, the order MicroService basically is handle like the order data on different dimensions, and it will handle like the data for specific analysis purposes. Analysis based on various dimensions like the order types, order status, or the category of order item, and also many other different dimensions for the order analysis microservice.
+I am in charge of the order functionality for this project. 
+Within order functionality, it contains 8 corresponding microservices, the order MicroService basically is handle like the order data on different dimensions, and it will handle like the data for specific analysis purposes. Analysis based on various dimensions like the order types, order status, or the category of order item, and also many other different dimensions for the order analysis microservice.
 And the meanwhile the customer MicroService basically handling the customer data also on different dimensions and definitions like new customer analysis service, customer retention rate service, and so on. 
 It also contains report service that will generate comprehensive customer report, and also provides promotion recommendation service for desired customers.
 

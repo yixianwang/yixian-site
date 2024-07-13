@@ -34,6 +34,34 @@ I have a problems list that I need to prepare for this position. I will put them
 - Strong QA mindset curious, meticulous, willing to speak up
 - Basic SQL skills
 
+- An incoming candidate must have strong communication, technical, automation, and assurance skills.  They also must be able to assess risk and create tests independently following an established strategy. The candidate must have strong quality assurance practice knowledge and hands-on implementation of functional and performance testing.
+
+- Must-Haves (please do not send candidates that do not meet these criteria):
+   - Experience with cloud infrastructure and testing applications running on cloud technologies
+   - Demonstrated knowledge of cloud components and architecture (preferably AWS and core services such as ECS, Lambda, S3, SQS, etc.)
+   - Understanding and ability to describe application architectures
+   - Hands-on experience and ability to develop UI and API automated tests in common frameworks (e.g., Rest Assured, Selenium, - Cucumber, etc.,)
+   - Experience executing and implementing QA strategies that include all functional and nonfunctional quality assurance - considerations
+   - Experience with object-oriented programming (Java preferred) and prior experience with application or automation framework - development
+   - Experience implementing tests with modern automated testing tools (e.g., Cucumber, Playwright, Karate, etc.), frameworks, and patterns
+   - Experience with foundational database concepts (Selecting, Filtering, Joining, Simple Aggregates like Sum and Count)
+   - Ability to independently design and create test cases following a set strategy for software applications
+   - Ability to create, execute, debug, and analyze automated load and performance tests
+   - Ability to develop automated tests using mocks/stubs
+   - Strong critical thinking and problem-solving skills
+   - Demonstrable experience seeking out information and learning through self-research
+   - Strong written and verbal communication skills
+- Required Skills
+   - Ability to effectively communicate progress on tasks
+   - Prior experience estimating individual pieces of work
+   - Ability to assess, communicate, and escalate risks when necessary
+- Nice-to-Haves:
+   - Foundational knowledge of artificial intelligence and machine learning
+   - Foundational knowledge of application security testing
+   - Hands-on DevOps skills (e.g. Jenkins)
+   - Experience with Node and that family of languages (Javascript, Typescript)
+   - Experience with application development tools and frameworks (Spring, Springboot, Angular, React, etc.)
+
 ## Skills
 - Java
 - AWS
@@ -44,6 +72,8 @@ I have a problems list that I need to prepare for this position. I will put them
     - integration, 
     - smoke, 
     - regression, 
+     - Regression testing (rarely, non-regression testing) is re-running functional and non-functional tests to ensure that previously developed and tested software still performs after a change. If not, that would be called a regression.
+      - Changes that may require regression testing include bug fixes, software enhancements, configuration changes, and even substitution of electronic components. As regression test suites tend to grow with each found defect, test automation is frequently involved. Sometimes a change impact analysis is performed to determine an appropriate subset of tests (non-regression analysis). 
     - performance, 
     - security, 
     - scalability, 
@@ -64,6 +94,9 @@ I have a problems list that I need to prepare for this position. I will put them
 - Junit
 - TestNG
 - Selenium
+
+## Please describe our company
+- Finra is the non-profit organization that regulates the stock market, so every single transaction that happens in stock market must, by law, be reported to over to Finra. Then, Finra reviews it using some algorithms to check for any anomalies or any suspicious activities in the market, and so on. 
 
 ## Question Lists 1
 - self intro && previous project

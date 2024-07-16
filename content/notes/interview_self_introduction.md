@@ -34,7 +34,7 @@ And also enhance the data management process.
 In terms of my tech stack, I specialize in backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management, and JUnit, TestNG and Selenium for Test Strategy. 
 For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
 And I primarily work with the PostgreSQL database. But I also have experience with other non-sql type of database. 
-On front-end, I utilize like Angular to create intuitive user frontend for different modules, so for this project I basically worked on order related services. 
+On front-end, I utilize like Angular to create intuitive user frontend for different modules, so for current project I basically worked on order related modules, and services. 
 And additionally in my previous projects, I have been using like the Angular for building responsive user interface, and NgRx for state management, and Angular Material for designing style. 
 
 **3. Talk about the biggest challenge in my project.**

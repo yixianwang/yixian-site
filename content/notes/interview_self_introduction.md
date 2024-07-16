@@ -21,21 +21,19 @@ And Initially the ADS was designed in a monolithic architecture.
 And my project is aim to basic decompose the whole architecture into MicroService. 
 And to enhance the scalability and flexibility of the whole system.
 
-I am in charge of the order functionality for this project. 
-Within order functionality, it contains 8 corresponding microservices, the order MicroService basically is handle like the order data on different dimensions, and it will handle like the data for specific analysis purposes. Analysis based on various dimensions like the order types, order status, or the category of order item, and also many other different dimensions for the order analysis microservice.
+I am in charge of the order functionality for this project. There are 8 microservices within order functionality.
+The order functionalities basically is handle like the order data on different dimensions, and it will handle like the data for specific analysis purposes. Analysis based on various dimensions like the order types, order status, or the category of order item, and also many other different dimensions for the order analysis microservice.
 And the meanwhile the customer MicroService basically handling the customer data also on different dimensions and definitions like new customer analysis service, customer retention rate service, and so on. 
 It also contains report service that will generate comprehensive customer report, and also provides promotion recommendation service for desired customers.
 
 This whole architecture shape basically enhance the whole systems’ scalability, flexibility, and maintainability. 
 And also enhance the data management process.
 
-In terms of my tech stack, I specialize in backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management. 
+In terms of my tech stack, I specialize in backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management.
+For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
 And I primarily work with the PostgreSQL database. But I also have experience with other non-sql type of database. 
 On front-end, I utilize like Angular to create intuitive user frontend for different modules, so for this project I basically worked on order service and customer service. 
 And additionally in my previous projects, I have been using like the Angular for building responsive user interface, and NgRx for state management, and Angular Material for designing style. 
-For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
-
-I appreciate the opportunity to discuss like the my skills and my experience, which I hope I could fulfill the company needs. And Yeah, it should be all.
 
 **3. Talk about the biggest challenge in my project.**
 So the biggest challenge in the ADS project, is basically I worked on the enhance performance for one of our API endpoints. It’s called like customer growth analysis service in the Customer MicroService, and as our company is going bigger this year. And we have experience like database query delay to this specific endpoint. And it often cause like a performance issue. And sometimes it overloads our database, and even occasionally crash our database.

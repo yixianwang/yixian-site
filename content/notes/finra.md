@@ -70,17 +70,44 @@ I have a problems list that I need to prepare for this position. I will put them
   - (start with types of test:) 
     - unit, 
     - integration, 
+      - tests the integration between the components like APIs, databases, message queue system, and so on.
     - smoke, 
-    - regression, 
-     - Regression testing (rarely, non-regression testing) is re-running functional and non-functional tests to ensure that previously developed and tested software still performs after a change. If not, that would be called a regression.
-      - Changes that may require regression testing include bug fixes, software enhancements, configuration changes, and even substitution of electronic components. As regression test suites tend to grow with each found defect, test automation is frequently involved. Sometimes a change impact analysis is performed to determine an appropriate subset of tests (non-regression analysis). 
-    - performance, 
-    - security, 
+      - simple, it won't test everything.
+      - a smoke test example in rest API, a handler, it returns 'OK' when you send a HTTP GET to the url "/test".
+      - by sending a request to the url, we get okay back. then we know that the codes are deployed  and can receive requests. If we don't the an okay feedback, no further testing is required.
+      - We can even setup Cloud Monitoring to hit that URL periodically and alert you if it breaks.
+    - end-to-end,
+      - regression, 
+        - because sometimes the code changes may have an unexpected impact on another part of the system.
+        - to ensure the code changes have not impact the existing features.
+        - the way to do that, retest everything
+      - performance, 
+        - Performance tests evaluate how a system performs under a particular workload.
+        - For instance, a performance test can observe response times when executing a high number of requests, or determine how a system behaves with a significant amount of data.
+          - Load testing
+          - Stress testing
+          - Spike testing
+          - Endurance testing
+          - Scalability testing
+          - Volume testing
+      - security, 
+        - it's for testing vulnerabilities. For instance, to check if the system can handle SQL injections, or Command injections, and so on.
     - scalability, 
+      - it's for testing the application's ability to scale up or down as a reaction to an increase in the number of users.
     - reliability, 
     - failure tolerance, 
+      - is to check whether the application can handle the roughness and still working properly.
+      - rough actions or repetitive actions which are done in frequent time and speed manner.
     - TDD, 
-    - BDD, etc.
+      - a software development process that involves writing unit tests before the code.
+      - the reason we have TDD is that it always leads to higher code quality and better design. It encourage developers to write code as desired.
+    - BDD, 
+      - BDD stands for Behavior Driven Development.
+      - it's an idea about how software development should be managed by both business interests and technical insight.
+      - In practice, we should consider using BDD when the problem space is complex.
+      - We have cucumber framework for this BDD.
+      - we just following the structure GWT(Given, When, Then) to tell the story.
+    - etc.
 - then frameworks are used for automation test
 - When testing:
   - what data used for testing

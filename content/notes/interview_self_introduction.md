@@ -21,11 +21,12 @@ And Initially the ADS was designed in a monolithic architecture.
 And my project is aim to basic decompose the whole architecture into MicroService. 
 And to enhance the scalability and flexibility of the whole system.
 
-I am in charge of the order functionality for this project. The order functionalities basically is handle like the order data on different dimensions for analysis purpose.
-Order functionality contains.
-For example, the order trending MS, handles the order trending data over time in (daily, weekly, monthly, and so on).
-and order real-time MS, during some sales event, it handles real-time ordering data.
-Discount and promotion MS, handles the promotions data tracking revenue and customer retention rate improvements.
+I am in charge of the order functionality for this project, including order trending service, real-time order analysis service, and promotion analysis service.
+The order functionalities basically is handle like the order data on different dimensions for analysis purpose.
+
+the order trending MS, it handles the order trending data over time in (daily, weekly, monthly, and so on).
+and order real-time MS, like during some sales event, it handles real-time ordering data.
+and promotion MS, it handles the data like the revenue and customer retention rate improvement and so on.
 It also contains report service that will generate comprehensive report.
 
 This whole architecture shape basically enhance the whole systems’ scalability, flexibility, and maintainability. 
@@ -33,9 +34,8 @@ And also enhance the data management process.
 
 In terms of my tech stack, I specialize in backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management, and JUnit, TestNG and Selenium for Test Strategy. 
 For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
-And I primarily work with the PostgreSQL database. But I also have experience with other non-sql type of database.
-On front-end, I utilize like Angular to create intuitive user frontend for different modules, so for current project I basically worked on order related modules, and services.
-This involves integrating various APIs to fetch data, creating dynamic and responsive UI components, and implementing complex data visualizations using libraries such as D3.js and Chart.js.
+And I primarily work with the PostgreSQL database. But I also have experience with non-sql type of database.
+For front-end, I use Angular to create frontend user interface for different modules, so for current project I basically worked on order related modules, and services.
 
 **3. Talk about the biggest challenge in my project.**
 So the biggest challenge in the ADS project, is basically I worked on the enhance performance for one of our API endpoints. It’s called like customer growth analysis service in the Customer MicroService, and as our company is going bigger this year. And we have experience like database query delay to this specific endpoint. And it often cause like a performance issue. And sometimes it overloads our database, and even occasionally crash our database.

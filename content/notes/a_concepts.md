@@ -1148,7 +1148,7 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 - the idea of JDBC
 
 ## JDBC
-- JDBC is used to connect out WEB APP and DB.
+- JDBC is used to connect our WEB APP and DB.
 - just a driver, that require duplicate logics
 
 - return: ResultSet

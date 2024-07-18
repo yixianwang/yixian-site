@@ -135,7 +135,7 @@ I have a problems list that I need to prepare for this position. I will put them
   3. Write Test Cases
      - Using my experience with JUnit and TestNG, I would write automated tests for the API. These tests would cover different aspects like:
        - Unit Tests: Verify the individual components of the API.
-       - Integration Tests: Ensure that different parts of  the API work together as expected.
+       - Integration Tests: Ensure that different parts of the API work together as expected.
        - Smoke Tests: Perform a basic check to see if the  API is up and running.
        - Regression Tests: Ensure that new changes do not break existing functionality.
        - Performance Tests: Measure the response time and throughput of the API.
@@ -215,12 +215,22 @@ I have a problems list that I need to prepare for this position. I will put them
 - throws vs try catch finally
 - what is finally
 - how to handle runtime exception
+  - try catch finally
+  - throws
+  - customize exceptions
+  - log
 - Where did you use reflection?
 - what is IoC
 - What is an actuator?
 - how to enable actuator in spring boot
 - how to have an immutable class in java?
+  - declare the class as final
+  - make all fields as final
+  - do not provide setters
+  - initialize all fields through constructor
+  - make sure the getter cannot modify internal states
 - is immutable class thread safe
+  - yes, This is because their state cannot be changed once they are created. As a result, multiple threads can safely access instances of immutable classes without needing synchronization.
 - why we don’t have all the class immutable
 - what is factory design pattern
 - sql: intersect vs union vs minus
@@ -248,7 +258,11 @@ I have a problems list that I need to prepare for this position. I will put them
 - how to connect API in test
 - how do you do the Authentication
 - how does JWT work
+  - JWT (JSON Web Token)
+  - JWTs are commonly used for authentication and authorization.
 - downside JWT
+  - once the payload increase along with the signarture, it might affect performance.
+  - it's hard to revoke and invalidate issued JWT from server side, because it's statelss, excepti it expired.
 - Java 8 new features
 - method reference
 - optional keyword
@@ -260,6 +274,11 @@ I have a problems list that I need to prepare for this position. I will put them
 - lazy loading
 - self join
 - SQL Query: update one field of table
+  ```SQL
+    UPDATE table_name
+    SET column_name = new_value
+    WHERE condition;
+  ```
 - SQL Query: find all the orders and customer name from the table
 - when the user story is not clear, how do you do
 

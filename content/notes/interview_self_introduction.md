@@ -3,8 +3,8 @@ title = 'Self Introduction'
 date = 2024-06-26T17:02:29-04:00
 draft = true
 +++
-**1. Self Introduction**
 
+## 1. Self Introduction
 My name is Austin. I have been working as a Java developer for over 6 years, and primarily focusing on Backend Development, and the MicroService architecture.
 
 My expertise basically like the core java concept,
@@ -13,8 +13,7 @@ And for front-end, I have experience using React and also Angular.
 I also have hands-on experience on building robust MicroService architecture.
 > just add a brief idea like what industry have I participated in. like what project I have worked on.
 
-**2. My most recent project**
-
+## 2. My most recent project
 In my most recent project I contribute(d) to a system called ADS, which is stand for Analytics Dashboard System.
 And it is designed to satisfy the company’s data analysis needs. 
 And Initially the ADS was designed in a monolithic architecture. 
@@ -37,7 +36,7 @@ For the MicroService I have intensely use Kafka to build like the event driven a
 And I primarily work with the PostgreSQL database. But I also have experience with non-sql type of database.
 For front-end, I use Angular to create frontend user interface for different modules, so for current project I basically worked on order related modules, and services.
 
-**3. Talk about the biggest challenge in my project.**
+## 3. Talk about the biggest challenge in my project.
 So the biggest challenge in the ADS project, is basically I worked on the enhance performance for one of our API endpoints. 
 It’s called like customer retention rate analysis service in the Promotion MicroService. 
 And as our company is going bigger this year. And we have experience like database query delay to this specific endpoint. 

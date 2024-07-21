@@ -44,28 +44,128 @@ please give me similar description that I can use in resume for XXX experience
 ### Postman
 
 ## AWS
-### EC2
+### Compute
+#### EC2 (Elastic Compute Cloud)
+> Understand EC2 instance types, pricing models, Auto Scaling, and best practices.
 - Provisioned and managed AWS EC2 instances to deliver scalable compute resources, configured instance types, security groups, and storage options, ensuring optimal performance and availability for applications.
+#### Lambada
+> Familiarity with serverless computing, event-driven architecture, and common use cases.
+- Developed and managed AWS Lambda functions by creating and configuring functions, setting up event triggers, integrating with other AWS services, optimizing performance, and ensuring scalability and reliability.
+#### Elastic Beanstalk
+> Managed service for deploying and scaling web applications and services.
+- Managed AWS Elastic Beanstalk environments by provisioning and configuring application resources, handling auto-scaling and load balancing, deploying applications, and ensuring continuous integration and delivery using CI/CD pipelines.
 
-### S3
+### Storage
+#### S3 (Simple Storage Service)
+> Knowledge of storage classes, lifecycle policies, access control, and data protection mechanisms.
 - Configured and managed AWS S3 for scalable storage solutions, ensuring secure data access and efficient storage management with versioning, lifecycle policies, and access control configurations.
+#### EBS (Elastic Block Store)
+> Understanding of volumes, snapshots, and performance optimization.
+#### EFS (Elastic File System)
+> Network file system concepts and use cases.
 
-### VPC
+### Databases
+#### RDS (Relational Database Service)
+> Managed relational databases, including Aurora, MySQL, PostgreSQL, and more. 
+- Managed AWS RDS instances by creating and configuring databases, optimizing performance, automating backups, ensuring high availability and security, and integrating with other AWS services for scalable and reliable database solutions.
+- Managed AWS RDS instances by configuring databases, performing automated backups, monitoring performance, and ensuring high availability and scalability for production environments.
+#### DynamoDB
+> NoSQL database, key-value and document store, scaling, and performance optimization.
+#### Redshift
+> Data warehousing and analytics.
+#### ElastiCache
+> Managed caching for Redis and Memcached.
+
+### NetWorking
+#### VPC (Virtual Private Cloud)
+> Network segmentation, subnets, route tables, NAT gateways, and security groups.
 > basically our Virtual Private Space in AWS, basically a space where you do your own stuff, it doesn't interfere with other AWS users in the cloud. That's basically what VPC is.
 - Designed and managed AWS VPCs to create isolated network environments, configure subnets, route tables, and gateways, ensuring secure and efficient network communication for applications.
+#### Route 53
+> DNS service, routing policies, and domain management.
+#### API Gateway
+> Creating, deploying, and managing APIs.
 
-### IAM role
+### Security and Identity
+#### IAM (Identity and Access Management)
+> Users, roles, policies, and best practices.
+##### IAM role
 > AWS user
 - Designed and managed AWS IAM roles to control access and permissions, ensuring secure and efficient resource management across various AWS services.
+#### KMS (Key Management Service)
+> Managing encryption keys and securing data.
+- Implemented and managed AWS KMS by creating and configuring encryption keys, ensuring secure key management, integrating with other AWS services for data protection, and enforcing compliance with security policies and best practices.
+#### Cognito
+> User authentication and authorization
 
+### Monitoring and Management
+#### CloudWatch
+> Monitoring, logging, and alerting.
+- Implemented and managed AWS CloudWatch by configuring monitoring and alerting for resources, setting up custom metrics and dashboards, analyzing logs, and ensuring system performance and reliability through automated responses and insights.
+#### CloudTrail
+> Logging and auditing AWS API calls.
+#### Config
+> Resource inventory, configuration history, and change notifications.
+
+### DevOps and CI/CD
+#### CodePipeline
+> Continuous integration and continuous delivery.
+#### CodeBuild
+> Build and test code.
+#### CodeDeploy
+> Automated deployment of applications.
+
+### Analytics and Big Data
+#### EMR (Elastic MapReduce)
+> Bit data processing using Hadoop, Spark, etc.
+#### Athena
+> Querying data in S3 using SQL.
+#### Kinesis
+> Real-time data processing and streaming.
+
+### Machine Learning
+#### SageMaker
+> Building, training, and deploying machine learning models.
+- Implemented and managed machine learning workflows on AWS by setting up and maintaining SageMaker environments, configuring EC2 instances for scalable training and inference, and deploying models using automated pipelines and endpoint management.
+#### Rekognition
+> Image and video analysis.
+#### Comprehend
+> Natural Language Processing.
+
+### Application Integration
+#### SQS (Simple Queue Service)
+> Messaging queue service.
+- Designed and implemented AWS SQS solutions by creating and configuring queues, integrating with other AWS services, optimizing message handling, and ensuring reliable and scalable message processing.
+#### SNS (Simple Notification Service)
+> Messaging and notifications.
+- Designed and managed AWS SNS by creating and configuring topics, setting up subscriptions, integrating with other AWS services, optimizing notification delivery, and ensuring reliable and scalable message broadcasting.
+#### Step Function
+> Orchestration of serverless workflows.
+
+### Architecture Best Practices
+#### Well-Architected Framework
+> Understanding the pillars of operational excellence, security, reliability, performance efficiency, and cost optimization.
+#### Microservices
+> Designing and deploying microservices on AWS
+
+### General Concepts
+#### Infrastructure as Code (IaC)
+> Using AWS CloudFormation or Terraform
+#### Cost Management
+> Best practices for cost optimization and monitoring
+#### Disaster Recovery
+> Strategies for backups, failover, and resilience.
+
+
+### Others
 ### Security Group
 > a list of permissions
 - Configured and managed AWS Security Groups to control inbound and outbound traffic, ensuring secure network communication for applications and compliance with security policies.
 
-### ECS
+#### ECS
 - Managed and deployed containerized applications using AWS ECS, configuring clusters, task definitions, and service scaling to ensure high availability and efficient resource utilization.
 
-### EKS
+#### EKS
 > Managed Kubernetes Cluster, meaning AWS will manage the **Master Nodes** for us. It will create the master nodes. Install all the necessary applications on them, like **Container Runtime**, Kubernetes **Master Processes**. It will take care of scaling it when needed, doing backup on that, etc. If you have small team of people, usually it's a good idea to let the platform do this maintenance for you. So we can focus on deploying your applications in K8s without worrying about whether the master nodes are properly backed up etc. This means we only have to care about the worker nodes.
 
 > **we will have a control plane once AWS creates all master nodes**(by choosing cluster name, k8s version, choose region and VPC, set Security Group for the cluster). 
@@ -79,35 +179,12 @@ please give me similar description that I can use in resume for XXX experience
 
 - Managed AWS EKS cluster by overseeing the creation and maintenance of master nodes, configuring worker nodes with auto-scaling EC2 instances, and deploying applications using kubectl and eksctl.
 
-### RDS
-- Managed AWS RDS instances by creating and configuring databases, optimizing performance, automating backups, ensuring high availability and security, and integrating with other AWS services for scalable and reliable database solutions.
-- Managed AWS RDS instances by configuring databases, performing automated backups, monitoring performance, and ensuring high availability and scalability for production environments.
-
-### DynamoDB
-
-### SNS
-- Designed and managed AWS SNS by creating and configuring topics, setting up subscriptions, integrating with other AWS services, optimizing notification delivery, and ensuring reliable and scalable message broadcasting.
-
-### SQS
-- Designed and implemented AWS SQS solutions by creating and configuring queues, integrating with other AWS services, optimizing message handling, and ensuring reliable and scalable message processing.
-
-### Lambada
-- Developed and managed AWS Lambda functions by creating and configuring functions, setting up event triggers, integrating with other AWS services, optimizing performance, and ensuring scalability and reliability.
-
-### Elastic Beanstalk
-- Managed AWS Elastic Beanstalk environments by provisioning and configuring application resources, handling auto-scaling and load balancing, deploying applications, and ensuring continuous integration and delivery using CI/CD pipelines.
-
-### KMS
-- Implemented and managed AWS KMS by creating and configuring encryption keys, ensuring secure key management, integrating with other AWS services for data protection, and enforcing compliance with security policies and best practices.
-
-### CloudWatch
-- Implemented and managed AWS CloudWatch by configuring monitoring and alerting for resources, setting up custom metrics and dashboards, analyzing logs, and ensuring system performance and reliability through automated responses and insights.
-
-### CloudFormation
+#### CloudFormation
 - Developed and maintained AWS CloudFormation templates by defining infrastructure as code, automating resource provisioning, ensuring consistent environments, and managing stack updates and rollbacks for scalable and reliable deployments.
 
-### SageMaker
-- Implemented and managed machine learning workflows on AWS by setting up and maintaining SageMaker environments, configuring EC2 instances for scalable training and inference, and deploying models using automated pipelines and endpoint management.
+
+
+
 
 ## Python
 ### Python Script
@@ -205,3 +282,27 @@ please give me similar description that I can use in resume for XXX experience
 ### HDFS
 ### Hive
 ### Kafka
+
+## Skills
+Languages: Java, C++, SQL, TypeScript, JavaScript, Python, Go.
+Databases: PostgreSQL, Oracle, MySQL, Hive, Redis, MongoDB, Cassandra, AWS RDS, AWS DynamoDB.
+Frameworks: Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, Junit, TestNG, Selenium.
+Cloud Service: AWS (EC2, S3, ECS, EKS, RDS, DynamoDB, SNS, SQS, Lambda, Fargate, KMS, CloudWatch).
+Frontend Technologies: Angular 10+, HTML, CSS, Bootstrap, Material UI, jQuery.
+Web Technologies: J2EE (Java Servlets, JDBC), RESTful Web Services, SOAP, JWT, Oauth2.
+Design Patterns: Singleton, Factory, Builder, Proxy, MVC, DAO.
+Dev/Ops: Git, Docker, Kubernetes, Jenkins, GitHub, GitLab, Linux, Bash.
+IDE & Tools: IntelliJ IDEA, WebStorm, VS Code, Maven, Jira, Splunk, Logstash, Kibana.
+AI / ML / HPC: Pytorch, Sklearn, Pandas, Numpy, CUDA.
+
+## Temp/Del
+Languages: Java, C++, SQL, TypeScript, JavaScript, Python, Go.
+Databases: PostgreSQL, Oracle, MySQL, Hive, Redis, MongoDB, Cassandra, AWS RDS, AWS DynamoDB.
+Frameworks: Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, Junit, TestNG, Selenium.
+Cloud Service: AWS (EC2, S3, ECS, EKS, RDS, DynamoDB, SNS, SQS, Lambda, Fargate, KMS, CloudWatch).
+Frontend Technologies: Angular 10+, HTML, CSS, Bootstrap, Material UI, jQuery.
+Web Technologies: J2EE (Java Servlets, JDBC), RESTful Web Services, SOAP, JWT, Oauth2.
+Design Patterns: Singleton, Factory, Builder, Proxy, MVC, DAO.
+Dev/Ops: Git, Docker, Kubernetes, Jenkins, GitHub, GitLab, Linux, Bash.
+IDE & Tools: IntelliJ IDEA, WebStorm, VS Code, Maven, Jira, Splunk, Logstash, Kibana.
+AI / ML / HPC: Pytorch, Sklearn, Pandas, Numpy, CUDA.

@@ -283,7 +283,7 @@ please give me similar description that I can use in resume for XXX experience
 ### Hive
 ### Kafka
 
-## Skills
+## Skills - Long
 Languages: Java, C++, SQL, TypeScript, JavaScript, Python, Go.
 Databases: PostgreSQL, Oracle, MySQL, Hive, Redis, MongoDB, Cassandra, AWS RDS, AWS DynamoDB.
 Frameworks: Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, Junit, TestNG, Selenium.
@@ -295,14 +295,6 @@ Dev/Ops: Git, Docker, Kubernetes, Jenkins, GitHub, GitLab, Linux, Bash.
 IDE & Tools: IntelliJ IDEA, WebStorm, VS Code, Maven, Jira, Splunk, Logstash, Kibana.
 AI / ML / HPC: Pytorch, Sklearn, Pandas, Numpy, CUDA.
 
-## Temp/Del
-Languages: Java, C++, SQL, TypeScript, JavaScript, Python, Go.
-Databases: PostgreSQL, Oracle, MySQL, Hive, Redis, MongoDB, Cassandra, AWS RDS, AWS DynamoDB.
-Frameworks: Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, Junit, TestNG, Selenium.
-Cloud Service: AWS (EC2, S3, ECS, EKS, RDS, DynamoDB, SNS, SQS, Lambda, Fargate, KMS, CloudWatch).
-Frontend Technologies: Angular 10+, HTML, CSS, Bootstrap, Material UI, jQuery.
-Web Technologies: J2EE (Java Servlets, JDBC), RESTful Web Services, SOAP, JWT, Oauth2.
-Design Patterns: Singleton, Factory, Builder, Proxy, MVC, DAO.
-Dev/Ops: Git, Docker, Kubernetes, Jenkins, GitHub, GitLab, Linux, Bash.
-IDE & Tools: IntelliJ IDEA, WebStorm, VS Code, Maven, Jira, Splunk, Logstash, Kibana.
-AI / ML / HPC: Pytorch, Sklearn, Pandas, Numpy, CUDA.
+## Skills - Short
+Technical Skills: Java, SQL, TypeScript, JavaScript, Python, Go, C++, HTML, CSS, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, Junit, TestNG, Selenium, PostgreSQL, Oracle, MySQL, Hive, Redis, MongoDB, Cassandra, Angular, Bootstrap, Angular Material, jQuery, AWS (EC2, S3, ECS, EKS, RDS, DynamoDB, SNS, SQS, Lambda, Fargate, KMS, CloudWatch).
+Tools & Knowledge: J2EE (Java Servlets, JDBC), RESTful Web Services, JWT, Oauth2, Maven, Jira, Splunk, Logstash, Kibana, Git, Docker, Kubernetes, Jenkins, GitHub, GitLab, Linux, Bash, Pytorch, Sklearn, Pandas, Numpy, CUDA.

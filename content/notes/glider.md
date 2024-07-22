@@ -83,21 +83,21 @@ class Outcome {
 ```Java
 class Outcome {
   public static List<Integer> solve(int m, int n) {
-    if (m > n) return new ArrayList<Integer>();
-    List<Integer> res = new ArrayList<Integer>();
-    BigInteger[] facs = new BigInteger[n + 1];
-    facs[0] = BigInteger.ZERO;
-    facs[1] = BigInteger.ONE;
+    if (n < m) return new ArrayList<Integer>();
+    List<Integer> result = new ArrayList<Integer>();
+    BigInteger[] factorials = new BigInteger[n + 1];
+    factorials[0] = BigInteger.ZERO;
+    factorials[1] = BigInteger.ONE;
     for (int i = 2; i <= n; i++) {
-      facs[i] = BigInteger.valueOf(i).multiply(facs[i - 1]);
+      factorials[i] = BigInteger.valueOf(i).multiply(factorials[i - 1]);
     }
     for (int i = m; i <= n; i++) {
-      if (even(facs[i])) res.add(i);
+      if (isEven(factorials[i])) result.add(i);
     }
-    return res.isEmpty() ? Arrays.asList(0) : res;
+    return result.isEmpty() ? Arrays.asList(0) : result;
   }
 
-  private static boolean even(BigInteger i) {
+  private static boolean isEven(BigInteger i) {
     return (i.toString().charAt(0) - '0') % 2 == 0;
   }
 }
@@ -143,7 +143,7 @@ class Outcome {
       sb.append(carry % 2);
       carry = carry / 2;
     }
-    return sb.reverse().toString(); //return type "String".
+    return sb.reverse().toString();
   }
 }
 ```
@@ -153,18 +153,18 @@ class Outcome {
 class Outcome {
   public static int maxArea(List<Integer> b) {
     Deque<Integer> q = new ArrayDeque<Integer>();
-    int max = 0;
-    for (int i = 0; i < b.size() + 1; i++) {
-      int cur = i == b.size() ? 0 : b.get(i);
-      while (!q.isEmpty() && b.get(q.peekLast()) > cur) {
+    int result = 0;
+    for (int i = 0; i <= b.size(); i++) {
+      int curr = i == b.size() ? 0 : b.get(i);
+      while (!q.isEmpty() && b.get(q.peekLast()) > curr) {
         int h = b.get(q.pollLast());
         int l = q.isEmpty() ? 0 : q.peekLast() + 1;
         int r = i - 1;
-        max = Math.max(max, (r - l + 1) * h);
+        result = Math.max(result, (r - l + 1) * h);
       }
       q.offerLast(i);
     }
-    return max;
+    return result;
   }
 }
 ```

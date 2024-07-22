@@ -104,8 +104,7 @@ class Outcome {
       while (!q.isEmpty() && b.get(q.peekLast()) > curr) {
         int h = b.get(q.pollLast());
         int l = q.isEmpty() ? 0 : q.peekLast() + 1;
-        int r = i - 1;
-        result = Math.max(result, (r - l + 1) * h);
+        result = Math.max(result, (i - l) * h);
       }
       q.offerLast(i);
     }

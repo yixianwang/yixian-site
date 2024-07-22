@@ -106,22 +106,22 @@ class Outcome {
 ## Brother's Game
 ```Java
 class Outcome {
-  public static int solve(List<Integer> ar) {
-    int n = ar.size();
-    int[] dp1 = new int[n];
-    int[] dp2 = new int[n];
-    int[] dp3 = new int[n];
-    dp1[0] = ar.get(0) ^ 1;
-    dp2[0] = ar.get(0);
-    dp3[0] = ar.get(0);
-    int max = 0;
+  public static int solve(List<Integer> nums) {
+    int n = nums.size();
+    int[] f1 = new int[n];
+    int[] f2 = new int[n];
+    int[] f3 = new int[n];
+    f1[0] = nums.get(0) ^ 1;
+    f2[0] = nums.get(0);
+    f3[0] = nums.get(0);
+    int result = 0;
     for (int i = 1; i < n; i++) {
-      dp1[i] = Math.max(dp1[i - 1] + (ar.get(i) ^ 1), dp3[i - 1] + (ar.get(i) ^ 1));
-      dp2[i] = Math.max(dp1[i - 1] + ar.get(i), dp2[i - 1] + ar.get(i));
-      dp3[i] = dp3[i - 1] + ar.get(i);
-      max = Math.max(max, Math.max(dp1[i], dp2[i]));
+      f1[i] = Math.max(f1[i - 1] + (nums.get(i) ^ 1), f3[i - 1] + (nums.get(i) ^ 1));
+      f2[i] = Math.max(f1[i - 1] + nums.get(i), f2[i - 1] + nums.get(i));
+      f3[i] = f3[i - 1] + nums.get(i);
+      result = Math.max(result, Math.max(f1[i], f2[i]));
     }
-    return max; //return type "int".
+    return result;
   }
 }
 ```

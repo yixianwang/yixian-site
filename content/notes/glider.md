@@ -3,7 +3,7 @@ title = 'Glider'
 date = 2024-07-22T12:03:13-04:00
 +++
 
-## String segmentation
+## String Segmentation
 ```Java
 class Outcome {
   public static String solve(String s, List<String> wordDict) {
@@ -81,9 +81,6 @@ class Outcome {
 
 ## Little Brother's Factorial Challenge
 ```Java
-import java.util.*;
-import java.math.*;
-
 class Outcome {
   public static List<Integer> solve(int m,int n){
     List<Integer> result = new ArrayList<>();
@@ -114,7 +111,7 @@ class Outcome {
 ```
 
 ```Java
-public class Outcome {
+class Outcome {
   public static List<Integer> solve(int m, int n) {
     if (m > n) return new ArrayList<Integer>();
     List<Integer> res = new ArrayList<Integer>();
@@ -183,7 +180,7 @@ class Outcome {
 
 ## Biggest Rectangle
 ```Java
-public class Outcome {
+class Outcome {
   public static int maxArea(List<Integer> b) {
     Deque<Integer> q = new ArrayDeque<Integer>();
     int max = 0;

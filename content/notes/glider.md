@@ -60,7 +60,8 @@ class Outcome {
     f3[0] = nums.get(0);
     int result = 0;
     for (int i = 1; i < n; i++) {
-      f1[i] = Math.max(f1[i - 1] + (nums.get(i) ^ 1), f3[i - 1] + (nums.get(i) ^ 1));
+      f1[i] = Math.max(f1[i - 1] + 
+         (nums.get(i) ^ 1), f3[i - 1] + (nums.get(i) ^ 1));
       f2[i] = Math.max(f1[i - 1] + nums.get(i), f2[i - 1] + nums.get(i));
       f3[i] = f3[i - 1] + nums.get(i);
       result = Math.max(result, Math.max(f1[i], f2[i]));

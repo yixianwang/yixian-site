@@ -82,36 +82,6 @@ class Outcome {
 ## Little Brother's Factorial Challenge
 ```Java
 class Outcome {
-  public static List<Integer> solve(int m,int n){
-    List<Integer> result = new ArrayList<>();
-    for(int i = m; i <= n; i++){
-      BigInteger factorial = factorial(i);
-      if(startsWithEvenDigit(factorial)){
-        result.add(i);
-      }
-    }
-    if(result.isEmpty()){
-      result.add(0);
-    }
-    return result; //return type "List<Integer>".
-  }
-  private static BigInteger factorial(int num){
-    BigInteger fact = BigInteger.ONE;
-    for(int i = 2; i<=num; i++){
-      fact = fact.multiply(BigInteger.valueOf(i));
-    }
-    return fact;
-  }
-  private static boolean startsWithEvenDigit(BigInteger number){
-    String str = number.toString();
-    char firstDigit = str.charAt(0);
-    return (firstDigit -'0')%2 ==0;
-  }
-}
-```
-
-```Java
-class Outcome {
   public static List<Integer> solve(int m, int n) {
     if (m > n) return new ArrayList<Integer>();
     List<Integer> res = new ArrayList<Integer>();

@@ -18,7 +18,7 @@ class Outcome {
         }
       }
     }
-    return f[s.length()] ? "true" : "false"; //return type "String".
+    return f[s.length()] ? "true" : "false";
   }
 }
 ```
@@ -127,14 +127,14 @@ class Outcome {
     if (!LRU.containsKey(key)) {
       return -1;
     }
-    makeRecently(key);
+    updateRecent(key);
     return LRU.get(key);
   }
 
   public void put(int key, int val) {
     if (LRU.containsKey(key)) {
       LRU.put(key, val);
-      makeRecently(key);
+      updateRecent(key);
       return;
     }
     if (LRU.size() >= this.capacity) {
@@ -144,7 +144,7 @@ class Outcome {
     LRU.put(key, val);
   }
 
-  private void makeRecently(int key) {
+  private void updateRecent(int key) {
     int val = LRU.get(key);
     LRU.remove(key);
     LRU.put(key, val);
@@ -164,7 +164,7 @@ class Outcome {
         result.add(LRU.get(key));
       }
     }
-    return result; //return type "List<Integer>".
+    return result;
   }
 }
 ```

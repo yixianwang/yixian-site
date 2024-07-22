@@ -23,62 +23,6 @@ class Outcome {
 }
 ```
 
-## LRU
-```Java
-class Outcome {
-  private int capacity;
-  LinkedHashMap<Integer, Integer> LRU = new LinkedHashMap<>();
-
-  public Outcome(int capacity) {
-    this.capacity = capacity;
-  }
-
-  public int get(int key) {
-    if (!LRU.containsKey(key)) {
-      return -1;
-    }
-    makeRecently(key);
-    return LRU.get(key);
-  }
-
-  public void put(int key, int val) {
-    if (LRU.containsKey(key)) {
-      LRU.put(key, val);
-      makeRecently(key);
-      return;
-    }
-    if (LRU.size() >= this.capacity) {
-      int oldestKey = LRU.keySet().iterator().next();
-      LRU.remove(oldestKey);
-    }
-    LRU.put(key, val);
-  }
-
-  private void makeRecently(int key) {
-    int val = LRU.get(key);
-    LRU.remove(key);
-    LRU.put(key, val);
-  }
-
-  public static List<Integer> solve(int capacity, List<String> ar) {
-    Outcome LRU = new Outcome(capacity);
-    List<Integer> result = new ArrayList<>();
-    for (String Operation : ar) {
-      String[] parts = Operation.split(",");
-      if (parts[0].equals("PUT")) {
-        int key = Integer.parseInt(parts[1]);
-        int value = Integer.parseInt(parts[2]);
-        LRU.put(key, value);
-      } else if (parts[0].equals("GET")) {
-        int key = Integer.parseInt(parts[1]);
-        result.add(LRU.get(key));
-      }
-    }
-    return result; //return type "List<Integer>".
-  }
-}
-```
-
 ## Little Brother's Factorial Challenge
 ```Java
 class Outcome {
@@ -165,6 +109,62 @@ class Outcome {
       q.offerLast(i);
     }
     return result;
+  }
+}
+```
+
+## LRU
+```Java
+class Outcome {
+  private int capacity;
+  LinkedHashMap<Integer, Integer> LRU = new LinkedHashMap<>();
+
+  public Outcome(int capacity) {
+    this.capacity = capacity;
+  }
+
+  public int get(int key) {
+    if (!LRU.containsKey(key)) {
+      return -1;
+    }
+    makeRecently(key);
+    return LRU.get(key);
+  }
+
+  public void put(int key, int val) {
+    if (LRU.containsKey(key)) {
+      LRU.put(key, val);
+      makeRecently(key);
+      return;
+    }
+    if (LRU.size() >= this.capacity) {
+      int oldestKey = LRU.keySet().iterator().next();
+      LRU.remove(oldestKey);
+    }
+    LRU.put(key, val);
+  }
+
+  private void makeRecently(int key) {
+    int val = LRU.get(key);
+    LRU.remove(key);
+    LRU.put(key, val);
+  }
+
+  public static List<Integer> solve(int capacity, List<String> ar) {
+    Outcome LRU = new Outcome(capacity);
+    List<Integer> result = new ArrayList<>();
+    for (String Operation : ar) {
+      String[] parts = Operation.split(",");
+      if (parts[0].equals("PUT")) {
+        int key = Integer.parseInt(parts[1]);
+        int value = Integer.parseInt(parts[2]);
+        LRU.put(key, value);
+      } else if (parts[0].equals("GET")) {
+        int key = Integer.parseInt(parts[1]);
+        result.add(LRU.get(key));
+      }
+    }
+    return result; //return type "List<Integer>".
   }
 }
 ```

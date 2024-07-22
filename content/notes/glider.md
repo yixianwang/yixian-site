@@ -74,7 +74,7 @@ class Outcome {
 ## Binary Addition
 ```Java
 class Outcome {
-  public static String solve(String a, String b) { //Write your code here
+  public static String solve(String a, String b) {
     StringBuilder sb = new StringBuilder();
     int i = a.length() - 1, j = b.length() - 1;
     int carry = 0;

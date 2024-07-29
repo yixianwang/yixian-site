@@ -17,6 +17,9 @@ please give me similar description that I can use in resume for XXX experience
 ```
 
 ## Java
+### DropWizard
+- Developed and maintained RESTful web services using DropWizard, ensuring high performance and scalability by implementing efficient resource management and optimization techniques.
+- Led the integration of DropWizard with various backend systems, enhancing system reliability and simplifying deployment processes through robust configuration management and monitoring.
 ### Spring Boot
 ### Spring MVC
 ### Spring Security
@@ -42,6 +45,8 @@ please give me similar description that I can use in resume for XXX experience
 ### DataDog
 ### Dynatrace
 ### Postman
+
+
 
 ## AWS
 ### Compute
@@ -219,6 +224,26 @@ please give me similar description that I can use in resume for XXX experience
 - Utilized Pandas to perform data manipulation, analysis, and visualization, developed efficient data processing workflows, cleaned and transformed large datasets, and collaborated with data science teams to derive actionable insights and support data-driven decision-making.
 - Leveraged Pandas for data manipulation and analysis, performed data cleaning, transformation, and aggregation, and optimized workflows for handling large datasets to enhance data-driven decision-making.
 
+### Scikit-learn
+- Developed and implemented machine learning models using Scikit-learn, leveraging algorithms such as linear regression, decision trees, and k-nearest neighbors to analyze and predict data trends, resulting in a 15% increase in prediction accuracy.
+- Utilized Scikit-learn for data preprocessing, feature selection, and model evaluation, enabling efficient and effective development of predictive analytics solutions that improved decision-making processes and operational efficiency.
+
+### Dash
+- Developed interactive data visualization dashboards using Dash and Plotly, enabling real-time data analysis and decision-making for business stakeholders. Integrated data from various sources, including SQL databases and APIs, to provide comprehensive insights and actionable metrics.
+- Implemented and optimized Dash applications to display complex data sets through intuitive visualizations and user-friendly interfaces. Focused on enhancing performance, usability, and responsiveness to ensure seamless user experiences across different devices and platforms.
+
+### Dask
+- Optimized data processing workflows by implementing Dask for distributed computing, significantly improving the performance and scalability of large-scale data analytics tasks.
+- Developed and deployed efficient data pipelines using Dask, enabling parallel processing of complex datasets and reducing overall computation time in data-intensive projects.
+
+### Flask
+- Developed and maintained robust web applications using Flask, implementing RESTful APIs, integrating with various databases, and ensuring efficient request handling and response processing to optimize performance and user experience.
+- Designed and deployed scalable Flask-based microservices, focusing on application security, session management, and seamless integration with front-end frameworks, resulting in improved application stability and responsiveness.
+
+### Boto3
+- Automated AWS infrastructure management by developing Python scripts with Boto3 to provision, configure, and maintain services such as EC2, S3, and RDS, resulting in improved operational efficiency and reduced manual intervention.
+- Enhanced cloud operations through the integration of Boto3, enabling seamless interaction with AWS services, automating resource scaling, and implementing robust monitoring and alerting solutions for optimized performance and cost management.
+
 ## SQL
 ### PostgresSQL
 - Designed, developed, and optimized PostgreSQL databases, implemented complex SQL queries and stored procedures, and ensured database performance, security, and scalability for application development projects.
@@ -254,14 +279,28 @@ please give me similar description that I can use in resume for XXX experience
 
 ## Go (Golang)
 
-## Git
-## GitLab
-## GitHub
-## Jenkins
-## Concourse
-## Airflow
-## Jira
-## Confluence
+## Devops
+### Git
+### GitLab
+### GitHub
+### Bitbucket
+- Implemented and managed Bitbucket repositories for version control, ensuring efficient code collaboration and integration across development teams by utilizing pull requests, branch management, and code reviews.
+### Jenkins
+### Bamboo
+- Implemented and maintained continuous integration and continuous deployment (CI/CD) pipelines using Bamboo, streamlining the build, test, and release process, resulting in a 30% reduction in deployment time and improved software quality.
+- Developed custom build plans and automated workflows in Bamboo, ensuring seamless integration with version control systems and facilitating efficient collaboration among development teams.
+### Artifactory
+- Implemented and managed Artifactory for artifact storage and distribution, ensuring seamless integration with CI/CD pipelines, leading to improved build efficiency and artifact version control.
+- Configured and maintained Artifactory repositories for multiple projects, enabling secure and efficient artifact management, versioning, and retrieval across development teams.
+- Optimized build and deployment processes by leveraging Artifactory's capabilities for storing and managing Docker images, Maven, and npm packages, resulting in enhanced workflow automation and reduced downtime.### Concourse
+### Ansible
+- Developed and maintained Ansible playbooks to automate the deployment, configuration, and management of cloud infrastructure across multiple environments, ensuring consistency and reducing manual intervention.
+- Implemented continuous integration and continuous deployment (CI/CD) pipelines using Ansible to automate application deployment, configuration updates, and system patching, significantly improving deployment speed and reliability.
+- Led the migration of legacy infrastructure to an automated environment by creating Ansible roles and playbooks, which improved scalability, reduced downtime, and enhanced system performance through efficient resource management.
+
+### Airflow
+### Jira
+### Confluence
 
 ## Docker
 ## Kubernetes

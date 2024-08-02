@@ -297,7 +297,6 @@ please give me similar description that I can use in resume for XXX experience
 - Developed and maintained Ansible playbooks to automate the deployment, configuration, and management of cloud infrastructure across multiple environments, ensuring consistency and reducing manual intervention.
 - Implemented continuous integration and continuous deployment (CI/CD) pipelines using Ansible to automate application deployment, configuration updates, and system patching, significantly improving deployment speed and reliability.
 - Led the migration of legacy infrastructure to an automated environment by creating Ansible roles and playbooks, which improved scalability, reduced downtime, and enhanced system performance through efficient resource management.
-
 ### Airflow
 ### Jira
 ### Confluence
@@ -337,3 +336,68 @@ AI / ML / HPC: Pytorch, Sklearn, Pandas, Numpy, CUDA.
 ## Skills - Short
 Technical Skills: Java, SQL, TypeScript, JavaScript, Python, Go, C++, HTML, CSS, Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, Junit, TestNG, Selenium, PostgreSQL, Oracle, MySQL, Hive, Redis, MongoDB, Cassandra, Angular, Bootstrap, Angular Material, jQuery, AWS (EC2, S3, ECS, EKS, RDS, DynamoDB, SNS, SQS, Lambda, Fargate, KMS, CloudWatch).
 Tools & Knowledge: J2EE (Java Servlets, JDBC), RESTful Web Services, JWT, Oauth2, Maven, Jira, Splunk, Logstash, Kibana, Git, Docker, Kubernetes, Jenkins, GitHub, GitLab, Linux, Bash, Pytorch, Sklearn, Pandas, Numpy, CUDA.
+
+## Question: Do you have Cassandra experience?
+### Scenario 1: You Have Experience with Cassandra
+
+1. **Start with a Confirmation:**
+   - "Yes, I have experience with Cassandra."
+
+2. **Mention the Duration:**
+   - "I have been working with Cassandra for the past [X] years/months."
+
+3. **Describe Your Role and Responsibilities:**
+   - "In my previous project, I was responsible for setting up and managing Cassandra clusters. This involved configuring nodes, setting up replication, and ensuring high availability."
+
+4. **Highlight Specific Tasks:**
+   - "I worked on optimizing read and write performance, managing data modeling, and implementing Cassandra query language (CQL) for database operations. Additionally, I handled backup and restore processes and monitored cluster health using tools like nodetool and OpsCenter."
+
+5. **Discuss Relevant Projects:**
+   - "One notable project was [briefly describe the project], where we used Cassandra to handle large-scale data for real-time analytics. My role included designing the schema, ensuring data consistency, and optimizing query performance."
+
+6. **Mention Challenges and Solutions:**
+   - "One challenge we faced was [describe a challenge], and to overcome it, we [describe the solution]. This improved our system's reliability and performance significantly."
+
+7. **Conclude with Your Enthusiasm:**
+   - "Overall, I found Cassandra to be a robust and scalable solution for our needs, and I'm keen to leverage my experience in Cassandra to contribute to your team."
+
+### Scenario 2: You Have Limited or Indirect Experience with Cassandra
+
+1. **Be Honest:**
+   - "I have limited experience with Cassandra."
+
+2. **Explain Your Level of Exposure:**
+   - "I have worked on a project where Cassandra was used as the primary database, and while I wasn't directly responsible for managing it, I collaborated closely with the database team."
+
+3. **Highlight Related Skills:**
+   - "I am familiar with NoSQL databases and concepts, having worked extensively with [mention any other NoSQL databases you have experience with, e.g., MongoDB, DynamoDB]. This includes data modeling, query optimization, and handling large datasets."
+
+4. **Mention Learning Efforts:**
+   - "To expand my knowledge, I have completed an online course on Cassandra and have experimented with it in my personal projects. I set up a small cluster and performed basic operations using CQL."
+
+5. **Express Willingness to Learn:**
+   - "I am enthusiastic about deepening my expertise in Cassandra and am confident that my background in NoSQL databases will help me quickly get up to speed."
+
+### Scenario 3: You Have No Experience with Cassandra
+
+1. **Be Honest:**
+   - "I haven't had the opportunity to work with Cassandra directly."
+
+2. **Highlight Related Experience:**
+   - "However, I have extensive experience with NoSQL databases like MongoDB and DynamoDB. I understand the principles of distributed databases, data modeling, and managing large-scale data."
+
+3. **Show Willingness to Learn:**
+   - "I am very interested in learning Cassandra and have already started going through online resources and documentation to familiarize myself with its architecture and operations."
+
+4. **Connect with Relevant Skills:**
+   - "Given my strong background in [mention relevant technologies or skills], I am confident that I can quickly adapt to using Cassandra in a professional setting."
+
+5. **Express Enthusiasm:**
+   - "I am eager to expand my skill set to include Cassandra and believe that my existing knowledge of NoSQL databases will be a strong foundation for learning it effectively."
+
+### General Tips
+
+- **Be Honest:** Never exaggerate your experience. Interviewers appreciate honesty and a willingness to learn.
+- **Be Specific:** Provide concrete examples and details about your experience and knowledge.
+- **Show Enthusiasm:** Demonstrate your interest in Cassandra and your commitment to expanding your skills.
+- **Relate to the Role:** Connect your experience with Cassandra (or lack thereof) to the responsibilities of the position you are applying for.

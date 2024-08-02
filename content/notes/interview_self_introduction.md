@@ -10,17 +10,18 @@ My name is Austin. I have been working as a Java developer for over 6 years, and
 My expertise basically like the core java concept,
 and (I am) familiar with those popular frameworks such as Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Kafka, JUnit, and so on.
 And for front-end, I have experience using React and also Angular.
-I also have hands-on experience on building robust MicroService architecture.
+I also have hands-on experience on building robust MicroService architecture with AWS cloud.
 > just add a brief idea like what industry have I participated in. like what project I have worked on.
 
 ## 2. My most recent project
 In my most recent project I contribute(d) to a system called ADS, which is stand for Analytics Dashboard System.
 And it is designed to satisfy the company’s data analysis needs. 
 And Initially the ADS was designed in a monolithic architecture. 
-And my project is aim to basic decompose the whole architecture into MicroService. 
+And my project is aim to basic decompose the whole architecture into MicroService and deploy the system on AWS. 
 And to enhance the scalability and flexibility of the whole system.
 
 I am in charge of the order functionality for this project, including order trending service, real-time order analysis service, and promotion analysis service.
+
 The order functionalities basically is handle like the order data on different dimensions for analysis purpose.
 
 the order trending MS, it handles the order trending data over time in (daily, weekly, monthly, and so on).
@@ -31,7 +32,7 @@ It also contains report service that will generate comprehensive report.
 This whole architecture shape basically enhance the whole systems’ scalability, flexibility, and maintainability. 
 And also enhance the data management process.
 
-In terms of my tech stack, I specialize in backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management, and JUnit, TestNG and Selenium for Test Strategy. 
+In terms of my tech stack, I specialize in backend Restful API using Java and Spring Boot and alongside with the Spring Data JPA, and Hibernate for data management, and JUnit, TestNG and Selenium for Testing. 
 For the MicroService I have intensely use Kafka to build like the event driven and support the real-time update.
 And I primarily work with the PostgreSQL database. But I also have experience with non-sql type of database.
 For front-end, I use Angular to create frontend user interface for different modules, so for current project I basically worked on order related modules, and services.
@@ -57,7 +58,7 @@ And I work closely with my team lead.
 And we basically migrate that old MySQL database for the Customer to ElasticSearch. 
 Using ElasticSearch as the backend. 
 And we have successfully launched this enhanced feature like in two months. 
-I feel like this is gonna be the most challenge part I found in my project.
+I feel like this is going be the most challenge part I found in my project.
 
 ## Angular Phone Interview
 Okay, I use Angular in both my current project and previous project.

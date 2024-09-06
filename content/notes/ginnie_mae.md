@@ -22,3 +22,17 @@ date = 2024-09-05T23:04:41-04:00
 - Impact on Interest Rates: By guaranteeing MBS, Ginnie Mae reduces the risk for investors, which helps to keep mortgage interest rates lower than they otherwise would be.
 
 - Liquidity Provider: Ginnie Mae enables mortgage lenders to sell their loans into the secondary market, freeing up capital to issue more loans. This process helps lenders manage liquidity and continue offering new mortgages, especially during times of economic stress.
+
+
+## Summary
+Ensuring affordable mortgage especially for low-income and first-time homebuyers.
+
+Ginnie Mae enables mortgage lenders to sell their loans into the secondary market, freeing up capital to issue more loans.
+Ginnie Mae is to provide a government-backed guarantee to ensure investors receive timely payments of principal and interest, even if the underlying borrowers default on their loans. 
+
+which helps to keep mortgage interest rates lower than they otherwise would be.
+
+## Questions
+- Who will I be work with most closely?
+- What's the next step of the hiring process?
+- Can I answer any final questions for you?

@@ -23,7 +23,7 @@ Overall, my experience with Java has equipped me with the skills to deliver high
 ## Debugging
 Yes, I have extensive experience with debugging programs. Debugging is a crucial part of my development process, and I've used various tools and techniques to identify and fix issues efficiently.
 
-Tools: I frequently use IDEs like IntelliJ IDEA and Eclipse, which provide powerful debugging tools. These tools allow me to set breakpoints, step through code, inspect variables, and evaluate expressions. I also use logging frameworks such as Log4j and SLF4J to log important information, which helps in understanding the flow of the application and identifying issues.
+Tools: I frequently use IDEs like IntelliJ IDEA, which provide powerful debugging tools. These tools allow me to set breakpoints, step through code, inspect variables, and evaluate expressions. I also use logging frameworks such as Log4j and SLF4J to log important information, which helps in understanding the flow of the application and identifying issues.
 
 Techniques: My approach to debugging usually starts with replicating the issue and understanding the context in which it occurs. I set breakpoints at critical points in the code to inspect the state of the application. I also use watch expressions to monitor specific variables and conditions.
 
@@ -40,7 +40,7 @@ I used Spring Boot's various modules like Spring Data JPA for database interacti
 
 One of the key benefits I found with Spring Boot is its auto-configuration feature, which significantly speeds up development by reducing boilerplate code. I also appreciated the ease of integrating other Spring projects and third-party libraries, which helped in building robust and scalable applications.
 
-Overall, my experience with Spring Boot has allowed me to deliver high-quality, maintainable code quickly and efficiently, making it a valuable tool in my development toolkit.
+Overall, Spring Boot is a valuable tool in my development toolkit.
 
 ## Database
 Yes, I have extensive experience with databases. I have worked with both relational databases like IBM DB2 and Microsoft SQL Server, as well as NoSQL databases like Cassandra.

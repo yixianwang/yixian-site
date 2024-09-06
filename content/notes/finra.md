@@ -258,7 +258,7 @@ I have a problems list that I need to prepare for this position. I will put them
 - how to connect API in test
 - how do you do the Authentication
 - how does JWT work
-  - JWT (JSON Web Token)
+  - JWT (JSON Web Token): header + payload + signature
   - JWTs are commonly used for authentication and authorization.
 - downside JWT
   - once the payload increase along with the signarture, it might affect performance.
@@ -303,7 +303,7 @@ I have a problems list that I need to prepare for this position. I will put them
 - Multithreading in java
 - How do you handle global exception
 - If you have try and finally block without catch block, can you execute it
-- What is springbootapplication annotation
+- What is SpringBoot application annotation
 - What is java reflection
 - Where did you use reflection
 - What are reasons you used reflection

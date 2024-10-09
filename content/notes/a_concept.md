@@ -1,5 +1,5 @@
 +++
-title = 'Antra Training Concepts Cheat Sheet'
+title = 'Cheat Sheet'
 date = 2024-04-30T18:58:08-04:00
 +++
 
@@ -1831,3 +1831,165 @@ removing them from the DOM. This is achieved with the help of lifecycle hooks. H
 
 - Jira: project management tool
 - Confluence: proj
+
+## Mockito
+### Basic
+```Java
+package net.thebabydragon;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+import java.util.Random;
+
+class MainTest {
+
+  // following two lines equals to 'Random random = Mockito.mock(Random.class);'
+  // @Mock and @Spy 需要搭配 MockitoAnnotations.openMocks(testClass) 方法一起使用
+  @Mock
+  private Random random;
+
+  // 真实的
+  @Spy
+  private Main main;
+
+  @BeforeEach
+  void setUp() {
+    System.out.println("----before----");
+    MockitoAnnotations.openMocks(this);
+  }
+
+  @Test
+  void addTest() {
+//    Random random = Mockito.mock(Random.class);
+    System.out.println(random.nextInt());
+
+    // basic
+    Mockito.verify(random).nextInt();
+    Mockito.verify(random, Mockito.times(1)).nextInt();
+
+    // 打桩
+    Mockito.when(random.nextInt()).thenReturn(100);
+    Assertions.assertEquals(100, random.nextInt());
+
+  }
+
+  @AfterEach
+  void after() {
+    System.out.println("----after----");
+  }
+
+  @Test
+  void testMain() {
+    // 这里可以打桩，如果不打桩，就是真实的，打桩就执行打桩
+    Mockito.when(main.add(2, 3)).thenReturn(100);
+    Assertions.assertEquals(100, main.add(2, 3));
+  }
+}
+```
+
+### Mockito.when().thenThrow();
+```java
+package net.thebabydragon;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+import java.util.Random;
+
+class MainTest {
+  @Spy
+  private Main main;
+
+  @BeforeEach
+  void setUp() {
+    MockitoAnnotations.initMocks(this);
+  }
+
+  @Test
+  void testMain() {
+    // Mockito.when().thenThrow();
+    Mockito.when(main.add(1, 3)).thenThrow(new RuntimeException());
+    main.add(1, 3);
+  }
+}
+```
+### Mockito.when().thenCallRealMethod();
+```java
+package net.thebabydragon;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+import java.util.Random;
+
+class MainTest {
+  @Spy
+  private Main main;
+
+  @BeforeEach
+  void setUp() {
+    MockitoAnnotations.initMocks(this);
+  }
+
+  @Test
+  void testMain() {
+    // first time run this
+    Mockito.when(main.add(1, 3)).thenReturn(12);
+    Assertions.assertEquals(12, main.add(1, 3));
+
+    // second time run this
+    Mockito.when(main.add(1, 3)).thenCallRealMethod();
+    Assertions.assertEquals(4, main.add(1, 3));
+  }
+}
+```
+
+### Static method
+```java
+package net.thebabydragon.Util;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StaticUtilsTest {
+
+  @Test
+  void range() {
+    try (MockedStatic<StaticUtils> mocked = Mockito.mockStatic(StaticUtils.class)) {
+      mocked.when(() -> StaticUtils.range(2, 6)).thenReturn(Arrays.asList(10, 11, 12));
+      assertEquals(Arrays.asList(10, 11, 12), StaticUtils.range(2, 6));
+    }
+  }
+
+  @Test
+  void name() {
+    try (MockedStatic<StaticUtils> mocked = Mockito.mockStatic(StaticUtils.class)) {
+      mocked.when(StaticUtils::name).thenCallRealMethod();
+      assertEquals("Echo", StaticUtils.name());
+    }
+  }
+}```

@@ -2,6 +2,31 @@
 title = 'Angular'
 date = 2024-01-27T02:54:24-04:00
 +++
+
+## Node and Angular Version Control
+### Check Current Angular and Node.js Versions
+```
+node -v
+ng version
+```
+
+### Upgrade or Downgrade Angular
+```
+ng update @angular/cli @angular/core
+```
+
+```
+npm uninstall @angular/cli @angular/core
+npm install @angular/cli@12 @angular/core@12
+```
+
+### Reinstall Node Modules
+- After upgrading or downgrading Angular, it’s a good practice to remove the node_modules folder and reinstall dependencies to ensure everything works with the new version:
+```
+rm -rf node_modules
+npm install
+```
+
 ## Concepts
 ### template reference variable
 - Useful: child component can interact with or manipulate the parent's HTMLElement

@@ -33,6 +33,6 @@ Ginnie Mae is to provide a government-backed guarantee to ensure investors recei
 which helps to keep mortgage interest rates lower than they otherwise would be.
 
 ## Questions
-- Who will I be work with most closely?
+- Who will I be working with most closely?
 - What's the next step of the hiring process?
-- Can I answer any final questions for you?
+- Is there any difference between pittsburgh and lake mary office?

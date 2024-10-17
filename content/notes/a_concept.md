@@ -136,6 +136,91 @@ functional interface with static
 ## Checked vs Unchecked exception
 
 ## Threadpool 的 coding
+- No: 
+```java
+ExecutorService tp1 = Executors.newFixedThreadPool(4);
+ExecutorService tp2 = Executors.newSingleThreadExecutor();
+ExecutorService tp3 = Executors.newCachedThreadpool();
+```
+- Yes:
+```java
+new ThreadPoolExecutor(corePoolSize, maximumPoolSize, 
+                       keepAliveTime, timeUnit,
+                       taskQueue,
+                       );
+```
+```java
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class ThreadPoolExecutorExample {
+
+    public static void main(String[] args) {
+        // Core and maximum pool size
+        int corePoolSize = 2;
+        int maximumPoolSize = 4;
+        
+        // Keep-alive time for extra threads beyond the core pool size
+        long keepAliveTime = 10;
+        TimeUnit unit = TimeUnit.SECONDS;
+
+        // Task queue with a capacity of 2
+        LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<>(2);
+
+        // Custom thread factory to name threads
+        ThreadFactory threadFactory = new ThreadFactory() {
+            private final AtomicInteger threadNumber = new AtomicInteger(1);
+            public Thread newThread(Runnable r) {
+                return new Thread(r, "CustomThread-" + threadNumber.getAndIncrement());
+            }
+        };
+
+        // Custom rejected execution handler to handle tasks when the queue is full
+        RejectedExecutionHandler handler = new ThreadPoolExecutor.CallerRunsPolicy();
+
+        // Creating the ThreadPoolExecutor
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+            corePoolSize,
+            maximumPoolSize,
+            keepAliveTime,
+            unit,
+            queue,
+            threadFactory,
+            handler
+        );
+
+        // Submit tasks to the executor
+        for (int i = 1; i <= 10; i++) {
+            final int taskId = i;
+            executor.submit(() -> {
+                System.out.println(Thread.currentThread().getName() + " is executing task " + taskId);
+                try {
+                    // Simulate task processing time
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            });
+        }
+
+        // Shutdown the executor
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                executor.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            executor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+```
 
 ## Multi-threading concepts and coding
 

@@ -3,6 +3,8 @@ title = 'Angular'
 date = 2024-01-27T02:54:24-04:00
 +++
 
+## How to read source code in Github
+
 ## Node and Angular Version Control
 ### Check Current Angular and Node.js Versions
 ```

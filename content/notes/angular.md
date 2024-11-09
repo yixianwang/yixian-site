@@ -327,3 +327,66 @@ export class HomeComponent implements OnInit {
 - add click handlers
 - search `Modal` in bootstrap doc, and update parts
 - add variable within `.ts` file, `updateTodoText: string = '';`
+
+## Advanced topics
+- input vs ng-content(simple string vs different html mark up)
+
+- `<ng-content select="input, textarea” />`
+
+- only extend built-in element like `button[buttonAttribute]`
+
+- :host (host element)
+
+
+- ? how to check setInterval running in background
+
+- `private interval?: ReturnType<typeof setInterval>;`
+- `clearTimeout(this.interval);`
+
+Form:
+get value:
+  1. two way binding
+  2.  template variable(pros: not update on every keystroke behind the scenes)
+    1. onSomthing(template variables) // with event
+    2. viewChild(class name | template vraibel name string) // without event
+      @ViewChild(‘form’) private form?: ElementRef<HTMLFormElement>;
+      // or private form = viewChild.required<ElementRef<HTMLFormElement>>(ButtonComponent); // 17.3 or after // return a signal
+      // constructor cannot access form
+
+      this.form?.nativeElement.reset();  // executing after ? if this.form is not undefined.
+
+- `ContentChild` vs `ViewChild`
+- (ng-content child vs real exist child)
+
+
+- `@ViewChild` cannot used in `ngOnInit` but can be used in `ngAfterViewInit` and other method triggers within template.
+
+
+1. `@Output() add = new EventEmitter<{title: string; text: string}>();`
+2. `add = output<{title: string; text: string}>();`
+
+- private el = inject(ElementRef);
+
+1. `@ContentChild('input') private control?: ElementRef< HTMLInputElement | HTMLTextAreaElement >;`
+2. `private control = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');`
+
+
+1. 
+```
+host: {
+  class: 'control',
+  '(click)': 'onClick()',
+},
+```
+2. `@HostBinding('class') className = 'control';`
+3. `@HostListener('click') onClick() { console.log('Clicked!'); }`
+
+
+
+
+
+
+
+
+
+

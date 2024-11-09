@@ -382,6 +382,85 @@ host: {
 3. `@HostListener('click') onClick() { console.log('Clicked!'); }`
 
 
+```
+@for (ticket of tickets; track ticket.id) {
+   <li>
+      <app-ticket /> 
+      {{ $first }}
+      {{ $last }}
+      {{ $even }}
+      {{ $odd }}
+      {{ $count }}
+   </li>
+} @empty {
+   <p>No tickets available.</p>
+}
+```
+
+- signal: read once in .ts file 
+   - signal()
+- signal: set subscription in .ts file 
+   - effect((cleanUp) => {});
+
+
+- signal: set vs update
+   - signal.update((oldValue) => newValue);
+
+- ... operator in js: keep old properties, and overriding status key.
+```
+this.tickets = this.tickets.map((ticket) => {
+   if (ticket.id === id) {
+      return { ...ticket, status: 'closed' }
+   }
+   return ticket;
+});
+```
+- in template, dynamically bind css style, true/false 
+```
+ <div
+   [class]="{
+     'ticket-open': data().status === 'open',
+     'ticket-closed': data().status === 'closed'
+   }"
+ ></div>
+```
+
+
+// {} is configuration
+- input configuration difference in input vs input.require
+  - (null, {}) vs ({}) 
+- `@Input configuration` 
+  - `@Input({})`
+
+// how to configuration for input
+1. alias(avoid in best practice), inside component is just property name, outside use alias name
+2. `transform: (inputValue) => {// some transformed value}`
+
+// how to configuration for output
+1. only has alias
+- `@Output('aliasNameOutsideOfComponent')` 
+- `propertyName = output({alias: 'aliasNameOutsideOfComponent'})`
+
+- we can unlock ngModule with FormModule, for two-way-binding
+
+- two-way-binding can use signal or non-signal properties
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -365,7 +365,7 @@ get value:
 1. `@Output() add = new EventEmitter<{title: string; text: string}>();`
 2. `add = output<{title: string; text: string}>();`
 
-- private el = inject(ElementRef);
+- private el = inject(ElementRef); // inject host element
 
 1. `@ContentChild('input') private control?: ElementRef< HTMLInputElement | HTMLTextAreaElement >;`
 2. `private control = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');`
@@ -479,21 +479,39 @@ export class RectComponent{
 }
 ```
 
+- attribute vs strutural directive
+  - only change the behavior of the element
+  - change the structure of DOM
 
+- window.confirm("Do you want to leave the app?");
 
+- event.preventDefault();
 
+- typescript type casting
+  - const address = (event.target as HTMLAnchorElement).href
 
+- queryParam = input('myapp', { alias: 'appSafeLink' });
 
+- export type Permission = 'admin' | 'user' | 'guest';
 
+- No, an effect in Angular does not automatically subscribe to all signals within a component. Instead, an effect only reacts to signals it accesses directly within its function scope.
 
+- attribute directive
+  - host:{
+    '(click)': 'onConfirmLeavePage($event)',
+  }
+    - queryParam = input('myapp', { alias: 'appSafeLink' });
+    - private hostElementRef = inject<ElementRef<HTMLAnchorElement>>(ElementRef);
 
+- structural directive always use ng-template, * will use it behind the scenes automatically
+- * asterisk is just a syntactic sugar for automatically adding ng-template element behind the scenes
+- an super important step is : private templateRef = inject(TemplateRef); // give access to the content of the template
+- last super important step is : private viewContainerRef = inject(ViewContainerRef); // give access to the place in the DOM where this directive is being used. so where this template is being used.
+  - this.viewContainerRef.createEmbeddedView(this.templateRef);
+  - this.viewContainerRef.clear();
+- * asterisk is not just syntactic sugar, it also setup property binding, with typescript code. we should use *appAuth="'admin'" to put string.
 
-
-
-
-
-
-
+- we can use `hostDirectives` within `@Dicrective` to build some layers
 
 
 

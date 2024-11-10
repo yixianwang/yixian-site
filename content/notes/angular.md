@@ -513,10 +513,22 @@ export class RectComponent{
 
 - we can use `hostDirectives` within `@Dicrective` to build some layers
 
+- `if (typeof value === 'string'){}` // js
+- `val = parseFloat(value);`// convert from string to number
 
+- `return `${outputTemp} F``
 
+- `tempPipe: 'param1'' : 'param2'`
 
+- const sorted = [...value];
+- sorted.sort();
 
+- in pipe, transform method only check if there is any change
 
+- in pipe, by setting pure:false within decorator, it will disable caching mechanism of the pipe.
+- let pipe execute very time anything changed in the template.
 
+- asc: `sorted.sort((a, b) => a > b ? 1 : -1);`
+- desc: `sorted.sort((a, b) => a > b ? -1 : 1);`
 
+- pipe best practice is only transforming what user sees

@@ -445,6 +445,39 @@ this.tickets = this.tickets.map((ticket) => {
 
 - two-way-binding can use signal or non-signal properties
 
+- To make component two-way-bindable
+// approach 1: version < 17.2
+```
+export class RectComponent{
+  @Input({required: true}) size!: { width: string; height: string };
+  @Output() sizeChange = new EventEmitter<{ width: string; height: string }>(); // must follow name rule here
+  
+  onReset() {
+    this.sizeChange.emit({
+      width: '200',
+      height: '100'
+    });
+  }
+}
+
+// in parent template
+<app-rect [(size)]="rectSize" />
+```
+
+// approach 2: version >= 17.2
+```
+export class RectComponent{
+  size = model.required<{ width: string; height: string }>();
+  
+  onReset() {
+    // we can use set or update here
+    this.size.set({
+      width: '200',
+      height: '100'
+    });
+  }
+}
+```
 
 
 

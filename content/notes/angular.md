@@ -629,10 +629,22 @@ this.zone.runOutsideAngular(() => {
 
 - setTimeout monitored by zone.js
 
+- RxJS:
+  - we need to subscribe to kick off the observables.
 
+- signal(values in container) vs observable(values over time)
+  - signals are great for managing application state
+  - observables are great for managing events & streamed data
+    1. signal built-in angular
+    2. observable has leaner code for interval
+    3. observable only executed when it has at least one subscriber, whereas signal always there
 
+- convert between signal and observable with `toObservalbe` and `toSignal`
 
+- signals always have initial value
+- observables can have initial value
 
-
+- `toSignal` will setup an undefined value for signal by default, but we can setup initial value in configuration object
+- `toSignal` has one nice thing that it will automatically cleanup observable subscription
 
 

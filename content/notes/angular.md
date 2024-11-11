@@ -647,4 +647,4 @@ this.zone.runOutsideAngular(() => {
 - `toSignal` will setup an undefined value for signal by default, but we can setup initial value in configuration object
 - `toSignal` has one nice thing that it will automatically cleanup observable subscription
 
-
+- `catchError((error, obj) => {})` in observable pipe must return a new observable

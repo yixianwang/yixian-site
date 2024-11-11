@@ -4,32 +4,31 @@ date = 2024-11-11T15:23:41-05:00
 +++
 
 ```java
+import de.jollyday.HolidayCalendar;
+import de.jollyday.HolidayManager;
+import de.jollyday.Holiday;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.YearMonth;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class BusinessDayCalculator {
 
     public static void main(String[] args) {
-        Set<LocalDate> holidays = new HashSet<>();
-        holidays.add(LocalDate.of(2024, Month.JANUARY, 1)); // New Year's Day
-        holidays.add(LocalDate.of(2024, Month.JULY, 4));    // Independence Day
-        holidays.add(LocalDate.of(2024, Month.DECEMBER, 25)); // Christmas Day
-        // Add other holidays as needed
-
-        LocalDate firstBusinessDay = getFirstBusinessDayOfNextMonth(holidays);
+        LocalDate firstBusinessDay = getFirstBusinessDayOfNextMonth("US");
         System.out.println("First business day of the next month: " + firstBusinessDay);
     }
 
-    public static LocalDate getFirstBusinessDayOfNextMonth(Set<LocalDate> holidays) {
+    public static LocalDate getFirstBusinessDayOfNextMonth(String countryCode) {
         // Get the current date
         LocalDate today = LocalDate.now();
         
         // Get the first day of the next month
         LocalDate firstDayOfNextMonth = YearMonth.from(today).plusMonths(1).atDay(1);
+
+        // Get the holidays for the next month
+        Set<LocalDate> holidays = getHolidaysForMonth(firstDayOfNextMonth.getYear(), firstDayOfNextMonth.getMonthValue(), countryCode);
 
         // Check if the first day is a business day
         while (isHolidayOrWeekend(firstDayOfNextMonth, holidays)) {
@@ -48,6 +47,20 @@ public class BusinessDayCalculator {
         
         // Check if the date is a holiday
         return holidays.contains(date);
+    }
+
+    private static Set<LocalDate> getHolidaysForMonth(int year, int month, String countryCode) {
+        // Initialize the HolidayManager with the specified country
+        HolidayManager holidayManager = HolidayManager.getInstance(HolidayCalendar.valueOf(countryCode));
+        
+        // Get all holidays for the given year
+        Set<Holiday> allHolidays = holidayManager.getHolidays(year);
+        
+        // Filter holidays to only include those in the specified month and return as LocalDate set
+        return allHolidays.stream()
+                .map(Holiday::getDate)
+                .filter(date -> date.getMonthValue() == month)
+                .collect(Collectors.toSet());
     }
 }
 ```

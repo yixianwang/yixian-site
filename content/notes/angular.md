@@ -432,7 +432,7 @@ this.tickets = this.tickets.map((ticket) => {
 - `@Input configuration` 
   - `@Input({})`
 
-// how to configuration for input
+// how to setup configuration for input
 1. alias(avoid in best practice), inside component is just property name, outside use alias name
 2. `transform: (inputValue) => {// some transformed value}`
 
@@ -518,7 +518,7 @@ export class RectComponent{
 
 - `return `${outputTemp} F``
 
-- `tempPipe: 'param1'' : 'param2'`
+- `tempPipe: 'param1' : 'param2'`
 
 - const sorted = [...value];
 - sorted.sort();
@@ -532,3 +532,48 @@ export class RectComponent{
 - desc: `sorted.sort((a, b) => a > b ? -1 : 1);`
 
 - pipe best practice is only transforming what user sees
+
+- services best practice:
+  - private tasks = signal<Task[]>([]);
+  - allTasks = this.tasks.asReadonly();
+
+- map will produce a new array
+- we should always create a new instead of updating in place
+```
+  updateTaskStatus(taskId: string, newStatus: TaskStatus) {
+    this.tasks.update((oldTasks) =>
+      oldTasks.map((task) =>
+        task.id === taskId ? { ...task, status: newStatus } : task
+      )
+    );
+  }
+```
+
+- computed will return a new signal 
+
+- effect and computed will do subscription
+
+- component and directive can access element injector
+- service cannot access element injector instead it only have access environment injector or module injector
+
+- How to register customized provider for anything
+```
+export const TASK_STATUS_OPTIONS = new InjectionToken<TaskStatusOptions>(
+  'task-status-options'
+);
+export const taskStatusOptionsProvider: Provider = {
+  provide: TASK_STATUS_OPTIONS,
+  useValue: TaskStatusOptions
+};
+
+// in component
+providers: [taskStatusOptionsProvider]
+
+private taskStatusOptinos = inject(TASK_STATUS_OPTIONS);
+```
+
+
+
+
+
+

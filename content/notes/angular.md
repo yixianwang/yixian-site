@@ -648,3 +648,86 @@ this.zone.runOutsideAngular(() => {
 - `toSignal` has one nice thing that it will automatically cleanup observable subscription
 
 - `catchError((error, obj) => {})` in observable pipe must return a new observable
+
+- Component structure: 12-http-12-interceptors
+
+- Component & Template driven form
+  - name="required" ngModel // name is required for angular to manage it
+
+## Template driven approach: we wanna do all the setup and configuration inside of the template.
+  - Angular managed Form
+  ```
+  // ngForm change the type into NgForm instead of HTMLFormElement
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <input id type name ngModel/> // no two-way-binding, extract values only form submitted
+  </form>
+  ```
+  - validation with attributes or directives
+    - `required email` 
+    - `required minlength="6"` 
+    - `min`
+    - `pattern`
+
+  - cons: when using template driven approach, the angular form object isn't available the first time the template is being rendered.
+  - cons: instead, this template defines the form structure, so it's only available thereafter.
+  - cons: if you try to access control info inside of the template, it won't work.
+  - solution: use template variable `#email="ngModel"` this syntax is supported by ngModel directive. **To get control information**
+  - Note 1: To get control specific information `#email="ngModel"`
+  - Note 2: To get form information `form`
+
+  - `ng-pristine` tells whether this field has received any input from the user or not. if it is added, it has not received any input.
+  - `ng-invalid` or `ng-valid` tells valid or not
+
+  - e.g. `@if (email.touched && email.dirty && email.invalid) {}`
+ 
+```
+constructor() {
+  afterNextRender(() => {}); // to register a function that should be executed once. once this component has been rendered for the first time.
+  // because it's template-driven approach, **so it's only after the template rendering, that this form is fully initialized.**
+}
+```
+
+```
+  constructor() {
+    afterNextRender(() => {
+      const savedForm = window.localStorage.getItem('saved-login-form');
+
+      if (savedForm) {
+        const loadedFormData = JSON.parse(savedForm);
+        const savedEmail = loadedFormData.email;
+        // right here: 1. template has been rendered
+        // 2. the form object is initialized
+        // 3. but the control objects actually aren't fully initialized yet.
+        // solution with template driven approach(we would have better solution with reactive driven form):
+        setTimeout(() => {
+          this.form().controls['email'].setValue(savedEmail); // set value, we can use controls to choose one of those, or all with object
+        }, 1);
+      }
+
+      const subscription = this.form()
+        .valueChanges?.pipe(debounceTime(500)) // user has to stop for at least 500 milliseconds.
+        .subscribe({
+          next: (value) =>
+            window.localStorage.setItem(
+              'saved-login-form',
+              JSON.stringify({ email: value.email })
+            ),
+        });
+
+      this.destroyRef.onDestroy(() => subscription?.unsubscribe());
+    });
+  } 
+```
+
+## Reactive driven approach
+- inside FormGroup or nested FormGroup, each key-value pair represents one control. e.g. email control for email input.
+```ts
+form = new FormGroup({
+  // email and password can be any name
+  email: new FormControl(''),
+  password: new FormControl('')
+});
+```
+
+
+

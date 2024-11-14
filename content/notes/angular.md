@@ -719,8 +719,9 @@ constructor() {
   } 
 ```
 
-## Reactive driven approach
+## Reactive driven approach: in template, we just connect elements
 - inside FormGroup or nested FormGroup, each key-value pair represents one control. e.g. email control for email input.
+### first step: setup the form
 ```ts
 form = new FormGroup({
   // email and password can be any name
@@ -728,6 +729,85 @@ form = new FormGroup({
   password: new FormControl('')
 });
 ```
+### second step: connect this form to template
+```ts
+imports: [ReactiveFormsModule]
 
+```
+// approach 1
+<input id="email" type="email" [formControl]="form.controls.email" />
+// approach 2
+<form [formGroup]="form">
+  <input id="email" type="email" [formControlName]="password" />
+</form>
+```
 
+### pros
+- pros: Submitting: in reactive approach, we don't have to pass any argument to onSubmit, because we already have access to the form in class
+- pros: get access and have type safe when using .value `this.form.controls.email` and `this.form.value.email`
 
+### validators
+```ts
+form = new FormGroup({
+  // can be [], or {validators:[], }
+  // asyncValidators?
+  // nonNullable?, it can make sure this input cannot be set to null again if it were reset.
+  // updateOn?, it can control if the value managed by Angular should update on every keystroke or only if the input loses focus with updateOn.
+  email: new FormControl('', {
+    validators: [Validators.email, Validators.required, (control) => {return null or nothing for valid, or {} for invalid}]
+  }), 
+  password: new FormControl('')
+});
+```
+```TS
+// custom validators
+function customValidator(control: AbstractControl) {
+  if (control.value.includes('?')) {
+    return null;
+  }
+  
+  return { doesNotContainQuestionMark: true };
+}
+
+// custom async validators
+function emailIsUnique(control: AbstractControl) {
+  if (control.value !== 'test@example.com') {
+    return of(null); // `of` produces an observable that instantly emits a value
+  }
+  
+  return of({ notUnique: true });
+}
+```
+
+### prepopulate data
+- we don't need afterNextRender within constructor, because we created form inside class, we don't have to wait for the template to render for it to be initialized. we already initialized form in the code.
+- so we can use `ngOnInit() {}`
+```TS
+// save value into localStorage
+private destroyRef = inject(DestroyRef);
+const subscription = this.form.valueChanges.pipe(debounceTime(500)) // we don't need ? after valueChanges.
+        .subscribe({
+          next: (value) =>
+            window.localStorage.setItem(
+              'saved-login-form',
+              JSON.stringify({ email: value.email })
+            ),
+        });
+this.destroyRef.onDestroy(() => subscription.unsubscribe());
+
+// update form value with localStorage
+1. outside component, doesn't work for ssr
+2. inside ngOnInit before `subsription` as usual
+```
+
+### nested FormGroup validator
+```ts
+// access controls within nested formgroup
+function equalValues(control: AbstractControl) {
+  const password = control.get('password')?.value;
+  const confirmPassword = control.get('confirmPassword')?.value;
+  if (password === confirmPassword) return null;
+  
+  return { passwordNotEuqal: true };
+}
+```

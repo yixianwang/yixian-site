@@ -44,4 +44,30 @@ date = 2024-09-04T19:21:00-04:00
 > And so now the **reducer** can set that status flag to success or something similar and it can update the todo's property in the **store** with the data we just loaded.
 
 
-## Code
+## Concepts
+1. **Store**, this is where our data is stored & managed.
+2. **Component**, this is where the data is needed & updates should be reflected.
+3. **Selector(Optional)**, Component can _read data_ from the store("listen to changes).
+4. **Action**, Standardized messages("events") to which reducers can listen. *Describe the changes that should be performed + any extra data that might be needed.*
+5. **Reducer**, Contains state changing logic. e.g. increment counter by 1. *it have the actual logic that gets triggered based on those actions*
+6. **Effects**, Side-effects that should be triggered for certain actions. e.g. send HTTP request.
+
+## Install NgRx
+`ng add @ngrx/store`
+
+### Module
+```ts {filename="app.module.ts"}
+import { StoreModule } from '@ngrx/store';
+
+// ...
+   imports: [..., StoreModule.forRoot({}, {})];
+```
+
+### Standalone
+```ts {filename="main.ts"}
+import { provideStore } from '@ngrx/store';
+
+bootstrapApplication(AppComponent, {
+   providers: [provideStore()] // added providedStore()
+});
+```

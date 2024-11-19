@@ -811,3 +811,5 @@ function equalValues(control: AbstractControl) {
   return { passwordNotEuqal: true };
 }
 ```
+
+## NgRx

@@ -812,4 +812,82 @@ function equalValues(control: AbstractControl) {
 }
 ```
 
-## NgRx
+## Routing
+### setting up
+```ts {filename="main.ts"}
+//...
+import { provideRouter } from '@angular/router';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter([
+      {
+        path: 'tasks', // <domain>/tasks
+        component: TasksComponent,
+      },
+    ]),
+  ],
+}).catch((err) => console.error(err));
+```
+
+#### outsource routes
+```ts {filename="app.routes.ts"}
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  {
+    path: 'tasks', // <domain>/tasks
+    component: TasksComponent,
+  },
+];
+```
+
+#### outsource app config
+```ts {filename="app.config.ts"}
+import { ApplicationConfig } from '@angular/core';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+  ],
+};
+```
+
+#### final setup
+1. use `<router-outlet />` inside app.component.html
+2. import `RouterOutlet` to app.component.ts
+
+### routerLink && routerLinkActive
+- use `routerLink` directive instead of href within anchor tag
+
+### retrieve route parameters 
+#### via input
+```ts {filename="app.config.ts"}
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes, withComponentInputBinding()), // any argument except first
+  ],
+};
+```
+
+```ts {filename="Component"}
+  userId = input.required<string>(); // angular will set this userId
+```
+
+- cons: doesn't work for child routes
+  - solution: add `withrouterConfig({paramsInheritanceStrategy: 'always'})` in privodeRouter of providers
+
+#### via observables
+- pros: works for child routes
+
+### programmatically routing
+```ts
+private router = inject(Router);
+
+// disable back navigation by setup replaceUrl
+this.router.navigate([['/users', this.userId()]], {replaceUrl: true, });
+```
+
+## fallback route
+- with `**` path
+

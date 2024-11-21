@@ -997,4 +997,4 @@ this.router.navigate(['./'], {
 - Advantage: users no longer receive an empty HTML file or an almost empty HTML file, but instead, a file that contains all the content. It's also great for search engine crawlers.
 - Potential disadvantages: Long-taking tasks may cause empty pages, complexity but this approach also has some potential disadvantages.
 
-> `afterNextRender(() => {})` only runs in browser, right after the next overall Component render cycle.
+> `, right after the next overall Component render cycle., right after the next overall Component render cycle.afterNextRender(() => {})` only runs in browser, right after the next overall Component render cycle.

@@ -879,6 +879,14 @@ export const appConfig: ApplicationConfig = {
 
 #### via observables
 - pros: works for child routes
+```ts
+private activatedRoute = inject(ActivatedRoute);
+
+ngOnInit(): void {
+  this.activatedRoute.paramMap... // to extract paramMap
+  this.activatedRoute.queryParams... // to extract queryParams
+}
+```
 
 ### programmatically routing
 ```ts
@@ -888,6 +896,41 @@ private router = inject(Router);
 this.router.navigate([['/users', this.userId()]], {replaceUrl: true, });
 ```
 
-## fallback route
+### fallback route
 - with `**` path
+
+### queryParams
+- `[queryParams]="{order: order() === 'asc' ? 'desc' : 'asc'}"` // set to asc when undefined or desc
+- by setting up with `withComponentInputBinding()` inside `app.config.ts`, we can extract queryParams by simply use `order = input<'asc' | 'desc'>();`
+- or by observables
+
+### data property inside route
+- for static data
+```ts {filename="app.routes.ts"}
+  data: { message: 'Hello'}
+```
+- by setting up with `withComponentInputBinding()` inside `app.config.ts`, we can extract with input
+
+### resolve property inside route
+- for dynamic data
+
+#### resolver function
+```ts {filename="user-tasks.component.ts"}
+export const resolveUserName: ResolveFn<string> = (
+  activatedRoute: ActivatedRouteSnapshot,
+  routerState: RouterStateSnapshot
+) => {
+  const usersService = inject(UsersService);
+  const userName =
+    usersService.users.find(
+      (u) => u.id === activatedRoute.paramMap.get('userId')
+    )?.name || '';
+  return userName;
+};
+```
+- we can extract data from resolver by input or @Input
+
+### Important
+> Resolver functions will be re-executed if a route parameter changes, but not if a query parameter changes.
+- by solving that, we can add `runGuardsAndResolvers: 'paramsOrQueryParamsChange'`
 

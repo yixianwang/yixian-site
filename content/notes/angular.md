@@ -934,3 +934,54 @@ export const resolveUserName: ResolveFn<string> = (
 > Resolver functions will be re-executed if a route parameter changes, but not if a query parameter changes.
 - by solving that, we can add `runGuardsAndResolvers: 'paramsOrQueryParamsChange'`
 
+### Route Guards
+- `can**` property. To control access to a route. All of them take arrays of guard functions or classes.
+- `canMatch` -> `canActivate`(before the component has been loaded)
+
+```ts
+const dummyCanMatch: CanMatchFn = (route, segments) => {
+  const router = inject(Router);
+  const shouldGetAccess = Math.random();
+  if (shouldGetAccess < 0.5) {
+    return true;
+  }
+  return new RedirectCommand(router.parseUrl('/unauthorized'));
+};
+```
+
+- `canDeactivate`, the idea is that we can control whether a user is allowed to leave a page or not.
+```ts {filename="new-task.component.ts"}
+export const canLeaveEditPage: CanDeactivateFn<NewTaskComponent> = (component) => {
+  if (component.enteredTitle() || component.enteredDate() || component.enteredSummary()) {
+    return window.confirm('Do you really want to leave? You will lose the entered data.')
+  }
+  return true;
+}
+```
+
+### fix redirect to same url within component
+1. update component. 
+2. change `runGuardsAndResolvers:'always'` to always inside parent route.
+
+```ts
+// 1. update component
+this.router.navigate(['./'], {
+   relativeTo: this.activatedRoute,
+   onSameUrlNavigation: 'reload',
+   queryParamsHandling: 'preserve',
+});
+```
+
+## Performance - Lazy Loading
+### Route-based lazy loading
+```ts {filename="users.routes.ts"}
+    loadComponent: () =>
+      import('../tasks/tasks.component').then((mod) => mod.TasksComponent),
+```
+### Deferrable Views(>= 17)
+
+### Lazily Loaded Routes
+
+
+
+

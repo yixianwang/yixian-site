@@ -979,9 +979,22 @@ this.router.navigate(['./'], {
       import('../tasks/tasks.component').then((mod) => mod.TasksComponent),
 ```
 ### Deferrable Views(>= 17)
+- enhancement for route base lazy loading
 
-### Lazily Loaded Routes
+## Building - SPA(Single Page Application)
+- Build a **client-side only** web app: all the UI rendering happens on the client side by JS code that is being served by the web host to the website visitors.
+- All compiled and optimized application code executes in the browsers.
+- Therefore, we don't need any dynamic web server. A **static host** suffices.
+- Potential Cons: initially missing content, bad SEO(search engine crawlers will likely see an empty site, because they are not waiting for the client-side Javascript code to render all the content. At least they are not guaranteed to wait.)
+- Use case: internal app, app that requires authentication, etc.
 
+## Building - SSR
+- Angular app routes are **rendered on-demand** on a dynamic web server 
+- Browser receives finished, rendered page. This page still includes lots of Angular Javascript code, which then takes over and **hydrated("activated")** the page once it has been received.
+- Web app is **hydrated** and becomes a SPA after initial rendering. Subsequent actions will be handled by client-side JS code.
+- Pros: instant responses due to client-side JS doing the heavy work. + Finished pages without missing content for the initial request.
+- **Dynamic web server** is required.
+- Advantage: users no longer receive an empty HTML file or an almost empty HTML file, but instead, a file that contains all the content. It's also great for search engine crawlers.
+- Potential disadvantages: Long-taking tasks may cause empty pages, complexity but this approach also has some potential disadvantages.
 
-
-
+> `afterNextRender(() => {})` only runs in browser, right after the next overall Component render cycle.

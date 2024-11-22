@@ -4,63 +4,74 @@ date = 2024-11-11T15:23:41-05:00
 +++
 
 ```java
-import de.jollyday.HolidayCalendar;
-import de.jollyday.HolidayManager;
-import de.jollyday.Holiday;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.Set;
-import java.util.stream.Collectors;
+const express = require("express");
+const cors = require("cors");
 
-public class BusinessDayCalculator {
+const app = express();
+const PORT = 3000;
 
-    public static void main(String[] args) {
-        LocalDate firstBusinessDay = getFirstBusinessDayOfNextMonth("US");
-        System.out.println("First business day of the next month: " + firstBusinessDay);
-    }
+// Enable CORS for cross-origin requests
+app.use(cors());
 
-    public static LocalDate getFirstBusinessDayOfNextMonth(String countryCode) {
-        // Get the current date
-        LocalDate today = LocalDate.now();
-        
-        // Get the first day of the next month
-        LocalDate firstDayOfNextMonth = YearMonth.from(today).plusMonths(1).atDay(1);
+// Middleware to parse JSON requests
+app.use(express.json());
 
-        // Get the holidays for the next month
-        Set<LocalDate> holidays = getHolidaysForMonth(firstDayOfNextMonth.getYear(), firstDayOfNextMonth.getMonthValue(), countryCode);
+// Mock data
+const mockData = {
+  page: "1",
+  total: "18",
+  records: "342",
+  summaries: [
+    {
+      ptsTransferRqstID: "506327",
+      id: "1",
+      fromIssuer: {
+        issuerId: "3663",
+        issuerName: "M&T BANK",
+      },
+      toIssuer: {
+        issuerId: "1555",
+        issuerName: "GUILD MORTGAGE COMPANY",
+      },
+      gmpUserId: "I_twu23663",
+      ptsTransferRqstTyp: "Standard-Partial",
+      ptsTrnsfrRqstDt: "12/01/2024",
+      ptsSaleDt: "11/21/2024",
+      ptsTransferRqstStatus: "Validation with Errors",
+      ptsTransferRqstCode: "PVF",
+      ptsBuyerSellerFlag: "S",
+      rowCount: 342,
+      rowNum: 1,
+      assAgreementDocId: null,
+      appLetterDocId: null,
+      hecmIssrFlag: "N",
+    },
+  ],
+};
 
-        // Check if the first day is a business day
-        while (isHolidayOrWeekend(firstDayOfNextMonth, holidays)) {
-            // Move to the next day if it's a holiday or weekend
-            firstDayOfNextMonth = firstDayOfNextMonth.plusDays(1);
-        }
+// Define API endpoint
+app.get("/pts/services/v1/transfers", (req, res) => {
+  // Extract query parameters (optional)
+  const {
+    issuerId,
+    page = "1",
+    sellingIssuer,
+    buyingIssuer,
+    transferType,
+    transferDate,
+    transferStatus,
+    transferNumber,
+  } = req.query;
 
-        return firstDayOfNextMonth;
-    }
+  console.log("Query Parameters:", req.query);
 
-    private static boolean isHolidayOrWeekend(LocalDate date, Set<LocalDate> holidays) {
-        // Check if the date is a weekend
-        if (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            return true;
-        }
-        
-        // Check if the date is a holiday
-        return holidays.contains(date);
-    }
+  // Return the mock data
+  res.json(mockData);
+});
 
-    private static Set<LocalDate> getHolidaysForMonth(int year, int month, String countryCode) {
-        // Initialize the HolidayManager with the specified country
-        HolidayManager holidayManager = HolidayManager.getInstance(HolidayCalendar.valueOf(countryCode));
-        
-        // Get all holidays for the given year
-        Set<Holiday> allHolidays = holidayManager.getHolidays(year);
-        
-        // Filter holidays to only include those in the specified month and return as LocalDate set
-        return allHolidays.stream()
-                .map(Holiday::getDate)
-                .filter(date -> date.getMonthValue() == month)
-                .collect(Collectors.toSet());
-    }
-}
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Mock server is running at http://localhost:${PORT}`);
+});
+
 ```

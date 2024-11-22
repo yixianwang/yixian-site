@@ -71,3 +71,6 @@ bootstrapApplication(AppComponent, {
    providers: [provideStore()] // added providedStore()
 });
 ```
+
+## syntax
+1. `createAction` + `createReducer`

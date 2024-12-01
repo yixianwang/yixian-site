@@ -998,3 +998,13 @@ this.router.navigate(['./'], {
 - Potential disadvantages: Long-taking tasks may cause empty pages, complexity but this approach also has some potential disadvantages.
 
 > `, right after the next overall Component render cycle., right after the next overall Component render cycle.afterNextRender(() => {})` only runs in browser, right after the next overall Component render cycle.
+
+
+## Refs
+- ElementRef: for directives, get access to the host element.
+  - `private hostElementRef = inject<ElementRef<HTMLAnchorElement>>(ElementRef);`
+  - with `this.elementRef.nativeElement`
+- TemplateRef: within Directive, to hold content within `ng-template`
+- ViewContainerRef: is a reference to the place in the DOM where above template is being used.
+  - `this.viewContainerRef.createEmbeddedView(this.templateRef);`
+  - `this.viewContainerRef.clear();`: will remove rendered content.

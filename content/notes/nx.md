@@ -7,7 +7,10 @@ date = 2024-12-01T00:55:44-05:00
 
 ## helper
 - `npx nx list @nx/angular`
+
+### useful properties
 - `--dry-run`
+- `--skip-tests`
 
 ## generate monorepo project
 - `npx create-nx-workspace@latest monorepo-name --preset=angular-monorepo`
@@ -15,12 +18,8 @@ date = 2024-12-01T00:55:44-05:00
 ## generate app
 - `npx nx g @nx/angular:app apps/app-name`
 
-## generate component
-### @nx/angular:component
-- full path: `npx nx g c remotes/pool-transfer/src/app/mams-apps-pts/components/request-details/request-details`
-
-### @schematics/angular:component
-- relative path: `npx nx g c my-component --project=project-name`
+## generate component/directive/pipe/service
+- `npx nx g c|d|p|s remotes/pool-transfer/src/app/mams-apps-pts/components/request-details/request-details`
 
 ## generate library
 - `npx nx g @nx/angular:lib libs/lib-name`

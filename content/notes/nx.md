@@ -19,7 +19,7 @@ date = 2024-12-01T00:55:44-05:00
 - `npx nx g @nx/angular:app apps/app-name`
 
 ## generate component/directive/pipe/service
-- `npx nx g c|d|p|s remotes/pool-transfer/src/app/mams-apps-pts/components/request-details/request-details`
+- `npx nx g c|d|p|s full-path --skip-tests`
 
 ## generate library
 - `npx nx g @nx/angular:lib libs/lib-name`

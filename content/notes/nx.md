@@ -11,6 +11,7 @@ date = 2024-12-01T00:55:44-05:00
 ### useful properties
 - `--dry-run`
 - `--skip-tests`
+- `@nx/angular:xxx` is optional, we can directly use xxx, and then choose.
 
 ## generate monorepo project
 - `npx create-nx-workspace@latest monorepo-name --preset=angular-monorepo`

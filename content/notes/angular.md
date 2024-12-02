@@ -1010,16 +1010,16 @@ this.router.navigate(['./'], {
   - `this.viewContainerRef.clear();`: will remove rendered content.
 
 ## ng-content vs ng-container vs ng-template
-| Feature                        | ng-content                               | ng-container                               | ng-template                            |
-|--------------------------------|------------------------------------------|--------------------------------------------|----------------------------------------|
-| Purpose                        | Content projection from parent to child. | Logical grouping without extra DOM nodes.  | Defines reusable or dynamic templates. |
-| DOM Rendering                  | Yes, renders content in DOM.             | No, doesn't create a DOM element.          | No, not directly rendered unless used. |
-| Use with Structural Directives | No                                       | Yes                                        | Yes                                    |
-| Reusability                    | No                                       | No                                         | Yes                                    |
-| Use Case                       | Pass content into child components.      | Apply directives without adding DOM nodes. | Dynamically render or reuse templates. |
+| **Feature**                        | **ng-content**                           | **ng-container**                           | **ng-template**                        |
+|------------------------------------|------------------------------------------|--------------------------------------------|----------------------------------------|
+| **Purpose**                        | Content projection from parent to child. | Logical grouping without extra DOM nodes.  | Defines reusable or dynamic templates. |
+| **DOM Rendering**                  | Yes, renders content in DOM.             | No, doesn't create a DOM element.          | No, not directly rendered unless used. |
+| **Use with Structural Directives** | No                                       | Yes                                        | Yes                                    |
+| **Reusability**                    | No                                       | No                                         | Yes                                    |
+| **Use Case**                       | Pass content into child components.      | Apply directives without adding DOM nodes. | Dynamically render or reuse templates. |
 
-| Scenario                                                              | Directive to Use |
-|-----------------------------------------------------------------------|------------------|
-| Passing dynamic content to child components                           | ng-content       |
-| Grouping elements with structural directives without adding DOM nodes | ng-container     |
-| Defining templates for dynamic or delayed rendering                   | ng-template      |
+| **Scenario**                                                          | **Directive to Use** |
+|-----------------------------------------------------------------------|----------------------|
+| Passing dynamic content to child components                           | ng-content           |
+| Grouping elements with structural directives without adding DOM nodes | ng-container         |
+| Defining templates for dynamic or delayed rendering                   | ng-template          |

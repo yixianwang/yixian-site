@@ -8,7 +8,7 @@ date = 2024-12-01T00:55:44-05:00
 ## helper
 - `npx nx list @nx/angular`
 
-### useful properties
+## useful properties and tips
 - `--dry-run`
 - `--skip-tests`
 - `@nx/angular:xxx` is optional, we can directly use xxx, and then choose.

@@ -1023,3 +1023,9 @@ this.router.navigate(['./'], {
 | Passing dynamic content to child components                           | ng-content           |
 | Grouping elements with structural directives without adding DOM nodes | ng-container         |
 | Defining templates for dynamic or delayed rendering                   | ng-template          |
+
+| **Scope**    | **Queries elements projected via <ng-content>.** | **Queries elements declared in the component's own template.** |
+|--------------|--------------------------------------------------|----------------------------------------------------------------|
+| **Timing**   | Available in ngAfterContentInit.                 | Available in ngAfterViewInit.                                  |
+| **Use Case** | For working with external content.               | For working with internal content.                             |
+

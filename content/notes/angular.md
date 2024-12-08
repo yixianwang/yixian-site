@@ -1139,3 +1139,7 @@ only runs in browser, right after the next overall Component render cycle.
 | **Scope**    | Queries elements projected via <ng-content>. | Queries elements declared in the component's own template. |
 | **Timing**   | Available in ngAfterContentInit.             | Available in ngAfterViewInit.                              |
 | **Use Case** | For working with external content.           | For working with internal content.                         |
+
+a
+b
+c

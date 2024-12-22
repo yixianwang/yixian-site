@@ -24,3 +24,15 @@ date = 2024-12-01T00:55:44-05:00
 
 ## generate library
 - `npx nx g lib libs/lib-name`
+
+## NX Angular MFS
+```
+npx create-nx-workspace@latest ng-mf --preset=apps
+
+cd ng-mf
+npx nx add @nx/angular
+
+npx nx g @nx/angular:host apps/dashboard --prefix=ng-mf
+
+npx nx g @nx/angular:remote apps/login --prefix=ng-mf --host=dashboard
+```

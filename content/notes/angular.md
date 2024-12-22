@@ -1140,4 +1140,192 @@ only runs in browser, right after the next overall Component render cycle.
 | **Timing**   | Available in ngAfterContentInit.             | Available in ngAfterViewInit.                              |
 | **Use Case** | For working with external content.           | For working with internal content.                         |
 
-## nx 
+## tapResponse ---> rxjs
+```TS
+tapResponse(
+  (data) => mySuccessAction({data}),
+  (error) => myFailureAction({error}),
+)
+
+map(
+  (data) => mySuccessAction({data}),
+),
+catchError(
+  (error) => of(myFailureAcction({error})
+)
+```
+
+## ComponentStore
+```TS
+import { HttpClient, HttpErrorResponse, HttpHeaders, } from '@angular/common/http';
+import { ComponentStore } from '@ngrx/component-store';
+import { Injectable, inject } from '@angular/core';
+import { ApiService } from '@mgm/shared-frontend';
+import { Router } from '@angular/router';
+import { catchError, concatMap, EMPTY, Observable, switchMap, tap } from 'rxjs';
+import { MY_URL } from '../utils/url.const';
+import { APP_CONST } from '../utils/app.const';
+import { ToastService } from '@mgm/ux-frontend';
+
+export interface IPoolNumber {
+  poolNumber: string;
+}
+
+export interface IAddNewPoolState {
+  addNewPoolData: IPoolNumber[];
+  xmlData: string[];
+  tableChangeEvent: any;
+  loading: boolean;
+  loaded: boolean;
+  error: string | null;
+}
+
+export const initialState: IAddNewPoolState = {
+  addNewPoolData: [],
+  xmlData: [],
+  loaded: false,
+  loading: false,
+  error: null,
+  tableChangeEvent: {
+    sortField: 'poolNumber',
+    sortOrder: 'asc',
+  },
+};
+
+@Injectable()
+export class AddNewPoolStore extends ComponentStore<IAddNewPoolState> {
+  constructor() {
+    super(initialState);
+  }
+  private apiService = inject(ApiService);
+  private router = inject(Router);
+  private http = inject(HttpClient);
+  private messageService = inject(ToastService);
+
+  // selectors
+  readonly sortOrder$ = this.select(
+    (state) => state.tableChangeEvent.sortOrder,
+  );
+  readonly sortField$ = this.select(
+    (state) => state.tableChangeEvent.sortField,
+  );
+  readonly tableData$: Observable<IPoolNumber[]> = this.select((state) => {
+    return state.addNewPoolData;
+  });
+
+  // updaters
+  readonly addToTableData = this.updater((state, poolNumber: IPoolNumber) => ({
+    ...state,
+    addNewPoolData: [...state.addNewPoolData, poolNumber],
+  }));
+  readonly setTableData = this.updater(
+    (state, addNewPoolData: IPoolNumber[]) => ({
+      ...state,
+      addNewPoolData,
+    }),
+  );
+  readonly setLoading = this.updater((state, loading: boolean) => ({
+    ...state,
+    loading,
+  }));
+  readonly setLoaded = this.updater((state, loaded: boolean) => ({
+    ...state,
+    loaded,
+  }));
+  readonly setXmlData = this.updater((state, xmlData: string[]) => ({
+    ...state,
+    xmlData,
+    error: null,
+  }));
+  readonly setError = this.updater((state, error: string | null) => ({
+    ...state,
+    error,
+    loading: false,
+  }));
+
+  // effects
+  readonly downloadTemplate = this.effect((trigger$: Observable<void>) =>
+    trigger$.pipe(
+      tap(() => this.patchState({ loading: true })),
+      concatMap(() =>
+        this.apiService
+          .sendDownloadRequest(MY_URL.NEW_POOL.GET_POOL_TEMPLATE())
+          .pipe(
+            tap((response) => {
+              this.patchState({ loading: false });
+              if (response) {
+                const blob = new Blob([<Blob>response], {
+                  type: APP_CONST.FILE_TYPE.SPEEDSHEET.RESPONSE,
+                });
+                const fileURL = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                const fname = `PoolTemplate`;
+                link.href = fileURL;
+                link.download = `${fname}.${APP_CONST.FILE_TYPE.SPEEDSHEET.TYPE}`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                this.messageService.add({
+                  summary: 'Action Success',
+                  severity: 'success',
+                  detail: 'Request summary is downloaded.',
+                });
+              }
+            }),
+            catchError((error: HttpErrorResponse) => {
+              this.patchState({ loading: false });
+              this.messageService.add({
+                summary: 'Action Failure',
+                detail: error?.message ? error?.message : 'unknown error',
+                severity: 'error',
+              });
+              return EMPTY; // Prevent the stream from terminating
+            }),
+          ),
+      ),
+    ),
+  );
+
+  readonly removePool = this.effect<{
+    ptsTransferRqstID: number;
+    vrsnId: number;
+    pools: number[];
+  }>((request$) =>
+    request$.pipe(
+      tap(() => this.setLoading(true)),
+      switchMap((requestBody) =>
+        this.http
+          .post<string>(MY_URL.NEW_POOL.REMOVE_POOL(), requestBody, {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+            }),
+          })
+          .pipe(
+            tap(() => this.setLoading(false)), // Example: Process success response here
+            catchError((error: HttpErrorResponse) => {
+              this.setLoading(false);
+              this.setError(error.message || 'An error occurred');
+              return EMPTY;
+            }),
+          ),
+      ),
+    ),
+  );
+}
+```
+
+```TS
+@Component({
+  providers: [AddNewPoolStore],
+})
+export class ConsumerComponent {
+  private addNewPoolStore = inject(AddNewPoolStore);
+  // select
+  tableData$: Observable<IPoolNumber[]> = this.addNewPoolStore.tableData$;
+  // update
+  this.addNewPoolStore.addToTableData( { poolNumber: "1234" } );
+  // effect
+  this.addNewPoolStore.downloadTemplate();
+}
+```

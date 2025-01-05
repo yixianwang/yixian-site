@@ -1329,3 +1329,9 @@ export class ConsumerComponent {
   this.addNewPoolStore.downloadTemplate();
 }
 ```
+
+## DI (dependency injection)
+- Standard Use Cases: Constructor injection or `inject`.
+- Dynamic Logic: Factory providers or `InjectionToken`.
+- Custom Configurations: `@Inject`, `@Optional`, `@Host`, `@Self`, or `@SkipSelf`.
+- Standalone Components: Use `inject` for cleaner code.

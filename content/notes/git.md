@@ -71,20 +71,24 @@ feat: add hat wobble
 +-------> Type: chore, docs, feat, fix, refactor, style, or test.
 ```
 
-More Examples:
 
-- `feat`: (new feature for the user, not a new feature for build script)
-- `fix`: (bug fix for the user, not a fix to a build script)
-- `docs`: (doc change)
-- `style`: (code formatting)
-- `refactor`: (restructure or improve code, no feature change)
-- `test`: (add or update tests)
+### Types
 - `chore`: (indicates a task that is not user facing or feature-related)
   - update dependencies
   - rename file or folders
   - update configurations
   - update pipelines
   - update docs
+- `deprecated`: (indicates a feature is deprecated)
+- `feat`: (new feature for the user, not a new feature for build script)
+- `fix`: (bug fix for the user, not a fix to a build script)
+- `release`: (indicates a release)
+
+#### other types
+- `docs`: (doc change)
+- `style`: (code formatting)
+- `refactor`: (restructure or improve code, no feature change)
+- `test`: (add or update tests)
 
 References:
 

@@ -794,9 +794,12 @@ imports: [ReactiveFormsModule]
 
 ```
 
-// approach 1
+## approach 1
+```
 <input id="email" type="email" [formControl]="form.controls.email" />
-// approach 2
+```
+## approach 2
+```
 <form [formGroup]="form">
   <input id="email" type="email" [formControlName]="password" />
 </form>
@@ -1335,3 +1338,57 @@ export class ConsumerComponent {
 - Dynamic Logic: Factory providers or `InjectionToken`.
 - Custom Configurations: `@Inject`, `@Optional`, `@Host`, `@Self`, or `@SkipSelf`.
 - Standalone Components: Use `inject` for cleaner code.
+
+## Handle Unit Testing Mistakes
+- [Angular Unit Testing Mistakes](https://www.youtube.com/watch?v=BTEx2X_8b-U&ab_channel=DecodedFrontend)
+
+1. we should initiate variables in `beforeEach`
+2. we should use `fixture.componentRef.setInput('data', widgetTestingData)` to set input value
+3. we should use `<p data-testId="no-location"`, and 
+    ```html
+    const noLocation = fixture.debugElement.query(By.css('[data-testId="no-location"]'));
+    // noLocation.nativeElement.value = 'tomorrow';
+    // noLocation.nativeElement.dispatchEvent(new Event('change')); // to fire the change event
+    expect(noLocation).toBeTruthy();
+    ```
+
+## Flatten Nested Observables
+- [Flatten Nested Observables](https://www.youtube.com/watch?v=OhuRvfcw3Tw&ab_channel=DecodedFrontend)
+
+1. we should use flatten operators like `switchMap` to flatten nested observables
+2. we should use `takeUntilDestroyed` at then end of pipe chain. we can have a eslint rule to enforce this.
+    ```ts
+    this.searchConfig$.pipe(
+      switchMap((config) => this.http.get(config.url))
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe((data) => {
+      this.data = data;
+    });
+    ```
+3. we should add subscription right after component property. Either use signal or async pipe(). With async pipe we can remove `takeUntilDestroyed`.
+    ```ts
+    // this is a property in component
+    users$ = toSignal(this.searchConfig$).pipe(
+      switchMap((config) => this.http.get(config.url)),
+      takeUntilDestroyed(this.destroyRef),
+    );
+    ```
+4. avoid **cold observables**, which is executing observable logic multiple times.
+   -  approach 1: reduce subscription in template
+   -  approach 2: use **hot observables**
+    ```ts
+    users$ = toSignal(this.searchConfig$).pipe(
+      switchMap((config) => this.http.get(config.url)),
+      // when a new subscriber arrives, the logic before shareReplay will not be executed
+      // the switchMap will executed only when a new config is emitted
+      shareReplay(1),
+    );
+    ```
+5. avoid improper usage of `distinctUntilChanged()` in pipe chain.
+    - `distinctUntilChanged()` only works for primitive values, not for objects. `// {} === {}` is false.
+    - to resolve this by using `distinctUntilChanged((prev, curr) => prev.id === curr.id)` or `distinctUntilKeyChanged('id')`, or deep comparison.
+6. avoid using side effects in the wrong places.
+    - `tap` is for side effects, not for changing the observable stream.
+    - `tap` is for logging, debugging, or triggering side effects.
+
+

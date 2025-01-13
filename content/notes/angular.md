@@ -1391,4 +1391,42 @@ export class ConsumerComponent {
     - `tap` is for side effects, not for changing the observable stream.
     - `tap` is for logging, debugging, or triggering side effects.
 
+## NGRX
+- [NGRX](https://www.youtube.com/watch?v=bHw8SV4SNUU&ab_channel=DecodedFrontend)
+```ts {filename="app.config.ts"}
+provideStore(),
+provideState(fromScientists.scientistFeature),
+provideEffects(scientistEffects),
+```
 
+```ts {filename="reducer.ts"}
+// without export
+const reducer = createReducer(...); 
+
+// define extra selectors along with default selectors defined automatically by createFeature
+export const scientistFeature = createFeature({
+  name: 'scientist',
+  reducer,
+  extraSelectors: ({ selectSelectedId, selectScientists }) => ({
+    selectSelectedScientist: createSelector(
+      selectSelectedId,
+      selectScientists,
+      (selectedId, scientists) => scientists.find((s) => s.id === selectedId)
+    ),
+  }),
+});
+```
+
+```ts {filename="component.ts"}
+// without constructor
+store = inject(Store);
+scientists$ = this.store.select(fromScientists.selectScientists);
+
+ngOnInit() {
+  this.store.dispatch(fromScientists.loadScientists());
+}
+
+onSelectScientist(id: number) {
+  this.store.dispatch(fromScientists.selectScientist({ id }));
+}
+```

@@ -42,9 +42,32 @@ git push origin v1.0.1
 
 ## merge, on development branch, do operations to merge feature branch into development branch
 ```
-# merge feature branch into development branch
+# merge feature branch into development branch, locally
 git checkout development
 git merge feature-branch
+
+# merge development branch into feature branch, without tracking development locally
+git checkout feature-branch
+git fetch origin
+git merge origin/development
+
+# conflict content will show message like:
+# CONFLICT (content): Merge conflict in some-file.js
+
+# resolve conflict, stage, commit, and then push
+# git commit -m "Resolved merge conflicts between development and feature-branch"
+```
+
+## rebase
+```
+git checkout feature-branch
+git pull --rebase origin development
+
+# If conflicts occur, resolve them and continue rebasing:
+git rebase --continue
+
+# After rebasing, force push since history is rewritten:
+git push --force origin feature-branch
 ```
 
 ## git diff

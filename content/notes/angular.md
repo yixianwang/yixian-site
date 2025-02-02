@@ -1340,7 +1340,7 @@ export class ConsumerComponent {
 - Standalone Components: Use `inject` for cleaner code.
 
 ### @Optional(), @Skip(), @SkipSelf(), @Host
-```ts {filename='app.component.html'}
+```ts {filename="app.component.html"}
 <div appParent>
   <div appChild>
     <div appGrandChild></div>
@@ -1348,7 +1348,7 @@ export class ConsumerComponent {
 </div>
 ```
 
-```ts {filename='app.component.ts'}
+```ts {filename="app.component.ts"}
 import { Component, Self, SkipSelf } from '@angular/core';
 import { LoggerService } from './logger.service';
 import { ParentDirective } from './parent.directive';
@@ -1378,7 +1378,7 @@ export class AppComponent {
 }
 ```
 
-```ts {filename='parent.component.ts'}
+```ts {filename="parent.component.ts"}
 import { Directive, Optional, Self } from '@angular/core';
 import { LoggerService } from './logger.service';
 
@@ -1396,7 +1396,7 @@ export class ParentDirective {
 }
 ```
 
-```ts {filename='child.component.ts'}
+```ts {filename="child.component.ts"}
 import { Directive, Optional, Self } from '@angular/core';
 import { LoggerService } from './logger.service';
 
@@ -1410,7 +1410,7 @@ export class ChildDirective {
 }
 ```
 
-```ts {filename='grand-child.component.ts'}
+```ts {filename="grand-child.component.ts"}
 import { Directive, Host } from '@angular/core';
 import { LoggerService } from './logger.service';
 
@@ -1424,7 +1424,7 @@ export class GrandChildDirective {
 }
 ```
 
-```ts {filename='logger.service.ts'}
+```ts {filename="logger.service.ts"}
 import { Injectable } from '@angular/core';
 
 @Injectable({

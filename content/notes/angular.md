@@ -1339,6 +1339,111 @@ export class ConsumerComponent {
 - Custom Configurations: `@Inject`, `@Optional`, `@Host`, `@Self`, or `@SkipSelf`.
 - Standalone Components: Use `inject` for cleaner code.
 
+### @Optional(), @Skip(), @SkipSelf(), @Host
+```ts {filename='app.component.html'}
+<div appParent>
+  <div appChild>
+    <div appGrandChild></div>
+  </div>
+</div>
+```
+
+```ts {filename='app.component.ts'}
+import { Component, Self, SkipSelf } from '@angular/core';
+import { LoggerService } from './logger.service';
+import { ParentDirective } from './parent.directive';
+import { ChildDirective } from './child.directive';
+import { GrandChildDirective } from './grand-child.directive';
+
+@Component({
+  imports: [ParentDirective, ChildDirective, GrandChildDirective],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+  providers: [LoggerService],
+})
+export class AppComponent {
+  constructor(
+    @Self() private logger: LoggerService,
+    @SkipSelf() private parentLogger: LoggerService
+  ) {
+    if (this.logger) {
+      this.logger.prefix = 'app: ';
+      this.logger.log('constructor init');
+    }
+    if (this.parentLogger) {
+      this.parentLogger.log('constructor init');
+    }
+  }
+}
+```
+
+```ts {filename='parent.component.ts'}
+import { Directive, Optional, Self } from '@angular/core';
+import { LoggerService } from './logger.service';
+
+@Directive({
+  selector: '[appParent]',
+  // providers: [LoggerService], // toggle between remove or keep this line to see the difference
+})
+export class ParentDirective {
+  constructor(@Optional() @Self() private logger: LoggerService) {
+    // toggle between remove or keep @Self() to see the difference
+    if (this.logger) {
+      this.logger.prefix = 'parent directive: ';
+    }
+  }
+}
+```
+
+```ts {filename='child.component.ts'}
+import { Directive, Optional, Self } from '@angular/core';
+import { LoggerService } from './logger.service';
+
+@Directive({
+  selector: '[appChild]',
+})
+export class ChildDirective {
+  constructor(private logger: LoggerService) {
+    this.logger.log('child directive constructor');
+  }
+}
+```
+
+```ts {filename='grand-child.component.ts'}
+import { Directive, Host } from '@angular/core';
+import { LoggerService } from './logger.service';
+
+@Directive({
+  selector: '[appGrandChild]',
+})
+export class GrandChildDirective {
+  constructor(@Host() private logger: LoggerService) {
+    this.logger.log('grand child directive constructor');
+  }
+}
+```
+
+```ts {filename='logger.service.ts'}
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoggerService {
+  prefix = 'root: ';
+  constructor() {
+    console.log("LoggerService constructor");
+  }
+
+  log(message: string) {
+    console.log(`${this.prefix}: ${message}`);
+  }
+}
+```
+
+
+
 ## Handle Unit Testing Mistakes
 - [Angular Unit Testing Mistakes](https://www.youtube.com/watch?v=BTEx2X_8b-U&ab_channel=DecodedFrontend)
 

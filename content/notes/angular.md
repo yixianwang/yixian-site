@@ -1339,7 +1339,7 @@ export class ConsumerComponent {
 - Custom Configurations: `@Inject`, `@Optional`, `@Host`, `@Self`, or `@SkipSelf`.
 - Standalone Components: Use `inject` for cleaner code.
 
-### @Optional(), @Skip(), @SkipSelf(), @Host
+### Resolution Modifiers: @Optional(), @Skip(), @SkipSelf(), @Host()
 ```ts {filename="app.component.html"}
 <div appParent>
   <div appChild>
@@ -1442,6 +1442,104 @@ export class LoggerService {
 }
 ```
 
+### Dependency Providers: useClass, useExisting, useValue, useFactory, injection tokens
+- allow us to control how angular should create the instances for provided dependencies.
+
+1. within `providers` array.
+2. within `@Injectable` decorator. **Tree shakeable.**
+ 
+#### useClass
+> useClass is not singleton, it will create a new instance every time it is injected.
+
+#### useExisting
+- just a alias
+> not creating a new instance, but using an existing instance of another service.
+
+#### useValue
+> to provide object literals, strings, or numbers as dependencies.
+- we can use `useValue` with `InjectionToken`.
+
+##### not tree shakeable
+```ts {filename="config.token.ts"}
+import { InjectionToken } from '@angular/core';
+
+export interface AppConfig {
+  experimentalEnabled: boolean;
+}
+
+export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
+```
+
+```ts {filename="app.config.ts"}
+providers: [
+  { provide: APP_CONFIG, useValue: ... },
+]
+```
+
+##### tree shakeable
+```ts {filename="config.token.ts"}
+import { InjectionToken } from '@angular/core';
+
+export interface AppConfig {
+  experimentalEnabled: boolean;
+}
+
+// use second parameters
+export const APP_CONFIG = new InjectionToken<AppConfig>('app.config', {
+  providedIn: 'root',
+  factory: () => ({
+    experimentalEnabled: true,
+  }),
+});
+
+// after this, we can inject in any constructors
+```
+
+```TS
+import { APP_CONFIG, AppConfig } from './config.token';
+import { Logger } from './logger';
+import { Injectable, inject } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ExperimentalService implements Logger {
+  // inject the config
+  constructor(@inject(APP_CONFIG) private config: AppConfig) {
+    console.log('ExperimentalService -> constructor -> config', config);
+  }
+}
+```
+
+> why injectionToken exists? 
+> because we are not using class, we cannot use class reference as a key in DI tree(key: class, value: instance).
+> but we need to have some key anyway, otherwise angular cannot understand how resolve it.
+> interfaces also will not work, because interfaces are not existing in runtime.
+> this s where injectionToken comes in. The value of injectionToken will act as a key in this case. 
+> it is a unique key that we can use to identify the dependency.
+
+#### useFactory
+- use case: if we don't know which service to provide in advance, and we need to decide at **runtime**.
+- e.x. when we need to configure provider based on the value from another service or dependency injection token.
+
+```TS {filename="app.component.ts"}
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+  providers: [
+    {
+      provide: LoggerService,
+      useFactory: (config: AppConfig, http: HttpClient) => {
+        return config.experimentalEnabled
+          ? new ExperimentalService(http) // after this, we can inject http in constructor of ExperimentalService
+          : new LoggerService();
+      },
+      deps: [APP_CONFIG, HttpClient], // after this, we can use these as a parameter in useFactory
+    },
+  ],
+})
+```
 
 
 ## Handle Unit Testing Mistakes

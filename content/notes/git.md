@@ -3,6 +3,37 @@ title = 'Git'
 date = 2023-10-24T03:10:46-04:00
 +++
 
+## We Want to Keep the Files Locally Modified but Unstaged
+- If you want to keep local changes without staging them for commits:
+```
+git update-index --assume-unchanged config1.yml
+git update-index --assume-unchanged config2.yml
+git update-index --assume-unchanged config3.yml
+```
+- These files will not appear in git status anymore.
+- They will remain untracked in future commits but still exist locally.
+To revert this and track them again:
+```
+git update-index --no-assume-unchanged config1.yml
+git update-index --no-assume-unchanged config2.yml
+git update-index --no-assume-unchanged config3.yml
+```
+
+## We Never Want to Accidentally Modify These Files
+- If these files are in the repository but should never be changed on your local machine, use:
+```
+git update-index --skip-worktree config1.yml
+git update-index --skip-worktree config2.yml
+git update-index --skip-worktree config3.yml
+```
+- This tells Git to ignore future changes in these files unless you explicitly change them.
+To undo this and allow modifications again:
+```
+git update-index --no-skip-worktree config1.yml
+git update-index --no-skip-worktree config2.yml
+git update-index --no-skip-worktree config3.yml
+```
+
 ## branch operations
 ```
 # set the remote branch to track the local branch

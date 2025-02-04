@@ -1633,3 +1633,32 @@ onSelectScientist(id: number) {
   this.store.dispatch(fromScientists.selectScientist({ id }));
 }
 ```
+
+## Router Guard
+### use case
+- To **confirm** the navigation operation.
+- Asking whether to save data before moving away from view.
+- Allow access to certain parts of the application to specific users.
+- Validating the Route parameters before navigating to the route.
+- Fetching some data before you display the component view.
+
+### all types of router guards
+1. CanActivate – Determines if a route can be activated.
+    - Used to prevent unauthorized users from accessing certain routes.
+    - Example use case: Restricting access to authenticated users.
+
+2. CanActivateChild – Determines if child routes can be activated.
+    - Similar to `CanActivate`, but applies to child routes.
+    - Example use case: Preventing access to child routes if the parent route is restricted.
+
+3. CanDeactivate – Determines if a route can be exited.
+    - Used to warn users before leaving a route (e.g., unsaved changes).
+    - Example use case: Prompting a user to save form data before navigating away.
+
+4. Resolve – Fetches data before navigating to a route.
+    - Used to **pre-load data** required by a route before displaying the component.
+    - Example use case: Loading user details before opening a profile page.
+
+5. CanLoad – Determines if a module can be lazily loaded.
+    - Prevents unauthorized users from loading an entire module.
+    - Example use case: Restricting access to an admin module before it is loaded.

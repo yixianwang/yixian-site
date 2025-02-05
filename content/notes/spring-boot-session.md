@@ -126,12 +126,12 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("user")
 public class UserController {
     @GetMapping("login")
-    public Result login(String username, String password, HttpServletRequest request) {
+    public Result login(HttpServletRequest request, String username, String password) {
         if (StringUtils.hasLength(username) && StringUtils.hasLength(password)) {
             if (username.equals("admin") && password.equals("admin") {
                 HttpSession session = request.getSession();
                 session.setAttribute("userinfo", "userinfo");
-                return Result.OK("login success", true);
+                return Result.success("login success", true);
             }
         }
         return Result.success("login failed, please login first", false);
@@ -146,7 +146,9 @@ public class UserController {
 }
 ```
 
-
+> run the application and visit `http://localhost:8080/background` to see if it reminds you `login failed, please login first` .
+> visit `http://localhost:8080/user/login?username=admin&password=admin` to see the result, it should be `login success`.
+> visit `http://localhost:8080/background` to see the result, it should be `backend data`.
 
 
 

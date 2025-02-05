@@ -147,7 +147,9 @@ public class UserController {
 ```
 
 > run the application and visit `http://localhost:8080/background` to see if it reminds you `login failed, please login first` .
+
 > visit `http://localhost:8080/user/login?username=admin&password=admin` to see the result, it should be `login success`.
+
 > visit `http://localhost:8080/background` to see the result, it should be `backend data`.
 
 

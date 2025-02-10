@@ -1662,3 +1662,18 @@ onSelectScientist(id: number) {
 5. CanLoad – Determines if a module can be lazily loaded.
     - Prevents unauthorized users from loading an entire module.
     - Example use case: Restricting access to an admin module before it is loaded.
+
+## Promise vs Observable
+- [Promise vs Observable](https://www.youtube.com/watch?v=V4iMyVnQPqM&list=PL1BztTYDF-QNrtkvjkT6Wjc8es7QB4Gty&index=52&ab_channel=procademy)
+
+1. Promise send data all at once, Observable send data over chunks in stream.
+2. Promise will send data even if no one is listening, Observable will send data only if someone is listening.
+3. Promise is javascript native, Observable is part of RxJS.
+
+## of vs from within rxjs
+1. of: takes multiple arguments.
+2. from: takes one argument. An iterable or promise to convert it into observable. It will iterate over the iterable and emit each value one by one.
+
+## Subject
+- we use subject for cross component communication.
+

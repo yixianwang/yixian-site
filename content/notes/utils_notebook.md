@@ -51,6 +51,10 @@ date = 2023-10-24T03:10:46-04:00
 * [c++ concept && requires](#c-concept--requires)
 
 <!-- vim-markdown-toc -->
+## python utils
+```
+curl http://api.joind.in | python -mjson.tool
+```
 
 ## To MP3 Converter Free
 ```

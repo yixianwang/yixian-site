@@ -38,6 +38,15 @@ git update-index --no-skip-worktree config2.yml
 git update-index --no-skip-worktree config3.yml
 ```
 
+## git.config
+```
+$ cat .gitconfig
+[alias]
+        lg = log --oneline --graph --decorate --all
+        lgt = log --pretty=format:'%h %an %ar %ad %s' --date=iso --all --graph
+        hidden = !git ls-files -v | grep \"^[a-z]\"
+```
+
 ## branch operations
 ```
 # set the remote branch to track the local branch

@@ -20,7 +20,7 @@ git update-index --no-assume-unchanged config3.yml
 ```
 - list files in --assume-unchanged
 ```
-git ls-files -v
+git config --global alias.hidden '!git ls-files -v | grep "^[a-z]"'
 ```
 
 ## We Never Want to Accidentally Modify These Files

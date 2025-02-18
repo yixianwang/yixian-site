@@ -18,6 +18,10 @@ git update-index --no-assume-unchanged config1.yml
 git update-index --no-assume-unchanged config2.yml
 git update-index --no-assume-unchanged config3.yml
 ```
+- list files in --assume-unchanged
+```
+git ls-files -v
+```
 
 ## We Never Want to Accidentally Modify These Files
 - If these files are in the repository but should never be changed on your local machine, use:

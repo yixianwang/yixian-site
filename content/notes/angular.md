@@ -1677,3 +1677,46 @@ onSelectScientist(id: number) {
 ## Subject
 - we use subject for cross component communication.
 
+## Only use Effect when needed and for advanced use case
+```ts
+@Component({
+  template: `
+    @for (option of options(); track option) {
+      <li (click)="select($index)"> {{ option }}
+    }
+  `
+})
+export class SelectCmp {
+  // use case 2 without effect
+  name = input('');
+  myName = computed(() => signal(this.name()));
+  setName(name: string) {
+    this.myName().set(name); // ERROR: no set method
+  }
+  
+  // with effect, glitch example
+  constructor() {
+    effect(() => {
+      this.options();
+      this.index.set(-1);
+    });
+  }
+  this.options.set([...]);
+  // time passes
+  // glitch state here
+  // effect runs
+  this.index.set(-1);
+  
+  // use case 1 without effect
+  options = input<string[]>();
+  state = computed(() => {
+    return {
+      options: this.options(),
+      index: signal(-1),
+    };
+  });
+  select(idx: number) {
+    this.state().index.set(idx);
+  }
+}
+```

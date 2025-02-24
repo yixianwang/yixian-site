@@ -1720,3 +1720,131 @@ export class SelectCmp {
   }
 }
 ```
+
+## Lifecycle Hooks
+```TS
+import { Component, OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+
+@Component({ selector: 'app-lifecycle-demo', template: `<ng-content></ng-content>`, })
+export class ChannelComponent implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
+  ngOnChanges() {
+    console.log('Component input changed');
+  }
+  ngOnInit() {
+    // only called once
+    console.log('Component Initialization...');
+  }
+  ngDoCheck() {
+    // this will be called every change detection cycle
+    console.log('Pickup changes missed by Angular...');
+  }
+  ngAfterContentInit() {
+    // only called once
+    console.log('Content from <ng-content> initialized...');
+  }
+  ngAfterContentChecked() {
+    // once the bindings inside the projected content that will be rendered instead of this <ng-content>, then this method will be invoked.
+    console.log('Content from <ng-content> checked...');
+    // this method before the ngAfterviewInit, because the content is in the parent component
+  }
+  ngAfterViewInit() {
+    console.log('View initialized...');
+  }
+  ngAfterViewChecked() {
+    // is called every time when all the bindings in the template has been checked.
+    console.log('View is checked...');
+  }
+  ngOnDestroy() {
+    console.log('Component is destroyed...');
+  }
+}
+
+import { Component, ChangeDetectorRef } from '@angular/core';
+@Component({
+  selector: 'app-root',
+  template: `
+    <h2>{{ topicName }}</h2>
+    <div *ngIf="isVisible" class="info">{{ getInfo() }}</div>
+    
+    <app-channel [name]="name">
+      <p>Projected Suff</p>
+    </app-channel>
+
+    <div>Created At: {{ creationDate | date:'short' }}</div>
+  `,
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  name = 'Decoded Frontend';
+  topicName = 'Change Detection in Angular';
+  isVisible = true;
+  creationDate = new Date();
+
+  constructor(private cd: ChangeDetectorRef) {
+    setTimeout(() => {
+      this.topicName = 'Angular Unit Testing';
+    }, 3000); // Updating after 3 seconds to demonstrate change detection
+  }
+
+  getInfo(): string {
+    return 'Change Detection Triggered';
+  }
+}
+```
+
+## private vs `#`
+|     **Feature**      |                     **private**                     |                **# (Private Field)**                 |
+|:--------------------:|:---------------------------------------------------:|:----------------------------------------------------:|
+|        Scope         |                   TypeScript only                   |               JavaScript & TypeScript                |
+|    Encapsulation     | Not truly private (accessible via bracket notation) | Fully private (cannot be accessed outside the class) |
+|     Performance      |      Slightly better (optimized in TypeScript)      |  Slightly slower due to runtime privacy enforcement  |
+| Access in Subclasses |                 Yes (via protected)                 |               No (completely private)                |
+|     Compiled Output  |           Becomes a normal property in JS           |             Uses native #private fields              |
+
+## signal store private store members
+```TS
+import { computed } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
+
+export const CounterStore = signalStore(
+  withState({
+    count1: 0,
+    // 👇 private state slice
+    _count2: 0,
+  }),
+  withComputed(({ count1, _count2 }) => ({
+    // 👇 private computed signal
+    _doubleCount1: computed(() => count1() * 2),
+    doubleCount2: computed(() => _count2() * 2),
+  })),
+  withProps(({ count2, _doubleCount1 }) => ({
+    // 👇 private property
+    _count2$: toObservable(count2),
+    doubleCount1$: toObservable(_doubleCount1),
+  })),
+  withMethods((store) => ({
+    increment1(): void {
+      patchState(store, { count1: store.count1() + 1 });
+    },
+    // 👇 private method
+    _increment2(): void {
+      patchState(store, { _count2: store._count2() + 1 });
+    },
+  })),
+);
+```
+
+## Unit tests
+> In unit tests env, the initial change detection cycle is not triggered automatically. We have to trigger it manually.
+
+> In unit tests, all the dependencies of the tested unit they have to be mocked.
+
+

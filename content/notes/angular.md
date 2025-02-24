@@ -1847,6 +1847,33 @@ export const CounterStore = signalStore(
 2. element/node injector hierarchy: is being created for every component and directives. Use `providers` keyword inside directive or component annotation.
 ![images](./images-angular/1.png)
 
+### Resolution Modifiers
+1. @Self: it will only look for the dependency in the current injector and not in the parent injector. If there is no provider here - throw the error. It doesn't traverse injectors tree.
+2. @SkipSelf: it tells Angular to skip local injector and start traversing of injector tree from parent injector.
+3. @Optional: it tells Angular that it should not throw the error if there is no provider and just returns NULL.
+4. @Host: it tells Angular that it should resolve dependencies in scope of current component view. It is applicable mostly for directives or projected components.
+
+### Dependency Providers
+1. useClass: just provides a new instance of some certain class.
+2. useExisting: works as an alias. It doesn't create a new instance but reuse already instantiated one.
+3. useValue: Utilize it when we need to provide non-class object like string, object or already instantiated class instance.
+4. useFactory: useful when we have to perform some additional logic during the dependency value creation.
+```TS
+@Component({
+  selector: 'app-root',
+  templateUrl: '',
+  providers: [
+    {
+      provide: Config,
+      useFactory: (http: HttpClient) => {
+        http.get('some/config') // some logic
+      },
+      deps: [HttpClient],
+    },
+  ],
+}) 
+```
+
 ## Unit tests
 > In unit tests env, the initial change detection cycle is not triggered automatically. We have to trigger it manually.
 

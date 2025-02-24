@@ -1842,6 +1842,11 @@ export const CounterStore = signalStore(
 );
 ```
 
+## angular has two injector hierarchy
+1. environment injector hierarchy: NullInjector -> Platform Injector -> Root Injector -> Router Injector -> Child Injector
+2. element/node injector hierarchy: is being created for every component and directives. Use `providers` keyword inside directive or component annotation.
+![images](./images-angular/1.png)
+
 ## Unit tests
 > In unit tests env, the initial change detection cycle is not triggered automatically. We have to trigger it manually.
 

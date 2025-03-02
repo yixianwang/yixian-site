@@ -1598,7 +1598,7 @@ export class ExperimentalService implements Logger {
 - [NGRX](https://www.youtube.com/watch?v=bHw8SV4SNUU&ab_channel=DecodedFrontend)
 ```ts {filename="app.config.ts"}
 provideStore(),
-provideState(fromScientists.scientistFeature),
+provideState(scientistFeature.scientistFeature),
 provideEffects(scientistEffects),
 ```
 
@@ -1623,14 +1623,14 @@ export const scientistFeature = createFeature({
 ```ts {filename="component.ts"}
 // without constructor
 store = inject(Store);
-scientists$ = this.store.select(fromScientists.selectScientists);
+scientists$ = this.store.select(scientistFeature.selectScientists);
 
 ngOnInit() {
-  this.store.dispatch(fromScientists.loadScientists());
+  this.store.dispatch(scientistFeature.loadScientists());
 }
 
 onSelectScientist(id: number) {
-  this.store.dispatch(fromScientists.selectScientist({ id }));
+  this.store.dispatch(scientistFeature.selectScientist({ id }));
 }
 ```
 
@@ -1879,4 +1879,258 @@ export const CounterStore = signalStore(
 
 > In unit tests, all the dependencies of the tested unit they have to be mocked.
 
+### simple service
+```TS
+import { Injectable } from '@angular/core';
+
+export interface Country {
+  [key: string]: {
+    name: string;
+    vat: number;
+  };
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TaxCalculatorService {
+  readonly countries: Country = Object.freeze({
+    ua: { name: 'Ukraine', vat: 20 },
+    at: { name: 'Austria', vat: 20 },
+    de: { name: 'Germany', vat: 19 },
+    uk: { name: 'United Kingdom', vat: 20 },
+    pl: { name: 'Poland', vat: 23 },
+  });
+
+  /**
+   * Expectation 1: It throws error if country isn't supported
+   * Expectation 2: It throws error if the price less then 0
+   * Expectation 3: Always returns 0 if isB2B flag set to true
+   * Expectation 4: Calculates VAT amount based on country
+   */
+  calculateVAT(price: number, countryKey: string, isB2B = false) {
+    if (!this.countries[countryKey]) {
+      throw new Error(`This country isn't supported...`);
+    }
+    if (price < 0) {
+      throw new Error(`The price can not be a negative number...`);
+    }
+    if (isB2B) {
+      return 0;
+    }
+    return (price / 100) * this.countries[countryKey].vat;
+  }
+}
+```
+```TS
+import { TaxCalculatorService } from "./tax-calculator.service"
+
+describe(`TaxCalculatorService`, () => {
+  let service: TaxCalculatorService;
+  beforeEach(() => {
+    service = new TaxCalculatorService()    
+  })
+  it(`should return 0 if isB2B flag is true`, () => {
+    const result = service.calculateVAT(100, 'ua', true);
+    expect(result).toBe(0);
+  })
+  it(`should properly calculate VAT for a given country`, () => {
+    const result = service.calculateVAT(100, 'ua');
+    expect(result).toBe(20);
+  })
+  describe(`TaxCalculatorSevice: Error Handling`, () => {
+    it(`should throw error if country isn't supported`, () => {
+      expect(() => service.calculateVAT(100, 'ru'))
+        .toThrowError(/isn't supported/)
+    })
+    it(`should throw error if price is negative number`, () => {
+      expect(() => service.calculateVAT(-100, 'ua'))
+        .toThrowError(/negative number/)
+    })
+  })
+})
+```
+
+### service with dependencies
+```TS
+import { Inject, Injectable, InjectionToken } from '@angular/core';
+
+export interface Country {
+  [key: string]: {
+    name: string;
+    vat: number;
+  };
+}
+
+export const CONUTRIES = new InjectionToken(
+  'countries',
+  {
+    providedIn: 'root',
+    factory: () => Object.freeze({
+      ua: { name: 'Ukraine', vat: 20 },
+      at: { name: 'Austria', vat: 20 },
+      de: { name: 'Germany', vat: 19 },
+      uk: { name: 'United Kingdom', vat: 20 },
+      pl: { name: 'Poland', vat: 23 }
+    })
+  }
+)
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TaxCalculatorService {
+
+  constructor(
+    @Inject(CONUTRIES) readonly countries: Country
+  ) {}
+
+  /**
+   * Expectation 1: It throws error if country isn't supported
+   * Expectation 2: It throws error if the price less then 0
+   * Expectation 3: Always returns 0 if isB2B flag set to true
+   * Expectation 4: Calculates VAT amount based on country
+   */
+  calculateVAT(price: number, countryKey: string, isB2B = false) {
+    if (!this.countries[countryKey]) {
+      throw new Error(`This country isn't supported...`);
+    }
+    if (price < 0) {
+      throw new Error(`The price can not be a negative number...`);
+    }
+    if (isB2B) {
+      return 0;
+    }
+    return (price / 100) * this.countries[countryKey].vat;
+  }
+}
+```
+
+```TS
+import { Country as Countries, TaxCalculatorService } from "./tax-calculator.service"
+
+describe(`TaxCalculatorService`, () => {
+  let service: TaxCalculatorService;
+  let testCountries: Countries;
+  beforeEach(() => {
+    testCountries = { ua: { name: 'Ukraine', vat: 20 } }
+    service = new TaxCalculatorService(testCountries);
+  })
+  it(`should return 0 if isB2B flag is true`, () => {
+    const result = service.calculateVAT(100, 'ua', true);
+    expect(result).toBe(0);
+  })
+  it(`should properly calculate VAT for a given country`, () => {
+    const result = service.calculateVAT(100, 'ua');
+    expect(result).toBe(20);
+  })
+  describe(`TaxCalculatorSevice: Error Handling`, () => {
+    it(`should throw error if country isn't supported`, () => {
+      expect(() => service.calculateVAT(100, 'ir'))
+        .toThrowError(/isn't supported/)
+    })
+    it(`should throw error if price is negative number`, () => {
+      expect(() => service.calculateVAT(-100, 'ua'))
+        .toThrowError(/negative number/)
+    })
+  })
+})
+```
+
+### service with inject function - approach 1
+```TS
+import { Inject, Injectable, InjectionToken, inject } from '@angular/core';
+
+export interface Country {
+  [key: string]: {
+    name: string;
+    vat: number;
+  };
+}
+
+export const COUNTRIES = new InjectionToken<Country>(
+  'countries',
+  {
+    providedIn: 'root',
+    factory: () => Object.freeze({
+      ua: { name: 'Ukraine', vat: 20 },
+      at: { name: 'Austria', vat: 20 },
+      de: { name: 'Germany', vat: 19 },
+      uk: { name: 'United Kingdom', vat: 20 },
+      pl: { name: 'Poland', vat: 23 }
+    })
+  }
+)
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TaxCalculatorService {
+
+  readonly countries = inject(COUNTRIES);
+
+  /**
+   * Expectation 1: It throws error if country isn't supported
+   * Expectation 2: It throws error if the price less then 0
+   * Expectation 3: Always returns 0 if isB2B flag set to true
+   * Expectation 4: Calculates VAT amount based on country
+   */
+  calculateVAT(price: number, countryKey: string, isB2B = false) {
+    if (!this.countries[countryKey]) {
+      throw new Error(`This country isn't supported...`);
+    }
+    if (price < 0) {
+      throw new Error(`The price can not be a negative number...`);
+    }
+    if (isB2B) {
+      return 0;
+    }
+    return (price / 100) * this.countries[countryKey].vat;
+  }
+}
+```
+
+```TS
+import { COUNTRIES, TaxCalculatorService } from "./tax-calculator.service"
+import { TestBed } from '@angular/core/testing';
+
+describe(`TaxCalculatorService`, () => {
+  let service: TaxCalculatorService;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        { 
+          provide: COUNTRIES,
+          useValue: { ua: { name: 'Ukraine', vat: 20 } } // faked value for this token
+        }
+      ]
+    })
+    TestBed.runInInjectionContext(() => {
+      service = new TaxCalculatorService();
+    })
+  })
+})
+```
+
+### service with inject function - approach 2
+```TS
+import { COUNTRIES, TaxCalculatorService } from "./tax-calculator.service"
+import { TestBed } from '@angular/core/testing';
+
+describe(`TaxCalculatorService`, () => {
+  let service: TaxCalculatorService;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        TaxCalculatorService, // when this service is not providedIn root
+        { 
+          provide: COUNTRIES,
+          useValue: { ua: { name: 'Ukraine', vat: 20 } }
+        }
+      ]
+    })
+    service = TestBed.inject(TaxCalculatorService);
+  })
+})
+```
 

@@ -2134,3 +2134,7 @@ describe(`TaxCalculatorService`, () => {
 })
 ```
 
+### setup env for component
+```TS
+
+```

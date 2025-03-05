@@ -2136,5 +2136,52 @@ describe(`TaxCalculatorService`, () => {
 
 ### setup env for component
 ```TS
+import { TestBed } from "@angular/core/testing";
+import { ButtonComponent } from "./button.component";
+import { ButtonModule } from "./button.module";
 
+describe('ButtonComponent', () => {
+  let fixture: ComponentFixture<ButtonComponent>;
+  beforeEach(() => {
+    TestBed.configureTestingModule({imports: [ButtonModule]})
+    fixture = TestBed.createComponent(ButtonComponent);
+    fixture.detectChanges(); // initial CD. triggers ngOnInit.
+  });
+  it('should test something...', () => {
+    expect(true).toBe(true);
+  })
+})
+```
+
+> The **ComponentFixture** is a test harness for interacting with the created component and its corresponding element.
+
+> use `fixture.componentInstance` to access the component instance.
+> use `fixture.detectChanges()` to trigger the change detection cycle.
+
+### nativeElement vs debugElement
+```TS
+fixture.nativeElement.querySelector('button');
+fixture.componentInstance.loading = true;
+fixture.detectChanges();
+```
+
+- will work on all angular platform
+```TS
+describe('ButtonComponent', () => {
+  let fixture: ComponentFixture<ButtonComponent>;
+  let el: DebugElement;
+  beforeEach(() => {
+    TestBed.configureTestingModule({imports: [ButtonModule]})
+    fixture = TestBed.createComponent(ButtonComponent);
+    el = fixture.debugElement;
+    fixture.detectChanges(); // initial CD. triggers ngOnInit.
+  });
+  it('should test something...', () => {
+    // el.query(By.css('css-class-name').nativeElement);
+    // el.queryAll(By.css('css-class-name'));
+    // el.queryAllNodes(By.css('css-class-name'));
+    debugger;
+    expect(true).toBe(true);
+  })
+})
 ```

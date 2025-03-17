@@ -3910,6 +3910,34 @@ set1 is empty!
 */
 ```
 
+### inblock dfs in C++
+- Leetcode 377
+```c++
+class Solution {
+ public:
+  int combinationSum4(vector<int>& nums, int target) {
+    vector<int> memo(target + 1, -1); // -1 表示没有计算过
+    auto dfs = [&](this auto&& dfs, int i) {
+      if (i == 0) { // 爬完了
+        return 1;
+      }
+      int &res = memo[i]; // 注意这里是引用
+      if (res != -1) { // 之前计算过
+        return res;
+      }
+      res = 0;
+      for (int x : nums) {
+        if (x <= i) {
+          res += dfs(i - x);
+        }
+      }
+      return res;
+    };
+    return dfs(target);
+  }
+};
+```
+
 ### C++ isalnum, isalpha, isdigit
 - `isalnum` checks whether c is either a decimal digit or an uppercase or lowercase letter.
 - The result is true if either isalpha or isdigit would also return true.

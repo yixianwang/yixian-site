@@ -2232,3 +2232,111 @@ class Thing extends Animal implements IA, IB {
     bb = 'bb'
 }
 ```
+
+## Generic in typescript
+- generic can be used in function, class, interface
+
+### function
+```ts
+// Returns the input as-is, but preserves the type
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+// Usage: Type is inferred
+const num = identity(42); // Type: number
+const str = identity("hello"); // Type: string
+
+// Explicitly specify the type (if needed)
+const explicit = identity<string>("world");
+```
+
+### interface
+```ts
+interface Box<T> {
+  value: T;
+}
+
+const numberBox: Box<number> = { value: 42 };
+const stringBox: Box<string> = { value: "hello" };
+```
+
+### class
+```ts
+class Queue<T> {
+  private items: T[] = [];
+  
+  enqueue(item: T) {
+    this.items.push(item);
+  }
+  
+  dequeue(): T | undefined {
+    return this.items.shift();
+  }
+}
+
+// Usage with numbers
+const numberQueue = new Queue<number>();
+numberQueue.enqueue(1);
+numberQueue.enqueue(2);
+
+// Usage with strings
+const stringQueue = new Queue<string>();
+stringQueue.enqueue("a");
+```
+
+### type constraints with extends
+- Restrict generics to types that meet certain conditions:
+
+```ts
+// Ensure `T` has a `length` property
+function logLength<T extends { length: number }>(arg: T): void {
+  console.log(arg.length);
+}
+
+logLength("hello"); // 5 (string has `length`)
+logLength([1, 2, 3]); // 3 (array has `length`)
+// logLength(42); // Error: number has no `length`
+```
+
+### default generic types
+```ts
+// Default to `number` if no type is provided
+interface Pagination<T = number> {
+  currentPage: T;
+  totalPages: T;
+}
+
+const page1: Pagination = { currentPage: 1, totalPages: 5 }; // Uses number
+const page2: Pagination<string> = { currentPage: "1", totalPages: "5" };
+```
+
+### multiple type parameters
+```ts
+// Map keys (K) to values (V)
+function pair<K, V>(key: K, value: V): [K, V] {
+  return [key, value];
+}
+
+const stringNumberPair = pair("age", 30); // Type: [string, number]
+const booleanDatePair = pair(true, new Date()); // Type: [boolean, Date]
+```
+
+### generic utility types
+- TypeScript provides built-in utility types like Partial<T>, Readonly<T>, etc.:
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+// Make all properties optional
+type PartialUser = Partial<User>;
+const partial: PartialUser = { name: "Alice" }; // OK (age is optional)
+
+// Make all properties readonly
+type ReadonlyUser = Readonly<User>;
+const readOnlyUser: ReadonlyUser = { name: "Bob", age: 30 };
+// readOnlyUser.age = 31; // Error: readonly property
+```

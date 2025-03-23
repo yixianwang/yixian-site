@@ -2185,3 +2185,50 @@ describe('ButtonComponent', () => {
   })
 })
 ```
+
+## Typescript memo
+
+### interface can extends more than one interfaces
+```ts
+interface IA {
+    aa: string;
+}
+
+interface IB {
+    bb: string;
+}
+
+// interface extends more than one interfaces
+interface IC extends IA, IB {
+    cc: string;
+}
+```
+
+### class extends one class + class implements more than one interfaces
+```ts
+class Animal {
+  animal = 'animal'
+  eat() {
+    console.log('animal eat!')
+  }
+}
+
+class Human {
+    human = 'human'
+    run() {
+        console.log('human run!')
+    }
+}
+
+// class extends one class
+// class implements more than one interfaces
+class Thing extends Animal implements IA, IB {
+    thing = 'thing'
+    sit() {
+        console.log('thing thing')
+    }
+    cc = 'cc'
+    aa = 'aa'
+    bb = 'bb'
+}
+```

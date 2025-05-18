@@ -149,3 +149,12 @@ public class UserController {
 ```
 
 ### Searching Multiple Tables
+
+## ResponseEntity
+- Returning a resource: Use `ResponseEntity.ok(resource)` for successful retrieval (200 OK).
+- Handling "Not Found": Use `new ResponseEntity<>(HttpStatus.NOT_FOUND)` or `ResponseEntity.notFound().build()` for resources that don't exist (404 Not Found).
+- Creating a new resource: Use `ResponseEntity.status(HttpStatus.CREATED).headers(headers).body(createdResource)` or `ResponseEntity.created(locationUri).body(createdResource)` for successful creation (201 Created), often including a Location header.
+- No content: Use `ResponseEntity.noContent().build()` when an operation is successful but there's no content to return (204 No Content).
+- Bad requests: Use `ResponseEntity.badRequest().body(errorMessage)` for invalid client requests (400 Bad Request), often with an error message in the body.
+- Internal server errors: Use `ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage)` for unexpected server-side issues (500 Internal Server Error).
+- Conditional responses: Use headers like `ETag`, `Last-Modified` with appropriate status codes like 304 Not Modified using ResponseEntity.

@@ -124,3 +124,10 @@ def tag_new_version():
 tag_new_version()
 ```
 
+## Read Env variables directly
+```python
+import os
+
+API_EMAIL = os.getenv("JIRA_EMAIL")
+API_TOKEN = os.getenv("JIRA_API_TOKEN")
+```

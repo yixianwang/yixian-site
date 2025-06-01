@@ -159,7 +159,7 @@ public class UserController {
 - Internal server errors: Use `ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage)` for unexpected server-side issues (500 Internal Server Error).
 - Conditional responses: Use headers like `ETag`, `Last-Modified` with appropriate status codes like 304 Not Modified using ResponseEntity.
 
-## Lombok
+## Lombok Constructors
 ### @NoArgsConstructor
 - Creates constructor with no parameters
 - Handles `final` fields by initializing to `0/false/null` (adds compiler warning)
@@ -192,3 +192,162 @@ public class UserController {
 - Prefer `@RequiredArgsConstructor` for DI
 - Use `@NoArgsConstructor` only when required by frameworks
 - Combine with `@Data` or `@Value` for full POJOs
+
+## Lombok Annotations Best Practice
+1. @Getter / @Setter
+- Use Case: Replace trivial getters/setters.
+- Best Practices:
+  - Avoid on `final` fields: Setters aren't generated.
+  - Limit Scope: Use `@Getter(AccessLevel.PROTECTED)` for encapsulation.
+  - Exclude Collections: Avoid exposing mutable collections directly.
+
+2. @ToString
+- Use Case: Debugging/logging representations.
+- Best Practices:
+  - Exclude Sensitive Data: `@ToString(exclude = "password")`.
+  - Handle Inheritance: Use `@ToString(callSuper = true)` for superclass fields.
+  - Avoid Circular References: Exclude bidirectional relationships.
+```java
+@ToString(callSuper = true, exclude = "user") 
+public class Profile { ... }
+```
+
+3. @EqualsAndHashCode
+- Use Case: Value-based equality.
+- Best Practices:
+  - Always Use `callSuper = true` for subclass equality checks.
+  - Exclude Lazy-Loaded Fields: In JPA entities, exclude `OneToMany`/collections.
+  - Use Immutable Fields: Only include fields that never change.
+```java
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+public class User {
+    @EqualsAndHashCode.Include private final Long id; // Immutable ID only
+}
+```
+
+4. Constructor Annotations
+- `@NoArgsConstructor`
+  - JPA Requirement: Use with access = AccessLevel.PROTECTED.
+  - Avoid in immutable objects.
+```java
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // JPA-safe
+public class Entity { ... }
+```
+- `@RequiredArgsConstructor`
+  - Dependency Injection: Perfect for final Spring beans.
+  - Replace explicit @Autowired constructors.
+```java
+@Service
+@RequiredArgsConstructor // Injects final dependencies
+public class OrderService {
+    private final OrderRepository repo;
+}
+```
+- `@AllArgsConstructor`
+  - Avoid in Entities: Risk of field-order mismatch.
+  - Use for DTOs/Records: Simple data carriers.
+```java
+@AllArgsConstructor // For non-persistent objects
+public record ProductDto(String id, String name) {}
+```
+
+5. `@Data`
+- Use Case: Mutable data containers (e.g., configuration DTOs).
+- Best Practices:
+  - Avoid in JPA Entities: Combines risky `@ToString/@EqualsAndHashCode`.
+  - Never Extend Classes: Breaks `equals()/hashCode()` without `callSuper=true`.
+```java
+@Data // Only for simple POJOs with no inheritance
+public class Config {
+    private String apiKey;
+    private int timeout;
+}
+```
+
+6. `@Value`
+- Use Case: Immutable objects (Java 16+ records preferred).
+- Best Practices:
+  - Replace with Records: Prefer `record` in modern Java.
+  - Use for Thread-Safe Objects: Immutability by default.
+```java
+@Value // Immutable class
+public class Point {
+    int x;
+    int y;
+}
+```
+
+7. `@Builder`
+- Use Case: Complex object creation.
+- Best Practices:
+  - Customize with `@Builder(builderMethodName = "hiddenBuilder")`.
+  - Set Defaults: Use `@Builder.Default` for field initializers.
+  - Immutable Builders: Pair with `@Value`.
+```java
+@Builder
+public class Widget {
+    @Builder.Default private String type = "DEFAULT"; 
+    private final int id;
+}
+```
+
+8. `@Slf4j`
+- Use Case: Logger injection.
+- Best Practice: Replace manual logger declarations.
+```java
+@Slf4j
+public class OrderService {
+    void process() {
+        log.info("Order processed"); // Injects 'log'
+    }
+}
+```
+
+9. `@SneakyThrows`
+- Use Case: Edge cases like rethrowing checked exceptions.
+- Best Practices:
+  - Avoid Mainstream Logic: Use sparingly.
+  - Document Why: Explain why exception is unchecked.
+```java
+@SneakyThrows(IOException.class) // Rarely justified
+public void unsafeOperation() { ... }
+```
+
+10. JPA-Specific Practices
+- Avoid `@Data/@EqualsAndHashCode`:
+  - Use hand-written equals() with primary key checks.
+- Lazy Fields: Exclude from `@ToString`:
+```java
+@Entity
+@Getter @Setter // Safe
+public class User {
+    @ToString.Exclude private byte[] passwordHash;
+    @EqualsAndHashCode.Exclude @OneToMany private List<Order> orders;
+}
+```
+
+11. Testing Considerations
+- Verify Generated Code: Ensure Lombok doesn't break complex logic.
+- Customize for Frameworks:
+```java
+@Value
+@AllArgsConstructor(access = AccessLevel.PRIVATE) // For Jackson
+public class TestDto { ... }
+```
+
+12. Advanced: Configuration File
+- Global Settings: Add `lombok.config`:
+```java
+# Fail on warnings
+config.stopBubbling = true
+lombok.anyConstructor.addConstructorProperties = true
+```
+
+| Annotation               | Do                                   | Don't                               |
+|--------------------------|--------------------------------------|-------------------------------------|
+| @Data                    | Simple DTOs/config objects           | JPA entities, inherited classes     |
+| @Value                   | Immutable objects (prefer records)   | Mutable objects                     |
+| @Builder                 | Complex construction, DTOs           | Entities with JPA constraints       |
+| @RequiredArgsConstructor | Spring dependency injection          | Classes with non-final dependencies |
+| @ToString                | Debugging, exclude sensitive fields  | Entities with relationships         |
+| @EqualsAndHashCode       | Immutable values, include superclass | Entities (use primary key manually) |

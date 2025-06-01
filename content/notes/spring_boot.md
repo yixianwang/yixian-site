@@ -351,3 +351,135 @@ lombok.anyConstructor.addConstructorProperties = true
 | @RequiredArgsConstructor | Spring dependency injection          | Classes with non-final dependencies |
 | @ToString                | Debugging, exclude sensitive fields  | Entities with relationships         |
 | @EqualsAndHashCode       | Immutable values, include superclass | Entities (use primary key manually) |
+
+## Java Records: Immutable Data Carriers
+- Eliminate boilerplate code for data-oriented classes.
+
+Key Features
+1. Auto-Generated Components:
+  - `final` fields (private)
+  - Public constructor (canonical)
+  - Accessor methods (`field()` instead of `getField()`)
+  - `equals(), hashCode(), toString()`
+2. Immutability:
+  - All fields are implicitly `final`
+  - No setter methods
+3. Syntax
+  - `public record Point(int x, int y) {}`
+```java
+// Equivalent Traditional Class
+public final class Point {
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int x() { return x; }
+    public int y() { return y; }
+
+    // Auto-generated:
+    // - equals() (compares all fields)
+    // - hashCode() (uses all fields)
+    // - toString() (e.g., "Point[x=1, y=2]")
+}
+```
+
+| Use Cases                    | Examples                  |
+|------------------------------|---------------------------|
+| Data Transfer Objects (DTOs) | API responses, DB results |
+| Value objects                | Currency, Coordinates     |
+| Tuple-like structures        | Pair<K,V>, Coordinate     |
+| Temporary data containers    | Method return values      |
+
+### Advanced Usage
+1. Custom Constructors
+```java
+public record Point(int x, int y) {
+    // Compact constructor (no parameters)
+    public Point {
+        if (x < 0 || y < 0) 
+            throw new IllegalArgumentException("Negative values");
+        // Fields auto-assigned after this block
+    }
+}
+```
+
+2. Add Methods
+```java
+public record Point(int x, int y) {
+    public double distance() {
+        return Math.sqrt(x*x + y*y);
+    }
+}
+```
+
+3. Implement Interfaces
+```java
+public record User(String name) implements Serializable {}
+```
+
+4. Annotations
+```java
+public record User(
+    @NotBlank String name,
+    @Min(18) int age
+) {}
+```
+
+### Limitations
+1. Cannot:
+  - Extend other classes (implicitly `final`)
+  - Declare non-`final` fields
+  - Add instance initializers
+
+2. Restrictions:
+  - All fields defined in header
+  - No abstract records
+  - Accessors must match field names
+
+### Records vs Traditional Classes
+| Characteristic | Record                | Class               |
+|----------------|-----------------------|---------------------|
+| Boilerplate    | Auto-generated        | Manual coding       |
+| Immutability   | Enforced              | Optional            |
+| Inheritance    | No extension (final)  | Extendable          |
+| Constructor    | Compact syntax        | Explicit assignment |
+| Accessors      | x() instead of getX() | Traditional getters |
+| Purpose        | Data carriers         | Complex behavior    |
+
+### Records vs Lombok @Data
+| Feature          | Java Record           | Lombok @Data            |
+|------------------|-----------------------|-------------------------|
+| Language feature | Native (JVM)          | Compiler plugin         |
+| Immutability     | Enforced              | Optional (final fields) |
+| Serialization    | Built-in support      | Manual configuration    |
+| Pattern Matching | Works with instanceof | No special support      |
+| Validation       | Compact constructor   | Manual validation       |
+
+### Best Practices
+1. Use for simple data carriers: DTOs, configuration, coordinates
+2. Avoid:
+  - Adding mutable state
+  - Complex business logic
+  - Inheritance hierarchies
+3. Prefer over Lombok for new projects (native solution)
+4. Validate data in compact constructors
+
+Example: REST API DTO
+```java
+public record ApiResponse<T>(
+    int status,
+    String message,
+    T data
+) {
+    public ApiResponse {
+        Objects.requireNonNull(data);
+    }
+}
+
+// Usage
+ApiResponse<User> response = new ApiResponse<>(200, "OK", user);
+```

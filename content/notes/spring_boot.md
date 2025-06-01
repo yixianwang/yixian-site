@@ -188,3 +188,7 @@ public class UserController {
 - Dependency injection
 - Immutable data
 
+### Best Practices:
+- Prefer `@RequiredArgsConstructor` for DI
+- Use `@NoArgsConstructor` only when required by frameworks
+- Combine with `@Data` or `@Value` for full POJOs

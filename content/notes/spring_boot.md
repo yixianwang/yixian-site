@@ -158,3 +158,33 @@ public class UserController {
 - Bad requests: Use `ResponseEntity.badRequest().body(errorMessage)` for invalid client requests (400 Bad Request), often with an error message in the body.
 - Internal server errors: Use `ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage)` for unexpected server-side issues (500 Internal Server Error).
 - Conditional responses: Use headers like `ETag`, `Last-Modified` with appropriate status codes like 304 Not Modified using ResponseEntity.
+
+## Lombok
+### @NoArgsConstructor
+- Creates constructor with no parameters
+- Handles `final` fields by initializing to `0/false/null` (adds compiler warning)
+- Use `force = true` to force `final` fields to `0/false/null` (suppresses warning)
+
+#### Use Case:
+- JPA entity classes (require no-arg constructor)
+- Frameworks like Hibernate that use reflection
+- Deserialization (JSON → Object)
+
+
+### @AllArgsConstructor
+- Order of parameters matches field declaration order
+- Includes `final` and non-final fields
+- Handles `@NonNull` fields (null checks)
+
+#### Use Case
+- Quick object initialization(Value Object)
+- Testing (creating objects with specific state)
+- Immutable configuration objects
+
+### @RequiredArgsConstructor
+- Generates a constructor for `final` fields and `@NonNull` fields.
+
+#### Use Case
+- Dependency injection
+- Immutable data
+

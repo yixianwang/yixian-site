@@ -120,3 +120,85 @@ ExecutorService cpuBoundExecutor = Executors.newFixedThreadPool(Runtime.getRunti
 ### When to Avoid
 - CPU-Intensive Tasks: Use platform threads instead.
 - Native Code/JNI: Operations blocking in native code.
+
+## Conclusion
+- `StructuredTaskScope`:	✅✅✅ 最结构化、最安全
+- `Executors.newVirtualThreadPerTaskExecutor()`:	✅✅ 适合大多数任务提交场景
+- `Thread.ofVirtual().start()`:	✅ 用于简单任务，不建议用于批量任务
+- 自定义虚拟线程工厂 + Executors:	✅ 灵活定制，适合需要控制线程属性的场景
+
+> ✅ 最佳实践建议：尽量使用 **结构化并发**（如 `StructuredTaskScope`）或通过 `Executors.newVirtualThreadPerTaskExecutor()` 管理虚拟线程，避免零散使用裸线程。
+
+## 场景 1：并行调用多个服务，只要最快返回的结果
+比如我们有多个外部服务，结果一致，我们只需要最快响应的那一个。 使用 `StructuredTaskScope.ShutdownOnSuccess`：
+ 
+```java
+import java.util.concurrent.StructuredTaskScope;
+
+String result;
+
+try (var scope = new StructuredTaskScope.ShutdownOnSuccess<String>()) {
+    scope.fork(() -> callServiceA());
+    scope.fork(() -> callServiceB());
+    scope.fork(() -> callServiceC());
+
+    scope.join();  // 等待其中一个成功
+    result = scope.result();  // 获取第一个成功的结果
+}
+System.out.println("First successful result: " + result);
+```
+
+### ✅ 特点：
+- 只保留第一个成功的任务。
+- 其他线程自动中断（通过虚拟线程的挂起机制，几乎无成本）。
+
+
+## 场景 2：多个任务并发执行，但任何一个失败就全部取消
+比如我们在并行执行数据库写入、日志记录、缓存刷新，只要任何一个失败就放弃整个操作。 使用 `StructuredTaskScope.ShutdownOnFailure`：
+```java
+import java.util.concurrent.StructuredTaskScope;
+
+try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+    scope.fork(() -> writeToDatabase());
+    scope.fork(() -> updateCache());
+    scope.fork(() -> writeAuditLog());
+
+    scope.join();               // 等所有完成或失败
+    scope.throwIfFailed();      // 任何一个失败都会抛出异常
+}
+```
+
+### ✅ 特点：
+- 所有任务并发执行。
+- 一旦有任务抛出异常，其他任务会被取消。
+- 统一处理异常和取消逻辑，不再需要 try-catch 每个任务。
+
+## 场景 3：父任务等待所有子任务完成，然后合并结果
+比如我们调用 3 个服务，要组合它们的结果生成最终响应。 使用 `StructuredTaskScope` + `ShutdownOnFailure` + `Future` 变量：
+```java
+String userInfo, orderInfo, paymentInfo;
+
+try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
+    var userFuture = scope.fork(() -> getUser());
+    var orderFuture = scope.fork(() -> getOrder());
+    var paymentFuture = scope.fork(() -> getPayment());
+
+    scope.join();
+    scope.throwIfFailed();
+
+    userInfo = userFuture.resultNow();
+    orderInfo = orderFuture.resultNow();
+    paymentInfo = paymentFuture.resultNow();
+
+    String response = combine(userInfo, orderInfo, paymentInfo);
+    System.out.println("Final response: " + response);
+}
+```
+
+| 使用情境      | 适合的 Scope 子类                             | 特点                   |
+| --------- | ---------------------------------------- | -------------------- |
+| 等最快返回结果   | `ShutdownOnSuccess<T>`                   | 类似 "anyOf"           |
+| 等全部成功     | `ShutdownOnFailure`                      | 所有成功才继续              |
+| 聚合多个任务结果  | `ShutdownOnFailure` + 多个 `Future`        | 效果类似 `Promise.all()` |
+| 有条件并发执行   | 任意 `StructuredTaskScope`                 | 动态控制任务加入和取消          |
+| 带超时的结构化并发 | 任意 `StructuredTaskScope` + `joinUntil()` | 带 deadline 控制        |

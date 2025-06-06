@@ -129,7 +129,8 @@ ExecutorService cpuBoundExecutor = Executors.newFixedThreadPool(Runtime.getRunti
 
 > ✅ 最佳实践建议：尽量使用 **结构化并发**（如 `StructuredTaskScope`）或通过 `Executors.newVirtualThreadPerTaskExecutor()` 管理虚拟线程，避免零散使用裸线程。
 
-## 场景 1：并行调用多个服务，只要最快返回的结果
+## StructuredTaskScope
+### 场景 1：并行调用多个服务，只要最快返回的结果
 比如我们有多个外部服务，结果一致，我们只需要最快响应的那一个。 使用 `StructuredTaskScope.ShutdownOnSuccess`：
  
 ```java
@@ -148,12 +149,12 @@ try (var scope = new StructuredTaskScope.ShutdownOnSuccess<String>()) {
 System.out.println("First successful result: " + result);
 ```
 
-### ✅ 特点：
+#### ✅ 特点：
 - 只保留第一个成功的任务。
 - 其他线程自动中断（通过虚拟线程的挂起机制，几乎无成本）。
 
 
-## 场景 2：多个任务并发执行，但任何一个失败就全部取消
+### 场景 2：多个任务并发执行，但任何一个失败就全部取消
 比如我们在并行执行数据库写入、日志记录、缓存刷新，只要任何一个失败就放弃整个操作。 使用 `StructuredTaskScope.ShutdownOnFailure`：
 ```java
 import java.util.concurrent.StructuredTaskScope;
@@ -168,12 +169,12 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 }
 ```
 
-### ✅ 特点：
+#### ✅ 特点：
 - 所有任务并发执行。
 - 一旦有任务抛出异常，其他任务会被取消。
 - 统一处理异常和取消逻辑，不再需要 try-catch 每个任务。
 
-## 场景 3：父任务等待所有子任务完成，然后合并结果
+### 场景 3：父任务等待所有子任务完成，然后合并结果
 比如我们调用 3 个服务，要组合它们的结果生成最终响应。 使用 `StructuredTaskScope` + `ShutdownOnFailure` + `Future` 变量：
 ```java
 String userInfo, orderInfo, paymentInfo;
@@ -202,3 +203,72 @@ try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
 | 聚合多个任务结果  | `ShutdownOnFailure` + 多个 `Future`        | 效果类似 `Promise.all()` |
 | 有条件并发执行   | 任意 `StructuredTaskScope`                 | 动态控制任务加入和取消          |
 | 带超时的结构化并发 | 任意 `StructuredTaskScope` + `joinUntil()` | 带 deadline 控制        |
+
+> 如果你在 Java 中有多个并发任务需要一起协调、失败处理、结果聚合，StructuredTaskScope 是最安全、最现代化的解决方案，特别适合配合虚拟线程使用。
+
+
+## `Executors.newVirtualThreadPerTaskExecutor()`
+### 场景 1：高并发 Web 爬虫 / 批处理任务
+假设你需要爬取上千个网页，或者处理成千上万个任务，传统线程池（如 FixedThreadPool）会由于线程资源限制而阻塞。但使用虚拟线程可以立即创建大量轻量级线程并执行任务。
+```java
+import java.net.URI;
+import java.net.http.*;
+import java.util.concurrent.*;
+
+var urls = List.of("https://a.com", "https://b.com", "https://c.com");  // 假设有上千个
+
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    List<Future<String>> futures = urls.stream()
+        .map(url -> executor.submit(() -> fetchPage(url)))
+        .toList();
+
+    for (Future<String> f : futures) {
+        System.out.println(f.get());  // 输出内容或处理
+    }
+}
+
+String fetchPage(String url) throws Exception {
+    var client = HttpClient.newHttpClient();
+    var request = HttpRequest.newBuilder(new URI(url)).build();
+    return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+}
+```
+
+#### ✅ 特点：
+- 自动创建虚拟线程，每个任务不受线程池限制
+- 使用 try-with-resources 自动关闭执行器，避免资源泄露
+- 任务之间完全隔离，不会互相影响
+
+### 场景 2：服务端请求并发处理
+每个 HTTP 请求用一个虚拟线程处理，避免了传统线程池的瓶颈：
+```java
+ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
+
+server.onRequest((req) -> {
+    executor.submit(() -> handleRequest(req));
+});
+```
+> 适用于微服务、API 网关、数据库连接池等服务端并发处理场景。
+
+### 场景 3：异步任务编排，不关心返回值
+比如日志记录、统计打点，不需要返回值，可以直接提交：
+```java
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    executor.submit(() -> logUserAction("login", "user123"));
+    executor.submit(() -> sendAnalytics("open_homepage"));
+}
+```
+
+### 场景 4：并行测试执行器
+在测试框架中，可以用虚拟线程并行跑多个测试用例，提升测试吞吐量：
+```java
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    List<Future<Boolean>> results = testCases.stream()
+        .map(test -> executor.submit(() -> runTestCase(test)))
+        .toList();
+
+    for (Future<Boolean> r : results) {
+        assert r.get();  // 所有测试应通过
+    }
+}
+```

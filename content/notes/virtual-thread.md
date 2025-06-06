@@ -272,3 +272,9 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
     }
 }
 ```
+
+### ⚠️ 注意事项（高级用法细节）
+- 每个任务创建一个新虚拟线程，适合 IO 密集型、不共享状态的任务。
+- 不适用于高频、极短任务（如纳秒级计算），否则调度开销可能超过任务成本。
+- 使用时应配合 try-with-resources 保证资源关闭。
+- 不自动限制并发数，如有资源限制应手动控制（如信号量或限流器）。

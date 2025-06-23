@@ -352,6 +352,17 @@ lombok.anyConstructor.addConstructorProperties = true
 | @ToString                | Debugging, exclude sensitive fields  | Entities with relationships         |
 | @EqualsAndHashCode       | Immutable values, include superclass | Entities (use primary key manually) |
 
+### Summary for best practices
+|            Annotation            |                   Use Case & Notes                  |
+|:--------------------------------:|:---------------------------------------------------:|
+| @RequiredArgsConstructor         | Preferred for constructor injection in Spring beans |
+| @Getter, @Setter                 | Use on fields or class; avoid on JPA entities       |
+| @Slf4j                           | For logging (no manual logger needed)               |
+| @Data                            | For DTOs only (not JPA entities)                    |
+| @Builder                         | For DTOs, not JPA entities                          |
+| @Value                           | For immutable DTOs                                  |
+| @NoArgsConstructor(force = true) | For JPA entities                                    |
+
 ## Java Records: Immutable Data Carriers
 - Eliminate boilerplate code for data-oriented classes.
 

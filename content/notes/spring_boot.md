@@ -532,5 +532,68 @@ modelMapper
   .addMapping(Source::getFoo, Destination::setBar);
 ```
 
+## Modern and recommended folder structure
+```plaintext
+src
+└── main
+    ├── java
+    │   └── com
+    │       └── yourcompany
+    │           └── yourproject
+    │               ├── YourProjectApplication.java
+    │               ├── config
+    │               │   └── (configuration classes: security, web, etc.)
+    │               ├── controller
+    │               │   └── (REST/controllers)
+    │               ├── dto
+    │               │   └── (Data Transfer Objects)
+    │               ├── entity
+    │               │   └── (JPA entities/domain models)
+    │               ├── exception
+    │               │   └── (custom exceptions and handlers)
+    │               ├── repository
+    │               │   └── (Spring Data repositories)
+    │               ├── service
+    │               │   └── (service layer)
+    │               ├── mapper
+    │               │   └── (MapStruct/ModelMapper mappers)
+    │               ├── util
+    │               │   └── (utility/helper classes)
+    │               └── (any feature-based packages, e.g., user, order, etc.)
+    ├── resources
+    │   ├── application.yml
+    │   ├── static
+    │   │   └── (static web resources)
+    │   ├── templates
+    │   │   └── (Thymeleaf/Freemarker templates)
+    │   └── (other resource files)
+    └── test
+        └── java
+            └── com
+                └── yourcompany
+                    └── yourproject
+                        └── (test classes, mirroring main structure)
+```
 
+- config: Java configuration classes (security, CORS, Swagger/OpenAPI, etc.)
+- controller: REST or web controllers (@RestController, @Controller)
+- dto: Data Transfer Objects for requests & responses
+- entity: JPA/Hibernate entities (database models)
+- exception: Custom exceptions and exception handlers (@ControllerAdvice)
+- repository: Spring Data repository interfaces
+- service: Business logic/services (@Service)
+- mapper: Classes/interfaces for mapping between entities and DTOs (e.g., using MapStruct or ModelMapper)
+- util: Utility or helper classes (validation, constants, etc.)
 
+For larger projects, use feature-based modularization:
+```plaintext
+└── user
+    ├── UserController.java
+    ├── UserService.java
+    ├── UserRepository.java
+    ├── User.java
+    ├── UserDto.java
+    └── UserMapper.java
+└── order
+    └── (order-related classes)
+```

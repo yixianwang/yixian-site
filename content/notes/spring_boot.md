@@ -494,3 +494,43 @@ public record ApiResponse<T>(
 // Usage
 ApiResponse<User> response = new ApiResponse<>(200, "OK", user);
 ```
+
+## Model Mapper in Spring Boot
+> ModelMapper is a Java library that helps you easily map one object to another, reducing repetitive code and improving maintainability—especially useful for converting between entities and DTOs in Spring Boot applications.
+
+Define a ModelMapper bean for dependency injection:
+```java
+@Configuration
+public class ModelMapperConfig {
+  @Bean
+  public ModelMapper modelMapper() {
+    return new ModelMapper();
+  }
+}
+```
+Then inject and use it in services or controllers:
+```java
+@Service
+public class UserService {
+  private final ModelMapper modelMapper;
+
+  @Autowired
+  public UserService(ModelMapper modelMapper) {
+    this.modelMapper = modelMapper;
+  }
+
+  public UserDTO convertToDto(User user) {
+    return modelMapper.map(user, UserDTO.class);
+  }
+}
+```
+### Custom Mappings
+For more complex cases (different field names, nested objects), we can configure mappings:
+```java
+modelMapper
+  .typeMap(Source.class, Destination.class)
+  .addMapping(Source::getFoo, Destination::setBar);
+```
+
+
+

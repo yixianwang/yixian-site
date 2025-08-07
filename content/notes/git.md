@@ -127,6 +127,32 @@ Format: `<type>(<scope>): <subject>`
 
 `<scope>` is optional
 
+## Create a Revert Commit by Resetting and Commiting
+```bash
+# 1. Start a new branch from latest main
+git checkout main
+git pull origin main
+git checkout -b fix/revert-main-to-<old-commit>
+
+# 2. Reset working directory to old commit (but keep as changes to commit)
+git reset --hard <old-commit>
+git reset --soft HEAD@{1} # makes the changes from the old commit a staged change
+
+# 3. Cmomit the changes as a new revert commit
+git commit -m "fix: revert main to <old-commit-id>"
+
+# 4. push branch
+git push origin fix/revert-main-to-<old-commit>
+```
+
+## Revert individual commits
+```bash
+git checkout -b fix/revert-bad-change
+git revert <bad-commit-id>
+git push origin fix/revert-bad-change
+```
+
+
 ### Example
 
 ```

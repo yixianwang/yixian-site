@@ -597,3 +597,40 @@ For larger projects, use feature-based modularization:
 └── order
     └── (order-related classes)
 ```
+
+## Async
+```java {filename="AsyncConfig.java"}
+package com.yourcompany.yourapp;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import java.util.concurrent.Executor;
+
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+
+@Configuration
+@EnableAsync
+public class AsyncConfig {
+
+  @Bean(name = "taskExecutor")
+  public Executor taskExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(4);        // Number of threads to keep in pool
+    executor.setMaxPoolSize(10);        // Max threads allowed
+    executor.setQueueCapacity(100);     // Queue size before rejecting new tasks
+    executor.setThreadNamePrefix("Async-"); // Thread name prefix for easier debugging
+    executor.initialize();
+    return executor;
+  }
+
+  // You can also add an AsyncUncaughtExceptionHandler bean to handle uncaught exceptions from @Async void methods
+  @Bean
+  public AsyncUncaughtExceptionHandler asyncUncaughtExceptionHandler() {
+    return (throwable, method, obj) -> {
+      System.err.println("Exception in async method: " + method.getName() + ", message: " + throwable.getMessage());
+    };
+  }
+}
+```

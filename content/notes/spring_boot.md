@@ -934,3 +934,49 @@ public class LoanValidationService {
     }
 }
 ```
+
+```java {filename="ValidationService.java"}
+@Service
+public class ValidationService {
+
+    private final KieContainer poolKieContainer;
+    private final KieContainer loanKieContainer;
+
+    public ValidationService(
+        @Qualifier("poolKieContainer") KieContainer poolKieContainer,
+        @Qualifier("loanKieContainer") KieContainer loanKieContainer
+    ) {
+        this.poolKieContainer = poolKieContainer;
+        this.loanKieContainer = loanKieContainer;
+    }
+
+    public void validatePool(RowData poolRow) {
+        try (StatelessKieSession session = poolKieContainer.newStatelessKieSession()) {
+            session.execute(poolRow);
+        }
+    }
+
+    public void validateLoan(RowData loanRow) {
+        try (StatelessKieSession session = loanKieContainer.newStatelessKieSession()) {
+            session.execute(loanRow);
+        }
+    }
+
+    // Or a generic method, if you can detect type or pass an enum param:
+    public void validate(RowData data, ValidationType type) {
+        KieContainer container = switch (type) {
+            case POOL -> poolKieContainer;
+            case LOAN -> loanKieContainer;
+        };
+
+        try (StatelessKieSession session = container.newStatelessKieSession()) {
+            session.execute(data);
+        }
+    }
+
+    public enum ValidationType {
+        POOL, LOAN
+    }
+}
+
+```

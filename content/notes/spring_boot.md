@@ -634,3 +634,152 @@ public class AsyncConfig {
   }
 }
 ```
+
+## Stream DAO
+```java {filename="KieConfig.java"}
+package com.example.validation.config;
+
+import org.kie.api.runtime.KieContainer;
+import org.kie.spring.KModuleBeanFactoryPostProcessor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class KieConfig {
+    @Bean
+    public KModuleBeanFactoryPostProcessor kiePostProcessor() {
+        return new KModuleBeanFactoryPostProcessor();
+    }
+
+    @Bean
+    public KieContainer kieContainer(org.kie.api.KieServices ks) {
+        return ks.getKieClasspathContainer();
+    }
+}
+```
+
+```java{filename="VirtualThreadConfig.java"}
+package com.example.validation.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Configuration
+public class VirtualThreadConfig {
+
+    @Bean(destroyMethod = "shutdown")
+    public ExecutorService virtualThreadExecutor() {
+        // Java 21 virtual thread-per-task executor
+        return Executors.newVirtualThreadPerTaskExecutor();
+    }
+}
+```
+
+```java {filename="BigTableDao.java"}
+@Repository
+public class BigTableDao {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    public BigTableDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public void streamRows(int fetchSize, Consumer<RowData> rowConsumer) {
+        jdbcTemplate.setFetchSize(fetchSize);
+        jdbcTemplate.setMaxRows(0);
+
+        String sql = "SELECT * FROM big_table"; // no ORDER BY if not required
+
+        jdbcTemplate.query(con -> {
+            PreparedStatement ps = con.prepareStatement(
+                sql,
+                ResultSet.TYPE_FORWARD_ONLY,
+                ResultSet.CONCUR_READ_ONLY
+            );
+            ps.setFetchSize(fetchSize);
+            return ps;
+        }, rs -> {
+            rowConsumer.accept(mapRow(rs));
+        });
+    }
+
+    private RowData mapRow(ResultSet rs) throws SQLException {
+        RowData row = new RowData();
+        row.setId(rs.getLong("id"));
+        row.setCol1(rs.getString("col1"));
+        row.setCol2(rs.getString("col2"));
+        // map other columns...
+        return row;
+    }
+}
+```
+
+```java {filename="StreamingValidationService.java"}
+@Service
+public class StreamingValidationService {
+
+    private final BigTableDao bigTableDao;
+    private final KieContainer kieContainer;
+    private final ValidationResultRepository resultRepository;
+
+    public StreamingValidationService(BigTableDao bigTableDao,
+                                      KieContainer kieContainer,
+                                      ValidationResultRepository resultRepository) {
+        this.bigTableDao = bigTableDao;
+        this.kieContainer = kieContainer;
+        this.resultRepository = resultRepository;
+    }
+
+    public void validateLargeTable() {
+        List<RowData> batch = new ArrayList<>(500);
+
+        bigTableDao.streamRows(500, row -> {
+            batch.add(row);
+            if (batch.size() == 500) {
+                processBatch(batch);
+                batch.clear();
+            }
+        });
+
+        if (!batch.isEmpty()) {
+            processBatch(batch);
+        }
+    }
+
+    private void processBatch(List<RowData> batch) {
+        List<ValidationResult> allResults = Collections.synchronizedList(new ArrayList<>());
+
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            List<Callable<Void>> tasks = new ArrayList<>();
+
+            for (RowData row : batch) {
+                tasks.add(() -> {
+                    StatelessKieSession kieSession = kieContainer.newStatelessKieSession();
+
+                    List<ValidationResult> results = new ArrayList<>();
+                    kieSession.setGlobal("results", results);
+
+                    kieSession.execute(row); // Stateless: runs rules immediately
+
+                    allResults.addAll(results);
+                    return null;
+                });
+            }
+
+            executor.invokeAll(tasks);
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Batch processing interrupted", e);
+        }
+
+        // Single DB write per batch
+        resultRepository.bulkInsert(allResults);
+    }
+
+}
+```

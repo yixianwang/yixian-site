@@ -980,3 +980,62 @@ public class ValidationService {
 }
 
 ```
+
+```java {filename="ValidationRuleSet.java"}
+public enum ValidationRuleSet {
+    POOL(List.of("rules/poolRule1.drl", "rules/poolRule2.drl")),
+    LOAN(List.of("rules/loanRule1.drl", "rules/loanRule2.drl"));
+
+    private final List<String> drlFiles;
+
+    ValidationRuleSet(List<String> drlFiles) {
+        this.drlFiles = drlFiles;
+    }
+
+    public List<String> getDrlFiles() {
+        return drlFiles;
+    }
+}
+```
+
+```java {filename="KieConfig.java"}
+@Configuration
+public class KieConfig {
+
+    @Bean
+    public KModuleBeanFactoryPostProcessor kiePostProcessor() {
+        return new KModuleBeanFactoryPostProcessor();
+    }
+
+    @Bean(name = "poolKieContainer")
+    public KieContainer poolKieContainer(KieServices ks) {
+        return createKieContainer(ks, ValidationRuleSet.POOL);
+    }
+
+    @Bean(name = "loanKieContainer")
+    public KieContainer loanKieContainer(KieServices ks) {
+        return createKieContainer(ks, ValidationRuleSet.LOAN);
+    }
+
+    private KieContainer createKieContainer(KieServices ks, ValidationRuleSet ruleSet) {
+        List<String> drlFiles = ruleSet.getDrlFiles();
+        KieFileSystem kfs = ks.newKieFileSystem();
+
+        KieModuleModel kModuleModel = ks.newKieModuleModel();
+        kfs.writeKModuleXML(kModuleModel.toXML());
+
+        for (String drl : drlFiles) {
+            kfs.write("src/main/resources/" + drl, ks.getResources().newClassPathResource(drl));
+        }
+
+        KieBuilder kieBuilder = ks.newKieBuilder(kfs).buildAll();
+
+        if (kieBuilder.getResults().hasMessages(org.kie.api.builder.Message.Level.ERROR)) {
+            throw new RuntimeException("Error building KIE base: " + kieBuilder.getResults());
+        }
+
+        ReleaseId releaseId = kieBuilder.getKieModule().getReleaseId();
+        return ks.newKieContainer(releaseId);
+    }
+}
+```

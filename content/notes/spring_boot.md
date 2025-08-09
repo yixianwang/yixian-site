@@ -783,3 +783,65 @@ public class StreamingValidationService {
 
 }
 ```
+
+```
+package com.example.validation.config;
+
+import org.kie.api.KieServices;
+import org.kie.api.builder.KieFileSystem;
+import org.kie.api.builder.KieBuilder;
+import org.kie.api.builder.ReleaseId;
+import org.kie.api.builder.model.KieModuleModel;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.StatelessKieSession;
+import org.kie.api.runtime.KieBase;
+import org.kie.api.runtime.KieBaseConfiguration;
+import org.kie.api.runtime.conf.EventProcessingOption;
+import org.kie.api.runtime.KieContainer;
+import org.kie.spring.KModuleBeanFactoryPostProcessor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+
+@Configuration
+public class KieConfig {
+
+    @Bean
+    public KModuleBeanFactoryPostProcessor kiePostProcessor() {
+        return new KModuleBeanFactoryPostProcessor();
+    }
+
+    /**
+     * Build KieContainer by loading provided DRL files from classpath or file system.
+     * For simplicity, assume drlFiles are classpath resources (e.g. "rules/myrules.drl")
+     */
+    @Bean
+    public KieContainer kieContainer(KieServices ks) {
+        List<String> drlFiles = List.of("rules/rule1.drl", "rules/rule2.drl"); // <- Inject or configure this list
+
+        KieFileSystem kfs = ks.newKieFileSystem();
+
+        // Create a minimal KieModule model (optional, but good practice)
+        KieModuleModel kModuleModel = ks.newKieModuleModel();
+        kfs.writeKModuleXML(kModuleModel.toXML());
+
+        // Add DRL files from classpath to the KieFileSystem
+        for (String drl : drlFiles) {
+            String path = "src/main/resources/" + drl; // adjust if needed
+            kfs.write("src/main/resources/" + drl, ks.getResources().newClassPathResource(drl));
+        }
+
+        KieBuilder kieBuilder = ks.newKieBuilder(kfs).buildAll();
+        if (kieBuilder.getResults().hasMessages(org.kie.api.builder.Message.Level.ERROR)) {
+            throw new RuntimeException("Errors while building Drools rules: " + kieBuilder.getResults());
+        }
+
+        ReleaseId releaseId = kieBuilder.getKieModule().getReleaseId();
+
+        return ks.newKieContainer(releaseId);
+    }
+}
+
+```

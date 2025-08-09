@@ -845,3 +845,92 @@ public class KieConfig {
 }
 
 ```
+
+```java {filename="KieConfig.java"}
+@Configuration
+public class KieConfig {
+
+    private static final List<String> poolDrlList = List.of(
+        "rules/poolRule1.drl",
+        "rules/poolRule2.drl"
+    );
+
+    private static final List<String> loanDrlList = List.of(
+        "rules/loanRule1.drl",
+        "rules/loanRule2.drl"
+    );
+
+    @Bean
+    public KModuleBeanFactoryPostProcessor kiePostProcessor() {
+        return new KModuleBeanFactoryPostProcessor();
+    }
+
+    @Bean(name = "poolKieContainer")
+    public KieContainer poolKieContainer(KieServices ks) {
+        return createKieContainer(ks, poolDrlList);
+    }
+
+    @Bean(name = "loanKieContainer")
+    public KieContainer loanKieContainer(KieServices ks) {
+        return createKieContainer(ks, loanDrlList);
+    }
+
+    private KieContainer createKieContainer(KieServices ks, List<String> drlFiles) {
+        KieFileSystem kfs = ks.newKieFileSystem();
+
+        // Minimal KieModule XML
+        KieModuleModel kModuleModel = ks.newKieModuleModel();
+        kfs.writeKModuleXML(kModuleModel.toXML());
+
+        // Write DRL files to KieFileSystem
+        for (String drl : drlFiles) {
+            kfs.write("src/main/resources/" + drl, ks.getResources().newClassPathResource(drl));
+        }
+
+        KieBuilder kieBuilder = ks.newKieBuilder(kfs).buildAll();
+
+        if (kieBuilder.getResults().hasMessages(org.kie.api.builder.Message.Level.ERROR)) {
+            throw new RuntimeException("Error building KIE base: " + kieBuilder.getResults());
+        }
+
+        ReleaseId releaseId = kieBuilder.getKieModule().getReleaseId();
+        return ks.newKieContainer(releaseId);
+    }
+}
+```
+
+```java {filename="PoolValidationService.java"}
+@Service
+public class PoolValidationService {
+
+    private final KieContainer poolKieContainer;
+
+    public PoolValidationService(@Qualifier("poolKieContainer") KieContainer poolKieContainer) {
+        this.poolKieContainer = poolKieContainer;
+    }
+
+    public void validatePoolData(RowData rowData) {
+        try (StatelessKieSession session = poolKieContainer.newStatelessKieSession()) {
+            session.execute(rowData);
+        }
+    }
+}
+```
+
+```java {filename="LoanValidationService.java"}
+@Service
+public class LoanValidationService {
+
+    private final KieContainer loanKieContainer;
+
+    public LoanValidationService(@Qualifier("loanKieContainer") KieContainer loanKieContainer) {
+        this.loanKieContainer = loanKieContainer;
+    }
+
+    public void validateLoanData(RowData rowData) {
+        try (StatelessKieSession session = loanKieContainer.newStatelessKieSession()) {
+            session.execute(rowData);
+        }
+    }
+}
+```

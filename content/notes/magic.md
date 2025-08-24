@@ -78,106 +78,106 @@ There are two time:
 - [Source](https://topdeck.gg/deck/yXwMlmGU74ISJ9x5OdlP/cQ30wpoy0eSg7t80b79fgn07Wz62)
 ```
 ~~Commanders~~
-1 Kraum, Ludevic's Opus
-1 Tymna the Weaver
+1 Kraum, Ludevic's Opus (C16) 34
+1 Tymna the Weaver (C16) 48
 
 ~~Mainboard~~
-1 Ad Nauseam
-1 An Offer You Can't Refuse
-1 Ancient Tomb
-1 Arcane Signet
-1 Arid Mesa
-1 Badlands
-1 Birgi, God of Storytelling // Harnfel, Horn of Bounty
-1 Bloodstained Mire
-1 Borne Upon a Wind
-1 Brain Freeze
-1 Cabal Ritual
-1 Cavern of Souls
-1 Chain of Vapor
-1 Chrome Mox
-1 City of Brass
-1 Command Tower
-1 Culling the Weak
-1 Dark Ritual
-1 Deflecting Swat
-1 Demonic Consultation
-1 Demonic Tutor
-1 Diabolic Intent
-1 Dragon's Rage Channeler
-1 Enlightened Tutor
-1 Esper Sentinel
-1 Exotic Orchard
-1 Faerie Mastermind
-1 Fellwar Stone
-1 Fierce Guardianship
-1 Final Fortune
-1 Flare of Duplication
-1 Flooded Strand
-1 Flusterstorm
-1 Force of Negation
-1 Force of Will
-1 Gamble
-1 Gemstone Caverns
-1 Grand Abolisher
-1 Imperial Seal
-1 Into the Flood Maw
-1 Intuition
-1 Jeska's Will
-1 Lion's Eye Diamond
-1 Lotho, Corrupt Shirriff
-1 Lotus Petal
-1 Mana Confluence
-1 Mana Vault
-1 Marsh Flats
-1 Mental Misstep
-1 Mindbreak Trap
-1 Mistrise Village
-1 Misty Rainforest
-1 Mnemonic Betrayal
-1 Mockingbird
-1 Mox Diamond
-1 Mox Opal
-1 Mystic Remora
-1 Mystical Tutor
-1 Necropotence
-1 Orcish Bowmasters
-1 Otawara, Soaring City
-1 Pact of Negation
-1 Plateau
-1 Polluted Delta
-1 Professional Face-Breaker
-1 Ragavan, Nimble Pilferer
-1 Rain of Filth
-1 Ranger-Captain of Eos
-1 Red Elemental Blast
-1 Rhystic Study
-1 Rite of Flame
-1 Scalding Tarn
-1 Scrubland
-1 Sevinne's Reclamation
-1 Silence
-1 Simian Spirit Guide
-1 Smothering Tithe
-1 Snapback
-1 Sol Ring
-1 Spire of Industry
-1 Swan Song
-1 Tainted Pact
-1 Tarnished Citadel
-1 Tataru Taru
-1 Thassa's Oracle
-1 Tundra
-1 Underground Sea
-1 Underworld Breach
-1 Valley Floodcaller
-1 Vampiric Tutor
-1 Verdant Catacombs
-1 Voice of Victory
-1 Volcanic Island
-1 Watery Grave
-1 Wheel of Fortune
-1 Windfall
-1 Windswept Heath
-1 Wishclaw Talisman
+1 Ad Nauseam (ALA) 63
+1 An Offer You Can't Refuse (SNC) 464
+1 Ancient Tomb (TMP) 315
+1 Arcane Signet (ELD) 331
+1 Arid Mesa (ZEN) 211
+1 Badlands (ME4) 241
+1 Birgi, God of Storytelling // Harnfel, Horn of Bounty (KHM) 123
+1 Bloodstained Mire (ONS) 313
+1 Borne Upon a Wind (PLTR) 44s
+1 Brain Freeze (SCG) 29
+1 Cabal Ritual (TOR) 51
+1 Cavern of Souls (AVR) 226
+1 Chain of Vapor (ONS) 73
+1 Chrome Mox (MRD) 152
+1 City of Brass (ME4) 243
+1 Command Tower (CMD) 269
+1 Culling the Weak (EXO) 55
+1 Dark Ritual (CEI) 99
+1 Deflecting Swat (C20) 50
+1 Demonic Consultation (ICE) 121
+1 Demonic Tutor (30A) 398
+1 Diabolic Intent (PLS) 42
+1 Dragon's Rage Channeler (MH2) 121
+1 Enlightened Tutor (MIR) 14
+1 Esper Sentinel (MH2) 328
+1 Exotic Orchard (CON) 142
+1 Faerie Mastermind (MOM) 58
+1 Fellwar Stone (DRK) 102
+1 Fierce Guardianship (C20) 35
+1 Final Fortune (MIR) 173
+1 Flare of Duplication (MH3) 416
+1 Flooded Strand (ONS) 316
+1 Flusterstorm (PLST) CMD-46
+1 Force of Negation (MH1) 52
+1 Force of Will (ALL) 28
+1 Gamble (USG) 188
+1 Gemstone Caverns (TSP) 274
+1 Grand Abolisher (M12) 19
+1 Imperial Seal (PTK) 78
+1 Into the Flood Maw (BLB) 52
+1 Intuition (TMP) 70
+1 Jeska's Will (CMR) 187
+1 Lion's Eye Diamond (MIR) 307
+1 Lotho, Corrupt Shirriff (LTR) 370
+1 Lotus Petal (TMP) 294
+1 Mana Confluence (JOU) 163
+1 Mana Vault (LEB) 260
+1 Marsh Flats (ZEN) 219
+1 Mental Misstep (NPH) 38
+1 Mindbreak Trap (ZEN) 57
+1 Mistrise Village (TDM) 261
+1 Misty Rainforest (ZEN) 220
+1 Mnemonic Betrayal (GRN) 189
+1 Mockingbird (BLB) 61
+1 Mox Diamond (STH) 138
+1 Mox Opal (SOM) 179
+1 Mystic Remora (ICE) 87
+1 Mystical Tutor (MIR) 80
+1 Necropotence (ICE) 154
+1 Orcish Bowmasters (PLTR) 103s
+1 Otawara, Soaring City (NEO) 271
+1 Pact of Negation (FUT) 42
+1 Plateau (ME4) 249
+1 Polluted Delta (ONS) 321
+1 Professional Face-Breaker (SNC) 426
+1 Ragavan, Nimble Pilferer (MH2) 138
+1 Rain of Filth (USG) 151
+1 Ranger-Captain of Eos (MH1) 21
+1 Red Elemental Blast (30A) 462
+1 Rhystic Study (PCY) 45
+1 Rite of Flame (CSP) 96
+1 Scalding Tarn (ZEN) 223
+1 Scrubland (ME4) 251
+1 Sevinne's Reclamation (C19) 5
+1 Silence (M10) 31
+1 Simian Spirit Guide (PLC) 122
+1 Smothering Tithe (RNA) 22
+1 Snapback (TSP) 78
+1 Sol Ring (WHO) 836
+1 Spire of Industry (AER) 184
+1 Swan Song (THS) 65
+1 Tainted Pact (ODY) 164
+1 Tarnished Citadel (ODY) 329
+1 Tataru Taru (FIC) 138
+1 Thassa's Oracle (THB) 308
+1 Tundra (ME4) 255
+1 Underground Sea (ME4) 256
+1 Underworld Breach (THB) 161
+1 Valley Floodcaller (BLB) 79
+1 Vampiric Tutor (VIS) 72
+1 Verdant Catacombs (ZEN) 229
+1 Voice of Victory (TDM) 33
+1 Volcanic Island (ME4) 260
+1 Watery Grave (RAV) 286
+1 Wheel of Fortune (VMA) 192
+1 Windfall (USG) 111
+1 Windswept Heath (ONS) 328
+1 Wishclaw Talisman (ELD) 110
 ```

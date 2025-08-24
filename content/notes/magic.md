@@ -178,3 +178,50 @@ There are two time:
 1 Windswept Heath (ONS) 328
 1 Wishclaw Talisman (ELD) 110
 ```
+
+## 38 considering
+```
+1 Teferi, Time Raveler
+1 Delney, Streetwise Lookout
+1 Flesh Duplicate
+1 Grim Hireling
+1 Knuckles the Echidna
+1 Ledger Shredder
+1 Mercurial Spelldancer
+1 Opposition Agent
+1 Phantasmal Image
+1 Pollywog Prodigy
+1 Rev, Tithe Extractor
+1 Talion, the Kindly Lord
+1 Vivi Ornitier
+1 Beseech the Mirror
+1 Demonic Counsel
+1 Last Chance
+1 Peer into the Abyss
+1 Praetor's Grasp
+1 Toxic Deluge
+1 Yawgmoth's Will
+1 Fire Covenant
+1 Burnt Offering
+1 Cyclonic Rift
+1 Gifts Ungiven
+1 March of Swirling Mist
+1 Miscast
+1 Pyroblast
+1 Grim Monolith
+1 Mox Amber
+1 Talisman of Dominance
+1 Talisman of Progress
+1 The One Ring
+1 Steal Enchantment
+1 Hallowed Fountain
+1 Morphic Pool
+1 Steam Vents
+1 Undercity Sewers
+1 Wooded Foothills
+```
+
+## 1st ranking
+```
+
+```

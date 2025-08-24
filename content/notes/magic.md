@@ -75,6 +75,7 @@ There are two time:
 - "Before it resolves, I cast <another spell> on my <target>"
 
 ## Deck list
+- [Source](https://topdeck.gg/deck/yXwMlmGU74ISJ9x5OdlP/cQ30wpoy0eSg7t80b79fgn07Wz62)
 ```
 ~~Commanders~~
 1 Kraum, Ludevic's Opus

@@ -77,11 +77,8 @@ There are two time:
 ## Deck list
 - [Source](https://topdeck.gg/deck/yXwMlmGU74ISJ9x5OdlP/cQ30wpoy0eSg7t80b79fgn07Wz62)
 ```
-~~Commanders~~
 1 Kraum, Ludevic's Opus (C16) 34
 1 Tymna the Weaver (C16) 48
-
-~~Mainboard~~
 1 Ad Nauseam (ALA) 63
 1 An Offer You Can't Refuse (SNC) 464
 1 Ancient Tomb (TMP) 315

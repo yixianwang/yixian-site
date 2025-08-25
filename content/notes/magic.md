@@ -75,7 +75,8 @@ There are two time:
 - "Before it resolves, I cast <another spell> on my <target>"
 
 ## Deck #1
-- [Source](https://topdeck.gg/deck/yXwMlmGU74ISJ9x5OdlP/cQ30wpoy0eSg7t80b79fgn07Wz62)
+- [Topdeck](https://topdeck.gg/deck/yXwMlmGU74ISJ9x5OdlP/cQ30wpoy0eSg7t80b79fgn07Wz62)
+- [Moxfield](https://moxfield.com/decks/7O1sCuIti0igU6Us_Jhadg)
 
 ```
 1 Kraum, Ludevic's Opus (C16) 34
@@ -223,4 +224,5 @@ There are two time:
 ```
 
 ## Deck #2
-- [Source](https://moxfield.com/decks/Uzt5J8HPnUGTOOkxAmY8nw)
+- [Topdeck](https://topdeck.gg/deck/steel-city-spectacular-20k-cedh-main-event/NoplwPOalyPYtwTf4sgflMhSsgr1)
+- [Moxfield](https://moxfield.com/decks/Uzt5J8HPnUGTOOkxAmY8nw)

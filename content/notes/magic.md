@@ -74,8 +74,9 @@ There are two time:
 - "I cast <spell name> on your <target>"
 - "Before it resolves, I cast <another spell> on my <target>"
 
-## Deck list
+## Deck #1
 - [Source](https://topdeck.gg/deck/yXwMlmGU74ISJ9x5OdlP/cQ30wpoy0eSg7t80b79fgn07Wz62)
+
 ```
 1 Kraum, Ludevic's Opus (C16) 34
 1 Tymna the Weaver (C16) 48
@@ -179,7 +180,7 @@ There are two time:
 1 Wishclaw Talisman (ELD) 110
 ```
 
-## 38 considering
+### considering(38)
 ```
 1 Teferi, Time Raveler
 1 Delney, Streetwise Lookout
@@ -221,7 +222,5 @@ There are two time:
 1 Wooded Foothills
 ```
 
-## 1st ranking
-```
-
-```
+## Deck #2
+- [Source](https://moxfield.com/decks/Uzt5J8HPnUGTOOkxAmY8nw)

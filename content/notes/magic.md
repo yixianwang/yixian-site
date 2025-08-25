@@ -78,6 +78,29 @@ There are two time:
 - [Topdeck](https://topdeck.gg/deck/yXwMlmGU74ISJ9x5OdlP/cQ30wpoy0eSg7t80b79fgn07Wz62)
 - [Moxfield](https://moxfield.com/decks/7O1sCuIti0igU6Us_Jhadg)
 
+### Wincon
+**Thassa's Oracle** + Demonic Consultation
+**Thassa's Oracle** + Tainted Pact
+**Underworld Breach** + Lion's Eye Diamond
+**Underworld Breach** + Brain Freeze
+**Intuition** search for Underworld Breach, Lion's Eye Diamond, and Sevinne's Reclamation.
+**Mnemonic Betrayal** 
+**Ad Nauseam**
+
+**Mystic Remora** + Esper Sentinel
+**Rhystic Study** + Esper Sentinel
+
+### Advantage Engine
+**Esper Sentinel**
+**Ragavan, Nimble Pilferer** mainly in the early game.
+
+## ++
+**Dockside Extortionist**
+**Drannith Magistrate**
+**Swords to Plowshares**
+**Dispel**
+**Path to Exile**
+
 ```
 1 Kraum, Ludevic's Opus (C16) 34
 1 Tymna the Weaver (C16) 48

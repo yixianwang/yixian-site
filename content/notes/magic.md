@@ -74,7 +74,7 @@ There are two time:
 - "I cast <spell name> on your <target>"
 - "Before it resolves, I cast <another spell> on my <target>"
 
-## Deck #1
+## Deck #1: Blue Farm
 - [Topdeck](https://topdeck.gg/deck/yXwMlmGU74ISJ9x5OdlP/cQ30wpoy0eSg7t80b79fgn07Wz62)
 - [Moxfield](https://moxfield.com/decks/7O1sCuIti0igU6Us_Jhadg)
 
@@ -223,6 +223,6 @@ There are two time:
 1 Wooded Foothills
 ```
 
-## Deck #2
+## Deck #2: Godspeed 
 - [Topdeck](https://topdeck.gg/deck/steel-city-spectacular-20k-cedh-main-event/NoplwPOalyPYtwTf4sgflMhSsgr1)
 - [Moxfield](https://moxfield.com/decks/Uzt5J8HPnUGTOOkxAmY8nw)

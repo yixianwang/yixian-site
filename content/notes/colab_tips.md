@@ -36,4 +36,19 @@ sys.path.insert(0, nb_path)
 ```
 Hope this helps, good luck!
 
+## Template
+```bash
+from google.colab import userdata
+import os
+
+os.environ["GH_USER"] = userdata.get("git_username")
+os.environ["GH_PAT"] = userdata.get("git_password")
+!git config --global user.name "{userdata.get('git_username')}"
+!git config --global user.email "{userdata.get('git_email')}"
+!git config --global credential.helper '!f() { echo "username=$GH_USER"; echo "password=$GH_PAT"; }; f'
+!git clone {userdata.get('git_repo')}
+
+%cd path/to/your/repo
+```
+
 

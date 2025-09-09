@@ -1,7 +1,6 @@
 +++
 title = 'Spring Boot Exception'
 date = 2025-09-09T07:48:03-04:00
-draft = true
 +++
 
 ## USER

@@ -4,6 +4,7 @@ date = 2025-09-16T00:25:50-04:00
 draft = true
 +++
 
+## Multiclass Perceptron
 Q1
 Which statement about the multiclass perceptron convergence is correct?
 (A) It always converges for any dataset, linearly separable or not.
@@ -26,11 +27,24 @@ Assumes sequential updates example 1 then example 2, after processing both examp
 (C) w1 = [0, 1, -1], w2 = [1, 0, 1], w3 = [1, 1, 1]
 (D) w1 = [-1, 0, -1], w2 = [0, 0, 0], w3 = [1, 1, 1]
 
+### Answer && Explanations
+
 Q1 Correct answer: B. Like the binary perceptron, the multiclass perceptron has a convergence guarantee only when the dataset is linearly separable with a positive margin. For non-separable data, it may update indefinitely.
 
 Q2 Correct answer: B.
 example 1: all 0, default y=3, wrong, update w1 = [0, 1, 0], w3 = [0, -1, 0]
 example 2: s1 = 1, s2 = 0, s3 = -1, predict y = 1, wrong, update w1 = [-1, 0, -1], w2 = [1, 1, 1]
+
+## Multiclass classification
+Which of the following best describes the difference between multiclass perceptron and logistic regression updates?
+
+(A) Perceptron updates only when the prediction is wrong, logistic regression updates on every example using the gradient of log loss.
+(B) Logistic regression never updates, only perceptron updates.
+(C) Both algorithms update identically but with different learning rates.
+(D) Logistic regression requires linear separability for convergence, perceptron does not.
+
+### Answer && Explanations
+Correct answer: A. Perceptron is mistake-driven (updates only on misclassified examples). Logistic regression updates continuously using the gradient of negative log-likelihood, even when predictions are correct but uncertain.
 
 <!-- Q1
 Which of the following best contrasts the multiclass perceptron with softmax (multinomial logistic regression)?

@@ -470,22 +470,22 @@ struct SegTree{
   SegTree(int _n=0){ init(_n); }
   void init(int _n){ n=1; while(n<_n) n<<=1; t.assign(2*n,0); }
   void build(const vector<ll>& a){
-      int m = a.size(); init(m);
-      for(int i=0;i<m;i++) t[n+i]=a[i];
-      for(int i=n-1;i>0;i--) t[i]=t[i<<1]+t[i<<1|1];
+    int m = a.size(); init(m);
+    for(int i=0;i<m;i++) t[n+i]=a[i];
+    for(int i=n-1;i>0;i--) t[i]=t[i<<1]+t[i<<1|1];
   }
   void update(int p, ll val){
-      p += n; t[p] = val;
-      while(p>1){ p>>=1; t[p] = t[p<<1] + t[p<<1|1]; }
+    p += n; t[p] = val;
+    while(p>1){ p>>=1; t[p] = t[p<<1] + t[p<<1|1]; }
   }
   ll query(int l, int r){ // inclusive l,r
-      ll res=0; l+=n; r+=n;
-      while(l<=r){
-          if(l&1) res += t[l++];
-          if(!(r&1)) res += t[r--];
-          l >>= 1; r >>= 1;
-      }
-      return res;
+    ll res=0; l+=n; r+=n;
+    while(l<=r){
+      if(l&1) res += t[l++];
+      if(!(r&1)) res += t[r--];
+      l >>= 1; r >>= 1;
+    }
+    return res;
   }
 };
 
@@ -493,14 +493,14 @@ struct SegTree{
 // 13) String utilities
 // ---------------------------
 vector<int> prefix_function(const string& s){
-    int n=s.size(); vector<int> pi(n);
-    for(int i=1;i<n;i++){
-        int j = pi[i-1];
-        while(j>0 && s[i]!=s[j]) j = pi[j-1];
-        if(s[i]==s[j]) ++j;
-        pi[i]=j;
-    }
-    return pi;
+  int n=s.size(); vector<int> pi(n);
+  for(int i=1;i<n;i++){
+    int j = pi[i-1];
+    while(j>0 && s[i]!=s[j]) j = pi[j-1];
+    if(s[i]==s[j]) ++j;
+    pi[i]=j;
+  }
+  return pi;
 }
 
 // ---------------------------
@@ -508,14 +508,15 @@ vector<int> prefix_function(const string& s){
 // ---------------------------
 
 // Reserve vector capacity to avoid reallocations
-// v.reserve(1000);
+v.reserve(1000);
 
 // Use references to avoid copies when iterating large objects
-// for(const auto &x : bigVec) { ... }
+for(const auto &x : bigVec) { ... }
 
 // Use move semantics when returning big containers (RVO helps)
 
-// Use stable sort if order matters: stable_sort(begin,end,comp);
+// Use stable sort if order matters: 
+stable_sort(begin,end,comp);
 
 // ---------------------------
 // 15) Problem-specific templates (examples)
@@ -523,42 +524,42 @@ vector<int> prefix_function(const string& s){
 
 // Example: Two-sum (hashmap)
 vector<int> twoSum(const vector<int>& nums, int target){
-    unordered_map<int,int> mp;
-    for(int i=0;i<(int)nums.size();++i){
-        int need = target - nums[i];
-        if(mp.count(need)) return {mp[need], i};
-        mp[nums[i]] = i;
-    }
-    return {};
+  unordered_map<int,int> mp;
+  for(int i=0;i<(int)nums.size();++i){
+    int need = target - nums[i];
+    if(mp.count(need)) return {mp[need], i};
+    mp[nums[i]] = i;
+  }
+  return {};
 }
 
 // Example: Merge intervals (sort + sweep)
 vector<vector<int>> mergeIntervals(vector<vector<int>>& intervals){
-    if(intervals.empty()) return {};
-    sort(intervals.begin(), intervals.end());
-    vector<vector<int>> res;
-    res.push_back(intervals[0]);
-    for(auto &it: intervals){
-        auto &last = res.back();
-        if(it[0] <= last[1]) last[1] = max(last[1], it[1]);
-        else res.push_back(it);
-    }
-    return res;
+  if(intervals.empty()) return {};
+  sort(intervals.begin(), intervals.end());
+  vector<vector<int>> res;
+  res.push_back(intervals[0]);
+  for(auto &it: intervals){
+    auto &last = res.back();
+    if(it[0] <= last[1]) last[1] = max(last[1], it[1]);
+    else res.push_back(it);
+  }
+  return res;
 }
 
 // Example: Reverse linked list (iterative) - LeetCode singly-linked-list structure assumed
-// ListNode* reverseList(ListNode* head){
-//     ListNode *prev=nullptr, *cur=head;
-//     while(cur){ ListNode* nxt=cur->next; cur->next=prev; prev=cur; cur=nxt; }
-//     return prev;
-// }
+ListNode* reverseList(ListNode* head){
+  ListNode *prev=nullptr, *cur=head;
+  while(cur){ ListNode* nxt=cur->next; cur->next=prev; prev=cur; cur=nxt; }
+  return prev;
+}
 
 // ---------------------------
 // End of cheat sheet
 // ---------------------------
 
 int main(){
-    // This file is a template repository. Main left empty.
-    return 0;
+  // This file is a template repository. Main left empty.
+  return 0;
 }
 ```

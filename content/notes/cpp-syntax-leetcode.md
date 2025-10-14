@@ -266,73 +266,73 @@ const ll LINF = (ll)4e18;
 
 // Function template
 int add(int a, int b){
-    return a + b;
+  return a + b;
 }
 
 // Lambda example
-// auto cmp = [](int a, int b){ return a > b; };
+auto cmp = [](int a, int b){ return a > b; };
 
 // ---------------------------
 // 2) Binary Search (classic) -- on index 0..n-1 where predicate is monotonic
 // ---------------------------
 int binary_search_index(int n, function<bool(int)> good){
-    int l = 0, r = n - 1, ans = -1;
-    while(l <= r){
-        int m = l + (r - l) / 2;
-        if(good(m)){
-            ans = m; r = m - 1;
-        } else l = m + 1;
-    }
-    return ans;
+  int l = 0, r = n - 1, ans = -1;
+  while(l <= r){
+    int m = l + (r - l) / 2;
+    if(good(m)){
+      ans = m; r = m - 1;
+    } else l = m + 1;
+  }
+  return ans;
 }
 
 // ---------------------------
 // 3) Two pointers / Sliding window
 // ---------------------------
 int count_subarrays_with_sum_at_most_k(const vector<int>& a, int k){
-    int n = a.size();
-    long long sum = 0; int l = 0; int cnt = 0;
-    for(int r=0;r<n;++r){
-        sum += a[r];
-        while(l <= r && sum > k){ sum -= a[l++]; }
-        cnt += (r - l + 1);
-    }
-    return cnt;
+  int n = a.size();
+  long long sum = 0; int l = 0; int cnt = 0;
+  for(int r=0;r<n;++r){
+    sum += a[r];
+    while(l <= r && sum > k){ sum -= a[l++]; }
+    cnt += (r - l + 1);
+  }
+  return cnt;
 }
 
 // ---------------------------
 // 4) DFS (recursive) & backtracking template
 // ---------------------------
 void dfs_recursive(int u, const vector<vector<int>>& g, vector<int>& vis){
-    vis[u] = 1;
-    for(int v: g[u]) if(!vis[v]) dfs_recursive(v,g,vis);
+  vis[u] = 1;
+  for(int v: g[u]) if(!vis[v]) dfs_recursive(v,g,vis);
 }
 
 // Backtracking example: generate permutations
 void backtrack_perms(vector<int>& a, vector<int>& cur, vector<bool>& used, vector<vector<int>>& out){
-    if((int)cur.size() == (int)a.size()){ out.push_back(cur); return; }
-    for(int i=0;i<(int)a.size();++i){
-        if(used[i]) continue;
-        used[i] = true;
-        cur.push_back(a[i]);
-        backtrack_perms(a,cur,used,out);
-        cur.pop_back();
-        used[i] = false;
-    }
+  if((int)cur.size() == (int)a.size()){ out.push_back(cur); return; }
+  for(int i=0;i<(int)a.size();++i){
+    if(used[i]) continue;
+    used[i] = true;
+    cur.push_back(a[i]);
+    backtrack_perms(a,cur,used,out);
+    cur.pop_back();
+    used[i] = false;
+  }
 }
 
 // ---------------------------
 // 5) BFS template (shortest path in unweighted graph)
 // ---------------------------
 vector<int> bfs_dist(int s, const vector<vector<int>>& g){
-    int n = g.size();
-    vector<int> dist(n, -1);
-    queue<int>q; q.push(s); dist[s]=0;
-    while(!q.empty()){
-        int u=q.front(); q.pop();
-        for(int v: g[u]) if(dist[v]==-1){ dist[v]=dist[u]+1; q.push(v); }
-    }
-    return dist;
+  int n = g.size();
+  vector<int> dist(n, -1);
+  queue<int>q; q.push(s); dist[s]=0;
+  while(!q.empty()){
+    int u=q.front(); q.pop();
+    for(int v: g[u]) if(dist[v]==-1){ dist[v]=dist[u]+1; q.push(v); }
+  }
+  return dist;
 }
 
 // ---------------------------
@@ -343,30 +343,30 @@ vector<int> bfs_dist(int s, const vector<vector<int>>& g){
 
 // Example: k smallest elements
 vector<int> k_smallest(const vector<int>& a, int k){
-    priority_queue<int> pq;
-    for(int x: a){
-        pq.push(x);
-        if((int)pq.size() > k) pq.pop();
-    }
-    vector<int> res;
-    while(!pq.empty()){ res.push_back(pq.top()); pq.pop(); }
-    reverse(res.begin(), res.end());
-    return res;
+  priority_queue<int> pq;
+  for(int x: a){
+    pq.push(x);
+    if((int)pq.size() > k) pq.pop();
+  }
+  vector<int> res;
+  while(!pq.empty()){ res.push_back(pq.top()); pq.pop(); }
+  reverse(res.begin(), res.end());
+  return res;
 }
 
 // ---------------------------
 // 7) Union-Find (Disjoint Set Union)
 // ---------------------------
 struct DSU{
-    int n; vector<int> p, r;
-    DSU(int n=0): n(n), p(n), r(n,0){ iota(p.begin(), p.end(), 0); }
-    int find(int x){ return p[x]==x?x:p[x]=find(p[x]); }
-    bool unite(int a,int b){
-        a=find(a); b=find(b); if(a==b) return false;
-        if(r[a]<r[b]) swap(a,b);
-        p[b]=a; if(r[a]==r[b]) r[a]++;
-        return true;
-    }
+  int n; vector<int> p, r;
+  DSU(int n=0): n(n), p(n), r(n,0){ iota(p.begin(), p.end(), 0); }
+  int find(int x){ return p[x]==x?x:p[x]=find(p[x]); }
+  bool unite(int a,int b){
+    a=find(a); b=find(b); if(a==b) return false;
+    if(r[a]<r[b]) swap(a,b);
+    p[b]=a; if(r[a]==r[b]) r[a]++;
+    return true;
+  }
 };
 
 // ---------------------------
@@ -374,19 +374,19 @@ struct DSU{
 // ---------------------------
 
 // sort vector
-// sort(v.begin(), v.end());
+sort(v.begin(), v.end());
 // sort by custom comparator
-// sort(v.begin(), v.end(), [](auto &x, auto &y){ return x.second < y.second; });
+sort(v.begin(), v.end(), [](auto &x, auto &y){ return x.second < y.second; });
 
 // lower_bound / upper_bound (on sorted container)
-// auto it = lower_bound(v.begin(), v.end(), value);
-// int idx = it - v.begin();
+auto it = lower_bound(v.begin(), v.end(), value);
+int idx = it - v.begin();
 
 // unique to remove consecutive duplicates
-// v.erase(unique(v.begin(), v.end()), v.end());
+v.erase(unique(v.begin(), v.end()), v.end());
 
 // prefix sum
-// vector<ll> pref(n+1,0); for(int i=0;i<n;++i) pref[i+1]=pref[i]+a[i];
+vector<ll> pref(n+1,0); for(int i=0;i<n;++i) pref[i+1]=pref[i]+a[i];
 
 // ---------------------------
 // 9) DP templates (top-down & bottom-up)
@@ -395,17 +395,17 @@ struct DSU{
 // Top-down memoization example (Fibonacci)
 vector<ll> memo_fib;
 ll fib_td(int n){
-    if(n<=1) return n;
-    if(memo_fib[n] != -1) return memo_fib[n];
-    return memo_fib[n] = fib_td(n-1) + fib_td(n-2);
+  if(n<=1) return n;
+  if(memo_fib[n] != -1) return memo_fib[n];
+  return memo_fib[n] = fib_td(n-1) + fib_td(n-2);
 }
 
 // Bottom-up DP example
 ll fib_bu(int n){
-    if(n<=1) return n;
-    ll a=0,b=1;
-    for(int i=2;i<=n;i++){ ll c=a+b; a=b; b=c; }
-    return b;
+  if(n<=1) return n;
+  ll a=0,b=1;
+  for(int i=2;i<=n;i++){ ll c=a+b; a=b; b=c; }
+  return b;
 }
 
 // ---------------------------
@@ -413,80 +413,80 @@ ll fib_bu(int n){
 // ---------------------------
 
 vector<ll> dijkstra(int src, const vector<vector<pair<int,int>>>& g){
-    int n = g.size();
-    vector<ll> dist(n, LINF);
-    priority_queue<pair<ll,int>, vector<pair<ll,int>>, greater<pair<ll,int>>> pq;
-    dist[src]=0; pq.push({0,src});
-    while(!pq.empty()){
-        auto [d,u] = pq.top(); pq.pop();
-        if(d!=dist[u]) continue;
-        for(auto [v,w]: g[u]){
-            if(dist[v] > dist[u] + w){
-                dist[v] = dist[u] + w;
-                pq.push({dist[v], v});
-            }
-        }
+  int n = g.size();
+  vector<ll> dist(n, LINF);
+  priority_queue<pair<ll,int>, vector<pair<ll,int>>, greater<pair<ll,int>>> pq;
+  dist[src]=0; pq.push({0,src});
+  while(!pq.empty()){
+    auto [d,u] = pq.top(); pq.pop();
+    if(d!=dist[u]) continue;
+    for(auto [v,w]: g[u]){
+      if(dist[v] > dist[u] + w){
+        dist[v] = dist[u] + w;
+        pq.push({dist[v], v});
+      }
     }
-    return dist;
+  }
+  return dist;
 }
 
 vector<int> topo_sort(int n, const vector<vector<int>>& g){
-    vector<int> indeg(n,0);
-    for(int u=0;u<n;++u) for(int v: g[u]) indeg[v]++;
-    queue<int> q; for(int i=0;i<n;++i) if(indeg[i]==0) q.push(i);
-    vector<int> order;
-    while(!q.empty()){
-        int u=q.front(); q.pop(); order.push_back(u);
-        for(int v: g[u]) if(--indeg[v]==0) q.push(v);
-    }
-    if((int)order.size()!=n) return {}; // cycle
-    return order;
+  vector<int> indeg(n,0);
+  for(int u=0;u<n;++u) for(int v: g[u]) indeg[v]++;
+  queue<int> q; for(int i=0;i<n;++i) if(indeg[i]==0) q.push(i);
+  vector<int> order;
+  while(!q.empty()){
+    int u=q.front(); q.pop(); order.push_back(u);
+    for(int v: g[u]) if(--indeg[v]==0) q.push(v);
+  }
+  if((int)order.size()!=n) return {}; // cycle
+  return order;
 }
 
 // ---------------------------
 // 11) Trie (prefix tree) -- common string problem template
 // ---------------------------
 struct TrieNode{
-    array<int,26> nxt;
-    bool end=false;
-    TrieNode(){ nxt.fill(-1); }
+  array<int,26> nxt;
+  bool end=false;
+  TrieNode(){ nxt.fill(-1); }
 };
 struct Trie{
-    vector<TrieNode> t;
-    Trie(){ t.emplace_back(); }
-    void insert(const string &s){
-        int cur=0;
-        for(char ch: s){ int c=ch-'a'; if(t[cur].nxt[c]==-1){ t[cur].nxt[c]=t.size(); t.emplace_back(); } cur=t[cur].nxt[c]; }
-        t[cur].end=true;
-    }
-    bool search(const string &s){ int cur=0; for(char ch: s){ int c=ch-'a'; if(t[cur].nxt[c]==-1) return false; cur=t[cur].nxt[c]; } return t[cur].end; }
+  vector<TrieNode> t;
+  Trie(){ t.emplace_back(); }
+  void insert(const string &s){
+    int cur=0;
+    for(char ch: s){ int c=ch-'a'; if(t[cur].nxt[c]==-1){ t[cur].nxt[c]=t.size(); t.emplace_back(); } cur=t[cur].nxt[c]; }
+    t[cur].end=true;
+  }
+  bool search(const string &s){ int cur=0; for(char ch: s){ int c=ch-'a'; if(t[cur].nxt[c]==-1) return false; cur=t[cur].nxt[c]; } return t[cur].end; }
 };
 
 // ---------------------------
 // 12) Segment Tree (range sum) -- iterative (bottom-up)
 // ---------------------------
 struct SegTree{
-    int n; vector<ll> t;
-    SegTree(int _n=0){ init(_n); }
-    void init(int _n){ n=1; while(n<_n) n<<=1; t.assign(2*n,0); }
-    void build(const vector<ll>& a){
-        int m = a.size(); init(m);
-        for(int i=0;i<m;i++) t[n+i]=a[i];
-        for(int i=n-1;i>0;i--) t[i]=t[i<<1]+t[i<<1|1];
-    }
-    void update(int p, ll val){
-        p += n; t[p] = val;
-        while(p>1){ p>>=1; t[p] = t[p<<1] + t[p<<1|1]; }
-    }
-    ll query(int l, int r){ // inclusive l,r
-        ll res=0; l+=n; r+=n;
-        while(l<=r){
-            if(l&1) res += t[l++];
-            if(!(r&1)) res += t[r--];
-            l >>= 1; r >>= 1;
-        }
-        return res;
-    }
+  int n; vector<ll> t;
+  SegTree(int _n=0){ init(_n); }
+  void init(int _n){ n=1; while(n<_n) n<<=1; t.assign(2*n,0); }
+  void build(const vector<ll>& a){
+      int m = a.size(); init(m);
+      for(int i=0;i<m;i++) t[n+i]=a[i];
+      for(int i=n-1;i>0;i--) t[i]=t[i<<1]+t[i<<1|1];
+  }
+  void update(int p, ll val){
+      p += n; t[p] = val;
+      while(p>1){ p>>=1; t[p] = t[p<<1] + t[p<<1|1]; }
+  }
+  ll query(int l, int r){ // inclusive l,r
+      ll res=0; l+=n; r+=n;
+      while(l<=r){
+          if(l&1) res += t[l++];
+          if(!(r&1)) res += t[r--];
+          l >>= 1; r >>= 1;
+      }
+      return res;
+  }
 };
 
 // ---------------------------

@@ -338,8 +338,10 @@ vector<int> bfs_dist(int s, const vector<vector<int>>& g){
 // ---------------------------
 // 6) Priority queue (heap) - min and max
 // ---------------------------
-// Max-heap: priority_queue<int> pq;
-// Min-heap: priority_queue<int, vector<int>, greater<int>> pq;
+// Max-heap: 
+priority_queue<int> pq;
+// Min-heap: 
+priority_queue<int, vector<int>, greater<int>> pq;
 
 // Example: k smallest elements
 vector<int> k_smallest(const vector<int>& a, int k){

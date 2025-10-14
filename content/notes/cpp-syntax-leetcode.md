@@ -175,6 +175,11 @@ I’ve grouped them into **Beginner → Intermediate → Advanced** levels so yo
 
 ---
 
+Example: 
+`int dist[1000];`
+`memset(dist, 0x3f, sizeof(dist)); // sets all ints to 0x3f3f3f3f`
+
+
 ## ⚡ 9. **Time & Space Optimization Tricks**
 
 * `ios::sync_with_stdio(false);`

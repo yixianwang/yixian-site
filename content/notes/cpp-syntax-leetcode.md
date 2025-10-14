@@ -232,10 +232,6 @@ Example:
 4. Practice recursion and lambda patterns (great for backtracking & DFS problems).
 5. Know your containers — which one to use for O(1) or O(log n).
 
----
-
-If you want, I can also give you a **C++ LeetCode cheat sheet** (a single file with templates for common problems like DFS, BFS, binary search, heap, union find, DP, etc.).
-👉 Do you want me to generate that file for you? (Yes/No)
 
 ```cpp
 // C++ LeetCode Cheat Sheet

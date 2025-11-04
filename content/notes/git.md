@@ -189,7 +189,7 @@ References:
 - https://seesparkbox.com/foundry/semantic_commit_messages
 - http://karma-runner.github.io/1.0/dev/git-commit-msg.html
 
-## .gitattribute
+## .gitattributes
 ```
 ###############################################################################
 # Global text handling

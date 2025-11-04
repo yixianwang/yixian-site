@@ -188,3 +188,107 @@ References:
 - https://www.conventionalcommits.org/
 - https://seesparkbox.com/foundry/semantic_commit_messages
 - http://karma-runner.github.io/1.0/dev/git-commit-msg.html
+
+## .gitattribute
+```
+###############################################################################
+# Global text handling
+###############################################################################
+# Automatically normalize line endings on commit and checkout
+* text=auto
+
+# Explicitly enforce LF for source code (avoid CRLF issues)
+*.java     text eol=lf
+*.kt       text eol=lf
+*.xml      text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.sql      text eol=lf
+*.sh       text eol=lf
+*.ts       text eol=lf
+*.js       text eol=lf
+*.json     text eol=lf
+*.html     text eol=lf
+*.scss     text eol=lf
+*.css      text eol=lf
+*.md       text eol=lf
+
+# Windows batch scripts should keep CRLF
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+
+
+###############################################################################
+# Binary files
+###############################################################################
+# Mark images, fonts, and archives as binary so Git won’t try to diff or merge them
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.ico      binary
+*.zip      binary
+*.jar      binary
+*.war      binary
+*.pdf      binary
+*.eot      binary
+*.ttf      binary
+*.woff     binary
+*.woff2    binary
+
+
+###############################################################################
+# Merge strategies
+###############################################################################
+# Never try to merge lock or dependency files automatically
+package-lock.json merge=ours
+yarn.lock         merge=ours
+pnpm-lock.yaml    merge=ours
+*.iml             merge=ours
+*.class           merge=ours
+
+# Ignore changes in generated build artifacts
+/dist/*           merge=ours
+/build/*          merge=ours
+/target/*         merge=ours
+
+
+###############################################################################
+# Diff settings
+###############################################################################
+# Use syntax-aware diffs for specific file types
+*.java diff=java
+*.xml  diff=xml
+*.html diff=html
+*.ts   diff=javascript
+*.scss diff=css
+*.css  diff=css
+*.md   diff=markdown
+
+# Disable diffs for binary files
+*.png -diff
+*.jpg -diff
+*.gif -diff
+*.jar -diff
+*.zip -diff
+
+
+###############################################################################
+# Git LFS (optional)
+###############################################################################
+# If using Git LFS for large media or artifacts, mark them lockable
+# *.psd filter=lfs diff=lfs merge=lfs -text lockable
+# *.mp4 filter=lfs diff=lfs merge=lfs -text lockable
+
+
+###############################################################################
+# Export / Archive rules
+###############################################################################
+# Exclude node_modules and build outputs when creating a Git archive
+node_modules/ export-ignore
+dist/         export-ignore
+build/        export-ignore
+target/       export-ignore
+.idea/        export-ignore
+.vscode/      export-ignore
+```

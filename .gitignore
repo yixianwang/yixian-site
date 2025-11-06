@@ -1,5 +1,7 @@
-.DS_Store
-temp
+# Hugo output
 public/
-.obsidian/
-Writerside/
+resources/
+.hugo_build.lock
+
+# Editor
+.vscode/

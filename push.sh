@@ -45,7 +45,10 @@ else
 fi
 run git push
 
-# ---- step 3: build with Hugo ----------------------------------------------
+# ---- step 3: clean and build with Hugo ------------------------------------
+echo "🧹 Cleaning old public/ files (except .git and .github)..."
+find ./public -mindepth 1 -not -path "./public/.git/*" -not -path "./public/.github/*" -print0 | xargs -0 rm -rf
+
 echo "🏗️ Running Hugo build..."
 run hugo
 

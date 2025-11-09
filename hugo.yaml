@@ -34,7 +34,7 @@ markup:
 menu:
   main:
     - name: Home
-      pageRef: /about
+      pageRef: /
       weight: 1
     - name: Projects
       pageRef: /projects

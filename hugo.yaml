@@ -45,23 +45,25 @@ menu:
     - name: Notes
       pageRef: /notes
       weight: 4
-
-    # - name: Papers
-    #   pageRef: /paper
-    #   weight: 5
-    # - name: Life
-    #   pageRef: /life
-    #   weight: 6
-    # - name: Photos
-    #   pageRef: /photo
-    #   weight: 7
-
     - name: Search
-      weight: 20
+      weight: 5
       params:
         type: search
     - name: GitHub
-      weight: 21
+      weight: 6 
       url: "https://github.com/yixianwang"
       params:
         icon: github
+
+params:
+  navbar:
+    displayTitle: true
+    displayLogo: false
+
+  footer:
+    displayCopyright: false
+    displayPoweredBy: true
+
+  editURL:
+    enable: true
+    base: "https://github.com/imfing/hextra-starter-template/edit/main/content"

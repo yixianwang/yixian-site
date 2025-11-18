@@ -5,9 +5,12 @@ draft = true
 +++
 
 ## Runtime Error Challenge
-- group unique index, (PUID, CD, TIMESTAMP), the timestamp not granually enough.
+- The issue is from the group unique index, (PUID, CD, TIMESTAMP), the timestamp not granually enough.
 
 ## Query Performance issue
-- the CTE contains many rows, and when join back to the main query, it's very slow
+- The issue comes from the CTE contains many rows, and when join back to the main query, it's very slow
+
+## Context pass along
+- How to pass context back and forth
 
 ## 

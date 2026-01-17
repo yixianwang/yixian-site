@@ -1,7 +1,6 @@
 +++
 title = 'MEMO'
 date = 2025-10-25T17:21:05-04:00
-draft = true
 +++
 
 ## pre-requisite

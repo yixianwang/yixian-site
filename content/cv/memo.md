@@ -12,3 +12,6 @@
 ### DB Unique index constraint bug for efficient code
 ### Drool syntax: && cannot skip second part, comma can skip second part
 ### Not code related: not coding error, need to push back to not coding error
+### jdk25 bugs:
+1. queryForObject always throw EmptyResultDataAccessException
+2. jackson 3, cannot use primitive boolean in payload

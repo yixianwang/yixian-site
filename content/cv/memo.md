@@ -9,6 +9,7 @@
 ## Challenges
 ### Virtual thread block the other thread
 1. `jps -l` # to list java process, find springboot Application.class process
+2.0 `jcmd 12345 help`
 2. `jcmd 12345 Thread.print`
 <!-- 2.legacy jstack 12345 # thread dump, to debug thead deadlock, stuck threads: look for BLOCKED, and WAITING threads -->
 3. `jcmd 12345 VM.flags` # inspect JVM flags

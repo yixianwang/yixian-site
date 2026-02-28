@@ -14,8 +14,9 @@
 ### Drool syntax: && cannot skip second part, comma can skip second part
 ### Not code related: not coding error, need to push back to not coding error
 ### jdk25 bugs:
-1. queryForObject always throw EmptyResultDataAccessException
 2. jackson 3, cannot use primitive boolean in payload
+### sb4 bugs:
+1. queryForObject always throw EmptyResultDataAccessException if set fetchSize globally, we should use for each preparedStatement for each query 
 ### improve query performance
 1. reduce the size of CTE (common table expression)
 2. landing on index (most of time)

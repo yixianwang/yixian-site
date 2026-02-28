@@ -10,10 +10,12 @@
 ### Virtual thread block the other thread
 1. jps -l # to list java process, find springboot Application.class process
 2. jcmd 12345 Thread.print
-2.legacy jstack 12345 # thread dump, to debug thead deadlock, stuck threads: look for BLOCKED, and WAITING threads
+<!-- 2.legacy jstack 12345 # thread dump, to debug thead deadlock, stuck threads: look for BLOCKED, and WAITING threads -->
 3. jcmd 12345 VM.flags # inspect JVM flags
 4. jcmd 12345 GC.heap_info
-4.legacy jmap -heap 12345 # memory dump, to debug memory leak
+<!-- 4.legacy jmap -heap 12345 # memory dump, to debug memory leak -->
+5. jcmd PID VM.command_line # inspect JVM arguments
+
 ### BRE performance: stream dao layer for large query, separate query to avoid large CTE, virtual thread
 ### Production defect: WAF rule
 ### DB Unique index constraint bug for efficient code

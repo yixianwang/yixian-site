@@ -15,6 +15,7 @@
 4. `jcmd 12345 GC.heap_info`
 <!-- 4.legacy jmap -heap 12345 # memory dump, to debug memory leak -->
 5. `jcmd PID VM.command_line` # inspect JVM arguments
+<!-- 5.legacy `wmic process where processid=12345 get commandline` -->
 
 ### Use JFR
 1. `jcmd 12345 JFR.start name=debug duration=60s filename=C:\temp\debug.jfr`

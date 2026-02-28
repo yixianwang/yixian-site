@@ -15,3 +15,7 @@
 ### jdk25 bugs:
 1. queryForObject always throw EmptyResultDataAccessException
 2. jackson 3, cannot use primitive boolean in payload
+### improve query performance
+1. reduce the size of CTE (common table expression)
+2. landing on index (most of time)
+3. improve table join

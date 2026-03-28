@@ -5,3 +5,8 @@ resources/
 
 # Editor
 .vscode/
+
+# OS / tooling
+.DS_Store
+__pycache__/
+temp/

@@ -4,7 +4,7 @@ date = 2026-03-28T09:03:40-04:00
 description = ''
 +++
 
-## .claude > TODO.md t
+## .claude > TODO.md
 ```
 # project-name TODO
 

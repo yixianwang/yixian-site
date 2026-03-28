@@ -11,8 +11,8 @@ run() {
 }
 
 has_changes() {
-  # true (0) if there are staged/unstaged changes
-  ! git diff --quiet || ! git diff --cached --quiet
+  # true (0) if there are staged, unstaged, or untracked changes
+  ! git diff --quiet || ! git diff --cached --quiet || [[ -n "$(git ls-files --others --exclude-standard)" ]]
 }
 
 # ---- preflight -------------------------------------------------------------
@@ -33,7 +33,7 @@ fi
 
 # ---- step 1: sync with main -----------------------------------------------
 echo "🔄 Checking out and pulling latest from main..."
-run git pull origin main
+run git pull --rebase origin main
 
 # ---- step 2: push changes to main repo ------------------------------------
 echo "🔄 Pushing to main repo..."
@@ -47,7 +47,10 @@ run git push
 
 # ---- step 3: clean and build with Hugo ------------------------------------
 echo "🧹 Cleaning old public/ files (except .git and .github)..."
-find ./public -mindepth 1 -not -path "./public/.git/*" -not -path "./public/.github/*" -print0 | xargs -0 rm -rf
+find ./public -mindepth 1 \
+  -not -path "./public/.git" -not -path "./public/.git/*" \
+  -not -path "./public/.github" -not -path "./public/.github/*" \
+  -print0 | xargs -0 rm -rf
 
 echo "🏗️ Running Hugo build..."
 run hugo

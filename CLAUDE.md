@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal website for Yixian Wang built with **Hugo** (static site generator) using the **Blowfish** theme (`github.com/nunocoracao/blowfish/v2`). Deployed to GitHub Pages at `https://yixianwang.github.io/`.
+Personal website for Yixian Wang built with **Hugo** (static site generator) using the **Blowfish** theme (`github.com/nunocoracao/blowfish/v2`). Deployed to GitHub Pages at `https://arkticor.com` (custom domain, via `yixianwang/yixianwang.github.io`).
 
 ## Common Commands
 
@@ -36,7 +36,9 @@ hugo mod tidy
 ## Architecture
 
 ### Dual-repo deployment model
-The `public/` directory is a **separate git repository** that maps to the GitHub Pages site. The `push.sh` script orchestrates: pull source -> commit source -> hugo build -> commit+push `public/`. Never delete `public/.git` or `public/.github`.
+The `public/` directory is a **separate git repository** (`yixianwang/yixianwang.github.io`) that maps to the GitHub Pages site. The root repo is `yixianwang/yixian-site`. The `push.sh` script orchestrates: pull source -> commit source -> hugo build -> commit+push `public/`.
+
+**Critical:** `public/.git` must remain intact — without it, `git -C public` commands silently operate on the root repo instead. Never use `git -C public` without first verifying `public/.git` exists. Never delete `public/.git` or `public/.github`. If `public/.git` is lost, re-clone: `rm -rf public && git clone git@github.com:yixianwang/yixianwang.github.io.git public`.
 
 ### Content structure
 - `content/blog/` — Blog posts (TOML front matter `+++...+++`, use `<!--more-->` for summary break)

@@ -121,9 +121,9 @@ functional interface with static
   the next and the highest generation, generation 2. This algorithm works efficiently for garbage collection of objects,
   as it is fast.
 
-![48](images-a/48.png)
+![48](../images-a/48.png)
 
-![49](images-a/49.png)
+![49](../images-a/49.png)
 
 ## Generics in Java, what is it, why we need it?
 
@@ -236,17 +236,17 @@ static: inner class, method, variable, static block
 
 ## keywords
 
-![29](images-a/29.png)
+![29](../images-a/29.png)
 
 ## Sort methods
 
-![30](images-a/30.png)
+![30](../images-a/30.png)
 
 ## JDK and JRE
 
 - JDK = JRE + DEV tools (Javac Compiler etc.)
 - JRE = JVM + Java SE standard library
-  ![21](images-a/21.png)
+  ![21](../images-a/21.png)
 
 ## JVM
 
@@ -267,13 +267,13 @@ static: inner class, method, variable, static block
 
 ### JVM memory model
 
-![20](images-a/20.png)
+![20](../images-a/20.png)
 
 ## What's the result from the code1
 
 - Green Black
    - line 70 first
-     ![22](images-a/22.png)
+     ![22](../images-a/22.png)
 
 ## the diff between RunOutOfMemory and OverStackFlow Exceptions in JVM
 
@@ -283,7 +283,7 @@ static: inner class, method, variable, static block
    - Bootstrap ClassLoader: to load the first pure java ClassLoader
    - Extension ClassLoader: to load extensions of core java from jdk extension library
    - System/Application ClassLoader: to load application type classes
-     ![25](images-a/25.png)
+     ![25](../images-a/25.png)
 
 ## Class class
 
@@ -315,8 +315,8 @@ static: inner class, method, variable, static block
 
 - Person inherited from Object
 - if we don't override hashCode method, it's basically comparing based on References.
-  ![23](images-a/23.png)
-  ![24](images-a/24.png)
+  ![23](../images-a/23.png)
+  ![24](../images-a/24.png)
 
 ### HashSet
 
@@ -325,8 +325,8 @@ static: inner class, method, variable, static block
 
 ### Comparison between any pair of data structures
 
-![ds1](images-a/1.png)
-![ds2](images-a/2.png)
+![ds1](../images-a/1.png)
+![ds2](../images-a/2.png)
 
 ## Java Flight Recorder
 
@@ -360,12 +360,12 @@ enum Day {
 }
 ```
 
-![28](images-a/28.png)
-![27](images-a/27.png)
+![28](../images-a/28.png)
+![27](../images-a/27.png)
 
 ### without Enum
 
-![26](images-a/26.png)
+![26](../images-a/26.png)
 
 ## Annotations
 
@@ -391,9 +391,9 @@ enum Day {
          - TYPE_USE
       - Documented: define if it is documented
       - Inherited: define if this annotation can inherit from parent to the child
-        ![31](images-a/31.png)
+        ![31](../images-a/31.png)
 
-![32](images-a/32.png)
+![32](../images-a/32.png)
 
 ## Exception Handling
 
@@ -415,14 +415,14 @@ enum Day {
 extends RuntimeException)**, then **what kind of infomation that we need to pass(those public methods)**, last *
 *messages and error code** are traditional ones that almost every customize exceptions can have.
 
-![33](images-a/33.png)
+![33](../images-a/33.png)
 
 ### Inheritance in Exceptions
 
 - the child class can only have same or narrower scope.
    - i.e. parent throws `Exception`, child should throws `Exception(same) or IOException(narrower)`
 
-![34](images-a/34.png)
+![34](../images-a/34.png)
 
 ## IOStream
 
@@ -436,14 +436,14 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 - `FileWriter`, writing file from JVM to hard disk in 16 bits each time
 - `CharArrayReader`, writing file from JVM to hard disk in 16 bits each time
 
-![35](images-a/35.png)
+![35](../images-a/35.png)
 
 > pay attention to `Bufffered` ones. They are just wrapping up the normal I/O Stream. It's trying to do increase the
 > communication speed.
 
 - `DEFAULT_BUFFER_SIZE = 8192` bytes, everytime with buffered we have 8 mb into JVM, instead of 1 byte or 2 bytes.
 
-![36](images-a/36.png)
+![36](../images-a/36.png)
 
 ### In real practice example
 
@@ -451,15 +451,15 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
    - means once we turn off the wrapper buffer stream, it will also turn off the inside
    - so we just need to close the buffered one, the inside will close automatically.
 
-![37](images-a/37.png)
+![37](../images-a/37.png)
 
 - Another good thing about `AutoCloseable` interface, is that once we implement that we can use `try-with-resource`
 
-![38](images-a/38.png)
+![38](../images-a/38.png)
 
 ### virtual thread is the future
 
-![43](images-a/43.png)
+![43](../images-a/43.png)
 
 ### Java 8 new features
 
@@ -469,7 +469,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
    - it's just a annoynous method wrapped up with an annoynoms object. That's the object is the actually the thing we
      passed to our Java program.
 
-![39](images-a/39.png)
+![39](../images-a/39.png)
 
 - Functional Interface
    - it's a kind of interface that has only 1 abstract method.
@@ -491,13 +491,13 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 - Function<T>
 - Predicate<T>
 
-![40](images-a/40.png)
+![40](../images-a/40.png)
 
-![41](images-a/41.png)
+![41](../images-a/41.png)
 
 - Stream API
    - It's let java can program in a way just like other functional programming language.
-     ![42](images-a/42.png)
+     ![42](../images-a/42.png)
    - Two types of stream:
       - finite stream
          - normal `stream()`
@@ -511,7 +511,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 > it will keep original data intact.
 
-![45](images-a/45.png)
+![45](../images-a/45.png)
 
 - Method Reference
    - is a further utilization of Lambda Expression. which is also a functional interface.
@@ -521,7 +521,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
    - The only thing we cannot reference is **abstract method**, as long as the method has a method body, that means we
      can refer to it.
 
-![44](images-a/44.png)
+![44](../images-a/44.png)
 
 - Optional Class
    - it can help to handle NullPointerExceptions
@@ -531,14 +531,14 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 ## Multithreading
 
-![46](images-a/46.png)
+![46](../images-a/46.png)
 
 - when we are talking about traditional thread, we should always use thread pool.
 - virtual thread is good and is the future, but it's not available for old java versions.
 
 - the first two ways to create new thread cannot throw any Exceptions, and no return for run method.
 - the third one can have return data types and also can throw Exceptions.
-  ![47](images-a/47.png)
+  ![47](../images-a/47.png)
 
 > we can set priority for each thread from 1(least significant) - 10(most significant)
 
@@ -553,7 +553,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 ### ThreadPool(or ExecutorService)
 
-![50](images-a/50.png)
+![50](../images-a/50.png)
 
 ### Summary
 
@@ -568,11 +568,11 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 - critical section: we have some threads, those threads are going to manipulate some common resources.
 
-![51](images-a/51.png)
+![51](../images-a/51.png)
 
 ### data type built-in lock
 
-![52](images-a/52.png)
+![52](../images-a/52.png)
 
 ### lock with synchronized keyword
 
@@ -586,7 +586,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
    - if we want to ensure the execution of the thread order is exactly the way that I want. I need to
      use `ReentrantLock` and `Condition`.
 
-![53](images-a/53.png)
+![53](../images-a/53.png)
 
 ### Avoid!!!
 
@@ -594,7 +594,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 - class template lock: means any of those static methods are locked with the same lock.
    - because static element is saved in method area in JVM, it's a class template lock.
-     ![54](images-a/54.png)
+     ![54](../images-a/54.png)
 
 - the following is not thread safe
    - the first `synchronized` keyword without static is on the object lock.
@@ -613,12 +613,12 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
      everything is done, the main thread will come back and get the result. then continue to running.
 - Cons for CompletableFuture, it's hard to handle Exceptions all over the place.
 
-![56](images-a/56.png)
-![57](images-a/57.png)
-![58](images-a/58.png)
-![59](images-a/59.png)
-![60](images-a/60.png)
-![61](images-a/61.png)
+![56](../images-a/56.png)
+![57](../images-a/57.png)
+![58](../images-a/58.png)
+![59](../images-a/59.png)
+![60](../images-a/60.png)
+![61](../images-a/61.png)
 
 ## volatile keyword: visibility only
 
@@ -635,14 +635,14 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 - it's special that it doesn't contain any lock.
    - it uses self-spinning mechanism to ensure that object value or any of those common resource value is going to be
      upgraded with the correct version.
-     ![62](images-a/62.png)
+     ![62](../images-a/62.png)
 
 - i.e. AtomicInteger
 
-![63](images-a/63.png)
+![63](../images-a/63.png)
 
 - i.e. AtomicReference
-  ![64](images-a/64.png)
+  ![64](../images-a/64.png)
 
 ### CAS vs Lock
 
@@ -810,7 +810,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 ## Java Web Architecture
 
 - Web Components(servlet, JSP): a unit can handle specific logic.
-  ![4](images-a/4.png)
+  ![4](../images-a/4.png)
 
 ### Backend Web Server/Container
 
@@ -832,9 +832,9 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 > the underlying technology behind Spring Data JPA is Hibernate. the underlying technology behind the Hibernate is JDBC.
 
-![5](images-a/5.png)
-![6](images-a/6.png)
-![7](images-a/7.png)
+![5](../images-a/5.png)
+![6](../images-a/6.png)
+![7](../images-a/7.png)
 
 ## Maven/Gradle
 
@@ -856,7 +856,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 ### Maven folder structure
 
-![8](images-a/8.png)
+![8](../images-a/8.png)
 
 ### Types of Repositories in Maven
 
@@ -889,7 +889,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 - We transfer the control of the object to the container of framework, which is `ApplicationContext`.
 - `ApplicationContext` helps us manage all beans life cycle.
 
-![9](images-a/9.png)
+![9](../images-a/9.png)
 
 - It is a principle which **transfer the control of the objects** to a container or framework.
 
@@ -897,11 +897,11 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 - We can inject the object into another object.
 
-![10](images-a/10.png)
-![11](images-a/11.png)
-![12](images-a/12.png)
-![13](images-a/13.png)
-![14](images-a/14.png)
+![10](../images-a/10.png)
+![11](../images-a/11.png)
+![12](../images-a/12.png)
+![13](../images-a/13.png)
+![14](../images-a/14.png)
 
 ## Bean Scope
 
@@ -982,7 +982,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 - `@PostConstruct`
 - `@PreDestroy`
-  ![15](images-a/15.png)
+  ![15](../images-a/15.png)
 
 ## AOP
 
@@ -1040,7 +1040,7 @@ extends RuntimeException)**, then **what kind of infomation that we need to pass
 
 - underlying logic of AOP is Reflection
 - Dynamic Proxy -> Reflection
-  ![16](images-a/16.png)
+  ![16](../images-a/16.png)
 
 ### SpringBoot Advantages
 
@@ -1145,9 +1145,9 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 8. Finally, the **DispatcherServlet** sends the generated response (HTML, JSON, XML, etc.) back to the client that
    initiated the request.
 
-![18](images-a/18.png)
+![18](../images-a/18.png)
 
-![17](images-a/17.png)
+![17](../images-a/17.png)
 
 ## 3 Layers
 
@@ -1168,7 +1168,7 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 
 ## Handle Exception in SpringBoot
 
-![3](images-a/3.png)
+![3](../images-a/3.png)
 
 - `@ExceptionHandler` within class, is **local** `@ExceptionHandler`.
 - `@ControllerAdvice` class with `@ExceptionHandler`, is **global** `@ExceptionHandler`.
@@ -1688,7 +1688,7 @@ removing them from the DOM. This is achieved with the help of lifecycle hooks. H
 - MicroService: Each microservice has its own data storage.
 - MicroFrontend: Each component we can use different frontend framework to build with.
 - Frontend Backend Separation
-  ![image](images-a/65.png)
+  ![image](../images-a/65.png)
 
 ### Microservice
 

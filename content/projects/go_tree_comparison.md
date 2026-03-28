@@ -26,9 +26,9 @@ endDate = 'Oct 2021'
 <img src="../images/go_tree_2.png" alt="image" width="50%" height="auto" style="float: right">
 <img src="../images/go_tree_3.png" alt="image" width="50%" height="auto" style="float: center">
 
-<!-- ![HashTime of Simple](images/go_tree_1.png)
-![HashTime of Coarse](images/go_tree_2.png)
-![HashTime of Fine](images/go_tree_3.png) -->
+<!-- ![HashTime of Simple](../images/go_tree_1.png)
+![HashTime of Coarse](../images/go_tree_2.png)
+![HashTime of Fine](../images/go_tree_3.png) -->
 
 > Fig. 1. Hash value computing time compared to Goroutines. Different input files has different hash-workers experiments. Computing time are all measured in seconds.  The x-axis represents the number of hash-workers.
 
@@ -47,9 +47,9 @@ endDate = 'Oct 2021'
 <img src="../images/go_tree_5.png" alt="image" width="50%" height="auto" style="float: right">
 <img src="../images/go_tree_6.png" alt="image" width="50%" height="auto" style="float: center">
 
-<!-- ![Averaged HashGroupTime of Simple](images/go_tree_4.png)
-![Averaged HashGroupTime of Coarse](images/go_tree_5.png)
-![Averaged HashGroupTime of Fine](images/go_tree_6.png) -->
+<!-- ![Averaged HashGroupTime of Simple](../images/go_tree_4.png)
+![Averaged HashGroupTime of Coarse](../images/go_tree_5.png)
+![Averaged HashGroupTime of Fine](../images/go_tree_6.png) -->
 
 > Fig. 2. Averaged hashGroupTime for different input file. There are four different implementations tested on each input file: Sequential version, Channel version, Lock version and Extra Implementation for extra credit. All computing time are measured in seconds. 
 
@@ -68,9 +68,9 @@ endDate = 'Oct 2021'
 <img src="../images/go_tree_8.png" alt="image" width="50%" height="auto" style="float: right">
 <img src="../images/go_tree_9.png" alt="image" width="50%" height="auto" style="float: center">
 
-<!-- ![Averaged CompareTreeTime of Simple](images/go_tree_7.png)
-![Averaged CompareTreeTime of Coarse](images/go_tree_8.png)
-![Averaged CompareTreeTime of Fine](images/go_tree_9.png) -->
+<!-- ![Averaged CompareTreeTime of Simple](../images/go_tree_7.png)
+![Averaged CompareTreeTime of Coarse](../images/go_tree_8.png)
+![Averaged CompareTreeTime of Fine](../images/go_tree_9.png) -->
 
 > Fig. 3. Averaged compareTreeTime for different input file. There are three different implementation for each input file: Sequential, Goroutine per BST and Concurrent Buffer. All computing time measured in seconds.
 

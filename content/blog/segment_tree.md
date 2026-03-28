@@ -185,9 +185,9 @@ int query(SegmentTreeNode* root, int left, int right) {
 - 树状数组/线段树查询区间和`O(mlogn)`
 - 前缀和数组`O(n + m)`
 
-![2.1.png](images_segment_tree/2.1.png)
+![2.1.png](../images_segment_tree/2.1.png)
 
-![2.2.png](images_segment_tree/2.2.png)
+![2.2.png](../images_segment_tree/2.2.png)
 
 ```c++
 struct STNode {
@@ -284,7 +284,7 @@ class Solution {
 - 暴力枚举求和`O(nm)`
 - 树状数组/线段树查询区间和`O(mlogn)`
 
-![2.3.png](images_segment_tree/2.3.png)
+![2.3.png](../images_segment_tree/2.3.png)
 
 ```c++
 struct STNode {
@@ -400,9 +400,9 @@ class Solution {
 - 二分法`O(nlogn + mlogn)`
 - 前缀和数组`O(k + n + m)`
 
-![2.4.png](images_segment_tree/2.4.png)
+![2.4.png](../images_segment_tree/2.4.png)
 
-![2.5.png](images_segment_tree/2.5.png)
+![2.5.png](../images_segment_tree/2.5.png)
 
 ```c++
 struct STNode {
@@ -516,13 +516,13 @@ class Solution {
 - 暴力求解`O(n^2)`
 - 树状数组/线段树`O(nlogk)`
 
-![2.6.png](images_segment_tree/2.6.png)
+![2.6.png](../images_segment_tree/2.6.png)
 
-![2.7.png](images_segment_tree/2.7.png)
+![2.7.png](../images_segment_tree/2.7.png)
 
 ***在单点修改的情况下，维护前缀和：使用线段树维护B数组***
 
-![2.8.png](images_segment_tree/2.8.png)
+![2.8.png](../images_segment_tree/2.8.png)
 
 ```c++
 struct STNode {
@@ -684,28 +684,28 @@ class Solution {
 > `C[i]`的元素个数（来自于`A`）：取决于`i`的二进制末尾有几个连续的`0`.  
 > e.g. `i`有`k`个`0`，那么`C[i]`共有`2^k`个`A`中的元素.  
 
-![3.1.png](images_segment_tree/3.1.png)
+![3.1.png](../images_segment_tree/3.1.png)
 
 > 根据`lowbit`函数，可以知道`C[i]`代表几个`A`中的元素相加，以及`i`的父亲在哪儿(`i + lowbit(i)`, e.g. `6 + lowbit(6) = 8`)
 
-![3.2.png](images_segment_tree/3.2.png)
+![3.2.png](../images_segment_tree/3.2.png)
 
-![3.3.png](images_segment_tree/3.3.png)
+![3.3.png](../images_segment_tree/3.3.png)
 
-![3.4.png](images_segment_tree/3.4.png)
+![3.4.png](../images_segment_tree/3.4.png)
 
 ### Lowbit 的两个含义
 e.g. Lowbit(4) = 4:
 1. 从`A[4]`出发向左共四个数的`SUM`
 2. 从`C[4]`搭出去梯子的长度（长度为4: `A[5], A[6], A[7], A[8]`），`C[4]`的值会影响到`C[8]`
 
-![3.5.png](images_segment_tree/3.5.png)
+![3.5.png](../images_segment_tree/3.5.png)
 
 ### 树状数组的程序实现: Lintcode 840: Range Sum
 
 - [Lintcode 840 Range Sum](https://www.lintcode.com/problem/840/)
 
-![3.6.png](images_segment_tree/3.6.png)
+![3.6.png](../images_segment_tree/3.6.png)
 
 ```c++
 /**
@@ -776,8 +776,8 @@ class NumArray {
 - 树状数组/线段树查询区间和`O(mlogn)`
 - 前缀和数组`O(n + m)`
 
-![4.1](images_segment_tree/4.1.png)
-![4.2](images_segment_tree/4.2.png)
+![4.1](../images_segment_tree/4.1.png)
+![4.2](../images_segment_tree/4.2.png)
 
 ```c++
 class BinaryIndexTree {
@@ -856,7 +856,7 @@ class Solution {
 - 暴力枚举求和`O(nm)`
 - 树状数组/线段树查询区间和`O(mlogn)`
 
-![4.3](images_segment_tree/4.3.png)
+![4.3](../images_segment_tree/4.3.png)
 
 ```c++
 class BinaryIndexTree {
@@ -934,8 +934,8 @@ class Solution {
 - 二分法`O(nlogn + mlogn)`
 - 前缀和数组`O(k + n + m)`
 
-![4.4](images_segment_tree/4.4.png)
-![4.5](images_segment_tree/4.5.png)
+![4.4](../images_segment_tree/4.4.png)
+![4.5](../images_segment_tree/4.5.png)
 
 
 ```c++
@@ -1012,8 +1012,8 @@ class Solution {
 - 暴力求解`O(n^2)`
 - 树状数组/线段树`O(nlogk)`
 
-![4.6](images_segment_tree/4.6.png)
-![4.5](images_segment_tree/4.5.png)
+![4.6](../images_segment_tree/4.6.png)
+![4.5](../images_segment_tree/4.5.png)
 
 ```c++
 class BinaryIndexTree {

@@ -23,10 +23,10 @@ date = 2023-12-01T00:32:23-05:00
 - YARN: only NM can start AM and Container
 - Standalone: master, worder, driver, executor
 - Standalone: only worker can start driver and executor
-![spark-1](images-spark/spark-1.svg)
-![spark-4](images-spark/spark-4.png)
-![spark-3](images-spark/spark-3.png)
-![spark-2](images-spark/spark-2.png)
+![spark-1](../images-spark/spark-1.svg)
+![spark-4](../images-spark/spark-4.png)
+![spark-3](../images-spark/spark-3.png)
+![spark-2](../images-spark/spark-2.png)
 
 ## Operating Mode
 - local/local-cluster/standalone/yarn/mesos

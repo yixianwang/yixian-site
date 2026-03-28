@@ -67,7 +67,7 @@ hash(hive) ---> hashcode % 3 = 2(machine 2)
 | foreach                    | iterate each element within RDD                                                                                                |
 
 ### Depencencies(This topic is Transformation operation related)
-![spark-core-1](images-spark/spark-core-1.png)
+![spark-core-1](../images-spark/spark-core-1.png)
 - with shuffle(internet connections between different machines) is **wide dependency**
 - without shuffle is **narrow dependency**
 > the number of stages is depended on the number of wide dependencies
@@ -702,8 +702,8 @@ result.collect()
 - spark has many nodes(machines), and they are independent. spark automatically send referenced variables to each node through network, it's convinent but inefficient. So shared variables are necessary.
 - spark provides two kinds of shared variable with limited type: **broadcast** and **accumulator**
 
-![before](images-spark/spark-core-2.png)
-![after](images-spark/spark-core-3.png)
+![before](../images-spark/spark-core-2.png)
+![after](../images-spark/spark-core-3.png)
 
 ### broadcast
 > **driver define broadcast, and send to each node(or machine) only one time**
@@ -794,7 +794,7 @@ list1.foreach(lambda x: acc.add(1))
 acc.value # 1000000
 ```
 
-![accumulator](images-spark/spark-core-4.png)
+![accumulator](../images-spark/spark-core-4.png)
 
 ## Shuffle
 - **ShuffleManager** handle all shuffle related execution, calculation and operations
@@ -809,16 +809,16 @@ acc.value # 1000000
 - shuffle map task 数量小于 `spark.shuffle.sort.bypassMergeThreshold`参数的值不是聚合类的shuffle算子(e.g. reduceByKey)
 
 - [Reference blog: shuffle](https://www.cnblogs.com/licheng/p/6687018.html)
-![Mapreduce&Shuffle](images-spark/spark-core-5.png)
+![Mapreduce&Shuffle](../images-spark/spark-core-5.png)
 - map machine: **shuffle** write data to local disk file
 - reduce machine: **shuffle** read data from disk file of map machine
 > Note: red 1, green 2, blue 3 are all represent partitions, the number of partition are three 
 
 
-![Spill](images-spark/spark-core-6.png)
+![Spill](../images-spark/spark-core-6.png)
 - Spill includes 输出、排序、溢写、合并
 
-![Spill-Collect](images-spark/spark-core-7.png)
+![Spill-Collect](../images-spark/spark-core-7.png)
 
 ## Optimize performance
 - [Reference 1](https://www.cnblogs.com/shishanyuan/p/8454323.html)

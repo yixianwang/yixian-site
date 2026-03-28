@@ -38,7 +38,7 @@ aws iam list-users
 
 ## Section 7: EC2 Instance Storage
 ### EBS
-![img](images-aws/1.png)
+![img](../images-aws/1.png)
 
 #### General Purpose SSD, gp2, gp3
 - gp3: IOPS and throughput are not linked.
@@ -85,7 +85,7 @@ aws iam list-users
 - Top Level Domain (TLD): .com, .us, .in, .gov, .org, ...
 - Second Level Domain (SLD): amazon.com, google.com, ...
 
-![URL](images-aws/2.png)
+![URL](../images-aws/2.png)
 
 - DNS SOA(Start of Authority) record
 

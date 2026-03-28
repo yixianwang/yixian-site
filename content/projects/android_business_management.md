@@ -20,7 +20,7 @@ endDate = 'Present'
 ## App Description
 - It is a business management app designed for my parents' real daily business of renting houses. It consists of two essential parts, business management and accounting. The inspiration is only from my parent's business which is handled by their handwriting right now. This app will save them much time creating a new contract or appointment. It can also automatically create an accountant summary and some beautiful graphs simultaneously that give my parents an intuitive view of how the business is running. The firebase is heavily used in this project.
 
-![App](images/android_business_management_1.png)
+![App](../images/android_business_management_1.png)
 
 ## APIs & Android Features
 -	APIs:
@@ -73,6 +73,6 @@ endDate = 'Present'
 -	I have described how these three tables work with UI in section 6 of this report.
 
 ## Firebase Database Schemas
-![Firebase 1](images/android_business_management_2.png)
-![Firebase 2](images/android_business_management_3.png)
-![Firebase 3](images/android_business_management_4.png)
+![Firebase 1](../images/android_business_management_2.png)
+![Firebase 2](../images/android_business_management_3.png)
+![Firebase 3](../images/android_business_management_4.png)

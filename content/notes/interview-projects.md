@@ -4,7 +4,7 @@ date = 2024-06-22T21:08:17-04:00
 +++
 
 ## Guide
-![project preparation guide](images-interview/1.png)
+![project preparation guide](../images-interview/1.png)
 
 ### Project Preparation Guide
 1. Company Info.

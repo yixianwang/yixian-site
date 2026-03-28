@@ -38,7 +38,7 @@ endDate = 'Oct 2021'
 
 - The **sequential** has the slowest converge speed but it doesn’t have any overhead on transferring data. The CPU is very powerful the Sequential version is the fastest implementation for the total elapsed time when the input size is small. (Fig. 1, right)
 
-![cuda kmeans 1](images/cuda_kmeans_1.png)
+![cuda kmeans 1](../images/cuda_kmeans_1.png)
 <!-- <img src="../images/cuda_kmeans_1.png" alt="image" width="100%" height="auto"> -->
 > Fig. 1. Averaged elapsed time per iteration and Total elapsed time(E2E runtime) measured on different input size.
 
@@ -58,7 +58,7 @@ endDate = 'Oct 2021'
 - At last, from all above assumption, the theoretical speedup of my CUDA implementations should have when I set my number of threads in each block to 32, and the hardware in Codio support this setup when the input size smaller than 2147483647 * 32, which is maximum block size times warp size of Tesla T4. In this setup, the warp scheduler won’t let any memory wait for others and thus it has the maximum occupancy.
 
 
-![cuda kmeans 2](images/cuda_kmeans_2.png)
+![cuda kmeans 2](../images/cuda_kmeans_2.png)
 > Fig. 2. Cuda Shmem, Cuda basic, and Thrust implementations speed up X times compared to sequential kmeans. “2k, 16k and 65k” means “2048, 16384 and 65536” input size. Red color is Cuda Shmem, orange color is Cuda basic and yellow color is Thrust implementation.
 
 ## Analyze Why Thrust Is Compromising
@@ -68,7 +68,7 @@ endDate = 'Oct 2021'
 
 - The second reason is that Thrust cannot make use of shared memory or constant memory in GPU, both two kinds of memories have almost register speed. The Thrust only can make use of global GPU memory and transfer data to computing units through L1 memory to register.
 
-![cuda kmeans 3](images/cuda_kmeans_3.png)
+![cuda kmeans 3](../images/cuda_kmeans_3.png)
 > Fig. 3. The fraction of the end-to-end runtime in CUDA versions(Shared Memory and Basic) is spent in data transfer.
 
 ## Analyze the Fraction of the End-to-End Runtime of CUDA Implementations Spent in Data Transfer

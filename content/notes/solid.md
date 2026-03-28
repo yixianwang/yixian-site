@@ -10,7 +10,7 @@ date = 2024-04-29T20:09:27-04:00
 - D: Dependency Inversion Principle
 
 - [Reference](https://zhuanlan.zhihu.com/p/350291336)
-![images](images-solid/solid.jpg)
+![images](../images-solid/solid.jpg)
 
 ## S -  Single-responsibility Principle
 - **DEFINE**: The interface responsibility should be single and not take on too many responsibilities.

@@ -3026,7 +3026,7 @@ class Solution:
 3. 递归的出口
     - 所有数都被选中的时候
 
-![1.1.png](images_recursion/1.1.png)
+![1.1.png](../images_recursion/1.1.png)
 
 ```c++
 class Solution {
@@ -3104,7 +3104,7 @@ class Solution:
   - 不算是递归改成非递归
 
 ### 用栈实现二叉树非递归遍历
-![image1.2](images_recursion/1.2.png)
+![image1.2](../images_recursion/1.2.png)
 
 #### 前序遍历
 - [Lintcode 66](https://www.lintcode.com/problem/66/)
@@ -3354,7 +3354,7 @@ class Solution:
 
 > e.g. `2`在中序遍历下的前驱节点是`7`; `1`在中序遍历下的前驱节点是`4`
 
-![moriss](images_recursion/1.3.png)
+![moriss](../images_recursion/1.3.png)
 
 ```c++
 class Solution {
@@ -3423,7 +3423,7 @@ class Solution:
 #### 中序遍历
 - [Lintcode 67](https://www.lintcode.com/problem/67/)
 
-![1.4](images_recursion/1.4.png)
+![1.4](../images_recursion/1.4.png)
 
 ```c++
 class Solution {
@@ -3597,7 +3597,7 @@ class Solution:
 ### Exercise: 169. 汉诺塔
 - [Lintcode 169](https://www.lintcode.com/problem/169/)
 
-![1.5.png](images_recursion/1.5.png)
+![1.5.png](../images_recursion/1.5.png)
 
 ```c++
 #include <deque>
@@ -3735,7 +3735,7 @@ class Solution:
 
 #### 二叉树遍历解法
 
-![1.6.png](images_recursion/1.6.png)
+![1.6.png](../images_recursion/1.6.png)
 
 - [1. 参考：二叉树遍历解法(递归)](#1-二叉树遍历解法)
 
@@ -3823,7 +3823,7 @@ class Solution:
 ```
 
 #### 组合数思路解法
-![1.7.png](images_recursion/1.7.png)
+![1.7.png](../images_recursion/1.7.png)
 
 - [2. 参考：组合数解法(递归)](#2-组合数解法)
 
@@ -3906,7 +3906,7 @@ class Solution:
 
 #### 二进制枚举解法
 
-![1.8.png](images_recursion/1.8.png)
+![1.8.png](../images_recursion/1.8.png)
 
 Time complexity O(n * 2^n)
 
@@ -3958,7 +3958,7 @@ class Solution:
 
 #### 用手写栈模拟递归解法
 
-![递归的解法](images_recursion/1.9.png)
+![递归的解法](../images_recursion/1.9.png)
 
 - [参考：全排列](#全排列)
 
@@ -4057,7 +4057,7 @@ class Solution:
 
 - [参考：下一个排列（非递归）](#下一个排列非递归)
 
-![下一个排列](images_recursion/1.10.png)
+![下一个排列](../images_recursion/1.10.png)
 
 ```c++
 class Solution {

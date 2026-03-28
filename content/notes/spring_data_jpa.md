@@ -34,8 +34,8 @@ date = 2024-06-01T21:42:22-04:00
 
 ```yaml {filename="application.properties"}
 ```
-![application.properties](images-springdatajpa/1.png)
-![DBScript](images-springdatajpa/2.png)
+![application.properties](../images-springdatajpa/1.png)
+![DBScript](../images-springdatajpa/2.png)
 
 
 ## Entities

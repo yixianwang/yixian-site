@@ -32,7 +32,7 @@ IoC entails Dependency Injection
 > Spring container is **injecting** object for us
 
 ## SpringBoot Controller
-![MVC](images-springboot/sb1.png)
+![MVC](../images-springboot/sb1.png)
 
 ### Rounter
 - `@RequestMapping`, on class or methods
@@ -77,7 +77,7 @@ spring.web.resources.static-locations=classpath:/static/
 - `enctype` define how to encode form data before sending to server
 - `enctype = "application/x-www-form-urlencoded"` is default, then form data likes `key=value&key=value`
 - `enctype = "multipart/form-data"`
-![enctype=multipart/form-data](images-springboot/sb2.png)
+![enctype=multipart/form-data](../images-springboot/sb2.png)
 
 - To update 1MB file limitation by SpringBoot built-in Tomcat
 ```
@@ -87,31 +87,31 @@ spring.servlet.multipart.max-request-size=10MB
 ```
 
 ### HandlerInterceptor
-![HandlerInterceptor](images-springboot/sb3.png)
-![HandlerInterceptor](images-springboot/sb4.png)
+![HandlerInterceptor](../images-springboot/sb3.png)
+![HandlerInterceptor](../images-springboot/sb4.png)
 
 ## RESTful service + Swagger
 
 ### Restful
-![Restful](images-springboot/sb5.png)
+![Restful](../images-springboot/sb5.png)
 
 ### Swagger
 - `http://127.0.0.1:8080/swagger-ui.html`
-![Swagger1](images-springboot/sb6.png)
-![Swagger2](images-springboot/sb7.png)
-![Swagger3](images-springboot/sb8.png)
+![Swagger1](../images-springboot/sb6.png)
+![Swagger2](../images-springboot/sb7.png)
+![Swagger3](../images-springboot/sb8.png)
 
 ## Mybatis-Plus
 ORM(Object Relational Mapping)
 
 ### Mybatis-Plus
-![Mybatis](images-springboot/sb9.png)
-![Mybatis](images-springboot/sb10.png)
-![Mybatis](images-springboot/sb11.png)
+![Mybatis](../images-springboot/sb9.png)
+![Mybatis](../images-springboot/sb10.png)
+![Mybatis](../images-springboot/sb11.png)
 
 ### Mybatis-Plus CRUD operation
-![Mybatis](images-springboot/sb12.png)
-![Mybatis](images-springboot/sb13.png)
+![Mybatis](../images-springboot/sb12.png)
+![Mybatis](../images-springboot/sb13.png)
 
 ### Example
 ```java

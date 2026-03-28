@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal website for Yixian Wang built with **Hugo** (static site generator) using the **Hextra** theme (`github.com/imfing/hextra`). Deployed to GitHub Pages at `https://yixianwang.github.io/`.
+Personal website for Yixian Wang built with **Hugo** (static site generator) using the **Blowfish** theme (`github.com/nunocoracao/blowfish/v2`). Deployed to GitHub Pages at `https://yixianwang.github.io/`.
 
 ## Common Commands
 
@@ -20,8 +20,8 @@ hugo new content/blog/my-post.md
 hugo new content/notes/my-note.md
 hugo new content/projects/my-project.md
 
-# Update Hextra theme
-hugo mod get -u github.com/imfing/hextra
+# Update Blowfish theme
+hugo mod get -u github.com/nunocoracao/blowfish/v2
 
 # Update all Hugo modules
 hugo mod get -u
@@ -40,7 +40,7 @@ The `public/` directory is a **separate git repository** that maps to the GitHub
 
 ### Content structure
 - `content/blog/` — Blog posts (TOML front matter `+++...+++`, use `<!--more-->` for summary break)
-- `content/notes/` — Technical notes (largest section, 129+ files)
+- `content/notes/` — Technical notes (largest section, 116+ files)
 - `content/projects/` — Project portfolio (includes `startDate`/`endDate` fields)
 - `content/cv/` — CV section
 - `content/_index.md` — Home page
@@ -49,7 +49,14 @@ The `public/` directory is a **separate git repository** that maps to the GitHub
 All content uses **TOML** front matter (delimited by `+++`). New content starts as `draft = true`. Archetypes in `archetypes/` define templates for each content type.
 
 ### Configuration
-- `hugo.yaml` — Main Hugo config (menu, params, markup settings)
+Blowfish uses a multi-file config structure in `config/_default/`:
+- `hugo.toml` — Base Hugo config (baseURL, module imports, outputs)
+- `params.toml` — Theme parameters (homepage layout, article display, search, footer)
+- `languages.en.toml` — Language config and author info (name, bio, social links)
+- `menus.en.toml` — Navigation menu items
+- `markup.toml` — Goldmark and syntax highlighting settings
+
+Other config files:
 - `go.mod` — Hugo module dependencies (requires Go 1.26+)
 - `netlify.toml` — Netlify build config (Hugo 0.159.1)
 - `.devcontainer/` — Dev container setup with Hugo extended + Node.js

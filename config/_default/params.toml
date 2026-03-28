@@ -1,0 +1,44 @@
+# Blowfish theme parameters
+
+colorScheme = "ocean"
+defaultAppearance = "dark"
+autoSwitchAppearance = true
+
+enableSearch = true
+enableCodeCopy = true
+
+[homepage]
+  layout = "profile"
+  homepageImage = "/images/photo.jpeg"
+  showRecent = true
+  showRecentItems = 6
+  showMoreLink = true
+  showMoreLinkDest = "/blog"
+  cardView = false
+
+[article]
+  showDate = true
+  showDateUpdated = false
+  showAuthor = false
+  showBreadcrumbs = true
+  showTableOfContents = true
+  showEdit = true
+  editURL = "https://github.com/yixianwang/yixian-site/tree/main/content"
+  showPagination = true
+  showReadingTime = true
+  showTaxonomies = true
+  showWordCount = false
+
+[list]
+  showBreadcrumbs = true
+  showTableOfContents = false
+  groupByYear = false
+
+[header]
+  layout = "basic"
+
+[footer]
+  showCopyright = false
+  showThemeAttribution = true
+  showAppearanceSwitcher = true
+  showScrollToTop = true

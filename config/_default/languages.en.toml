@@ -1,0 +1,18 @@
+languageCode = "en"
+languageName = "English"
+weight = 1
+title = "Yixian Wang"
+
+[params]
+  displayName = "Yixian Wang"
+  description = "CS Graduate Student at UT Austin"
+
+[params.author]
+  name = "Yixian Wang"
+  image = "/images/photo.jpeg"
+  headline = "CS Graduate | Software Engineer"
+  bio = "Hi! I obtained my master's degree in CS from UT Austin. I am very enthusiastic about the software engineer position and eager to learn. I also have a strong background in applied mathematics and machine learning."
+  links = [
+    { github = "https://github.com/yixianwang" },
+    { email = "mailto:wangyixian.wyx@gmail.com" },
+  ]

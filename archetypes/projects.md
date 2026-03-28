@@ -4,8 +4,8 @@ date = {{ .Date }}
 startDate = ''
 endDate = ''
 draft = true
+description = ''
 +++
-
 
 <!--more-->
 

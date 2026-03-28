@@ -2,4 +2,4 @@ module github.com/yixianwang/yixian-site
 
 go 1.26
 
-require github.com/imfing/hextra v0.12.1 // indirect
+require github.com/nunocoracao/blowfish/v2 v2.100.0 // indirect
